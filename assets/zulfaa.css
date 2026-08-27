@@ -459,6 +459,39 @@ section.band {
   color: var(--teal-deep);
 }
 
+/* numbered instructions — the one place on the site with a real sequence */
+.doc-body ol.steps {
+  margin: 0 0 1.1rem;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.doc-body ol.steps li {
+  position: relative;
+  counter-increment: step;
+  padding-inline-start: 2.35rem;
+  margin-bottom: 0.7rem;
+}
+
+.doc-body ol.steps li::before {
+  content: counter(step);
+  position: absolute;
+  inset-inline-start: 0;
+  top: -0.05rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  background: var(--teal-soft);
+  color: var(--teal-deep);
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
 .toc {
   margin: 2rem auto 0;
   max-width: 46rem;
