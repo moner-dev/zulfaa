@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://moner-dev.github.io/zulfaa/sitemap.xml
