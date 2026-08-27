@@ -38,6 +38,18 @@
   --ink-soft: #5c6964;
   --radius: 1.5rem;
   --shell: 62rem;
+
+  /* The deep band — shared by the screenshot showcase and the footer, so the
+     two dark surfaces are one material and cannot drift apart. */
+  --band-top: #1c5f56;
+  --band-mid: #164b45;
+  --band-deep: #0e332e;
+  --band-edge: rgba(230, 184, 76, 0.28);
+  --on-band: rgba(254, 249, 240, 0.78);
+  --on-band-strong: var(--cream);
+  /* 0.62 is the floor: below it the quiet line drops under 4.5:1 against the
+     lightest part of the band, and it is small text. */
+  --on-band-soft: rgba(254, 249, 240, 0.62);
 }
 
 *,
@@ -498,13 +510,33 @@ section.band {
 
 /* ── footer ─────────────────────────────────────────────────────────── */
 
+/* The same deep band as the screenshot showcase, so the page closes on the
+   material it opened the showcase with. It is its own dark surface on every
+   page, not only the homepage. */
 .site-foot {
+  position: relative;
+  isolation: isolate;
   margin-top: 3rem;
-  padding: 2rem 0 2.5rem;
-  border-top: 1px solid var(--cream-deep);
+  padding: 2.75rem 0 3rem;
+  border-top: 1px solid var(--band-edge);
   text-align: center;
   font-size: 0.85rem;
-  color: var(--ink-soft);
+  background-color: var(--band-mid);
+  background-image:
+    radial-gradient(38rem 18rem at 50% 0%, rgba(230, 184, 76, 0.12), transparent 70%),
+    linear-gradient(168deg, var(--band-mid) 0%, var(--band-deep) 100%);
+  color: var(--on-band);
+}
+
+.site-foot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("star-gold.svg");
+  background-repeat: repeat;
+  opacity: 0.5;
 }
 
 .site-foot nav {
@@ -512,19 +544,41 @@ section.band {
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.4rem 1.1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.15rem;
 }
 
 .site-foot nav a {
   text-decoration: none;
   font-weight: 600;
+  color: var(--on-band-strong);
+  transition: color 0.25s ease;
+}
+
+.site-foot nav a:hover {
+  color: var(--gold);
+}
+
+.site-foot nav a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 0.4rem;
+}
+
+.site-foot p {
+  color: var(--on-band);
 }
 
 .site-foot .dev {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--teal-deep);
+  color: var(--on-band-strong);
+}
+
+/* the copyright line is the quietest thing on the page */
+.site-foot p:last-child {
+  margin-bottom: 0;
+  color: var(--on-band-soft);
 }
 
 @media (max-width: 34rem) {
@@ -550,11 +604,11 @@ section.band {
   isolation: isolate;
   margin-top: 3.5rem;
   padding: 3.5rem 0 3rem;
-  border-block: 1px solid rgba(230, 184, 76, 0.28);
-  background-color: #123f39;
+  border-block: 1px solid var(--band-edge);
+  background-color: var(--band-mid);
   background-image:
     radial-gradient(44rem 24rem at 50% -4rem, rgba(230, 184, 76, 0.16), transparent 68%),
-    linear-gradient(168deg, #1c5f56 0%, #164b45 46%, #0e332e 100%);
+    linear-gradient(168deg, var(--band-top) 0%, var(--band-mid) 46%, var(--band-deep) 100%);
   color: var(--cream);
 }
 
@@ -845,6 +899,20 @@ section.band {
     background: none;
     color: var(--ink);
     border-block: 0;
+  }
+  /* a printed policy should not carry a slab of dark ink at the end of it */
+  .site-foot {
+    background: none;
+    color: var(--ink-soft);
+    border-top: 1px solid var(--cream-deep);
+  }
+  .site-foot::before {
+    display: none;
+  }
+  .site-foot nav a,
+  .site-foot .dev,
+  .site-foot p {
+    color: var(--ink);
   }
   .car-viewport {
     overflow: visible;
