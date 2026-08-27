@@ -1,0 +1,100 @@
+[
+ {
+  "file": "home.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "Home",
+  "alt": "The ZULFAA home screen: the next prayer countdown, today's challenge, Qur'an progress and the verse of the day."
+ },
+ {
+  "file": "prayer-times.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "Prayer times",
+  "alt": "The prayer times screen, showing the five daily prayers for the chosen location with the current prayer highlighted."
+ },
+ {
+  "file": "qibla.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "Qibla",
+  "alt": "The qibla compass, pointing to the Ka'bah with the bearing and distance from the current location."
+ },
+ {
+  "file": "quran.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "The Noble Qur'an",
+  "alt": "The Qur'an reader, listing the surahs with reading progress and the last position."
+ },
+ {
+  "file": "reciters.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "Reciters",
+  "alt": "The reciter picker, offering a list of Qur'an reciters to listen to."
+ },
+ {
+  "file": "adhkar.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "Adhkar",
+  "alt": "The adhkar collection, with morning and evening remembrances grouped by occasion."
+ },
+ {
+  "file": "dua.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "Du'a",
+  "alt": "The du'a collection, grouped by theme with translation and source."
+ },
+ {
+  "file": "daily-challenge.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "Daily Challenge",
+  "alt": "The daily knowledge challenge, offering a set of questions and the tokens they award."
+ },
+ {
+  "file": "notifications.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "Reminders",
+  "alt": "The notification settings, with a mode for each prayer and for the adhkar and Qur'an reminders."
+ },
+ {
+  "file": "prayer-settings.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "Prayer settings",
+  "alt": "The prayer calculation settings: method, madhhab and per-prayer minute adjustments."
+ },
+ {
+  "file": "profile.webp",
+  "w": 462,
+  "h": 986,
+  "caption": "Your space",
+  "alt": "The personal space, showing saved items, favourites and the daily wird."
+ },
+ {
+  "file": "menu.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "Navigation",
+  "alt": "The side menu, listing the app's sections from the Daily Challenge to Help and Support."
+ },
+ {
+  "file": "about.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "About ZULFAA",
+  "alt": "The about screen, describing ZULFAA and crediting the sources its content comes from."
+ },
+ {
+  "file": "intro.webp",
+  "w": 462,
+  "h": 990,
+  "caption": "The opening",
+  "alt": "The ZULFAA opening screen: the gold emblem centred on the cream muqarnas vault."
+ }
+]

@@ -1,23 +1,123 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://moner-dev.github.io/zulfaa/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://moner-dev.github.io/zulfaa/ar/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://moner-dev.github.io/zulfaa/nl/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/"/>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://moner-dev.github.io/zulfaa/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/privacy/"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://moner-dev.github.io/zulfaa/ar/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/privacy/"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://moner-dev.github.io/zulfaa/nl/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/privacy/"/>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://moner-dev.github.io/zulfaa/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/terms/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/terms/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/terms/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/terms/"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://moner-dev.github.io/zulfaa/ar/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/terms/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/terms/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/terms/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/terms/"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://moner-dev.github.io/zulfaa/nl/terms/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/terms/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/terms/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/terms/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/terms/"/>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://moner-dev.github.io/zulfaa/delete-data/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/delete-data/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/delete-data/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/delete-data/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/delete-data/"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://moner-dev.github.io/zulfaa/ar/delete-data/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/delete-data/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/delete-data/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/delete-data/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/delete-data/"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://moner-dev.github.io/zulfaa/nl/delete-data/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/delete-data/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/delete-data/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/delete-data/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/delete-data/"/>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://moner-dev.github.io/zulfaa/support/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/support/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/support/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/support/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/support/"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://moner-dev.github.io/zulfaa/ar/support/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/support/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/support/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/support/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/support/"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://moner-dev.github.io/zulfaa/nl/support/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://moner-dev.github.io/zulfaa/support/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://moner-dev.github.io/zulfaa/ar/support/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://moner-dev.github.io/zulfaa/nl/support/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/support/"/>
     <priority>0.8</priority>
   </url>
 </urlset>

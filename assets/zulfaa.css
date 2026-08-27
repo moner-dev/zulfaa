@@ -179,6 +179,106 @@ img {
   color: var(--teal-deep);
 }
 
+/* ── language switcher ──────────────────────────────────────────────────
+   Three plain links. No script, so it works with scripting off and a search
+   engine can follow it. */
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.2rem;
+  border-radius: 999px;
+  border: 1px solid rgba(42, 138, 128, 0.18);
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.78rem;
+}
+
+.lang-switch a {
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--ink-soft);
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.lang-switch a:hover {
+  background: var(--cream-deep);
+  color: var(--teal-deep);
+}
+
+.lang-switch a[aria-current="true"] {
+  background: var(--teal-deep);
+  color: var(--cream);
+}
+
+.lang-switch a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ── Arabic ─────────────────────────────────────────────────────────────
+   Cairo carries the Arabic; the Latin faces have no Arabic glyphs and
+   Fredoka none at all, so Arabic pages lead with Cairo and let Latin words
+   inside them fall through to the usual stack. The unicode-range on the
+   Cairo @font-face means the Latin subset is never downloaded for it. */
+
+html[lang="ar"] body,
+html[lang="ar"] h1,
+html[lang="ar"] h2,
+html[lang="ar"] h3,
+html[lang="ar"] .brand-name {
+  font-family: "Cairo", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+html[lang="ar"] body {
+  line-height: 1.9; /* Arabic sits taller; give the diacritics room */
+}
+
+html[lang="ar"] .showcase-eyebrow,
+html[lang="ar"] .car-status,
+html[lang="ar"] .lb-cap,
+html[lang="ar"] .brand-name {
+  letter-spacing: normal; /* tracking breaks Arabic joining */
+}
+
+/* the hero wordmark is already Arabic and already sized for it */
+html[lang="ar"] .hero h1 {
+  letter-spacing: 0.06em;
+}
+
+/* ── RTL ────────────────────────────────────────────────────────────────
+   The layout is built on logical properties, so most of it mirrors itself.
+   These are the handful of physical offsets that cannot. */
+
+[dir="rtl"] .car-prev {
+  left: auto;
+  right: clamp(0.35rem, 2vw, 1.75rem);
+}
+
+[dir="rtl"] .car-next {
+  right: auto;
+  left: clamp(0.35rem, 2vw, 1.75rem);
+}
+
+/* the chevrons point the way the reader travels */
+[dir="rtl"] .car-arrow svg,
+[dir="rtl"] .lb-prev svg,
+[dir="rtl"] .lb-next svg {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .lb-close {
+  right: auto;
+  left: clamp(0.75rem, 3vw, 1.75rem);
+}
+
+/* The lightbox is a three-column grid, so RTL mirrors it on its own and
+   "previous" lands on the reader's right, which is where it belongs. Nothing
+   to override — only the absolutely positioned pieces above needed help. */
+
 /* ── hero ───────────────────────────────────────────────────────────── */
 
 .hero {

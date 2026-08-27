@@ -1,0 +1,821 @@
+{
+ "ar": {
+  "nav": {
+   "privacy": "سياسة الخصوصية",
+   "terms": "شروط الاستخدام",
+   "support": "المساعدة والدعم"
+  },
+  "privacy": {
+   "subtitle": "كيف نتعامل مع بياناتك",
+   "updated": "٢٧ أغسطس ٢٠٢٦",
+   "updatedLabel": "آخر تحديث",
+   "summary": "الأولوية لجهازك. حساب مسابقة تقني واحد، يُستخدم للمسابقة وحدها.",
+   "intro": "خصوصيتك أمانة. تشرح هذه السياسة ما يفعله زُلْفَى فعليًا ببياناتك اليوم. فمعظم بياناتك الدينية وإعداداتك — أوقات الصلاة والقرآن والأذكار والأدعية والقبلة — تُحسب وتبقى على جهازك. أمّا ميزات المسابقة، وبعض الميزات الاختيارية المتعلّقة بالمحتوى والموقع والصوت، فتستعين بخدمات خارجية على النحو المبيَّن لاحقًا في هذه السياسة. ولا توجد إعلانات ولا تحليلات ولا تتبّع في أي جزء من التطبيق.",
+   "sections": [
+    {
+     "id": "identity",
+     "title": "من نحن",
+     "body": "تنطبق هذه السياسة على تطبيق زُلْفَى (معرّف الحزمة على أندرويد com.zulfaa.app)، وهو من تصميم وتطوير MONER INTELLIGENCE SYSTEMS، الجهة المسؤولة عن التطبيق وعن التعامل مع البيانات الموصوف هنا. ولأي سؤال أو طلب يتعلّق بالخصوصية يمكنك المراسلة على moner.intelligence@gmail.com، وهو العنوان نفسه الذي ينشره زُلْفَى في صفحة المساعدة والدعم. وهذه السياسة منشورة أيضًا علنًا على الموقع الرسمي لزُلْفَى، ونصّها هناك هو النص نفسه."
+    },
+    {
+     "id": "overview",
+     "title": "الأساس",
+     "body": "يعمل زُلْفَى على جهازك أولًا: القرآن والأذكار والأدعية وأوقات الصلاة والقبلة تُحسب وتُحفظ محليًا وتعمل دون اتصال. ولا يحتوي التطبيق على أي أدوات تحليلات أو تتبّع أو إعلانات، ولا يطلب اسمك الحقيقي ولا بريدك ولا رقم هاتفك ولا تاريخ ميلادك. ولا يبيع زُلْفَى بياناتك، ولا يستخدمها في الإعلانات، ولا يستعمل التتبّع أو التحليلات؛ ولا يُرسل بيانات إلى خدمات خارجية إلا بالقدر اللازم لأداء الوظائف المبيَّنة في هذه السياسة."
+    },
+    {
+     "id": "account",
+     "title": "حساب المسابقة واسم المستخدم",
+     "body": "يستخدم زُلْفَى حسابًا تقنيًا مخصصًا للمسابقة، لا يتطلب منك إدخال بريد إلكتروني أو كلمة مرور. ويحفظ هذا الحساب بيانات مشاركتك في المسابقة، مثل التقدّم والنتائج والرصيد والترتيب. ولا يظهر هذا المعرّف للمستخدمين الآخرين. ويظل اختيار اسم المستخدم اختياريًا لاستخدام التطبيق عمومًا، لكنه مطلوب للمشاركة في تحدّي اليوم التنافسي. وعند اختيار اسم مستخدم يصبح هذا الاسم علنيًا وقد يظهر في لوحة الشرف إلى جانب ترتيبك ورصيدك من التوكنز؛ لذلك يُنصح باختيار اسم ترتاح لظهوره للآخرين."
+    },
+    {
+     "id": "device",
+     "title": "ما يبقى على جهازك",
+     "body": "يُحفظ ما يلي في التخزين المحلي على جهازك: لغة الواجهة؛ موقع الصلاة وطريقة الحساب والمذهب والتعديلات الزمنية؛ تفضيل تتبّع القبلة المباشر؛ تفضيلات الإشعارات؛ تقدّم قراءة القرآن والعلامات وآخر موضع واختيار القارئ؛ المحفوظات والمفضلة من الآيات والأدعية والأذكار؛ تقدّم الأذكار؛ سجل القراءة؛ بيانات الجلسة التقنية اللازمة للحفاظ على حساب المسابقة؛ ونسخة مؤقتة من مقاطع التفسير التي فتحتها. ولا تُزامَن هذه الإعدادات بين أجهزتك ولا تُرفع إلى حساب. وزُلْفَى نفسه لا يزامنها ولا يرفعها. أمّا النسخ الاحتياطي في نظام أندرويد فأمر منفصل وبيدك أنت: إن كان النسخ الاحتياطي مفعّلًا في إعدادات جهازك، فقد يُدرج النظام بيانات هذا التطبيق ضمن النسخة المحفوظة في حسابك أنت على Google، ويستعيدها عند إعداد جهاز جديد. وتلك النسخة تخصّك أنت وGoogle لا زُلْفَى، ويمكنك إيقافها من إعدادات النسخ الاحتياطي في جهازك. وما يُرسل إلى خدمات خارجية عند استخدام ميزات بعينها مبيَّن في بند «الخدمات الخارجية»."
+    },
+    {
+     "id": "prayerLocation",
+     "title": "موقع الصلاة",
+     "body": "تُحسب أوقات الصلاة على جهازك من إحداثيات الموقع الذي تختاره، إمّا عبر إذن الموقع في جهازك أو باختيار مدينتك يدويًا. وتُخزَّن الإحداثيات واسم المكان على جهازك، ولا تُرسل إلى خادم المسابقة ولا تُربط بحسابك؛ ولا تصل إلى خدمة خارجية إلا في الحالة الموضّحة في بند «الخدمات الخارجية»."
+    },
+    {
+     "id": "qibla",
+     "title": "الموقع المباشر والبوصلة",
+     "body": "عند تفعيل التتبّع المباشر في شاشة القبلة، يقرأ التطبيق موقعك من الجهاز أثناء فتح الشاشة ليحدّث اتجاه القبلة والمسافة. يُحسب الاتجاه على الجهاز نفسه، ولا يُسجَّل مسار تحرّكك ولا يُحفظ سجل مواقع. كما قد يستخدم التطبيق مستشعر اتجاه الجهاز (البوصلة) بإذن منك لعرض الاتجاه مباشرة؛ قراءات المستشعر تُستخدم لحظيًا ولا تُخزَّن. ولا يستخدم زُلْفَى الموقع في الخلفية."
+    },
+    {
+     "id": "notifications",
+     "title": "الإشعارات",
+     "body": "تُحفظ تفضيلات الإشعارات على جهازك، وتُحسب مواعيدها محليًا من أوقات صلاتك. لا تُرسل إشعارات من أي خادم، ولا يُرسل شيء عنك عند تفعيلها. وعلى أجهزة أندرويد المدعومة لا يطلب زُلْفَى إذن الإشعارات إلا بعد إجراء صريح منك للسماح بتسليم الإشعارات، ولا يُطلب عند بدء التشغيل؛ ثم يحتفظ نظام أندرويد بالمواعيد، فتصلك تنبيهات الصلوات الخمس والتذكير قبل الصلاة وأذكار الصباح والمساء وورد القرآن والمناسبات الإسلامية حتى والتطبيق في الخلفية أو مغلق. وإن سمحت أيضًا لخاصية التوقيت الدقيق في النظام، جُدولت تنبيهات الصلاة على الدقيقة؛ وبدونها قد يُسلّم أندرويد بعضها بدقة أقل. والصلوات المضبوطة على وضع الأذان تُشغّل أذان زُلْفَى المُضمَّن داخل التطبيق من جهازك دون اتصال. أمّا نسخة الويب فلا تُطلق إشعارات النظام. وهذه كلها إشعارات محلية على جهازك، ولا يستخدم زُلْفَى الإشعارات الفورية (Push) لإعلانات المالك أو الدعاية أو التسويق."
+    },
+    {
+     "id": "playback",
+     "title": "التلاوة والتشغيل في الخلفية",
+     "body": "أثناء تشغيل التلاوة يشغّل زُلْفَى على أندرويد خدمة تشغيل وسائط في المقدّمة، لتستمر التلاوة من آية إلى التي تليها والتطبيق في الخلفية. ويشترط أندرويد مقابل ذلك إشعارًا ظاهرًا، فيظهر إشعار بسيط ومستمر طوال مدة التشغيل؛ لا يحمل أي بيانات شخصية ولا أزرار تحكّم — فأزرار التحكّم يحملها مشغّل الشاشة الرئيسية الاختياري. ولا تفعل هذه الخدمة سوى حجز التركيز الصوتي: لا تسجّل شيئًا ولا تجمع شيئًا ولا ترسل شيئًا إلى أي جهة، وتتوقّف بتوقّف التشغيل. أمّا صوت التلاوة نفسه فيُجلب من المصادر المذكورة في بند الخدمات الخارجية."
+    },
+    {
+     "id": "quran",
+     "title": "القرآن والتفسير والمحفوظات",
+     "body": "نص المصحف والترجمة الإنجليزية والأذكار والأدعية مُضمَّنة داخل التطبيق وتعمل دون اتصال. ويُحفظ تقدّم القراءة والعلامات والمفضلة والمحفوظات على جهازك. أمّا التفسير فهو الاستثناء: ليس مُضمَّنًا، فعند فتح تفسير آية يُجلب من خدمة المحتوى الخارجية Quran.com ويُحفظ مؤقتًا على جهازك مدة أقصاها سبعة أيام. ولا يحمل ذلك الطلب سوى رقم السورة والآية."
+    },
+    {
+     "id": "challenge",
+     "title": "تحدّي اليوم والتوكنز ولوحة الشرف",
+     "body": "عند مشاركتك في تحدّي اليوم التنافسي تُرسَل بيانات مشاركتك — معرّف السؤال والخيار الذي اخترته — إلى خدمة المسابقة. ويُحفظ في حساب المسابقة الخاص بك، ويبقى بين الجلسات: محاولتك اليومية، وإجاباتك ونتائجها، ورصيدك من التوكنز ومجموعك التراكمي، وسجلّ كل مكافأة. ولوحة الشرف علنية: قد يظهر فيها اسم المستخدم ورصيد التوكنز في المدة المختارة والترتيب. والتوكنز نقاط داخل زُلْفَى: لا قيمة مالية لها، ولا تُشترى ولا تُباع ولا تُحوَّل ولا تُستبدل."
+    },
+    {
+     "id": "services",
+     "title": "الخدمات الخارجية",
+     "body": "يتّصل زُلْفَى بالخدمات التالية، ولهذه الأغراض وحدها. وقد تتلقّى الخدمة الخارجية عند إرسال أي طلب معلومات اتصال تقنية، مثل عنوان IP الخاص بجهازك، ولكلٍّ منها سياسة خصوصية خاصة بها. · Supabase — الخادم الخلفي للمسابقة: حساب المسابقة واسم المستخدم وبيانات المسابقة، عند كل قراءة أو كتابة لبيانات المسابقة. · Photon من Komoot — البحث عن الأماكن: نص البحث الذي تكتبه. · Nominatim من OpenStreetMap — تحويل الإحداثيات إلى اسم مكان: إحداثيات الموقع المطلوب تحويله. · Quran.com (مؤسسة القرآن) — التفسير: رقم السورة والآية عند فتح تفسير. · EveryAyah و cdn.islamic.network — تلاوة الآيات: رقم السورة والآية والقارئ أثناء تشغيل الصوت في المصحف. ولا يُرسل زُلْفَى اسم المستخدم ولا معرّف حساب المسابقة إلى هذه الخدمات، عدا مزوّد الخادم الخلفي للمسابقة (Supabase) حيث يلزم ذلك لعمل المسابقة نفسها. أمّا قوائم الدول والمناطق وخطوط التطبيق فمُضمَّنة داخل التطبيق ولا تحتاج أي طلب. وتشغّل هذه الجهات بنيتها التقنية الخاصة بها، وقد تكون خارج بلد إقامتك، فقد ينطوي استخدام الميزات أعلاه على نقل دولي للبيانات المحدودة المذكورة لكل خدمة."
+    },
+    {
+     "id": "permissions",
+     "title": "الأذونات التي تتحكم بها",
+     "body": "قد يطلب زُلْفَى ثلاثة أذونات، وكلها اختيارية: الموقع (لأوقات الصلاة والقبلة)، والإشعارات (للتذكير)، ومستشعر الاتجاه (للبوصلة). يعمل التطبيق بدونها مع تعطّل الميزة المرتبطة بها، ويمكنك سحب أي إذن في أي وقت من إعدادات المتصفّح أو النظام."
+    },
+    {
+     "id": "security",
+     "title": "الأمان",
+     "body": "كل اتصال يجريه زُلْفَى بخدمة خارجية يتم عبر HTTPS، فالبيانات المحدودة الموصوفة في هذه السياسة مشفّرة أثناء النقل. والبيانات المحفوظة على جهازك تبقى في مساحة التخزين الخاصة بالتطبيق وحده، محمية بأمان جهازك نفسه. أمّا الخادم الخلفي للمسابقة فمحمي بقواعد أمان على مستوى الصفوف في كل جدول، فلا يستطيع أي جهاز أن يقرأ أو يكتب إلا سجلّات المسابقة العائدة له، إضافة إلى البيانات العلنية بطبيعتها مثل لوحة الشرف. ولا يحتوي التطبيق إلا على مفتاح عام قابل للنشر، ولا يتضمّن أي مفتاح ذي صلاحيات. ولا يمكن ضمان أمان أي نظام ضمانًا مطلقًا، غير أنّ زُلْفَى لا يطلب أصلًا اسمًا حقيقيًا ولا بريدًا إلكترونيًا ولا رقم هاتف ولا تاريخ ميلاد ولا أي بيانات دفع، فلا توجد لديه معلومات من هذا النوع ليحفظها."
+    },
+    {
+     "id": "deletion",
+     "title": "حذف بياناتك",
+     "body": "يمسح الزر أسفل هذه الصفحة بيانات زُلْفَى المحفوظة على هذا الجهاز: موقع الصلاة وإعداداتها، وتفضيلات الإشعارات والقبلة، وتقدّم القرآن والعلامات والمفضلة والمحفوظات، وتقدّم الأذكار، والسجل، ولغة الواجهة. ويسري الحذف فورًا ولا يمكن التراجع عنه. ولا يشمل ذلك حساب المسابقة: فحساب المسابقة واسم المستخدم ورصيد التوكنز وترتيبك في لوحة الشرف محفوظة على الخادم وتُترك عمدًا كما هي، حتى لا يؤدي مسح جهاز واحد إلى إتلافها دون قصد. وحذف حساب المسابقة إجراء منفصل تجده كذلك أسفل هذه الصفحة: فهو يزيل نهائيًا حساب المسابقة واسم المستخدم ورصيد التوكنز وسجلّها ومحاولات التحدّي وإجاباتها وموضعك في لوحة الشرف. وإن استخدمت ميزات المسابقة بعد ذلك أُنشئ لك حساب مسابقة جديد يبدأ من الصفر. ويشمل مسح البيانات المحلية أيضًا النسخة المؤقتة من التفسير المحفوظة على جهازك."
+    },
+    {
+     "id": "retention",
+     "title": "مدة الاحتفاظ بالبيانات",
+     "body": "لا يُحتفظ ببيانات المسابقة إلا ما دام الحساب مستخدَمًا. فالحساب الفارغ — بلا اسم مستخدم، وبلا محاولات أو إجابات في التحدّي، وبلا سجلّ توكنز، ورصيده صفر — قد يُحذف تلقائيًا بعد ٦٠ يومًا متتاليًا من عدم النشاط. أمّا الحساب الذي يحمل اسم مستخدم أو أي سجلّ مسابقة فقد يُحذف تلقائيًا بعد ٣٦٥ يومًا متتاليًا من عدم النشاط. وأيّ نشاط جديد يعيد المدة إلى بدايتها، ففتح زُلْفَى وحده يُبقي الحساب قائمًا. ولست مضطرًا للانتظار: يمكنك حذف حساب المسابقة بنفسك في أي وقت من الزر أسفل هذه الصفحة. والحذف نهائي، ويزيل اسم المستخدم ورصيد التوكنز وسجلّها ومحاولات التحدّي وإجاباتها وأي موضع في لوحة الشرف. وإن استخدمت ميزات المسابقة بعد ذلك أُنشئ لك حساب مسابقة جديد يبدأ من الصفر."
+    },
+    {
+     "id": "children",
+     "title": "الأطفال",
+     "body": "زُلْفَى تطبيق عبادة عام، وليس موجَّهًا إلى الأطفال على وجه الخصوص. ولا يطلب الاستخدام المعتاد اسمًا ولا بريدًا ولا رقم هاتف ولا تاريخ ميلاد. والمعلومة الوحيدة التي يجعلها المستخدم علنية عن قصد من خلال المسابقة هي اسم المستخدم الذي يختاره، وهو يظهر علنًا في لوحة الشرف، فلا ينبغي أن يتضمّن اسمًا حقيقيًا ولا أي بيانات شخصية. وعلى وليّ الأمر الذي يأذن لطفله بدخول المسابقة أن ينتبه إلى أنّ الاسم المختار يُعرض للعموم."
+    },
+    {
+     "id": "changes",
+     "title": "تحديث هذه السياسة",
+     "body": "إذا تغيّر سلوك التطبيق — كإضافة خدمة جديدة، أو نوع جديد من البيانات المحفوظة، أو تغيير فيما يُعرض علنًا — ستُحدَّث هذه الصفحة ويُحدَّث تاريخ آخر تحديث أعلاه."
+    },
+    {
+     "id": "contact",
+     "title": "التواصل",
+     "body": "لأي سؤال أو طلب يتعلّق بهذه السياسة راسلنا على moner.intelligence@gmail.com — وهو عنوان MONER INTELLIGENCE SYSTEMS، مطوّر زُلْفَى. كما أنّ الأزرار أسفل هذه الصفحة طريق مباشر لا يحتاج مراسلة أحد: يمكنك مسح بياناتك المحلية، ويمكنك حذف حساب المسابقة وكل ما يحفظه الخادم عنه. وإن كنت تفضّل ألّا يكون لك اسم مستخدم علني ولا سجلّ مشاركة في المسابقة فاكتفِ بعدم دخول التحدّي التنافسي: يبقى حساب المسابقة فارغًا، ويخضع لمدد الاحتفاظ المذكورة أعلاه."
+    }
+   ]
+  },
+  "terms": {
+   "subtitle": "الشروط التي تحكم استخدامك للتطبيق",
+   "summary": "باستخدامك زُلْفَى فإنك توافق على هذه الشروط.",
+   "intro": "تشرح هذه الشروط ما يقدّمه زُلْفَى، وما يمكنك توقّعه منه، وما هي مسؤوليتك عند استخدامه. نرجو قراءتها؛ وهي مكتوبة بلغة واضحة قدر الإمكان.",
+   "updated": "٢٤ أغسطس ٢٠٢٦",
+   "updatedLabel": "آخر تحديث",
+   "sections": [
+    {
+     "id": "acceptance",
+     "title": "قبول الشروط",
+     "body": "باستخدامك تطبيق زُلْفَى فإنك توافق على هذه الشروط. وإن لم توافق عليها، فالرجاء عدم استخدام التطبيق. وإذا كنت تستخدمه نيابة عن غيرك، فأنت تقرّ بأنك مخوَّل بذلك."
+    },
+    {
+     "id": "about",
+     "title": "عن زُلْفَى",
+     "body": "زُلْفَى تطبيق إسلامي يجمع مواقيت الصلاة واتجاه القبلة والقرآن الكريم والتفسير والأذكار والأدعية والمناسبات الإسلامية، مع تذكيرات وتحدٍّ معرفي يومي. وهو من تصميم وتطوير MONER INTELLIGENCE SYSTEMS، ومخصّص للهواتف الذكية على أندرويد وآيفون."
+    },
+    {
+     "id": "eligibility",
+     "title": "الأهلية ومسؤولية المستخدم",
+     "body": "ينبغي أن تكون قادرًا قانونًا على قبول هذه الشروط في بلدك؛ وإن كنت قاصرًا فاستخدم التطبيق بموافقة وليّك. وأنت مسؤول عن جهازك وعن صحة الإعدادات التي تختارها — كالموقع وطريقة الحساب — لأن نتائج التطبيق تعتمد عليها."
+    },
+    {
+     "id": "religiousContent",
+     "title": "المحتوى الديني والمعلوماتي",
+     "body": "يقدّم زُلْفَى محتوى وأدوات إسلامية للاستئناس والتيسير، ولا يصدر فتاوى ولا أحكامًا شرعية، ولا يحلّ محلّ أهل العلم والمرجعيات الشرعية المعتبرة. وعند الحاجة إلى حكم شرعي أو إلى ترجيح في مسألة، فالمرجع أهل العلم في بلدك."
+    },
+    {
+     "id": "prayerQibla",
+     "title": "مواقيت الصلاة والقبلة",
+     "body": "تُحسب المواقيت بناءً على الإعدادات التي تختارها — كطريقة الحساب والمذهب والتعديلات اليدوية — وعلى الموقع المستخدم. ويعتمد اتجاه القبلة على موقعك وعلى حسّاسات جهازك، وقد تتأثر دقّته بالتشويش المغناطيسي أو بحدود الجهاز أو بدقة تحديد الموقع أو بتوقيت النظام. ولذلك ننصح بالتحقق من المواقيت والاتجاه مع مصدر موثوق في محيطك عند الأمور المهمة."
+    },
+    {
+     "id": "sources",
+     "title": "القرآن والتفسير والأذكار ومصادرها",
+     "body": "نص المصحف والترجمات والتفسير والأذكار والأدعية مأخوذة من مصادر خارجية معروفة ومنسوبة إلى أصحابها داخل التطبيق. ولا يدّعي زُلْفَى ملكية هذا المحتوى، وتبقى حقوقه وشروط استخدامه لأصحابها. وقد يتوقف أو يتغيّر بعض المحتوى الذي يُجلب من خدمات خارجية دون تحكّم منّا."
+    },
+    {
+     "id": "notifications",
+     "title": "الإشعارات والتذكيرات",
+     "body": "قد يوفّر زُلْفَى تذكيرات محلية على الأجهزة المدعومة: الصلوات الخمس، والتذكير قبل الصلاة، وأذكار الصباح والمساء، وورد القرآن، والمناسبات الإسلامية. وأنت من يتحكّم في هذه التفضيلات، وقد يلزم إذن من نظام جهازك. وقد يتأثر وقت وصول التذكير بسلوك الجهاز ونظام التشغيل وإعدادات توفير الطاقة، فلا نضمن وصولًا دقيقًا في كل جهاز. وفي وضع الأذان يُشغَّل الأذان المُضمَّن داخل التطبيق حيث يكون ذلك مدعومًا."
+    },
+    {
+     "id": "challenge",
+     "title": "تحدّي اليوم والتوكنز ولوحة الشرف",
+     "body": "تحدّي اليوم ميزة معرفية داخل التطبيق، والتوكنز نقاط تشجيعية داخلية تعبّر عن نشاطك فيه. التوكنز ليست مالًا ولا عملة رقمية، ولا قيمة نقدية لها، ولا تُشترى ولا تُباع ولا تُحوَّل ولا تُستبدل بمال أو بمقابل مالي. وقد تتغيّر ترتيبات لوحة الشرف مع الوقت. وفي حالات الإجابة الآلية أو التلاعب أو الاحتيال أو إساءة الاستخدام، يجوز لنا تصحيح النتائج أو إزالتها أو تقييد الوصول بالقدر المناسب."
+    },
+    {
+     "id": "accounts",
+     "title": "الحساب والوصول",
+     "body": "يعمل معظم التطبيق دون حساب. ولاستخدام التحدّي ولوحة الشرف يُنشئ زُلْفَى هوية مسابقة مرتبطة بجهازك، ويمكنك اختيار اسم مستخدم يظهر في لوحة الشرف. وأنت مسؤول عن الاسم الذي تختاره. ويمكنك حذف حساب المسابقة من داخل التطبيق، كما يمكنك مسح بيانات زُلْفَى المحفوظة على جهازك؛ وهما إجراءان منفصلان موضّحان في التطبيق."
+    },
+    {
+     "id": "acceptableUse",
+     "title": "الاستخدام المقبول",
+     "body": "استخدم زُلْفَى استخدامًا مشروعًا ومحترمًا. ولا يجوز التلاعب بنتائج التحدّي أو استخدام وسائل آلية للحصول على نقاط، ولا محاولة الوصول غير المصرّح به إلى الخدمة أو إلى حسابات غيرك، ولا تعطيل الخدمة أو استغلال ثغرة فيها، ولا انتحال شخصية أو استخدام اسم مسيء أو مخالف للقانون."
+    },
+    {
+     "id": "ip",
+     "title": "الملكية الفكرية",
+     "body": "برمجيات زُلْفَى وتصميمه وواجهته وهويته البصرية واسمه وشعاره ورسومه الأصلية مملوكة لـ MONER INTELLIGENCE SYSTEMS ومحمية بموجب القوانين المعمول بها. ولا يجوز نسخها أو تعديلها أو توزيعها دون إذن. ولا يشمل ذلك المحتوى الديني ذا المصادر الخارجية، فحقوقه لأصحابه كما هو مبيّن في صفحة المصادر داخل التطبيق."
+    },
+    {
+     "id": "purchase",
+     "title": "شراء التطبيق ومعاملات المتجر",
+     "body": "زُلْفَى تطبيق مدفوع لمرّة واحدة حيثما بيع كذلك؛ ولا يتضمّن اشتراكًا متكرّرًا ولا مشتريات داخل التطبيق ولا شراء توكنز. وتتم عمليات الشراء والدفع عبر متجر التطبيقات المعني، وتخضع لشروطه وسياسات الاسترداد لديه، وهي جهة الاسترداد المختصة."
+    },
+    {
+     "id": "thirdParty",
+     "title": "الخدمات والمصادر والروابط الخارجية",
+     "body": "قد يعتمد زُلْفَى على مصادر أو خدمات خارجية أو يحيل إليها، مثل مصادر المحتوى الديني المنسوبة داخل التطبيق. وهذه الجهات مستقلة عنّا، ولها شروطها وسياساتها، ولا نتحكّم في توفّرها أو استمرارها أو محتواها."
+    },
+    {
+     "id": "availability",
+     "title": "التوفّر والتحديثات والتغييرات",
+     "body": "قد نُصلح الأخطاء ونحسّن الميزات ونحدّث المحتوى ونعدّل بعض الوظائف أو نوقفها عند الحاجة. ولا نتعهّد بأن تبقى كل ميزة متاحة دائمًا أو دون انقطاع، وقد تعتمد بعض الميزات على اتصال بالإنترنت أو على دعم جهازك."
+    },
+    {
+     "id": "warranties",
+     "title": "حدود الضمان",
+     "body": "نبذل جهدًا معقولًا ليعمل زُلْفَى كما هو موصوف، غير أنه يُقدَّم دون ضمان بأن يكون خاليًا من الأخطاء أو متاحًا دائمًا أو دقيقًا في كل حال. ولا يحدّ هذا البند من حقوقك الإلزامية كمستهلك بموجب القانون الواجب التطبيق عليك، فتلك الحقوق تبقى قائمة."
+    },
+    {
+     "id": "liability",
+     "title": "حدود المسؤولية",
+     "body": "لا نتحمّل المسؤولية عن الأضرار غير المباشرة أو التبعية الناشئة عن استخدام التطبيق بالقدر الذي يجيزه القانون. ولا يُستثنى ولا يُحدّ في هذه الشروط ما لا يجوز قانونًا استثناؤه أو تحديده — كالمسؤولية عن التقصير الجسيم أو الضرر الجسدي أو الحقوق الإلزامية للمستهلك."
+    },
+    {
+     "id": "termination",
+     "title": "تقييد الوصول أو إيقافه",
+     "body": "يجوز لنا تقييد الوصول إلى ميزات المسابقة أو إيقافه عند مخالفة هذه الشروط أو عند التلاعب أو إساءة الاستخدام، وبالقدر المتناسب مع المخالفة. ويبقى استخدامك للميزات التي تعمل على جهازك — كالمواقيت والقرآن والأذكار والقبلة — كما هو."
+    },
+    {
+     "id": "privacy",
+     "title": "الخصوصية",
+     "body": "توضّح سياسة الخصوصية داخل التطبيق كيف يتعامل زُلْفَى مع بياناتك، وهي وثيقة مستقلة عن هذه الشروط ومكمّلة لها."
+    },
+    {
+     "id": "changes",
+     "title": "تعديل هذه الشروط",
+     "body": "قد نحدّث هذه الشروط عند تغيّر التطبيق أو المتطلّبات القانونية. ويظهر تاريخ آخر تحديث في أعلى هذه الصفحة، واستمرارك في استخدام التطبيق بعد التحديث يعني قبولك النسخة المحدّثة."
+    },
+    {
+     "id": "law",
+     "title": "القانون الواجب التطبيق",
+     "body": "تُطبَّق هذه الشروط بما لا يخلّ بحقوقك الإلزامية كمستهلك في بلد إقامتك، فتلك الحقوق تبقى لك في كل حال. ولم تُحدَّد بعدُ جهة اختصاص قضائي رسمية لهذا التطبيق، وسيُستكمل ذلك قبل الإصدار العام."
+    },
+    {
+     "id": "contact",
+     "title": "التواصل",
+     "body": "لأي سؤال عن هذه الشروط يمكنك مراسلة MONER INTELLIGENCE SYSTEMS على moner.intelligence@gmail.com."
+    }
+   ]
+  },
+  "product": {
+   "tagline": "رفيقك اليومي للصلاة والذكر",
+   "about": "زُلْفَى تطبيق إسلامي يجمع أوقات الصلاة الدقيقة والقرآن الكريم والأذكار والأدعية واتجاه القبلة في تجربة هادئة وأنيقة تعينك على يومك.",
+   "features": [
+    "أوقات الصلاة",
+    "القرآن الكريم",
+    "الأذكار والأدعية",
+    "اتجاه القبلة"
+   ]
+  },
+  "support": {
+   "faqTitle": "الأسئلة الشائعة",
+   "contactTitle": "تواصل معنا",
+   "contactBody": "لم تجد ما تبحث عنه؟ راسل فريق زُلْفَى وسنرد عليك قريبًا.",
+   "contactAction": "مراسلة الدعم",
+   "faq": [
+    {
+     "q": "كيف تُحسب أوقات الصلاة؟",
+     "a": "تُحسب الأوقات وفق موقعك وطريقة الحساب المختارة في إعدادات الصلاة، ويمكنك تعديل الدقائق يدويًا لكل صلاة."
+    },
+    {
+     "q": "كيف أغيّر المدينة؟",
+     "a": "من صفحة الموقع في القائمة الجانبية يمكنك استخدام موقع الجهاز أو اختيار مدينة يدويًا."
+    },
+    {
+     "q": "هل يعمل التطبيق دون اتصال؟",
+     "a": "تعمل الأذكار والأدعية والقبلة دون اتصال، بينما تحتاج بعض الميزات إلى الإنترنت."
+    },
+    {
+     "q": "كيف أحفظ آية أو دعاء؟",
+     "a": "اضغط على رمز الحفظ في أي محتوى ليظهر في صفحة المحفوظات."
+    }
+   ]
+  },
+  "deleteUi": {
+   "privClearTitle": "حذف البيانات المحلية",
+   "privClearBody": "يحذف بيانات زُلْفَى المحفوظة على هذا الجهاز: الموقع وإعدادات الصلاة، تقدّم القرآن والمحفوظات والمفضلة، تقدّم الأذكار، السجل، والتفضيلات.",
+   "privClearAction": "حذف بيانات زُلْفَى المحلية",
+   "privClearConfirm": "نعم، احذف كل شيء",
+   "delAccTitle": "حذف حساب المسابقة",
+   "delAccAction": "حذف حساب المسابقة",
+   "delAccSheetIntro": "سيؤدي هذا إلى الحذف النهائي لما يلي:",
+   "delAccConfirm": "نعم، احذف حسابي",
+   "delAccDone": "تم حذف حساب المسابقة الخاص بك.",
+   "delAccList": [
+    "اسم المستخدم — ويعود متاحًا لغيرك",
+    "رصيد التوكنز ومجموعها التراكمي",
+    "سجلّ التوكنز كاملًا",
+    "كل محاولات التحدّي اليومي وإجاباتها",
+    "موضعك في لوحة الشرف",
+    "ملفك في المسابقة"
+   ]
+  }
+ },
+ "en": {
+  "nav": {
+   "privacy": "Privacy Policy",
+   "terms": "Terms of Use",
+   "support": "Help & Support"
+  },
+  "privacy": {
+   "subtitle": "How we handle your data",
+   "updated": "27 August 2026",
+   "updatedLabel": "Last updated",
+   "summary": "Local first. One technical competition account, used only for the ranked challenge.",
+   "intro": "Your privacy is a trust. This policy describes what ZULFAA actually does with your data today. Most of your religious data and your settings — prayer times, the Qur'an, adhkar, du'as and the qibla — are calculated and kept on your device. The competition features, and some optional content, location and audio features, use external services as described later in this policy. There is no advertising, no analytics and no tracking anywhere in the app.",
+   "sections": [
+    {
+     "id": "identity",
+     "title": "Who we are",
+     "body": "This policy applies to the ZULFAA mobile app (Android package identifier com.zulfaa.app), designed and developed by MONER INTELLIGENCE SYSTEMS, which is responsible for the app and for the handling of data described here. Privacy questions and requests can be sent to moner.intelligence@gmail.com, the same address ZULFAA publishes in Help & Support. This policy is also published publicly on the official ZULFAA website, where the text is the same as it is here."
+    },
+    {
+     "id": "overview",
+     "title": "The short version",
+     "body": "ZULFAA works on your device first: the Qur'an, adhkar, du'as, prayer times and the qibla are all calculated and stored locally, and work offline. The app contains no analytics, tracking or advertising code, and never asks for your real name, email address, phone number or date of birth. ZULFAA does not sell your data, does not use it for advertising, and does not use tracking or analytics; it sends data to external services only where that is necessary for the functions described in this policy."
+    },
+    {
+     "id": "account",
+     "title": "Competition account and username",
+     "body": "ZULFAA uses a technical account dedicated to the competition, which does not require you to enter an email address or a password. It holds your competition participation data, such as your progress, results, balance and rank. This identifier is not shown to other users. Choosing a username remains optional for using the app in general, but it is required in order to take part in the ranked Daily Challenge. Once you choose a username it becomes public and may appear on the Honor Board beside your rank and your token balance, so it is advisable to choose a name you are comfortable showing to others."
+    },
+    {
+     "id": "device",
+     "title": "What stays on your device",
+     "body": "Kept in local storage on your device: your interface language; your prayer location, calculation method, madhhab and time adjustments; your live-qibla preference; your notification preferences; Qur'an reading progress, bookmarks, last position and chosen reciter; saved and favorited verses, du'as and adhkar; adhkar progress; your reading history; the technical session data required to maintain the competition account; and a short-lived cache of the tafsir passages you have opened. None of these settings are synced between your devices or uploaded to an account. ZULFAA itself neither syncs them nor uploads them. Android's own system backup is a separate matter and is under your control: if device backup is switched on in your Android settings, the system may include this app's data in the backup held in your own Google account, and restore it when you set up a new device. That backup belongs to you and to Google, not to ZULFAA, and you can switch it off in your device's backup settings. What is sent to external services when you use particular features is set out under Third-party services."
+    },
+    {
+     "id": "prayerLocation",
+     "title": "Prayer location",
+     "body": "Prayer times are calculated on your device from the coordinates of the location you choose — either through your device's location permission or by picking your city manually. The coordinates and place name are stored on your device. They are not sent to the competition server and are not linked to your account; they reach an outside service only in the case described under Third-party services."
+    },
+    {
+     "id": "qibla",
+     "title": "Live location and compass",
+     "body": "When you turn on live tracking on the Qibla screen, the app reads your position from the device while that screen is open, to keep the qibla direction and distance current. The bearing is computed on the device. No movement trail or location history is recorded or stored. With your permission the app may also read the device orientation sensor to point the compass; those readings are used moment to moment and are never stored. ZULFAA does not use location in the background."
+    },
+    {
+     "id": "notifications",
+     "title": "Notifications",
+     "body": "Your notification preferences are stored on your device, and the schedule is worked out locally from your calculated prayer times. Nothing is pushed from a server, and enabling reminders sends nothing about you anywhere. On supported Android devices ZULFAA requests notification permission only after an explicit action to allow notification delivery, never silently at startup; Android then holds the schedule, so the five daily prayers, the pre-prayer reminder, morning and evening adhkar, your Qur'an wird and Islamic occasions can still reach you while the app is in the background or closed. If you also allow the system's precise-timing capability, prayer alerts are scheduled to the minute; without it Android may deliver some of them less precisely. Prayers set to adhan mode play the ZULFAA adhan bundled with the app, from your device, offline. The web build does not raise system notifications. These are local notifications on your device — ZULFAA does not use push notifications for owner announcements, advertising or marketing."
+    },
+    {
+     "id": "playback",
+     "title": "Recitation and background playback",
+     "body": "While a recitation is playing, ZULFAA runs a media-playback foreground service on Android so the recitation can continue from one ayah to the next while the app is in the background. Android requires a visible notice in exchange, so a plain ongoing notification appears for as long as playback lasts; it carries no personal data and no playback controls — the optional home-screen player widget is what carries the controls. The service holds audio focus and nothing else: it records nothing, collects nothing and sends nothing anywhere, and it stops when playback stops. The recitation audio itself is streamed from the providers named under Third-party services."
+    },
+    {
+     "id": "quran",
+     "title": "Qur'an, tafsir and saved items",
+     "body": "The Qur'an text, the English translation, the adhkar and the du'as are bundled with the app and work offline. Your reading progress, bookmarks, favorites and saved items are kept on your device. Tafsir is the exception: it is not bundled, so opening a tafsir passage fetches it from Quran.com, an external content service, and caches it on your device for at most seven days. That request carries the surah and verse reference only."
+    },
+    {
+     "id": "challenge",
+     "title": "Daily Challenge, tokens and the Honor Board",
+     "body": "When you take part in the ranked Daily Challenge, your participation data — the question identifier and the option you picked — is sent to the competition service. Held under your competition account, and kept between sessions: your daily attempt, the answers you gave and their results, your token balance and lifetime total, and the record of each award. The Honor Board is public: a username, the token score for the selected period and the rank can appear on it. Tokens are a score inside ZULFAA: they have no monetary value and cannot be bought, sold, transferred or exchanged."
+    },
+    {
+     "id": "services",
+     "title": "Third-party services",
+     "body": "ZULFAA contacts the following services, and only for the purposes given. When a request is made, the external service may receive technical connection information such as your device's IP address, and each service has its own privacy policy. · Supabase — the competition backend: your competition account, username and competition data, whenever competition data is read or written. · Photon (Komoot) — place search: the search text you type. · Nominatim (OpenStreetMap) — reverse geocoding: the coordinates of the position being turned into a place name. · Quran.com (Quran Foundation) — tafsir: the surah and verse reference, when you open a tafsir passage. · EveryAyah and cdn.islamic.network — recitation audio: the surah, verse and reciter, while you play audio in the reader. ZULFAA does not send your username or your competition account identifier to these services, except to the competition backend provider (Supabase), where it is required for the competition itself to work. The country and region lists, and the app's typefaces, are bundled with the app and need no request at all. These providers operate their own infrastructure, which may be located outside your country of residence, so using the features above can involve an international transfer of the limited data listed for each service."
+    },
+    {
+     "id": "permissions",
+     "title": "Permissions you control",
+     "body": "ZULFAA may ask for three permissions, all optional: location (for prayer times and qibla), notifications (for reminders), and the orientation sensor (for the compass). The app works without them — only the related feature stops working — and you can withdraw any of them at any time in your browser or system settings."
+    },
+    {
+     "id": "security",
+     "title": "Security",
+     "body": "Every connection ZULFAA makes to an external service uses HTTPS, so the limited data described in this policy is encrypted in transit. The data kept on your device is held in the app's own private storage, protected by your device's own security. The competition backend is protected by row-level security rules on every table, so a device can only read and write the competition records that belong to it, together with the data that is public by design, such as the Honor Board. The app ships with a publishable key only; no privileged key is contained in the app. No system can be guaranteed to be completely secure, but because ZULFAA never asks for a real name, an email address, a phone number, a date of birth or a payment detail, there is no such information for it to hold."
+    },
+    {
+     "id": "deletion",
+     "title": "Deleting your data",
+     "body": "The button at the bottom of this page clears the ZULFAA data stored on this device: prayer location and settings, notification and qibla preferences, Qur'an progress, bookmarks, favorites, saved items, adhkar progress, history and interface language. It takes effect immediately and cannot be undone. It does not delete your competition account: your competition account, username, token balance and Honor Board position are held on the server and are deliberately left in place, so that clearing one device does not silently destroy them. Deleting the competition account is a separate action, also at the bottom of this page: it permanently removes your competition account, username, token balance, token history, challenge attempts and answers, and your Honor Board position. If you use the competition features again afterwards, a new competition account is created for you and starts from zero. Clearing local data also removes the temporary tafsir cache stored on your device."
+    },
+    {
+     "id": "retention",
+     "title": "How long data is kept",
+     "body": "Competition data is kept only while the account is in use. A competition account that is still empty — no username, no challenge attempts or answers, no token history and a zero balance — may be deleted automatically after 60 consecutive days without activity. An account that carries a username or any competition history may be deleted automatically after 365 consecutive days without activity. Any new activity resets that period, so simply opening ZULFAA keeps an account alive. You do not have to wait: you can delete your competition account yourself at any time, from the button at the bottom of this page. Deletion is permanent and removes the username, token balance, token history, challenge attempts and answers, and any Honor Board position. If you use the competition features again afterwards, a new competition account is created for you and starts from zero."
+    },
+    {
+     "id": "children",
+     "title": "Children",
+     "body": "ZULFAA is a general worship app and is not directed specifically at children. Ordinary use asks for no name, email address, phone number or date of birth. The only information a user intentionally makes public through the competition is the username they choose, which is shown publicly on the Honor Board, and it should not contain a real name or any other personal detail. A parent allowing a child to take part in the ranked challenge should be aware that the chosen username is shown publicly."
+    },
+    {
+     "id": "changes",
+     "title": "Changes to this policy",
+     "body": "If the app's behaviour changes — a new service, a new kind of stored data, or a change to what is shown publicly — this page is updated and the last-updated date above changes with it."
+    },
+    {
+     "id": "contact",
+     "title": "Contact",
+     "body": "For any question or request about this policy, write to moner.intelligence@gmail.com — the address of MONER INTELLIGENCE SYSTEMS, the developer of ZULFAA. The controls at the bottom of this page are also a direct route and need no message to anyone: you can clear your local data, and you can delete your competition account together with everything the server holds for it. If you would rather not create a public username or a competition participation record, simply do not enter the ranked challenge: your competition account stays empty, and it is subject to the retention periods described above."
+    }
+   ]
+  },
+  "terms": {
+   "subtitle": "The terms that govern your use of the app",
+   "summary": "By using ZULFAA you agree to these Terms.",
+   "intro": "These Terms explain what ZULFAA provides, what you can expect from it, and what is expected of you when you use it. They are written in plain language wherever the law allows.",
+   "updated": "24 August 2026",
+   "updatedLabel": "Last updated",
+   "sections": [
+    {
+     "id": "acceptance",
+     "title": "Acceptance of these Terms",
+     "body": "By using ZULFAA you agree to these Terms. If you do not agree with them, please do not use the app. If you use ZULFAA on someone else's behalf, you confirm that you are allowed to do so."
+    },
+    {
+     "id": "about",
+     "title": "About ZULFAA",
+     "body": "ZULFAA is an Islamic app that brings together prayer times, Qibla direction, the Qur'an, tafsir, adhkar, du'a, Islamic occasions, reminders, and a daily knowledge challenge. It is designed and developed by MONER INTELLIGENCE SYSTEMS for Android and iPhone."
+    },
+    {
+     "id": "eligibility",
+     "title": "Eligibility and your responsibilities",
+     "body": "You should be legally able to accept these Terms where you live; if you are a minor, use ZULFAA with the consent of a parent or guardian. You are responsible for your own device and for the settings you choose — such as your location and calculation method — because what the app shows you depends on them."
+    },
+    {
+     "id": "religiousContent",
+     "title": "Religious and informational content",
+     "body": "ZULFAA offers Islamic tools and content to support your daily worship. It does not issue religious rulings and is not a substitute for qualified scholars or your local religious authority. For matters that require a ruling or a considered opinion, please consult people of knowledge."
+    },
+    {
+     "id": "prayerQibla",
+     "title": "Prayer times and qibla",
+     "body": "Prayer times are calculated from the settings you choose — such as calculation method, madhhab and any manual adjustments — and from the location in use. Qibla direction depends on your location and on your device's sensors, and its accuracy can be affected by magnetic interference, device limitations, location accuracy or system timing. For anything important, we recommend confirming times and direction with a trusted local source."
+    },
+    {
+     "id": "sources",
+     "title": "Qur'an, tafsir, adhkar and their sources",
+     "body": "The Qur'an text, translations, tafsir, adhkar and du'as come from established external sources, each credited inside the app. ZULFAA does not claim ownership of that content; it remains with its rights holders and subject to their terms. Content fetched from external services may change or become unavailable for reasons outside our control."
+    },
+    {
+     "id": "notifications",
+     "title": "Notifications and reminders",
+     "body": "On supported devices ZULFAA may provide local reminders: the five daily prayers, a pre-prayer reminder, morning and evening adhkar, your Qur'an wird and Islamic occasions. You control these preferences, and your device's system permissions may be required. When a reminder actually arrives can depend on your device, its operating system and its battery settings, so precise delivery cannot be guaranteed on every device. Prayers set to adhan mode play the adhan bundled with the app where that is supported."
+    },
+    {
+     "id": "challenge",
+     "title": "Daily Challenge, tokens and the Honor Board",
+     "body": "The Daily Challenge is an in-app knowledge feature, and tokens are an internal ZULFAA score that reflects your activity in it. Tokens are not money and not cryptocurrency. They have no cash value, cannot be bought, sold or transferred, and cannot be redeemed for money or any financial benefit. Honor Board rankings may change over time. Where answers are automated, manipulated, fraudulent or otherwise abused, we may correct or remove scores, or restrict access, to the extent that is proportionate."
+    },
+    {
+     "id": "accounts",
+     "title": "Accounts and access",
+     "body": "Most of ZULFAA works without any account. To take part in the Daily Challenge and the Honor Board, ZULFAA creates a competition identity linked to your device, and you may choose a username that appears on the Honor Board. You are responsible for the username you choose. You can delete your competition account from within the app, and you can separately clear the ZULFAA data stored on your device; both controls are explained in the app."
+    },
+    {
+     "id": "acceptableUse",
+     "title": "Acceptable use",
+     "body": "Please use ZULFAA lawfully and respectfully. You may not manipulate Daily Challenge results or use automated means to gain tokens, attempt unauthorised access to the service or to other people's accounts, disrupt the service or exploit a security weakness in it, or impersonate anyone or use an offensive or unlawful username."
+    },
+    {
+     "id": "ip",
+     "title": "Intellectual property",
+     "body": "ZULFAA's software, design, interface, branding, name, logo and original graphics belong to MONER INTELLIGENCE SYSTEMS and are protected by applicable law. They may not be copied, modified or distributed without permission. This does not extend to the externally sourced religious content, which remains with its rights holders as credited in the app's sources page."
+    },
+    {
+     "id": "purchase",
+     "title": "Paid app and store transactions",
+     "body": "Where ZULFAA is sold, it is a one-time paid app. There is no recurring ZULFAA subscription, no in-app purchases and no way to buy tokens. Purchases and payments are handled by the relevant app store and are governed by that store's terms and refund rules; refunds are handled by the store."
+    },
+    {
+     "id": "thirdParty",
+     "title": "Third-party sources, services and links",
+     "body": "ZULFAA may rely on or refer to external sources and services, such as the religious content providers credited in the app. Those parties are independent of us, have their own terms and policies, and we do not control their availability, continuity or content."
+    },
+    {
+     "id": "availability",
+     "title": "Availability, updates and changes",
+     "body": "We may fix problems, improve features, update content, and change or discontinue functionality where that is reasonably necessary. We do not promise that every feature will always be available or uninterrupted, and some features depend on an internet connection or on what your device supports."
+    },
+    {
+     "id": "warranties",
+     "title": "Disclaimer",
+     "body": "We take reasonable care to make ZULFAA work as described, but it is provided without a guarantee that it will be error-free, always available, or accurate in every situation. Nothing in this section limits the mandatory consumer rights you have under the law that applies to you; those rights continue to apply."
+    },
+    {
+     "id": "liability",
+     "title": "Limitation of liability",
+     "body": "To the extent permitted by law, we are not liable for indirect or consequential loss arising from your use of the app. Nothing in these Terms excludes or limits liability that cannot lawfully be excluded or limited — including liability for gross negligence, for personal injury, or under mandatory consumer protection law."
+    },
+    {
+     "id": "termination",
+     "title": "Restricting or ending access",
+     "body": "We may restrict or end access to the competition features if these Terms are breached, or in cases of manipulation or abuse, and only to an extent proportionate to what happened. Features that run on your own device — prayer times, the Qur'an, adhkar and qibla — are unaffected."
+    },
+    {
+     "id": "privacy",
+     "title": "Privacy",
+     "body": "The Privacy Policy in the app explains how ZULFAA handles your data. It is a separate document that complements these Terms."
+    },
+    {
+     "id": "changes",
+     "title": "Changes to these Terms",
+     "body": "We may update these Terms as the app or legal requirements change. The date at the top of this page shows when they were last updated, and continuing to use the app after an update means you accept the updated version."
+    },
+    {
+     "id": "law",
+     "title": "Applicable law",
+     "body": "These Terms apply without prejudice to the mandatory consumer rights you have in your country of residence; those rights always remain available to you. A formal governing-law jurisdiction has not yet been established for this app and will be confirmed before public release."
+    },
+    {
+     "id": "contact",
+     "title": "Contact",
+     "body": "If you have a question about these Terms you can contact MONER INTELLIGENCE SYSTEMS at moner.intelligence@gmail.com."
+    }
+   ]
+  },
+  "product": {
+   "tagline": "Your daily companion for prayer and dhikr",
+   "about": "ZULFAA is an Islamic app bringing together accurate prayer times, the Qur'an, adhkar and du'as, and qibla direction in one calm, elegant experience.",
+   "features": [
+    "Prayer times",
+    "The Qur'an",
+    "Adhkar & du'as",
+    "Qibla direction"
+   ]
+  },
+  "support": {
+   "faqTitle": "Frequently asked questions",
+   "contactTitle": "Contact us",
+   "contactBody": "Didn't find what you need? Message the ZULFAA team and we'll reply soon.",
+   "contactAction": "Email support",
+   "faq": [
+    {
+     "q": "How are prayer times calculated?",
+     "a": "Times follow your location and the calculation method chosen in prayer settings; you can adjust minutes manually per prayer."
+    },
+    {
+     "q": "How do I change my city?",
+     "a": "From the Location page in the side menu you can use device location or pick a city manually."
+    },
+    {
+     "q": "Does the app work offline?",
+     "a": "Adhkar, du'as and qibla work offline, while some features need the internet."
+    },
+    {
+     "q": "How do I save a verse or du'a?",
+     "a": "Tap the save icon on any content and it will appear on the Saved page."
+    }
+   ]
+  },
+  "deleteUi": {
+   "privClearTitle": "Clear local data",
+   "privClearBody": "Deletes the ZULFAA data stored on this device: location and prayer settings, Qur'an progress, saved items and favorites, adhkar progress, history, and preferences.",
+   "privClearAction": "Clear local ZULFAA data",
+   "privClearConfirm": "Yes, delete everything",
+   "delAccTitle": "Delete competition account",
+   "delAccAction": "Delete competition account",
+   "delAccSheetIntro": "This permanently removes:",
+   "delAccConfirm": "Yes, delete my account",
+   "delAccDone": "Your competition account has been deleted.",
+   "delAccList": [
+    "Your username — it becomes available to others again",
+    "Your token balance and lifetime total",
+    "Your entire token history",
+    "Every Daily Challenge attempt and answer",
+    "Your place on the Honor Board",
+    "Your competition profile"
+   ]
+  }
+ },
+ "nl": {
+  "nav": {
+   "privacy": "Privacybeleid",
+   "terms": "Gebruiksvoorwaarden",
+   "support": "Hulp & Ondersteuning"
+  },
+  "privacy": {
+   "subtitle": "Hoe wij met uw gegevens omgaan",
+   "updated": "27 augustus 2026",
+   "updatedLabel": "Laatst bijgewerkt",
+   "summary": "Lokaal eerst. Eén technisch wedstrijdaccount, alleen voor de wedstrijd.",
+   "intro": "Uw privacy is een vertrouwen. Dit beleid beschrijft wat ZULFAA vandaag daadwerkelijk met uw gegevens doet. Het meeste van uw religieuze gegevens en uw instellingen — gebedstijden, de Koran, adhkar, doe'a's en de qibla — wordt op uw apparaat berekend en bewaard. De wedstrijdfuncties, en enkele optionele functies voor inhoud, locatie en audio, maken gebruik van externe diensten zoals verderop in dit beleid wordt beschreven. Er zit nergens in de app advertentie-, analytics- of trackingcode.",
+   "sections": [
+    {
+     "id": "identity",
+     "title": "Wie wij zijn",
+     "body": "Dit beleid geldt voor de ZULFAA-app (Android-pakketnaam com.zulfaa.app), ontworpen en ontwikkeld door MONER INTELLIGENCE SYSTEMS, dat verantwoordelijk is voor de app en voor de gegevensverwerking die hier wordt beschreven. Vragen en verzoeken over privacy kunt u sturen naar moner.intelligence@gmail.com, hetzelfde adres dat ZULFAA in Help & ondersteuning publiceert. Dit beleid staat ook openbaar op de officiële ZULFAA-website; de tekst daar is dezelfde als hier."
+    },
+    {
+     "id": "overview",
+     "title": "In het kort",
+     "body": "ZULFAA werkt eerst op uw apparaat: de Koran, adhkar, doe'a's, gebedstijden en de qibla worden lokaal berekend en bewaard, en werken offline. De app bevat geen analytics-, tracking- of advertentiecode en vraagt nooit om uw echte naam, e-mailadres, telefoonnummer of geboortedatum. ZULFAA verkoopt uw gegevens niet, gebruikt ze niet voor advertenties en gebruikt geen tracking of analytics; gegevens gaan alleen naar externe diensten voor zover dat nodig is voor de functies die in dit beleid worden beschreven."
+    },
+    {
+     "id": "account",
+     "title": "Wedstrijdaccount en gebruikersnaam",
+     "body": "ZULFAA gebruikt een technisch account dat speciaal voor de wedstrijd is bedoeld en waarvoor u geen e-mailadres of wachtwoord hoeft in te voeren. Daarin worden uw deelnamegegevens voor de wedstrijd bewaard, zoals uw voortgang, resultaten, saldo en plaats. Deze identificatie wordt niet aan andere gebruikers getoond. Een gebruikersnaam kiezen blijft optioneel voor het gebruik van de app in het algemeen, maar is vereist om deel te nemen aan de dagelijkse uitdaging in wedstrijdmodus. Zodra u een gebruikersnaam kiest, wordt die openbaar en kan hij op de Erelijst verschijnen naast uw plaats en uw tokensaldo; kies daarom een naam die u met een gerust hart aan anderen laat zien."
+    },
+    {
+     "id": "device",
+     "title": "Wat op uw apparaat blijft",
+     "body": "In de lokale opslag op uw apparaat wordt bewaard: uw interfacetaal; uw gebedslocatie, berekeningsmethode, madhhab en tijdcorrecties; uw voorkeur voor live qibla-tracking; uw meldingsvoorkeuren; Koranvoortgang, bladwijzers, laatste leespositie en gekozen reciteur; opgeslagen en favoriete verzen, doe'a's en adhkar; adhkar-voortgang; uw leesgeschiedenis; de technische sessiegegevens die nodig zijn om het wedstrijdaccount in stand te houden; en een kortstondige cache van de tafsir-passages die u hebt geopend. Deze instellingen worden niet tussen uw apparaten gesynchroniseerd en niet naar een account geüpload. ZULFAA zelf synchroniseert ze niet en uploadt ze niet. De systeemback-up van Android staat daar los van en is aan u: staat back-up in uw Android-instellingen aan, dan kan het systeem de gegevens van deze app opnemen in de back-up in uw eigen Google-account en die terugzetten wanneer u een nieuw apparaat inricht. Die back-up is van u en van Google, niet van ZULFAA, en u kunt hem uitschakelen in de back-upinstellingen van uw apparaat. Wat er bij het gebruik van bepaalde functies naar externe diensten gaat, staat beschreven onder Diensten van derden."
+    },
+    {
+     "id": "prayerLocation",
+     "title": "Gebedslocatie",
+     "body": "Gebedstijden worden op uw apparaat berekend uit de coördinaten van de locatie die u kiest — via de locatietoestemming van uw apparaat of door uw stad handmatig te kiezen. De coördinaten en plaatsnaam worden op uw apparaat opgeslagen. Ze gaan niet naar de wedstrijdserver en worden niet aan uw account gekoppeld; ze bereiken alleen een externe dienst in het geval dat onder Diensten van derden staat beschreven."
+    },
+    {
+     "id": "qibla",
+     "title": "Live locatie en kompas",
+     "body": "Wanneer u live tracking op het Qibla-scherm inschakelt, leest de app uw positie van het apparaat zolang dat scherm open is, om richting en afstand actueel te houden. De richting wordt op het apparaat berekend. Er wordt geen bewegingsspoor of locatiegeschiedenis vastgelegd of bewaard. Met uw toestemming kan de app ook de oriëntatiesensor uitlezen voor het kompas; die metingen worden alleen op het moment zelf gebruikt en nooit opgeslagen. ZULFAA gebruikt geen locatie op de achtergrond."
+    },
+    {
+     "id": "notifications",
+     "title": "Meldingen",
+     "body": "Uw meldingsvoorkeuren staan op uw apparaat en de planning wordt lokaal berekend uit uw gebedstijden. Er wordt niets vanaf een server verstuurd, en inschakelen stuurt niets over u ergens heen. Op ondersteunde Android-apparaten vraagt ZULFAA pas toestemming voor meldingen na een uitdrukkelijke actie van u om meldingen toe te staan, nooit stilzwijgend bij het opstarten; Android bewaart daarna de planning, zodat de vijf dagelijkse gebeden, de herinnering vóór het gebed, de ochtend- en avondadhkar, uw Koranwird en islamitische gelegenheden u ook bereiken terwijl de app op de achtergrond staat of gesloten is. Geeft u daarnaast toestemming voor de precieze-timingfunctie van het systeem, dan worden gebedsmeldingen op de minuut ingepland; zonder die toestemming kan Android sommige meldingen minder precies bezorgen. Gebeden die op adhan-modus staan, spelen de in de app meegeleverde ZULFAA-adhan af vanaf uw apparaat, offline. De webversie toont geen systeemmeldingen. Dit zijn lokale meldingen op uw apparaat — ZULFAA gebruikt geen pushmeldingen voor aankondigingen van de eigenaar, advertenties of marketing."
+    },
+    {
+     "id": "playback",
+     "title": "Recitatie en afspelen op de achtergrond",
+     "body": "Terwijl een recitatie speelt, draait ZULFAA op Android een voorgrondservice voor mediaweergave, zodat de recitatie van het ene vers naar het volgende kan doorlopen terwijl de app op de achtergrond staat. Android verlangt daarvoor een zichtbare melding, dus zolang er wordt afgespeeld verschijnt een eenvoudige doorlopende melding; die bevat geen persoonsgegevens en geen afspeelknoppen — de optionele spelerwidget op het startscherm draagt de knoppen. De service houdt alleen de audiofocus vast: hij legt niets vast, verzamelt niets en stuurt niets ergens heen, en hij stopt zodra het afspelen stopt. De recitatie-audio zelf komt van de aanbieders die onder Diensten van derden worden genoemd."
+    },
+    {
+     "id": "quran",
+     "title": "Koran, tafsir en opgeslagen items",
+     "body": "De Korantekst, de Engelse vertaling, de adhkar en de doe'a's zitten in de app en werken offline. Uw leesvoortgang, bladwijzers, favorieten en opgeslagen items blijven op uw apparaat. De tafsir is de uitzondering: die zit niet in de app, dus bij het openen van een tafsir-passage wordt deze opgehaald bij Quran.com, een externe contentdienst, en hoogstens zeven dagen op uw apparaat bewaard. Dat verzoek bevat alleen de soera- en versverwijzing."
+    },
+    {
+     "id": "challenge",
+     "title": "Dagelijkse uitdaging, tokens en de Erelijst",
+     "body": "Wanneer u deelneemt aan de dagelijkse uitdaging in wedstrijdmodus, worden uw deelnamegegevens — de vraag-identificatie en de door u gekozen optie — naar de wedstrijddienst gestuurd. Onder uw wedstrijdaccount wordt bewaard en tussen sessies behouden: uw dagelijkse poging, de antwoorden die u gaf en de uitslag daarvan, uw tokensaldo en uw totaal ooit verdiend, en de registratie van elke beloning. De Erelijst is openbaar: daarop kunnen een gebruikersnaam, de tokenscore over de gekozen periode en de plaats verschijnen. Tokens zijn een score binnen ZULFAA: ze hebben geen geldwaarde en kunnen niet worden gekocht, verkocht, overgedragen of ingewisseld."
+    },
+    {
+     "id": "services",
+     "title": "Diensten van derden",
+     "body": "ZULFAA neemt contact op met de volgende diensten, en uitsluitend voor de genoemde doelen. Bij een verzoek kan de externe dienst technische verbindingsgegevens ontvangen, zoals het IP-adres van uw apparaat, en elke dienst heeft zijn eigen privacybeleid. · Supabase — de wedstrijdbackend: uw wedstrijdaccount, gebruikersnaam en wedstrijdgegevens, telkens wanneer wedstrijdgegevens worden gelezen of geschreven. · Photon (Komoot) — plaatszoeken: de zoektekst die u typt. · Nominatim (OpenStreetMap) — omzetten van coördinaten: de coördinaten van de positie die in een plaatsnaam wordt omgezet. · Quran.com (Quran Foundation) — tafsir: de soera- en versverwijzing, wanneer u een tafsir-passage opent. · EveryAyah en cdn.islamic.network — recitatie-audio: de soera, het vers en de reciteur, terwijl u audio afspeelt in de lezer. ZULFAA stuurt uw gebruikersnaam of uw wedstrijdaccount-identificatie niet naar deze diensten, behalve naar de leverancier van de wedstrijdbackend (Supabase), waar dat nodig is om de wedstrijd zelf te laten werken. De landen- en regiolijsten en de lettertypen van de app zitten in de app en vergen helemaal geen verzoek. Deze aanbieders draaien hun eigen infrastructuur, die zich buiten uw land van verblijf kan bevinden; het gebruik van bovenstaande functies kan dus een internationale doorgifte inhouden van de beperkte gegevens die per dienst zijn genoemd."
+    },
+    {
+     "id": "permissions",
+     "title": "Toestemmingen die u beheert",
+     "body": "ZULFAA kan om drie toestemmingen vragen, alle optioneel: locatie (voor gebedstijden en qibla), meldingen (voor herinneringen) en de oriëntatiesensor (voor het kompas). De app werkt ook zonder — alleen de bijbehorende functie stopt dan — en u kunt elke toestemming op elk moment intrekken via uw browser- of systeeminstellingen."
+    },
+    {
+     "id": "security",
+     "title": "Beveiliging",
+     "body": "Elke verbinding die ZULFAA met een externe dienst maakt verloopt via HTTPS, zodat de beperkte gegevens die in dit beleid worden beschreven onderweg versleuteld zijn. De gegevens op uw apparaat staan in de eigen, afgeschermde opslag van de app en worden beschermd door de beveiliging van uw apparaat zelf. De wedstrijdbackend is beveiligd met regels op rijniveau op elke tabel, zodat een apparaat alleen de wedstrijdgegevens kan lezen en schrijven die bij dat apparaat horen, naast de gegevens die van nature openbaar zijn, zoals het Honor Board. De app bevat uitsluitend een publiceerbare sleutel; er zit geen sleutel met verhoogde rechten in de app. Geen enkel systeem is volledig te beveiligen, maar omdat ZULFAA nooit om een echte naam, e-mailadres, telefoonnummer, geboortedatum of betaalgegevens vraagt, zijn zulke gegevens er eenvoudigweg niet."
+    },
+    {
+     "id": "deletion",
+     "title": "Uw gegevens verwijderen",
+     "body": "De knop onderaan deze pagina wist de ZULFAA-gegevens op dit apparaat: gebedslocatie en -instellingen, meldings- en qibla-voorkeuren, Koranvoortgang, bladwijzers, favorieten, opgeslagen items, adhkar-voortgang, geschiedenis en interfacetaal. Dat gebeurt onmiddellijk en is niet ongedaan te maken. Uw wedstrijdaccount wordt daarmee niet verwijderd: uw wedstrijdaccount, gebruikersnaam, tokensaldo en plaats op de Erelijst staan op de server en blijven bewust bestaan, zodat het wissen van één apparaat ze niet ongemerkt vernietigt. Het wedstrijdaccount verwijderen is een aparte actie, eveneens onderaan deze pagina: die wist definitief uw wedstrijdaccount, gebruikersnaam, tokensaldo, tokengeschiedenis, pogingen en antwoorden en uw plaats op de Erelijst. Gebruikt u de wedstrijdfuncties daarna opnieuw, dan wordt een nieuw wedstrijdaccount voor u aangemaakt dat bij nul begint. Het wissen van lokale gegevens verwijdert ook de tijdelijke tafsir-cache op uw apparaat."
+    },
+    {
+     "id": "retention",
+     "title": "Hoelang gegevens worden bewaard",
+     "body": "Wedstrijdgegevens worden alleen bewaard zolang het account in gebruik is. Een wedstrijdaccount dat nog leeg is — geen gebruikersnaam, geen pogingen of antwoorden, geen tokengeschiedenis en een saldo van nul — kan automatisch worden verwijderd na 60 opeenvolgende dagen zonder activiteit. Een account met een gebruikersnaam of enige wedstrijdgeschiedenis kan automatisch worden verwijderd na 365 opeenvolgende dagen zonder activiteit. Elke nieuwe activiteit zet die periode terug op nul, dus alleen al het openen van ZULFAA houdt een account in stand. U hoeft niet te wachten: u kunt uw wedstrijdaccount op elk moment zelf verwijderen met de knop onderaan deze pagina. Verwijderen is definitief en wist de gebruikersnaam, het tokensaldo, de tokengeschiedenis, de pogingen en antwoorden en elke plaats op de Erelijst. Gebruikt u de wedstrijdfuncties daarna opnieuw, dan wordt een nieuw wedstrijdaccount voor u aangemaakt dat bij nul begint."
+    },
+    {
+     "id": "children",
+     "title": "Kinderen",
+     "body": "ZULFAA is een algemene aanbiddings-app en richt zich niet specifiek op kinderen. Gewoon gebruik vraagt niet om een naam, e-mailadres, telefoonnummer of geboortedatum. Het enige gegeven dat een gebruiker via de wedstrijd bewust openbaar maakt, is de gebruikersnaam die hij of zij kiest en die openbaar op de Erelijst wordt getoond; die naam hoort geen echte naam of andere persoonlijke gegevens te bevatten. Een ouder die een kind aan de wedstrijd laat deelnemen, dient te weten dat de gekozen gebruikersnaam openbaar wordt getoond."
+    },
+    {
+     "id": "changes",
+     "title": "Wijzigingen in dit beleid",
+     "body": "Verandert het gedrag van de app — een nieuwe dienst, een nieuw soort opgeslagen gegevens, of een wijziging in wat openbaar wordt getoond — dan wordt deze pagina bijgewerkt en verandert de datum hierboven mee."
+    },
+    {
+     "id": "contact",
+     "title": "Contact",
+     "body": "Voor elke vraag of elk verzoek over dit beleid kunt u schrijven naar moner.intelligence@gmail.com — het adres van MONER INTELLIGENCE SYSTEMS, de ontwikkelaar van ZULFAA. Ook de knoppen onderaan deze pagina zijn een directe weg waarvoor u niemand hoeft te mailen: u kunt uw lokale gegevens wissen én uw wedstrijdaccount met alles wat de server daarvoor bewaart verwijderen. Wilt u liever geen openbare gebruikersnaam en geen deelnamegegevens voor de wedstrijd aanmaken, neem dan eenvoudigweg niet deel aan de wedstrijdmodus: uw wedstrijdaccount blijft leeg en valt onder de hierboven beschreven bewaartermijnen."
+    }
+   ]
+  },
+  "terms": {
+   "subtitle": "De voorwaarden voor uw gebruik van de app",
+   "summary": "Door ZULFAA te gebruiken gaat u akkoord met deze voorwaarden.",
+   "intro": "Deze voorwaarden leggen uit wat ZULFAA biedt, wat u ervan mag verwachten en wat er van u wordt verwacht bij het gebruik. Ze zijn zo begrijpelijk mogelijk geschreven.",
+   "updated": "24 augustus 2026",
+   "updatedLabel": "Laatst bijgewerkt",
+   "sections": [
+    {
+     "id": "acceptance",
+     "title": "Aanvaarding van deze voorwaarden",
+     "body": "Door ZULFAA te gebruiken gaat u akkoord met deze voorwaarden. Bent u het er niet mee eens, gebruik de app dan niet. Gebruikt u ZULFAA namens iemand anders, dan bevestigt u dat u daartoe bevoegd bent."
+    },
+    {
+     "id": "about",
+     "title": "Over ZULFAA",
+     "body": "ZULFAA is een islamitische app met gebedstijden, qibla-richting, de Koran, tafsir, adhkar, dua, islamitische gelegenheden, herinneringen en een dagelijkse kennisuitdaging. De app is ontworpen en ontwikkeld door MONER INTELLIGENCE SYSTEMS voor Android en iPhone."
+    },
+    {
+     "id": "eligibility",
+     "title": "Gebruik en uw verantwoordelijkheid",
+     "body": "U moet deze voorwaarden in uw land rechtsgeldig kunnen aanvaarden; bent u minderjarig, gebruik ZULFAA dan met toestemming van een ouder of voogd. U bent zelf verantwoordelijk voor uw apparaat en voor de instellingen die u kiest — zoals locatie en berekeningsmethode — omdat wat de app toont daarvan afhangt."
+    },
+    {
+     "id": "religiousContent",
+     "title": "Religieuze en informatieve inhoud",
+     "body": "ZULFAA biedt islamitische hulpmiddelen en inhoud ter ondersteuning van uw dagelijkse gebedspraktijk. De app geeft geen religieuze uitspraken en vervangt geen gekwalificeerde geleerden of uw plaatselijke religieuze autoriteit. Raadpleeg voor vraagstukken die een oordeel vragen mensen met kennis van zaken."
+    },
+    {
+     "id": "prayerQibla",
+     "title": "Gebedstijden en qibla",
+     "body": "Gebedstijden worden berekend op basis van de instellingen die u kiest — zoals berekeningsmethode, madhhab en handmatige correcties — en van de gebruikte locatie. De qiblarichting hangt af van uw locatie en van de sensoren van uw apparaat; magnetische storing, beperkingen van het apparaat, locatienauwkeurigheid of de systeemtijd kunnen de nauwkeurigheid beïnvloeden. Controleer belangrijke tijden en richtingen daarom ook bij een betrouwbare bron in uw omgeving."
+    },
+    {
+     "id": "sources",
+     "title": "Koran, tafsir, adhkar en hun bronnen",
+     "body": "De Korantekst, vertalingen, tafsir, adhkar en doe'a's zijn afkomstig van gevestigde externe bronnen, die in de app worden vermeld. ZULFAA claimt geen eigendom van die inhoud; de rechten blijven bij de rechthebbenden en hun voorwaarden gelden. Inhoud die van externe diensten wordt opgehaald, kan buiten onze invloed om wijzigen of wegvallen."
+    },
+    {
+     "id": "notifications",
+     "title": "Meldingen en herinneringen",
+     "body": "Op ondersteunde apparaten kan ZULFAA lokale herinneringen geven: de vijf dagelijkse gebeden, een herinnering vóór het gebed, ochtend- en avondadhkar, uw Koranwird en islamitische gelegenheden. U bepaalt deze voorkeuren zelf en toestemming van uw besturingssysteem kan nodig zijn. Wanneer een herinnering daadwerkelijk aankomt, kan afhangen van uw apparaat, het besturingssysteem en de batterij-instellingen; exacte bezorging kan daarom niet op elk apparaat worden gegarandeerd. Gebeden in adhan-modus spelen de in de app meegeleverde adhan af waar dat wordt ondersteund."
+    },
+    {
+     "id": "challenge",
+     "title": "Dagelijkse uitdaging, tokens en het Honor Board",
+     "body": "De dagelijkse uitdaging is een kennisfunctie in de app en tokens zijn een interne ZULFAA-score die uw activiteit daarin weergeeft. Tokens zijn geen geld en geen cryptovaluta. Ze hebben geen geldwaarde, kunnen niet worden gekocht, verkocht of overgedragen en zijn niet inwisselbaar voor geld of enig financieel voordeel. Klasseringen op het Honor Board kunnen in de loop van de tijd wijzigen. Bij geautomatiseerde, gemanipuleerde, frauduleuze of anderszins oneigenlijke deelname kunnen wij scores corrigeren of verwijderen of de toegang beperken, steeds in verhouding tot wat er is gebeurd."
+    },
+    {
+     "id": "accounts",
+     "title": "Account en toegang",
+     "body": "Het grootste deel van ZULFAA werkt zonder account. Voor de dagelijkse uitdaging en het Honor Board maakt ZULFAA een wedstrijdidentiteit aan die aan uw apparaat is gekoppeld, en kunt u een gebruikersnaam kiezen die op het Honor Board verschijnt. U bent verantwoordelijk voor de gekozen naam. U kunt uw wedstrijdaccount in de app verwijderen en daarnaast de ZULFAA-gegevens op uw apparaat wissen; beide mogelijkheden worden in de app toegelicht."
+    },
+    {
+     "id": "acceptableUse",
+     "title": "Toegestaan gebruik",
+     "body": "Gebruik ZULFAA rechtmatig en respectvol. Het is niet toegestaan resultaten van de dagelijkse uitdaging te manipuleren of tokens met geautomatiseerde middelen te verkrijgen, ongeoorloofde toegang te zoeken tot de dienst of tot accounts van anderen, de dienst te verstoren of een beveiligingszwakte te misbruiken, of zich voor te doen als iemand anders dan wel een beledigende of onrechtmatige gebruikersnaam te voeren."
+    },
+    {
+     "id": "ip",
+     "title": "Intellectuele eigendom",
+     "body": "De software, het ontwerp, de interface, de merkuitingen, de naam, het logo en de originele graphics van ZULFAA behoren toe aan MONER INTELLIGENCE SYSTEMS en zijn beschermd volgens het toepasselijke recht. Zij mogen niet zonder toestemming worden gekopieerd, gewijzigd of verspreid. Dit geldt niet voor de extern afkomstige religieuze inhoud; die blijft bij de rechthebbenden zoals vermeld op de bronnenpagina in de app."
+    },
+    {
+     "id": "purchase",
+     "title": "Betaalde app en aankopen via de store",
+     "body": "Waar ZULFAA wordt verkocht, is het een eenmalig betaalde app. Er is geen doorlopend ZULFAA-abonnement, er zijn geen in-app-aankopen en tokens kunnen niet worden gekocht. Aankopen en betalingen verlopen via de betreffende appstore en vallen onder de voorwaarden en het restitutiebeleid van die store; terugbetalingen worden door de store afgehandeld."
+    },
+    {
+     "id": "thirdParty",
+     "title": "Diensten, bronnen en links van derden",
+     "body": "ZULFAA kan gebruikmaken van of verwijzen naar externe bronnen en diensten, zoals de in de app vermelde aanbieders van religieuze inhoud. Die partijen staan los van ons, hanteren eigen voorwaarden en beleid, en wij hebben geen invloed op hun beschikbaarheid, voortbestaan of inhoud."
+    },
+    {
+     "id": "availability",
+     "title": "Beschikbaarheid, updates en wijzigingen",
+     "body": "Wij kunnen fouten herstellen, functies verbeteren, inhoud bijwerken en functionaliteit wijzigen of beëindigen waar dat redelijkerwijs nodig is. Wij beloven niet dat elke functie altijd of ononderbroken beschikbaar is; sommige functies vereisen een internetverbinding of ondersteuning door uw apparaat."
+    },
+    {
+     "id": "warranties",
+     "title": "Garantiebeperking",
+     "body": "Wij spannen ons redelijkerwijs in om ZULFAA te laten werken zoals beschreven, maar de app wordt geleverd zonder garantie dat deze foutloos, altijd beschikbaar of in elke situatie nauwkeurig is. Niets in dit onderdeel beperkt uw dwingende consumentenrechten onder het op u toepasselijke recht; die rechten blijven onverkort gelden."
+    },
+    {
+     "id": "liability",
+     "title": "Beperking van aansprakelijkheid",
+     "body": "Voor zover de wet dat toestaat, zijn wij niet aansprakelijk voor indirecte schade of gevolgschade door uw gebruik van de app. Niets in deze voorwaarden sluit aansprakelijkheid uit of beperkt deze waar dat wettelijk niet is toegestaan — waaronder aansprakelijkheid bij grove nalatigheid, bij persoonlijk letsel, of op grond van dwingend consumentenrecht."
+    },
+    {
+     "id": "termination",
+     "title": "Beperking of beëindiging van toegang",
+     "body": "Wij kunnen de toegang tot de wedstrijdfuncties beperken of beëindigen bij schending van deze voorwaarden of bij manipulatie of misbruik, en uitsluitend in verhouding tot wat er is gebeurd. Functies die op uw eigen apparaat draaien — gebedstijden, Koran, adhkar en qibla — blijven gewoon beschikbaar."
+    },
+    {
+     "id": "privacy",
+     "title": "Privacy",
+     "body": "Het privacybeleid in de app legt uit hoe ZULFAA met uw gegevens omgaat. Dat is een afzonderlijk document dat deze voorwaarden aanvult."
+    },
+    {
+     "id": "changes",
+     "title": "Wijziging van deze voorwaarden",
+     "body": "Wij kunnen deze voorwaarden bijwerken wanneer de app of wettelijke vereisten veranderen. De datum boven aan deze pagina geeft de laatste wijziging aan; blijft u de app daarna gebruiken, dan aanvaardt u de bijgewerkte versie."
+    },
+    {
+     "id": "law",
+     "title": "Toepasselijk recht",
+     "body": "Deze voorwaarden gelden onverminderd de dwingende consumentenrechten die u in uw land van verblijf heeft; die rechten blijven u steeds toekomen. Voor deze app is nog geen formele bevoegde rechtsmacht vastgelegd; dit wordt vóór de openbare release bevestigd."
+    },
+    {
+     "id": "contact",
+     "title": "Contact",
+     "body": "Heeft u een vraag over deze voorwaarden, neem dan contact op met MONER INTELLIGENCE SYSTEMS via moner.intelligence@gmail.com."
+    }
+   ]
+  },
+  "product": {
+   "tagline": "Uw dagelijkse metgezel voor gebed en dhikr",
+   "about": "ZULFAA is een islamitische app die nauwkeurige gebedstijden, de Koran, adhkar en doe'as en de qiblarichting samenbrengt in één rustige, elegante ervaring.",
+   "features": [
+    "Gebedstijden",
+    "De Koran",
+    "Adhkar & doe'as",
+    "Qiblarichting"
+   ]
+  },
+  "support": {
+   "faqTitle": "Veelgestelde vragen",
+   "contactTitle": "Neem contact op",
+   "contactBody": "Niet gevonden wat u zocht? Stuur het ZULFAA-team een bericht; we reageren snel.",
+   "contactAction": "E-mail support",
+   "faq": [
+    {
+     "q": "Hoe worden gebedstijden berekend?",
+     "a": "De tijden volgen uw locatie en de gekozen berekeningsmethode; per gebed kunt u minuten handmatig aanpassen."
+    },
+    {
+     "q": "Hoe wijzig ik mijn stad?",
+     "a": "Via de Locatie-pagina in het zijmenu kunt u apparaatlocatie gebruiken of handmatig een stad kiezen."
+    },
+    {
+     "q": "Werkt de app offline?",
+     "a": "Adhkar, doe'as en qibla werken offline; sommige functies hebben internet nodig."
+    },
+    {
+     "q": "Hoe sla ik een vers of doe'a op?",
+     "a": "Tik op het opslaan-icoon bij inhoud; die verschijnt dan op de pagina Opgeslagen."
+    }
+   ]
+  },
+  "deleteUi": {
+   "privClearTitle": "Lokale gegevens wissen",
+   "privClearBody": "Verwijdert de ZULFAA-gegevens op dit apparaat: locatie- en gebedsinstellingen, Koranvoortgang, opgeslagen items en favorieten, adhkar-voortgang, geschiedenis en voorkeuren.",
+   "privClearAction": "Lokale ZULFAA-gegevens wissen",
+   "privClearConfirm": "Ja, verwijder alles",
+   "delAccTitle": "Wedstrijdaccount verwijderen",
+   "delAccAction": "Wedstrijdaccount verwijderen",
+   "delAccSheetIntro": "Hiermee verdwijnt definitief:",
+   "delAccConfirm": "Ja, verwijder mijn account",
+   "delAccDone": "Uw wedstrijdaccount is verwijderd.",
+   "delAccList": [
+    "Uw gebruikersnaam — die komt weer vrij voor anderen",
+    "Uw tokensaldo en uw totaal ooit verdiend",
+    "Uw volledige tokengeschiedenis",
+    "Elke poging en elk antwoord in de dagelijkse uitdaging",
+    "Uw plaats op de Erelijst",
+    "Uw wedstrijdprofiel"
+   ]
+  }
+ }
+}
