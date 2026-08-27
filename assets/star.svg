@@ -1,7 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-  <g fill="none" stroke="#1a5a52" stroke-opacity="0.09" stroke-width="1">
-    <path d="M32 8 39 18.5 51.5 18.5 45 32 51.5 45.5 39 45.5 32 56 25 45.5 12.5 45.5 19 32 12.5 18.5 25 18.5Z"/>
+  <!-- The khatim: the eight-pointed Islamic star, drawn as the outline of two
+       superimposed squares, one rotated 45 degrees. The inner vertices land
+       exactly on x=16, x=48, y=16 and y=48 — the edges of the upright square —
+       so the geometry is the true construction, not an approximation.
+       The four short strokes carry the points into the neighbouring tiles, so
+       the repeat reads as one continuous lattice. -->
+  <g fill="none" stroke="#1a5a52" stroke-opacity="0.09" stroke-width="1" stroke-linejoin="round">
+    <path d="M54.63 32 48 38.63 48 48 38.63 48 32 54.63 25.37 48 16 48 16 38.63 9.37 32 16 25.37 16 16 25.37 16 32 9.37 38.63 16 48 16 48 25.37Z"/>
     <circle cx="32" cy="32" r="4"/>
-    <path d="M0 32h12.5M51.5 32H64M32 0v8M32 56v8"/>
+    <path d="M0 32h9.37M54.63 32H64M32 0v9.37M32 54.63V64"/>
   </g>
 </svg>
