@@ -540,12 +540,323 @@ section.band {
   }
 }
 
+/* ── screenshot showcase ────────────────────────────────────────────────
+   A deep-teal band, deliberately darker than the rest of the page: the
+   screenshots are themselves cream-heavy, and on cream they would dissolve
+   into the page. Full-bleed, so it reads as its own room. */
+
+.showcase {
+  position: relative;
+  isolation: isolate;
+  margin-top: 3.5rem;
+  padding: 3.5rem 0 3rem;
+  border-block: 1px solid rgba(230, 184, 76, 0.28);
+  background-color: #123f39;
+  background-image:
+    radial-gradient(44rem 24rem at 50% -4rem, rgba(230, 184, 76, 0.16), transparent 68%),
+    linear-gradient(168deg, #1c5f56 0%, #164b45 46%, #0e332e 100%);
+  color: var(--cream);
+}
+
+/* the khatim lattice again, struck in gold — the same motif as the page ground */
+.showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("star-gold.svg");
+  background-repeat: repeat;
+  opacity: 0.6;
+}
+
+.showcase-eyebrow {
+  margin: 0;
+  text-align: center;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.showcase h2 {
+  margin: 0.6rem 0 0;
+  text-align: center;
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  color: var(--cream);
+}
+
+.showcase-note {
+  max-width: 34rem;
+  margin: 0.7rem auto 0;
+  text-align: center;
+  font-size: 0.95rem;
+  color: rgba(254, 249, 240, 0.72);
+}
+
+/* ── the carousel ───────────────────────────────────────────────────── */
+
+.carousel {
+  --shot-w: clamp(10.5rem, 44vw, 14rem);
+  position: relative;
+  margin-top: 2rem;
+}
+
+.car-viewport {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.car-viewport::-webkit-scrollbar {
+  display: none;
+}
+
+.car-viewport:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+  border-radius: 1rem;
+}
+
+.car-track {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.85rem, 2.5vw, 1.5rem);
+  /* the side padding is what lets the first and last slide reach the centre */
+  padding: 2.5rem calc(50% - var(--shot-w) / 2);
+  margin: 0;
+  list-style: none;
+}
+
+.shot {
+  flex: 0 0 var(--shot-w);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  transition: opacity 0.45s ease;
+}
+
+/* Dimming only makes sense once the script knows which slide is centred, and
+   it has to stay gentle: these screenshots are cream, the band is teal, and
+   too much transparency lets a neighbour dissolve into the background rather
+   than read as the next screen. The centre leads on scale and shadow instead. */
+.carousel.is-enhanced .shot {
+  opacity: 0.78;
+}
+
+.carousel.is-enhanced .shot.is-active {
+  opacity: 1;
+}
+
+.shot-frame {
+  overflow: hidden;
+  border-radius: 1.35rem;
+  border: 1px solid rgba(230, 184, 76, 0.26);
+  /* a lit placeholder, not a void: a lazy slide that has not arrived yet
+     should read as a screen about to appear, not as a hole in the row */
+  background: rgba(254, 249, 240, 0.07);
+  box-shadow:
+    0 20px 42px -20px rgba(0, 0, 0, 0.7),
+    0 3px 10px -5px rgba(0, 0, 0, 0.55);
+  /* transform only — it never reflows, so nothing on the row can jump */
+  transform: translateZ(0);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s ease,
+    border-color 0.45s ease;
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.carousel.is-enhanced .shot.is-active .shot-frame {
+  transform: scale(1.035);
+  border-color: rgba(230, 184, 76, 0.5);
+  box-shadow:
+    0 26px 52px -20px rgba(0, 0, 0, 0.78),
+    0 4px 12px -5px rgba(0, 0, 0, 0.6);
+}
+
+.shot-cap {
+  margin: 1rem 0 0;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: rgba(254, 249, 240, 0.6);
+  transition: color 0.45s ease;
+}
+
+.carousel.is-enhanced .shot.is-active .shot-cap {
+  color: var(--gold);
+}
+
+/* Hover lift — pointer devices only, so a tap on a phone never leaves a
+   slide stuck in a hovered state. :hover alone gives the whole behaviour:
+   the pointer leaving one slide restores it as the next one grows. */
+@media (hover: hover) and (pointer: fine) {
+  .carousel.is-enhanced .shot:hover {
+    opacity: 1;
+  }
+  .shot:hover .shot-frame {
+    transform: scale(1.06);
+    border-color: rgba(230, 184, 76, 0.55);
+    box-shadow:
+      0 30px 58px -20px rgba(0, 0, 0, 0.8),
+      0 5px 14px -6px rgba(0, 0, 0, 0.62);
+  }
+  .carousel.is-enhanced .shot.is-active:hover .shot-frame {
+    transform: scale(1.085);
+  }
+  .carousel.is-enhanced .shot:hover .shot-cap {
+    color: var(--gold-soft);
+  }
+}
+
+/* ── arrows ─────────────────────────────────────────────────────────── */
+
+.car-arrow {
+  position: absolute;
+  top: 50%;
+  /* the caption sits below the image, so the row's optical centre is higher */
+  transform: translateY(-50%);
+  margin-top: -1.1rem;
+  z-index: 3;
+  display: none;
+  width: 2.9rem;
+  height: 2.9rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(230, 184, 76, 0.45);
+  background: rgba(11, 38, 34, 0.74);
+  color: var(--gold-soft);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+.carousel.is-enhanced .car-arrow {
+  display: inline-flex;
+}
+
+.car-arrow svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.car-prev {
+  left: clamp(0.35rem, 2vw, 1.75rem);
+}
+
+.car-next {
+  right: clamp(0.35rem, 2vw, 1.75rem);
+}
+
+.car-arrow:hover {
+  background: rgba(230, 184, 76, 0.92);
+  border-color: var(--gold);
+  color: #0e332e;
+}
+
+.car-arrow:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.car-arrow[disabled] {
+  opacity: 0.28;
+  cursor: default;
+}
+
+.car-arrow[disabled]:hover {
+  background: rgba(11, 38, 34, 0.74);
+  border-color: rgba(230, 184, 76, 0.45);
+  color: var(--gold-soft);
+}
+
+/* ── position readout ───────────────────────────────────────────────── */
+
+.car-status {
+  display: none;
+  margin: 1.4rem 0 0;
+  text-align: center;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(254, 249, 240, 0.5);
+  font-variant-numeric: tabular-nums;
+}
+
+.carousel.is-enhanced .car-status {
+  display: block;
+}
+
+.car-status b {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.car-hint {
+  margin: 0.5rem 0 0;
+  text-align: center;
+  font-size: 0.76rem;
+  color: rgba(254, 249, 240, 0.4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .car-viewport {
+    scroll-behavior: auto;
+  }
+  .shot,
+  .shot-frame,
+  .shot-cap {
+    transition: none;
+  }
+  .shot:hover .shot-frame,
+  .carousel.is-enhanced .shot.is-active .shot-frame,
+  .carousel.is-enhanced .shot.is-active:hover .shot-frame {
+    transform: none;
+  }
+}
+
 @media print {
   body::before {
     display: none;
   }
   .site-nav,
   .linkrow {
+    display: none;
+  }
+  .showcase {
+    background: none;
+    color: var(--ink);
+    border-block: 0;
+  }
+  .car-viewport {
+    overflow: visible;
+  }
+  .car-track {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
+  }
+  .car-arrow,
+  .car-status,
+  .car-hint {
     display: none;
   }
 }
