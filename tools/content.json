@@ -108,7 +108,7 @@
    "subtitle": "الشروط التي تحكم استخدامك للتطبيق",
    "summary": "باستخدامك زُلْفَى فإنك توافق على هذه الشروط.",
    "intro": "تشرح هذه الشروط ما يقدّمه زُلْفَى، وما يمكنك توقّعه منه، وما هي مسؤوليتك عند استخدامه. نرجو قراءتها؛ وهي مكتوبة بلغة واضحة قدر الإمكان.",
-   "updated": "٢٤ أغسطس ٢٠٢٦",
+   "updated": "٦ سبتمبر ٢٠٢٦",
    "updatedLabel": "آخر تحديث",
    "sections": [
     {
@@ -137,9 +137,14 @@
      "body": "تُحسب المواقيت بناءً على الإعدادات التي تختارها — كطريقة الحساب والمذهب والتعديلات اليدوية — وعلى الموقع المستخدم. ويعتمد اتجاه القبلة على موقعك وعلى حسّاسات جهازك، وقد تتأثر دقّته بالتشويش المغناطيسي أو بحدود الجهاز أو بدقة تحديد الموقع أو بتوقيت النظام. ولذلك ننصح بالتحقق من المواقيت والاتجاه مع مصدر موثوق في محيطك عند الأمور المهمة."
     },
     {
+     "id": "calendar",
+     "title": "التقويم الهجري وتواريخ رمضان",
+     "body": "التواريخ الهجرية التي يعرضها التطبيق — بما فيها المناسبات القادمة وبداية رمضان ونهايته — محسوبة من تقويم أم القرى، وهو تقويم حسابي منشور. وبداية الشهر الحقيقية تثبت بالرؤية أو بإعلان الجهة التي تتبعها، وقد تخالف الحساب بيوم في كثير من البلدان وكثير من السنين. فما يعرضه التطبيق تقدير، ويقول عن نفسه إنه تقدير، ولا يصلح وحده لتقرير أمر شرعي. وأنت وحدك من يقرّر الجهة التي يتبعها، والرجوع إليها عند الاختلاف هو الأصل."
+    },
+    {
      "id": "sources",
      "title": "القرآن والتفسير والأذكار ومصادرها",
-     "body": "نص المصحف والترجمات والتفسير والأذكار والأدعية مأخوذة من مصادر خارجية معروفة ومنسوبة إلى أصحابها داخل التطبيق. ولا يدّعي زُلْفَى ملكية هذا المحتوى، وتبقى حقوقه وشروط استخدامه لأصحابها. وقد يتوقف أو يتغيّر بعض المحتوى الذي يُجلب من خدمات خارجية دون تحكّم منّا."
+     "body": "نص المصحف والترجمات والتفسير والأذكار والأدعية مأخوذة من مصادر خارجية معروفة ومنسوبة إلى أصحابها داخل التطبيق. ولا يدّعي زُلْفَى ملكية هذا المحتوى، وتبقى حقوقه وشروط استخدامه لأصحابها. وقد يتوقف أو يتغيّر بعض المحتوى الذي يُجلب من خدمات خارجية دون تحكّم منّا. وبعض ما تقرؤه من ترجمة هو من عمل زُلْفَى نفسها لا من نسخة منشورة، ولا سيما عناوين الأدعية بالإنجليزية والهولندية، وصياغة معاني الأدعية القرآنية بالهولندية. وهي منسوبة إلى زُلْفَى داخل التطبيق، وتُقدَّم استئناسًا على فهم المعنى لا ترجمةً للقرآن الكريم، ولم تُراجَع من جهة علمية مستقلة. وفيما يحتاج إلى دقّة، فارجع إلى نسخة منشورة وإلى أهل العلم."
     },
     {
      "id": "notifications",
@@ -381,7 +386,7 @@
    "subtitle": "The terms that govern your use of the app",
    "summary": "By using ZULFAA you agree to these Terms.",
    "intro": "These Terms explain what ZULFAA provides, what you can expect from it, and what is expected of you when you use it. They are written in plain language wherever the law allows.",
-   "updated": "24 August 2026",
+   "updated": "6 September 2026",
    "updatedLabel": "Last updated",
    "sections": [
     {
@@ -410,9 +415,14 @@
      "body": "Prayer times are calculated from the settings you choose — such as calculation method, madhhab and any manual adjustments — and from the location in use. Qibla direction depends on your location and on your device's sensors, and its accuracy can be affected by magnetic interference, device limitations, location accuracy or system timing. For anything important, we recommend confirming times and direction with a trusted local source."
     },
     {
+     "id": "calendar",
+     "title": "The Hijri calendar and Ramadan dates",
+     "body": "The Hijri dates the app shows — including upcoming occasions and the beginning and end of Ramadan — are calculated from the Umm al-Qura calendar, a published arithmetic projection. The real beginning of a month is settled by moon sighting or by the authority you follow, and can differ from the calculation by a day in many countries in many years. What the app shows is therefore an estimate, it says so, and it is not on its own a basis for a religious decision. Choosing which authority to follow is yours alone, and where they differ, theirs is the answer."
+    },
+    {
      "id": "sources",
      "title": "Qur'an, tafsir, adhkar and their sources",
-     "body": "The Qur'an text, translations, tafsir, adhkar and du'as come from established external sources, each credited inside the app. ZULFAA does not claim ownership of that content; it remains with its rights holders and subject to their terms. Content fetched from external services may change or become unavailable for reasons outside our control."
+     "body": "The Qur'an text, translations, tafsir, adhkar and du'as come from established external sources, each credited inside the app. ZULFAA does not claim ownership of that content; it remains with its rights holders and subject to their terms. Content fetched from external services may change or become unavailable for reasons outside our control. Some renderings are ZULFAA’s own rather than a published edition — notably the English and Dutch du’a titles and the Dutch renderings of the meaning of Qur’anic du’as. These are credited to ZULFAA inside the app, are offered as an aid to understanding rather than as a translation of the Qur’an, and have not been reviewed by an independent scholarly body. Where precision matters, rely on a published edition and on people of knowledge."
     },
     {
      "id": "notifications",
@@ -654,7 +664,7 @@
    "subtitle": "De voorwaarden voor uw gebruik van de app",
    "summary": "Door ZULFAA te gebruiken gaat u akkoord met deze voorwaarden.",
    "intro": "Deze voorwaarden leggen uit wat ZULFAA biedt, wat u ervan mag verwachten en wat er van u wordt verwacht bij het gebruik. Ze zijn zo begrijpelijk mogelijk geschreven.",
-   "updated": "24 augustus 2026",
+   "updated": "6 september 2026",
    "updatedLabel": "Laatst bijgewerkt",
    "sections": [
     {
@@ -683,9 +693,14 @@
      "body": "Gebedstijden worden berekend op basis van de instellingen die u kiest — zoals berekeningsmethode, madhhab en handmatige correcties — en van de gebruikte locatie. De qiblarichting hangt af van uw locatie en van de sensoren van uw apparaat; magnetische storing, beperkingen van het apparaat, locatienauwkeurigheid of de systeemtijd kunnen de nauwkeurigheid beïnvloeden. Controleer belangrijke tijden en richtingen daarom ook bij een betrouwbare bron in uw omgeving."
     },
     {
+     "id": "calendar",
+     "title": "De Hijri-kalender en Ramadan-data",
+     "body": "De Hijri-data die de app toont — waaronder komende gelegenheden en het begin en einde van de Ramadan — worden berekend met de Umm al-Qura-kalender, een gepubliceerde rekenkundige projectie. Het werkelijke begin van een maand wordt vastgesteld door maanwaarneming of door de instantie die u volgt, en kan in veel landen en veel jaren een dag afwijken van de berekening. Wat de app toont is dus een schatting, hij vermeldt dat ook, en het is op zichzelf geen grond voor een religieuze beslissing. Welke instantie u volgt bepaalt u zelf, en waar die afwijkt, geldt haar antwoord."
+    },
+    {
      "id": "sources",
      "title": "Koran, tafsir, adhkar en hun bronnen",
-     "body": "De Korantekst, vertalingen, tafsir, adhkar en doe'a's zijn afkomstig van gevestigde externe bronnen, die in de app worden vermeld. ZULFAA claimt geen eigendom van die inhoud; de rechten blijven bij de rechthebbenden en hun voorwaarden gelden. Inhoud die van externe diensten wordt opgehaald, kan buiten onze invloed om wijzigen of wegvallen."
+     "body": "De Korantekst, vertalingen, tafsir, adhkar en doe'a's zijn afkomstig van gevestigde externe bronnen, die in de app worden vermeld. ZULFAA claimt geen eigendom van die inhoud; de rechten blijven bij de rechthebbenden en hun voorwaarden gelden. Inhoud die van externe diensten wordt opgehaald, kan buiten onze invloed om wijzigen of wegvallen. Sommige weergaven zijn van ZULFAA zelf en niet uit een gepubliceerde editie — met name de Engelse en Nederlandse titels van du’a’s en de Nederlandse weergave van de betekenis van Koranische du’a’s. Ze worden in de app aan ZULFAA toegeschreven, zijn bedoeld als hulp bij het begrijpen en niet als vertaling van de Koran, en zijn niet door een onafhankelijke wetenschappelijke instantie beoordeeld. Waar het op precisie aankomt, raadpleeg een gepubliceerde editie en mensen van kennis."
     },
     {
      "id": "notifications",
@@ -766,11 +781,11 @@
   },
   "product": {
    "tagline": "Uw dagelijkse metgezel voor gebed en dhikr",
-   "about": "ZULFAA is een islamitische app die nauwkeurige gebedstijden, de Koran, adhkar en doe'as en de qiblarichting samenbrengt in één rustige, elegante ervaring.",
+   "about": "ZULFAA is een islamitische app die nauwkeurige gebedstijden, de Koran, adhkar en doe'a's en de qiblarichting samenbrengt in één rustige, elegante ervaring.",
    "features": [
     "Gebedstijden",
     "De Koran",
-    "Adhkar & doe'as",
+    "Adhkar & doe'a's",
     "Qiblarichting"
    ]
   },
@@ -790,7 +805,7 @@
     },
     {
      "q": "Werkt de app offline?",
-     "a": "Adhkar, doe'as en qibla werken offline; sommige functies hebben internet nodig."
+     "a": "Adhkar, doe'a's en qibla werken offline; sommige functies hebben internet nodig."
     },
     {
      "q": "Hoe sla ik een vers of doe'a op?",

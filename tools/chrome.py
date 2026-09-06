@@ -14,7 +14,14 @@ from ui_strings import S, LANGS, DEIXIS          # noqa: E402
 from dd_strings import DD                        # noqa: E402
 
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-C = json.load(open(os.path.join(SCR, "content.json"), encoding="utf-8"))
+# ── which content, and where it is written ───────────────────────────────────
+# ZULFAA_LEGAL_PREVIEW=1 renders the OWNER PREVIEW: the next-release legal
+# clauses that extract_from_app.py drops from the public content file. It reads
+# content.preview.json and writes into .preview/, which is gitignored, so a
+# preview can never become a publication by forgetting a flag.
+PREVIEW = os.environ.get("ZULFAA_LEGAL_PREVIEW") == "1"
+C = json.load(open(os.path.join(SCR, "content.preview.json" if PREVIEW else "content.json"), encoding="utf-8"))
+OUT_ROOT = os.path.join(SITE, ".preview") if PREVIEW else SITE
 SHOTS = json.load(open(os.path.join(SCR, "shots.json"), encoding="utf-8"))
 ORIGIN = "https://moner-dev.github.io/zulfaa/"
 MAIL = "moner.intelligence@gmail.com"
@@ -217,7 +224,7 @@ def clauses(lang, sections, linkmap=None):
 
 
 def write(path, text):
-    full = os.path.join(SITE, path)
+    full = os.path.join(OUT_ROOT, path)
     os.makedirs(os.path.dirname(full), exist_ok=True)
     open(full, "w", encoding="utf-8", newline="").write(text)
     return path

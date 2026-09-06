@@ -34,6 +34,34 @@ those substitutions applied.
 `ui_strings.py` and `dd_strings.py` hold navigation, headings and marketing
 copy only.
 
+## Legal release gating — read this before touching content.json
+
+**This generator is the website's legal release gate.** A Privacy or Terms
+clause whose feature has not shipped is **dropped here**, so `build.py` cannot
+emit what it never receives.
+
+That is deliberate. GitHub Pages serves whatever bytes are committed, so a
+clause hidden with CSS is a clause that is published. Omission is the only
+control that means anything on a static site.
+
+The map lives in the APP, at `src/release/legal.ts`, and the flags in
+`src/release/nextRelease.ts`. Both are *parsed* by `extract_from_app.py` rather
+than mirrored here — a second copy of a legal gate is a second thing to forget
+when a feature ships.
+
+| Mode | Command | Output | Committed? |
+|---|---|---|---|
+| **Public** | `python tools/extract_from_app.py` | `content.json`, then `ar/` + `nl/` | yes — this is the site |
+| **Owner preview** | `ZULFAA_LEGAL_PREVIEW=1 …` | `content.preview.json`, then `.preview/` | **no — both gitignored** |
+
+The extractor prints what it omitted on every public run. The full owner
+procedure is `Docs/LEGAL_RELEASE_WORKFLOW.md` in the app repository.
+
+> **The English pages are never touched in preview mode.** They are the
+> approved, Play-facing originals; rewriting them while showing you a preview is
+> exactly the accident this mechanism exists to prevent. Preview English in the
+> app instead: `npm run dev`, then `/?legal=preview`.
+
 ## Running it
 
 ```bash
@@ -42,7 +70,17 @@ ZULFAA_APP_SRC='/path/to/Design modern Islamic app UI' python tools/extract_from
 
 # 2. regenerate the ar/ and nl/ pages
 python tools/build.py
+
+# 3. GENERATING IS NOT PUBLISHING. This repository is the deployment.
+git status            # the generated files are modified, not committed
+git add -A && git commit -m "..." && git push
+git log origin/main -1        # confirm the push landed
+# then load https://moner-dev.github.io/zulfaa/privacy/ and read it
 ```
+
+Step 3 is written out because it was once skipped: the pages were regenerated,
+reported as updated, and the live site served the previous text for the rest of
+the day.
 
 Both are deterministic: running them twice leaves the tree byte-identical.
 

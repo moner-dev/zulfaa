@@ -1,2 +1,14 @@
 __pycache__/
 *.pyc
+
+# ── the owner's next-release legal preview ──────────────────────────────────
+# `ZULFAA_LEGAL_PREVIEW=1 python tools/extract_from_app.py && ZULFAA_LEGAL_PREVIEW=1 python tools/build.py`
+# renders the PREPARED legal clauses — the ones the public build deliberately
+# omits — into .preview/ so they can be read before release.
+#
+# Both are ignored ON PURPOSE, and it is the only thing keeping "preview" and
+# "publish" apart in a repository that IS the deployment. GitHub Pages serves
+# whatever is committed on the published branch; a preview file that got
+# committed would be a live page.
+.preview/
+tools/content.preview.json

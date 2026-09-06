@@ -2,7 +2,7 @@
 """Writes the /ar/ and /nl/ subtrees and adds the switcher to the English pages."""
 import os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from chrome import SITE, LANGS, S, C, write, e, up
+from chrome import SITE, LANGS, S, C, write, e, up, PREVIEW, OUT_ROOT
 from pages import build_privacy, build_terms, build_support, build_delete
 from home import build_home
 
@@ -34,6 +34,20 @@ EN_PAGES = {"index.html": ("", 0), "privacy/index.html": ("privacy/", 1),
             "terms/index.html": ("terms/", 1), "delete-data/index.html": ("delete-data/", 1),
             "support/index.html": ("support/", 1)}
 
+# ── the English pages ───────────────────────────────────────────────────────
+# These are hand-written, Play-facing originals; build.py only inserts the
+# language switcher and the hreflang alternates, both idempotent.
+#
+# IN PREVIEW MODE THEY ARE NOT TOUCHED. The preview exists to show the owner
+# next-release clauses; rewriting the published English files while doing that
+# is exactly the accident this whole mechanism is meant to prevent. The English
+# preview is read in the app instead (`?legal=preview` on a dev build), which
+# renders the same strings from the same dictionary.
+if PREVIEW:
+    print("preview: English pages left untouched (they are the published originals)")
+    print("wrote %d files -> %s" % (len(written), OUT_ROOT))
+    raise SystemExit(0)
+
 for f, (page, depth) in EN_PAGES.items():
     full = os.path.join(SITE, f)
     t = open(full, encoding="utf-8").read()
@@ -57,6 +71,6 @@ for f, (page, depth) in EN_PAGES.items():
         open(full, "w", encoding="utf-8", newline="").write(t)
         written.append(f + "  (switcher + hreflang only)")
 
-print("wrote %d files" % len(written))
+print("wrote %d files -> %s" % (len(written), OUT_ROOT))
 for w in written:
     print("  " + w)
