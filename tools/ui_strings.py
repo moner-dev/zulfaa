@@ -32,12 +32,27 @@ DEIXIS = {
 
 S = {}
 
+# ─────────────────────────── ENGLISH (header chrome only) ───────────────────
+# The English pages are the hand-written originals. build.py re-renders only
+# their <header> - the menu button and the language menu - from these strings
+# and from the links already in each page. No other English text lives here.
+S["en"] = {
+    "navLabel": "Primary",
+    "langLabel": "Language",
+    "langPrefix": "Language: ",
+    "langShort": "EN",
+    "menuLabel": "Menu",
+}
+
 # ─────────────────────────── ARABIC ───────────────────────────
 S["ar"] = {
     "skip": "تخطّي إلى المحتوى",
     "navLabel": "التنقل الرئيسي",
     "footerLabel": "روابط التذييل",
     "langLabel": "اللغة",
+    "langPrefix": "اللغة: ",
+    "langShort": "عربي",
+    "menuLabel": "القائمة",
     "home": "الرئيسية",
     "deleteNav": "حذف البيانات",
     "devBy": "زُلْفَى من تصميم وتطوير",
@@ -93,6 +108,9 @@ S["nl"] = {
     "navLabel": "Hoofdnavigatie",
     "footerLabel": "Voettekst",
     "langLabel": "Taal",
+    "langPrefix": "Taal: ",
+    "langShort": "NL",
+    "menuLabel": "Menu",
     "home": "Start",
     "deleteNav": "Gegevens verwijderen",
     "devBy": "ZULFAA is ontworpen en ontwikkeld door",

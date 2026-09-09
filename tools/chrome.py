@@ -2,7 +2,8 @@
 """Generates the /ar/ and /nl/ subtrees of the ZULFAA website.
 
 English lives at the root and is NOT generated - those pages are the approved,
-Play-facing originals and are only ever touched to add the language switcher.
+Play-facing originals and are only ever touched to re-render their header
+(menu button + language menu), which is generated here for every language.
 Arabic and Dutch legal text comes from the app (content.json); only the
 navigation and marketing copy is authored here.
 """
@@ -81,6 +82,7 @@ def head(lang, page, depth, title, desc):
     <link rel="icon" type="image/png" href="{a}assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="{a}assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="{a}assets/zulfaa.css" />
+{JS_CLASS}
     <meta name="theme-color" content="#fef9f0" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ZULFAA" />
@@ -96,37 +98,84 @@ def head(lang, page, depth, title, desc):
 """
 
 
+# The one line of script in <head>. It flips the class the stylesheet keys
+# the collapsed header on, before any of the body is parsed, so a phone never
+# paints the open menu and then hides it. With scripting off it never runs and
+# the header renders as plain wrapped links - see assets/zulfaa.css.
+JS_CLASS = '    <script>document.documentElement.classList.add("js");</script>'
+NAV_JS = '    <script src="%sassets/nav.js" defer></script>'
+
+GLOBE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
+         '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>')
+CHEV = ('<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '
+        'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>')
+CHECK = ('<svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" '
+         'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>')
+
+
 def langswitch(lang, page, depth):
-    """Plain links - the switcher must work with scripting off."""
+    """The language menu.
+
+    Three plain links in a list - that is the whole thing with scripting off,
+    and what a crawler follows. The button before the list carries the current
+    language and is enhanced into a menu button by assets/nav.js; the
+    stylesheet hides it until <html> has the `js` class. Same anchors either
+    way, so every alternate URL is in the page exactly once."""
     a = up(depth)
-    out = ['      <nav class="lang-switch" aria-label="%s">' % e(S[lang]["langLabel"] if lang != "en" else "Language")]
+    s = S[lang]
+    out = ['        <nav class="lang-switch" aria-label="%s">' % e(s["langLabel"]),
+           '          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" '
+           'aria-controls="lang-menu">',
+           '            %s' % GLOBE,
+           '            <span class="vh">%s</span>' % e(s["langPrefix"]),
+           '            <span class="lang-name" lang="%s">%s</span>' % (lang, e(LANGS[lang]["name"])),
+           '            <span class="lang-code" aria-hidden="true" lang="%s">%s</span>' % (lang, e(s["langShort"])),
+           '            %s' % CHEV,
+           '          </button>',
+           '          <ul class="lang-list" id="lang-menu">']
     for l in ("en", "ar", "nl"):
         href = (a + LANGS[l]["base"] + page) or "./"
         cur = ' aria-current="true"' if l == lang else ""
-        out.append('        <a href="%s" lang="%s" hreflang="%s"%s>%s</a>' % (href, l, l, cur, e(LANGS[l]["name"])))
-    out.append("      </nav>")
+        out.append('            <li><a href="%s" lang="%s" hreflang="%s"%s>%s%s</a></li>'
+                   % (href, l, l, cur, e(LANGS[l]["name"]), CHECK if l == lang else ""))
+    out.append("          </ul>")
+    out.append("        </nav>")
     return "\n".join(out)
 
 
-def header(lang, page, depth):
-    a = up(depth)
+def nav_items(lang):
     s = S[lang]
     n = C[lang]["nav"]
-    items = [("", s["home"]), ("privacy/", n["privacy"]), ("terms/", n["terms"]),
-             ("delete-data/", s["deleteNav"]), ("support/", n["support"])]
-    links = []
-    for href, label in items:
-        target = a + LANGS[lang]["base"] + href
-        cur = ' aria-current="page"' if href == page else ""
-        links.append('          <a href="%s"%s>%s</a>' % (target, cur, e(label)))
+    return [("", s["home"]), ("privacy/", n["privacy"]), ("terms/", n["terms"]),
+            ("delete-data/", s["deleteNav"]), ("support/", n["support"])]
+
+
+def header_html(lang, page, depth, links):
+    """The header for any language. `links` is a list of (href, label, current)
+    with hrefs already resolved - the English pages hand in the links they
+    already contain, the generated pages the ones nav_items() computes.
+
+    Order matters and is deliberate: menu button, brand, primary nav, language
+    menu. That is the visual order on a phone (button at the reading start,
+    language at the reading end) and the tab order everywhere, with the nav
+    panel between the button that opens it and the control after it."""
+    a = up(depth)
+    s = S[lang]
+    home = (a + LANGS[lang]["base"]) or "./"
+    rows = "\n".join('          <a href="%s"%s>%s</a>'
+                     % (h, ' aria-current="page"' if cur else "", e(label)) for h, label, cur in links)
     return f"""    <header class="site-head">
       <div class="shell">
-        <a class="brand" href="{a}{LANGS[lang]['base']}">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="{e(s['menuLabel'])}">
+          <span class="bars" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+        </button>
+        <a class="brand" href="{home}">
           <img src="{a}assets/emblem-256.webp" alt="" width="256" height="256" />
           <span class="brand-name">Zulfaa</span>
         </a>
-        <nav class="site-nav" aria-label="{e(s['navLabel'])}">
-{chr(10).join(links)}
+        <nav class="site-nav" id="site-menu" aria-label="{e(s['navLabel'])}">
+{rows}
         </nav>
 {langswitch(lang, page, depth)}
       </div>
@@ -135,12 +184,16 @@ def header(lang, page, depth):
 """
 
 
+def header(lang, page, depth):
+    a = up(depth)
+    links = [(a + LANGS[lang]["base"] + href, label, href == page) for href, label in nav_items(lang)]
+    return header_html(lang, page, depth, links)
+
+
 def footer(lang, page, depth):
     a = up(depth)
     s = S[lang]
-    n = C[lang]["nav"]
-    items = [("", s["home"]), ("privacy/", n["privacy"]), ("terms/", n["terms"]),
-             ("delete-data/", s["deleteNav"]), ("support/", n["support"])]
+    items = nav_items(lang)
     links = "\n".join('          <a href="%s">%s</a>' % (a + LANGS[lang]["base"] + h, e(l)) for h, l in items)
     return f"""    <footer class="site-foot">
       <div class="shell">
@@ -154,6 +207,7 @@ def footer(lang, page, depth):
         <p>{e(s['rights'])}</p>
       </div>
     </footer>
+{NAV_JS % a}
   </body>
 </html>
 """

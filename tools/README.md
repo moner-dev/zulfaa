@@ -13,8 +13,11 @@ never runs any of this — the tools are a maintenance aid, not a build step.
 | `/`, `/privacy/`, `/terms/`, `/delete-data/`, `/support/` | hand-written | **No** — these are the approved, Play-facing English originals |
 | `/ar/…`, `/nl/…` | `content.json` + `ui_strings.py` + `dd_strings.py` | Yes |
 
-The English pages are touched by `build.py` for one thing only: inserting the
-language switcher and the `hreflang` alternates, both idempotent.
+The English pages are touched by `build.py` for three things only, each
+idempotent: re-rendering their `<header>` (menu button, primary links, language
+menu) from the links the page already contains, adding the one-line `js`
+class script in `<head>` plus `assets/nav.js` before `</body>`, and inserting
+the `hreflang` alternates. Nothing below the header is read or written.
 
 ## Where the words come from
 
@@ -91,7 +94,8 @@ extract_from_app.py   reads the app, writes content.json   (read-only on the app
 content.json          ar/en/nl legal + product text, extracted
 ui_strings.py         chrome, marketing copy, the deixis rules
 dd_strings.py         the data-deletion page, ar + nl
-chrome.py             head, header, footer, switcher, clause renderer
+chrome.py             head, header (menu button + language menu), footer, clause renderer
+responsive_check.mjs  headless-Chrome check: overflow, menu/dropdown, screenshots (--nojs, --states)
 home.py               the landing page, carousel and lightbox
 pages.py              privacy, terms, support, delete-data
 build.py              writes everything; run this one

@@ -13,6 +13,7 @@
     <link rel="icon" type="image/png" href="../../assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="../../assets/zulfaa.css" />
+    <script>document.documentElement.classList.add("js");</script>
     <meta name="theme-color" content="#fef9f0" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ZULFAA" />
@@ -27,22 +28,34 @@
   <body>
     <header class="site-head">
       <div class="shell">
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="القائمة">
+          <span class="bars" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+        </button>
         <a class="brand" href="../../ar/">
           <img src="../../assets/emblem-256.webp" alt="" width="256" height="256" />
           <span class="brand-name">Zulfaa</span>
         </a>
-        <nav class="site-nav" aria-label="التنقل الرئيسي">
+        <nav class="site-nav" id="site-menu" aria-label="التنقل الرئيسي">
           <a href="../../ar/">الرئيسية</a>
           <a href="../../ar/privacy/" aria-current="page">سياسة الخصوصية</a>
           <a href="../../ar/terms/">شروط الاستخدام</a>
           <a href="../../ar/delete-data/">حذف البيانات</a>
           <a href="../../ar/support/">المساعدة والدعم</a>
         </nav>
-      <nav class="lang-switch" aria-label="اللغة">
-        <a href="../../privacy/" lang="en" hreflang="en">English</a>
-        <a href="../../ar/privacy/" lang="ar" hreflang="ar" aria-current="true">العربية</a>
-        <a href="../../nl/privacy/" lang="nl" hreflang="nl">Nederlands</a>
-      </nav>
+        <nav class="lang-switch" aria-label="اللغة">
+          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+            <span class="vh">اللغة: </span>
+            <span class="lang-name" lang="ar">العربية</span>
+            <span class="lang-code" aria-hidden="true" lang="ar">عربي</span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <ul class="lang-list" id="lang-menu">
+            <li><a href="../../privacy/" lang="en" hreflang="en">English</a></li>
+            <li><a href="../../ar/privacy/" lang="ar" hreflang="ar" aria-current="true">العربية<svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg></a></li>
+            <li><a href="../../nl/privacy/" lang="nl" hreflang="nl">Nederlands</a></li>
+          </ul>
+        </nav>
       </div>
     </header>
 
@@ -200,5 +213,6 @@
         <p>© ٢٠٢٦ MONER INTELLIGENCE SYSTEMS. جميع الحقوق محفوظة.</p>
       </div>
     </footer>
+    <script src="../../assets/nav.js" defer></script>
   </body>
 </html>

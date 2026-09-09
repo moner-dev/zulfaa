@@ -38,6 +38,7 @@
   --ink-soft: #5c6964;
   --radius: 1.5rem;
   --shell: 62rem;
+  --shell-head: 74rem; /* the header row may run wider than the reading column */
 
   /* The deep band — shared by the screenshot showcase and the footer, so the
      two dark surfaces are one material and cannot drift apart. */
@@ -119,17 +120,35 @@ img {
   padding: 0 1.25rem;
 }
 
-/* ── header ─────────────────────────────────────────────────────────── */
+/* ── header ─────────────────────────────────────────────────────────────
+   One row: [menu button] brand … primary nav … language menu.
+
+   Above the breakpoint the primary nav is inline. At and below it
+   (68.75rem = 1100px: tablets, phones, and the narrowest laptops, where the
+   five Dutch labels no longer fit beside the brand) the nav folds into a
+   panel under a menu button. The button's aria-expanded is the only state:
+   the stylesheet reads it, and so does nav.js.
+
+   Everything collapsed is gated on `html.js`, which the one-line script in
+   <head> sets before the body is parsed. With scripting off the class is
+   absent, the buttons stay hidden, and the links simply wrap onto a second
+   row - the page is fully navigable without a single script. */
 
 .site-head {
-  padding: 1.5rem 0 0.5rem;
+  position: relative;
+  z-index: 30; /* the open panels sit over the hero; the lightbox (100) stays above */
+  padding: 1.25rem 0 0.5rem;
 }
 
 .site-head .shell {
+  --head-pad: 1.25rem; /* the shell padding, shared with the menu panel below */
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem 1.5rem;
+  gap: 0.75rem 1.25rem;
+  max-width: var(--shell-head);
+  padding-inline: var(--head-pad);
 }
 
 .brand {
@@ -154,19 +173,80 @@ img {
   text-transform: uppercase;
 }
 
+.brand:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+  border-radius: 0.5rem;
+}
+
+/* visually hidden, still read out - the "Language:" prefix on the menu button */
+.vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* the round header controls share one material */
+.nav-toggle,
+.lang-btn {
+  display: none; /* enhanced in; see html.js below */
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  margin: 0;
+  border: 1px solid rgba(42, 138, 128, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--teal-deep);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.nav-toggle:hover,
+.lang-btn:hover {
+  background: var(--cream-deep);
+  border-color: rgba(42, 138, 128, 0.32);
+}
+
+.nav-toggle:focus-visible,
+.lang-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+.nav-toggle[aria-expanded="true"],
+.lang-btn[aria-expanded="true"] {
+  background: var(--teal-soft);
+  border-color: rgba(42, 138, 128, 0.32);
+}
+
+/* ── primary nav ── */
+
 .site-nav {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem 0.4rem;
-  font-size: 0.9rem;
+  gap: 0.35rem 0.3rem;
+  font-size: 0.88rem;
 }
 
 .site-nav a {
   text-decoration: none;
   color: var(--ink-soft);
-  padding: 0.35rem 0.8rem;
+  padding: 0.35rem 0.75rem;
   border-radius: 999px;
   font-weight: 600;
+  white-space: nowrap;
 }
 
 .site-nav a:hover {
@@ -179,44 +259,333 @@ img {
   color: var(--teal-deep);
 }
 
-/* ── language switcher ──────────────────────────────────────────────────
-   Three plain links. No script, so it works with scripting off and a search
-   engine can follow it. */
+.site-nav a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* ── the menu button ──
+   Three bars that fold into a cross. Symmetric, so it needs no mirroring. */
+
+.nav-toggle {
+  width: 2.75rem;
+  padding: 0;
+  flex: none;
+}
+
+.nav-toggle .bars {
+  position: relative;
+  display: block;
+  width: 1.2rem;
+  height: 0.9rem;
+}
+
+.nav-toggle .bar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    top 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.nav-toggle .bar:nth-child(1) {
+  top: 0;
+}
+.nav-toggle .bar:nth-child(2) {
+  top: calc(50% - 1px);
+}
+.nav-toggle .bar:nth-child(3) {
+  top: calc(100% - 2px);
+}
+
+.nav-toggle[aria-expanded="true"] .bar:nth-child(1) {
+  top: calc(50% - 1px);
+  transform: rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .bar:nth-child(3) {
+  top: calc(50% - 1px);
+  transform: rotate(-45deg);
+}
+
+/* ── language menu ──
+   Without script: a pill row of three plain links, as before. With script:
+   a button showing the current language, and the same three links as a
+   drop-down menu beneath it. Same anchors either way, so a search engine and
+   a reader with scripting off both get every alternate. */
 
 .lang-switch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: none;
+}
+
+.lang-list {
   display: flex;
   align-items: center;
   gap: 0.15rem;
+  margin: 0;
   padding: 0.2rem;
+  list-style: none;
   border-radius: 999px;
   border: 1px solid rgba(42, 138, 128, 0.18);
   background: rgba(255, 255, 255, 0.7);
   font-size: 0.78rem;
 }
 
-.lang-switch a {
+.lang-list a {
+  display: inline-flex;
+  align-items: center;
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
   text-decoration: none;
   font-weight: 600;
   color: var(--ink-soft);
   white-space: nowrap;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
-.lang-switch a:hover {
+.lang-list a:hover {
   background: var(--cream-deep);
   color: var(--teal-deep);
 }
 
-.lang-switch a[aria-current="true"] {
+.lang-list a[aria-current="true"] {
   background: var(--teal-deep);
   color: var(--cream);
 }
 
-.lang-switch a:focus-visible {
+.lang-list a:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
+}
+
+/* Arabic in its own face wherever it appears in the switcher, on every page */
+.lang-list a[lang="ar"],
+.lang-btn [lang="ar"] {
+  font-family: "Cairo", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+.lang-check {
+  display: none;
+}
+
+.lang-btn {
+  gap: 0.45rem;
+  padding-block: 0.4rem;
+  padding-inline: 0.85rem 0.7rem;
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+
+.lang-btn svg {
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.lang-btn .chev {
+  width: 0.8rem;
+  height: 0.8rem;
+  transition: transform 0.2s ease;
+}
+
+.lang-btn[aria-expanded="true"] .chev {
+  transform: rotate(180deg);
+}
+
+.lang-code {
+  display: none;
+}
+
+/* ── enhanced (html.js) ── */
+
+html.js .lang-btn {
+  display: inline-flex;
+}
+
+html.js .lang-list {
+  position: absolute;
+  top: calc(100% + 0.45rem);
+  inset-inline-end: 0;
+  z-index: 5;
+  min-width: 11.5rem;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.1rem;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow:
+    0 1px 2px rgba(26, 90, 82, 0.06),
+    0 18px 40px -18px rgba(26, 90, 82, 0.35);
+  font-size: 0.9rem;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-0.35rem);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    visibility 0s linear 0.18s;
+}
+
+html.js .lang-btn[aria-expanded="true"] + .lang-list {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition-delay: 0s;
+}
+
+html.js .lang-list a {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 0.7rem;
+  color: var(--ink);
+}
+
+html.js .lang-list a:hover {
+  background: var(--cream-deep);
+  color: var(--teal-deep);
+}
+
+html.js .lang-list a[aria-current="true"] {
+  background: var(--teal-soft);
+  color: var(--teal-deep);
+}
+
+html.js .lang-list a[aria-current="true"] .lang-check {
+  display: block;
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ── collapsed: tablets and phones ── */
+
+@media (max-width: 68.75rem) {
+  html.js .nav-toggle {
+    display: inline-flex;
+  }
+
+  html.js .site-nav {
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    inset-inline-start: var(--head-pad);
+    z-index: 5;
+    width: min(100% - 2 * var(--head-pad), 24rem);
+    flex-direction: column;
+    gap: 0.15rem;
+    padding: 0.5rem;
+    border: 1px solid rgba(42, 138, 128, 0.18);
+    border-radius: 1.25rem;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow:
+      0 1px 2px rgba(26, 90, 82, 0.06),
+      0 22px 48px -20px rgba(26, 90, 82, 0.38);
+    font-size: 1rem;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-0.4rem);
+    transition:
+      opacity 0.18s ease,
+      transform 0.18s ease,
+      visibility 0s linear 0.18s;
+  }
+
+  html.js .nav-toggle[aria-expanded="true"] ~ .site-nav {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  html.js .site-nav a {
+    display: flex;
+    padding: 0.8rem 1rem;
+    border-radius: 0.9rem;
+    color: var(--ink);
+    white-space: normal;
+  }
+
+  html.js .site-nav a:hover {
+    background: var(--cream-deep);
+    color: var(--teal-deep);
+  }
+
+  html.js .site-nav a[aria-current="page"] {
+    background: var(--teal-soft);
+    color: var(--teal-deep);
+  }
+
+  /* scripting off: the links wrap onto their own row beneath the brand */
+  html:not(.js) .site-nav {
+    order: 3;
+    flex-basis: 100%;
+  }
+}
+
+/* Phones up to 420px: the language button shows the short form, the brand
+   and the menu button tighten a little, so [menu] [brand] [language] stays on
+   one row down to 320px in every language ("Nederlands" is the long one). */
+@media (max-width: 26.25rem) {
+  html.js .lang-btn .lang-name {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
+  }
+  html.js .lang-code {
+    display: inline;
+  }
+  html.js .lang-btn {
+    gap: 0.35rem;
+    padding-inline: 0.65rem 0.55rem;
+  }
+  .site-head .shell {
+    --head-pad: 1rem;
+    gap: 0.5rem;
+  }
+  .brand {
+    gap: 0.5rem;
+  }
+  .brand img {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  .brand-name {
+    font-size: 1.02rem;
+    letter-spacing: 0.1em;
+  }
+  .nav-toggle {
+    width: 2.5rem;
+    min-height: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-toggle .bar,
+  .lang-btn .chev,
+  html.js .lang-list,
+  html.js .site-nav {
+    transition: none;
+  }
 }
 
 /* ── Arabic ─────────────────────────────────────────────────────────────
@@ -1300,6 +1669,8 @@ section.band {
     display: none;
   }
   .site-nav,
+  .nav-toggle,
+  .lang-switch,
   .linkrow {
     display: none;
   }
