@@ -7,7 +7,7 @@ Play-facing originals and are only ever touched to re-render their header
 Arabic and Dutch legal text comes from the app (content.json); only the
 navigation and marketing copy is authored here.
 """
-import json, os, re, sys, html
+import json, os, re, sys, html, hashlib
 
 SCR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCR)
@@ -81,7 +81,7 @@ def head(lang, page, depth, title, desc):
     <link rel="alternate" hreflang="x-default" href="{ORIGIN}{page}" />
     <link rel="icon" type="image/png" href="{a}assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="{a}assets/apple-touch-icon.png" />
-    <link rel="stylesheet" href="{a}assets/zulfaa.css" />
+    <link rel="stylesheet" href="{a}{asset("assets/zulfaa.css")}" />
 {JS_CLASS}
     <meta name="theme-color" content="#fef9f0" />
     <meta property="og:type" content="website" />
@@ -103,7 +103,36 @@ def head(lang, page, depth, title, desc):
 # paints the open menu and then hides it. With scripting off it never runs and
 # the header renders as plain wrapped links - see assets/zulfaa.css.
 JS_CLASS = '    <script>document.documentElement.classList.add("js");</script>'
-NAV_JS = '    <script src="%sassets/nav.js" defer></script>'
+
+
+def asset(rel):
+    """`assets/x.css` -> `assets/x.css?v=<content hash>`.
+
+    WHY THIS EXISTS. GitHub Pages serves every file with
+    `Cache-Control: max-age=600`, so for ten minutes after a deploy a returning
+    browser can pair NEW markup with the PREVIOUS stylesheet. That is not a
+    slightly-off page: the drawer's own furniture has no styles yet, so the
+    close button and the word "Menu" render inline in the header beside a
+    language control that should be inside the drawer, and there is no drawer
+    at all. That is exactly what shipped on 9 September 2026 and was reported
+    as a broken design.
+
+    A content hash in the URL makes the pairing impossible - new markup asks
+    for a URL no old cache has ever seen - and it is stable, so rebuilding
+    without touching an asset leaves the HTML byte-identical."""
+    with open(os.path.join(SITE, rel), "rb") as fh:
+        return "%s?v=%s" % (rel, hashlib.sha1(fh.read()).hexdigest()[:8])
+
+
+ASSET_RE = re.compile(r"assets/(?:zulfaa\.css|nav\.js|carousel\.js)(?:\?v=[0-9a-f]+)?")
+
+
+def reversion(text):
+    """Rewrite every versioned asset URL in a page to the current hash."""
+    return ASSET_RE.sub(lambda m: asset(m.group(0).split("?")[0]), text)
+
+
+NAV_JS = '    <script src="%s' + asset("assets/nav.js") + '" defer></script>'
 
 GLOBE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
@@ -156,10 +185,12 @@ def header_html(lang, page, depth, links):
     with hrefs already resolved - the English pages hand in the links they
     already contain, the generated pages the ones nav_items() computes.
 
-    Order matters and is deliberate: menu button, brand, primary nav, language
-    menu. That is the visual order on a phone (button at the reading start,
-    language at the reading end) and the tab order everywhere, with the nav
-    panel between the button that opens it and the control after it.
+    Order matters and is deliberate: brand, menu button, primary nav, language
+    menu. The brand opens the header at the reading start and `margin-inline-end:
+    auto` pushes everything after it to the reading end, so on a phone the menu
+    button sits against the edge the drawer slides in from - left of the brand it
+    left the whole other half of the header empty and read as unfinished. The tab
+    order follows: brand, the button that opens the panel, then the panel.
 
     THE DRAWER. Below 1100px the primary nav and the language switcher move
     into a side panel that slides in from the READING END - the right in
@@ -179,16 +210,15 @@ def header_html(lang, page, depth, links):
                      % (h, ' aria-current="page"' if cur else "", e(label)) for h, label, cur in links)
     return f"""    <header class="site-head">
       <div class="shell">
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="{e(s['menuLabel'])}">
-          <span class="bars" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
-        </button>
         <a class="brand" href="{home}">
           <img src="{a}assets/emblem-256.webp" alt="" width="256" height="256" />
           <span class="brand-name">Zulfaa</span>
         </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="{e(s['menuLabel'])}">
+          <span class="bars" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
+        </button>
         <div class="drawer" id="site-menu">
           <div class="drawer-top">
-            <span class="drawer-title">{e(s['menuLabel'])}</span>
             <button class="drawer-close" type="button" aria-label="{e(s['closeLabel'])}">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
             </button>

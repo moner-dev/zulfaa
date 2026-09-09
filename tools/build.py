@@ -3,7 +3,7 @@
 import os, re, sys, html
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from chrome import (SITE, LANGS, S, C, write, e, up, PREVIEW, OUT_ROOT,
-                    header_html, JS_CLASS, NAV_JS)
+                    header_html, JS_CLASS, NAV_JS, reversion)
 from pages import build_privacy, build_terms, build_support, build_delete
 from home import build_home
 
@@ -64,8 +64,11 @@ for f, (page, depth) in EN_PAGES.items():
     orig = t
     a = up(depth)
     t = english_header(t, page, depth)
+    # every asset URL carries the current content hash, so a returning browser
+    # can never pair this markup with a stylesheet it cached before the deploy
+    t = reversion(t)
     if 'classList.add("js")' not in t:
-        m = re.search(r'(    <link rel="stylesheet" href="[^"]*assets/zulfaa.css" />\n)', t)
+        m = re.search(r'(    <link rel="stylesheet" href="[^"]*assets/zulfaa\.css(?:\?v=[0-9a-f]+)?" />\n)', t)
         assert m, f
         t = t[:m.end(1)] + JS_CLASS + "\n" + t[m.end(1):]
     if "assets/nav.js" not in t:

@@ -2,7 +2,7 @@
 """The localised landing page, carousel and lightbox included."""
 import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from chrome import (S, LANGS, C, SHOTS, CAPS, ALT, MAIL, DEV, e, head, header, footer, up)
+from chrome import (S, LANGS, C, SHOTS, CAPS, ALT, MAIL, DEV, e, head, header, footer, up, asset)
 
 GLYPHS = [
  '<circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" />',
@@ -160,5 +160,5 @@ def build_home(lang):
         </button>
       </div>
     </div>
-    <script src="{a}assets/carousel.js" defer></script>
+    <script src="{a}{asset("assets/carousel.js")}" defer></script>
 """ + footer(lang, p, d))

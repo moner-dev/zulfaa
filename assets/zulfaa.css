@@ -323,17 +323,12 @@ img {
   top: calc(100% - 2px);
 }
 
-.nav-toggle[aria-expanded="true"] .bar:nth-child(1) {
-  top: calc(50% - 1px);
-  transform: rotate(45deg);
-}
-.nav-toggle[aria-expanded="true"] .bar:nth-child(2) {
-  opacity: 0;
-}
-.nav-toggle[aria-expanded="true"] .bar:nth-child(3) {
-  top: calc(50% - 1px);
-  transform: rotate(-45deg);
-}
+/* The bars deliberately DO NOT fold into a cross while the drawer is open.
+   The drawer opens against the opposite edge and carries its own close button;
+   morphing the header button as well put a second, detached X on the far side
+   of a dimmed page, which read as debris rather than as a control. The button
+   sits behind the backdrop while the drawer is open and is not the way back
+   out — the close button, the backdrop, Escape and a link are. */
 
 /* ── language menu ──
    Without script: a pill row of three plain links, as before. With script:
@@ -575,21 +570,15 @@ html.js .lang-list a[aria-current="true"] .lang-check {
     transition-delay: 0s;
   }
 
+  /* Just the close button, at the drawer's own reading end - nearest the edge
+     the panel came from. No "Menu" caption: the panel is plainly a menu, and
+     the word was the thing that leaked into the header when the stylesheet was
+     a version behind the markup. */
   html.js .drawer-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-    padding: 0.1rem 0.15rem 0.5rem;
-  }
-
-  html.js .drawer-title {
-    font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
+    justify-content: flex-end;
+    padding-block-end: 0.35rem;
   }
 
   html.js .drawer-close {
