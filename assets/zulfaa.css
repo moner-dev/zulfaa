@@ -198,7 +198,10 @@ img {
   display: none; /* enhanced in; see html.js below */
   align-items: center;
   justify-content: center;
-  min-height: 2.75rem;
+  /* 2.25rem = 36px. The controls sit beside a 44px brand mark and a 0.88rem
+     nav row; at 2.75rem they out-weighed both and the header read as three
+     competing blocks instead of a brand with two quiet controls. */
+  min-height: 2.25rem;
   margin: 0;
   border: 1px solid rgba(42, 138, 128, 0.18);
   border-radius: 999px;
@@ -229,6 +232,23 @@ img {
 .lang-btn[aria-expanded="true"] {
   background: var(--teal-soft);
   border-color: rgba(42, 138, 128, 0.32);
+}
+
+/* ── the drawer wrapper ──
+   Above the collapsed breakpoint it is not a box at all: `display: contents`
+   hands `.site-nav` and `.lang-switch` straight to `.shell`, so the desktop
+   header is laid out exactly as it was before the drawer existed. Its own
+   furniture — the title row, the close button, the backdrop — is rendered on
+   every page and shown only inside the drawer. */
+
+.drawer {
+  display: contents;
+}
+
+.drawer-top,
+.drawer-close,
+.scrim {
+  display: none;
 }
 
 /* ── primary nav ── */
@@ -268,7 +288,7 @@ img {
    Three bars that fold into a cross. Symmetric, so it needs no mirroring. */
 
 .nav-toggle {
-  width: 2.75rem;
+  width: 2.25rem;
   padding: 0;
   flex: none;
 }
@@ -276,8 +296,8 @@ img {
 .nav-toggle .bars {
   position: relative;
   display: block;
-  width: 1.2rem;
-  height: 0.9rem;
+  width: 1rem;
+  height: 0.7rem;
 }
 
 .nav-toggle .bar {
@@ -381,22 +401,24 @@ img {
 }
 
 .lang-btn {
-  gap: 0.45rem;
-  padding-block: 0.4rem;
-  padding-inline: 0.85rem 0.7rem;
-  font-size: 0.82rem;
+  gap: 0.3rem;
+  padding-block: 0.25rem;
+  padding-inline: 0.6rem 0.45rem;
+  font-size: 0.78rem;
   white-space: nowrap;
 }
 
+/* the globe reads as a mark beside the label, not as an illustration */
 .lang-btn svg {
   flex: none;
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 0.9rem;
+  height: 0.9rem;
 }
 
 .lang-btn .chev {
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  opacity: 0.65;
   transition: transform 0.2s ease;
 }
 
@@ -419,17 +441,20 @@ html.js .lang-list {
   top: calc(100% + 0.45rem);
   inset-inline-end: 0;
   z-index: 5;
-  min-width: 11.5rem;
+  /* wide enough for "Nederlands" at 0.84rem and no wider; the old 11.5rem
+     left a band of empty panel beside every label */
+  min-width: 9.5rem;
   flex-direction: column;
   align-items: stretch;
-  gap: 0.1rem;
-  padding: 0.4rem;
-  border-radius: 1rem;
+  gap: 0.05rem;
+  padding: 0.3rem;
+  border: 1px solid rgba(42, 138, 128, 0.14);
+  border-radius: 0.85rem;
   background: rgba(255, 255, 255, 0.98);
   box-shadow:
     0 1px 2px rgba(26, 90, 82, 0.06),
-    0 18px 40px -18px rgba(26, 90, 82, 0.35);
-  font-size: 0.9rem;
+    0 14px 32px -16px rgba(26, 90, 82, 0.32);
+  font-size: 0.84rem;
   visibility: hidden;
   opacity: 0;
   transform: translateY(-0.35rem);
@@ -448,11 +473,18 @@ html.js .lang-btn[aria-expanded="true"] + .lang-list {
 
 html.js .lang-list a {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.6rem 0.85rem;
-  border-radius: 0.7rem;
+  gap: 0.6rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.5rem;
   color: var(--ink);
+}
+
+/* inside a panel the ring must hug the row: at a positive offset it crossed
+   the panel's padding and broke its rounded edge */
+html.js .lang-list a:focus-visible {
+  outline-offset: -2px;
 }
 
 html.js .lang-list a:hover {
@@ -468,65 +500,228 @@ html.js .lang-list a[aria-current="true"] {
 html.js .lang-list a[aria-current="true"] .lang-check {
   display: block;
   flex: none;
-  width: 1rem;
-  height: 1rem;
+  width: 0.8rem;
+  height: 0.8rem;
 }
 
-/* ── collapsed: tablets and phones ── */
+/* ── collapsed: tablets and phones — the side drawer ──
+   The primary nav and the language switcher move into a panel that slides in
+   from the READING END: the right in English and Dutch, the left in Arabic.
+   `--drawer-out` is the only physical value in here; everything else is a
+   logical property, so the mirroring is one line rather than a second set of
+   rules. Above this breakpoint `.drawer` is `display: contents` and the shell
+   lays its children out exactly as it did before the drawer existed. */
 
 @media (max-width: 68.75rem) {
   html.js .nav-toggle {
     display: inline-flex;
   }
 
-  html.js .site-nav {
-    position: absolute;
-    top: calc(100% + 0.45rem);
-    inset-inline-start: var(--head-pad);
-    z-index: 5;
-    width: min(100% - 2 * var(--head-pad), 24rem);
+  html.js .drawer {
+    --drawer-out: 100%;
+    position: fixed;
+    inset-block: 0;
+    inset-inline-end: 0;
+    z-index: 60;
+    display: flex;
+    width: min(80vw, 18.5rem);
     flex-direction: column;
     gap: 0.15rem;
-    padding: 0.5rem;
-    border: 1px solid rgba(42, 138, 128, 0.18);
-    border-radius: 1.25rem;
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow:
-      0 1px 2px rgba(26, 90, 82, 0.06),
-      0 22px 48px -20px rgba(26, 90, 82, 0.38);
-    font-size: 1rem;
+    padding: 0.8rem;
+    background: var(--cream);
+    border-inline-start: 1px solid rgba(42, 138, 128, 0.16);
+    box-shadow: -18px 0 44px -24px rgba(26, 90, 82, 0.45);
+    overflow-y: auto;
+    overscroll-behavior: contain;
     visibility: hidden;
-    opacity: 0;
-    transform: translateY(-0.4rem);
+    transform: translateX(var(--drawer-out));
     transition:
-      opacity 0.18s ease,
-      transform 0.18s ease,
-      visibility 0s linear 0.18s;
+      transform 0.26s cubic-bezier(0.32, 0.72, 0, 1),
+      visibility 0s linear 0.26s;
   }
 
-  html.js .nav-toggle[aria-expanded="true"] ~ .site-nav {
+  /* `html.js` is where the 100% above is set, so the mirror has to out-specify
+     it on the same element — `[dir="rtl"] .drawer` alone loses and the panel
+     slides in from the wrong side in Arabic while still landing correctly,
+     which is invisible in a screenshot of the OPEN state. */
+  html.js[dir="rtl"] .drawer {
+    --drawer-out: -100%;
+  }
+
+  html.js .nav-toggle[aria-expanded="true"] ~ .drawer {
     visibility: visible;
-    opacity: 1;
     transform: none;
     transition-delay: 0s;
   }
 
-  html.js .site-nav a {
-    display: flex;
-    padding: 0.8rem 1rem;
-    border-radius: 0.9rem;
-    color: var(--ink);
-    white-space: normal;
+  /* the backdrop; `hidden` is removed by nav.js, so with scripting off there
+     is no scrim and no drawer — the links simply render inline */
+  html.js .scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    background: rgba(20, 62, 57, 0.32);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.26s ease,
+      visibility 0s linear 0.26s;
   }
 
-  html.js .site-nav a:hover {
+  html.js .nav-toggle[aria-expanded="true"] ~ .scrim {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+  }
+
+  html.js .drawer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.1rem 0.15rem 0.5rem;
+  }
+
+  html.js .drawer-title {
+    font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  html.js .drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+    border: 1px solid rgba(42, 138, 128, 0.18);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--teal-deep);
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  html.js .drawer-close svg {
+    width: 0.85rem;
+    height: 0.85rem;
+  }
+
+  html.js .drawer-close:hover {
+    background: var(--cream-deep);
+    border-color: rgba(42, 138, 128, 0.32);
+  }
+
+  html.js .drawer-close:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+
+  html.js .drawer .site-nav {
+    flex-direction: column;
+    gap: 0.1rem;
+    font-size: 0.9rem;
+  }
+
+  html.js .drawer .site-nav a {
+    display: flex;
+    padding: 0.6rem 0.7rem;
+    border-radius: 0.6rem;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  html.js .drawer .site-nav a:hover {
     background: var(--cream-deep);
     color: var(--teal-deep);
   }
 
-  html.js .site-nav a[aria-current="page"] {
+  html.js .drawer .site-nav a[aria-current="page"] {
     background: var(--teal-soft);
     color: var(--teal-deep);
+  }
+
+  /* inside a panel the ring hugs the row rather than crossing its edge */
+  html.js .drawer .site-nav a:focus-visible,
+  html.js .drawer .lang-list a:focus-visible {
+    outline-offset: -2px;
+  }
+
+  /* ── the language selector inside the drawer ──
+     Not a dropdown within a drawer, which would be a menu inside a menu: the
+     three languages become one compact segmented row, always visible. The
+     button that opens the desktop menu is not rendered here at all, and
+     nav.js drops the menu semantics with it (see applyLangMode). */
+  html.js .drawer .lang-switch {
+    margin-block-start: auto;
+    padding-block-start: 0.7rem;
+  }
+
+  html.js .drawer .lang-switch::before {
+    content: "";
+    display: block;
+    height: 1px;
+    margin-block-end: 0.6rem;
+    background: rgba(42, 138, 128, 0.14);
+  }
+
+  html.js .drawer .lang-btn {
+    display: none;
+  }
+
+  html.js .drawer .lang-list {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    font-size: 0.72rem;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  /* content-sized, not three equal thirds: "Nederlands" is half again as wide
+     as "English" and an equal third clipped it */
+  html.js .drawer .lang-list li {
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  html.js .drawer .lang-list a {
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.4rem 0.45rem;
+    border: 1px solid rgba(42, 138, 128, 0.16);
+    border-radius: 0.55rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  html.js .drawer .lang-list a[aria-current="true"] {
+    background: var(--teal-deep);
+    border-color: var(--teal-deep);
+    color: var(--cream);
+  }
+
+  /* The tick is the desktop menu's affordance; here the filled pill already
+     says which language is current, so the check is redundant. It needs the
+     full `a[aria-current="true"]` to out-specify the rule that shows it. */
+  html.js .drawer .lang-list a[aria-current="true"] .lang-check {
+    display: none;
   }
 
   /* scripting off: the links wrap onto their own row beneath the brand */
@@ -535,7 +730,6 @@ html.js .lang-list a[aria-current="true"] .lang-check {
     flex-basis: 100%;
   }
 }
-
 /* Phones up to 420px: the language button shows the short form, the brand
    and the menu button tighten a little, so [menu] [brand] [language] stays on
    one row down to 320px in every language ("Nederlands" is the long one). */
@@ -555,8 +749,8 @@ html.js .lang-list a[aria-current="true"] .lang-check {
     display: inline;
   }
   html.js .lang-btn {
-    gap: 0.35rem;
-    padding-inline: 0.65rem 0.55rem;
+    gap: 0.25rem;
+    padding-inline: 0.5rem 0.4rem;
   }
   .site-head .shell {
     --head-pad: 1rem;

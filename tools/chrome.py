@@ -124,23 +124,23 @@ def langswitch(lang, page, depth):
     way, so every alternate URL is in the page exactly once."""
     a = up(depth)
     s = S[lang]
-    out = ['        <nav class="lang-switch" aria-label="%s">' % e(s["langLabel"]),
-           '          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" '
+    out = ['          <nav class="lang-switch" aria-label="%s">' % e(s["langLabel"]),
+           '            <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" '
            'aria-controls="lang-menu">',
-           '            %s' % GLOBE,
-           '            <span class="vh">%s</span>' % e(s["langPrefix"]),
-           '            <span class="lang-name" lang="%s">%s</span>' % (lang, e(LANGS[lang]["name"])),
-           '            <span class="lang-code" aria-hidden="true" lang="%s">%s</span>' % (lang, e(s["langShort"])),
-           '            %s' % CHEV,
-           '          </button>',
-           '          <ul class="lang-list" id="lang-menu">']
+           '              %s' % GLOBE,
+           '              <span class="vh">%s</span>' % e(s["langPrefix"]),
+           '              <span class="lang-name" lang="%s">%s</span>' % (lang, e(LANGS[lang]["name"])),
+           '              <span class="lang-code" aria-hidden="true" lang="%s">%s</span>' % (lang, e(s["langShort"])),
+           '              %s' % CHEV,
+           '            </button>',
+           '            <ul class="lang-list" id="lang-menu">']
     for l in ("en", "ar", "nl"):
         href = (a + LANGS[l]["base"] + page) or "./"
         cur = ' aria-current="true"' if l == lang else ""
-        out.append('            <li><a href="%s" lang="%s" hreflang="%s"%s>%s%s</a></li>'
+        out.append('              <li><a href="%s" lang="%s" hreflang="%s"%s>%s%s</a></li>'
                    % (href, l, l, cur, e(LANGS[l]["name"]), CHECK if l == lang else ""))
-    out.append("          </ul>")
-    out.append("        </nav>")
+    out.append("            </ul>")
+    out.append("          </nav>")
     return "\n".join(out)
 
 
@@ -159,11 +159,23 @@ def header_html(lang, page, depth, links):
     Order matters and is deliberate: menu button, brand, primary nav, language
     menu. That is the visual order on a phone (button at the reading start,
     language at the reading end) and the tab order everywhere, with the nav
-    panel between the button that opens it and the control after it."""
+    panel between the button that opens it and the control after it.
+
+    THE DRAWER. Below 1100px the primary nav and the language switcher move
+    into a side panel that slides in from the READING END - the right in
+    English and Dutch, the left in Arabic - over a backdrop. They are wrapped
+    in `.drawer` for that, and above the breakpoint that wrapper is
+    `display: contents`, so on a desktop its children are laid out by
+    `.shell` exactly as they were before it existed. One markup, no
+    duplicated links: a second copy of the nav inside a drawer would be a
+    second set of URLs for a crawler and a second thing to keep in step.
+
+    The close button and the backdrop are rendered for every page but are
+    inert - `display: none` - until the collapsed breakpoint AND `html.js`."""
     a = up(depth)
     s = S[lang]
     home = (a + LANGS[lang]["base"]) or "./"
-    rows = "\n".join('          <a href="%s"%s>%s</a>'
+    rows = "\n".join('            <a href="%s"%s>%s</a>'
                      % (h, ' aria-current="page"' if cur else "", e(label)) for h, label, cur in links)
     return f"""    <header class="site-head">
       <div class="shell">
@@ -174,10 +186,19 @@ def header_html(lang, page, depth, links):
           <img src="{a}assets/emblem-256.webp" alt="" width="256" height="256" />
           <span class="brand-name">Zulfaa</span>
         </a>
-        <nav class="site-nav" id="site-menu" aria-label="{e(s['navLabel'])}">
+        <div class="drawer" id="site-menu">
+          <div class="drawer-top">
+            <span class="drawer-title">{e(s['menuLabel'])}</span>
+            <button class="drawer-close" type="button" aria-label="{e(s['closeLabel'])}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+          </div>
+          <nav class="site-nav" aria-label="{e(s['navLabel'])}">
 {rows}
-        </nav>
+          </nav>
 {langswitch(lang, page, depth)}
+        </div>
+        <div class="scrim" hidden></div>
       </div>
     </header>
 

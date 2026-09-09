@@ -35,27 +35,36 @@
           <img src="../../assets/emblem-256.webp" alt="" width="256" height="256" />
           <span class="brand-name">Zulfaa</span>
         </a>
-        <nav class="site-nav" id="site-menu" aria-label="Hoofdnavigatie">
-          <a href="../../nl/">Start</a>
-          <a href="../../nl/privacy/">Privacybeleid</a>
-          <a href="../../nl/terms/" aria-current="page">Gebruiksvoorwaarden</a>
-          <a href="../../nl/delete-data/">Gegevens verwijderen</a>
-          <a href="../../nl/support/">Hulp &amp; Ondersteuning</a>
-        </nav>
-        <nav class="lang-switch" aria-label="Taal">
-          <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
-            <span class="vh">Taal: </span>
-            <span class="lang-name" lang="nl">Nederlands</span>
-            <span class="lang-code" aria-hidden="true" lang="nl">NL</span>
-            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-          </button>
-          <ul class="lang-list" id="lang-menu">
-            <li><a href="../../terms/" lang="en" hreflang="en">English</a></li>
-            <li><a href="../../ar/terms/" lang="ar" hreflang="ar">العربية</a></li>
-            <li><a href="../../nl/terms/" lang="nl" hreflang="nl" aria-current="true">Nederlands<svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg></a></li>
-          </ul>
-        </nav>
+        <div class="drawer" id="site-menu">
+          <div class="drawer-top">
+            <span class="drawer-title">Menu</span>
+            <button class="drawer-close" type="button" aria-label="Menu sluiten">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+            </button>
+          </div>
+          <nav class="site-nav" aria-label="Hoofdnavigatie">
+            <a href="../../nl/">Start</a>
+            <a href="../../nl/privacy/">Privacybeleid</a>
+            <a href="../../nl/terms/" aria-current="page">Gebruiksvoorwaarden</a>
+            <a href="../../nl/delete-data/">Gegevens verwijderen</a>
+            <a href="../../nl/support/">Hulp &amp; Ondersteuning</a>
+          </nav>
+          <nav class="lang-switch" aria-label="Taal">
+            <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg>
+              <span class="vh">Taal: </span>
+              <span class="lang-name" lang="nl">Nederlands</span>
+              <span class="lang-code" aria-hidden="true" lang="nl">NL</span>
+              <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <ul class="lang-list" id="lang-menu">
+              <li><a href="../../terms/" lang="en" hreflang="en">English</a></li>
+              <li><a href="../../ar/terms/" lang="ar" hreflang="ar">العربية</a></li>
+              <li><a href="../../nl/terms/" lang="nl" hreflang="nl" aria-current="true">Nederlands<svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg></a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="scrim" hidden></div>
       </div>
     </header>
 

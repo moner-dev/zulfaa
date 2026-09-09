@@ -42,6 +42,7 @@ S["en"] = {
     "langPrefix": "Language: ",
     "langShort": "EN",
     "menuLabel": "Menu",
+    "closeLabel": "Close menu",
 }
 
 # ─────────────────────────── ARABIC ───────────────────────────
@@ -53,6 +54,7 @@ S["ar"] = {
     "langPrefix": "اللغة: ",
     "langShort": "عربي",
     "menuLabel": "القائمة",
+    "closeLabel": "إغلاق القائمة",
     "home": "الرئيسية",
     "deleteNav": "حذف البيانات",
     "devBy": "زُلْفَى من تصميم وتطوير",
@@ -111,6 +113,7 @@ S["nl"] = {
     "langPrefix": "Taal: ",
     "langShort": "NL",
     "menuLabel": "Menu",
+    "closeLabel": "Menu sluiten",
     "home": "Start",
     "deleteNav": "Gegevens verwijderen",
     "devBy": "ZULFAA is ontworpen en ontwikkeld door",
