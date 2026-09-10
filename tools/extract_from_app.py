@@ -96,9 +96,9 @@ def keep(sections, gates):
 # is revised, so this map must be revised with it — a stale anchor raises below
 # rather than silently extracting the wrong language.
 ANCHOR = {
-    "ar": 'privUpdated: "٢٧ أغسطس ٢٠٢٦"',
-    "en": 'privUpdated: "27 August 2026"',
-    "nl": 'privUpdated: "27 augustus 2026"',
+    "ar": 'privUpdated: "١٠ سبتمبر ٢٠٢٦"',
+    "en": 'privUpdated: "10 September 2026"',
+    "nl": 'privUpdated: "10 september 2026"',
 }
 
 def unesc(s):
