@@ -2,7 +2,7 @@
 """Writes the /ar/ and /nl/ subtrees and re-renders the header of the English pages."""
 import os, re, sys, html
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from chrome import (SITE, LANGS, S, C, write, e, up, PREVIEW, OUT_ROOT,
+from chrome import (SITE, LANGS, S, C, write, e, up, PREVIEW, OUT_ROOT, ORIGIN,
                     header_html, JS_CLASS, NAV_JS, reversion)
 from pages import build_privacy, build_terms, build_support, build_delete
 from home import build_home
@@ -76,9 +76,9 @@ for f, (page, depth) in EN_PAGES.items():
         t = t.replace("  </body>", NAV_JS % a + "\n  </body>", 1)
     # hreflang alternates
     if 'rel="alternate"' not in t:
-        alts = "\n".join('    <link rel="alternate" hreflang="%s" href="https://moner-dev.github.io/zulfaa/%s%s" />'
-                         % (c, LANGS[c]["base"], page) for c in ("en", "ar", "nl"))
-        alts += '\n    <link rel="alternate" hreflang="x-default" href="https://moner-dev.github.io/zulfaa/%s" />' % page
+        alts = "\n".join('    <link rel="alternate" hreflang="%s" href="%s%s%s" />'
+                         % (c, ORIGIN, LANGS[c]["base"], page) for c in ("en", "ar", "nl"))
+        alts += '\n    <link rel="alternate" hreflang="x-default" href="%s%s" />' % (ORIGIN, page)
         m = re.search(r'(    <link rel="canonical"[^\n]*\n)', t)
         assert m, f
         t = t[:m.end(1)] + alts + "\n" + t[m.end(1):]

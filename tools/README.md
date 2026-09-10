@@ -78,7 +78,7 @@ python tools/build.py
 git status            # the generated files are modified, not committed
 git add -A && git commit -m "..." && git push
 git log origin/main -1        # confirm the push landed
-# then load https://moner-dev.github.io/zulfaa/privacy/ and read it
+# then load https://zulfaa.nl/privacy/ and read it
 ```
 
 Step 3 is written out because it was once skipped: the pages were regenerated,

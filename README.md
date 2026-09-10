@@ -3,14 +3,14 @@
 The public website for **ZULFAA**, an Islamic app bringing together prayer times, the Qur'an,
 adhkar and du'as, and qibla direction.
 
-Live at <https://moner-dev.github.io/zulfaa/>
+Live at <https://zulfaa.nl/>
 
 | Page | URL |
 | --- | --- |
-| Home | <https://moner-dev.github.io/zulfaa/> |
-| Privacy Policy | <https://moner-dev.github.io/zulfaa/privacy/> |
-| Terms of Use | <https://moner-dev.github.io/zulfaa/terms/> |
-| Support | <https://moner-dev.github.io/zulfaa/support/> |
+| Home | <https://zulfaa.nl/> |
+| Privacy Policy | <https://zulfaa.nl/privacy/> |
+| Terms of Use | <https://zulfaa.nl/terms/> |
+| Support | <https://zulfaa.nl/support/> |
 
 ## About this repository
 

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://moner-dev.github.io/zulfaa/sitemap.xml
+Sitemap: https://zulfaa.nl/sitemap.xml

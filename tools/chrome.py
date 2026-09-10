@@ -24,7 +24,11 @@ PREVIEW = os.environ.get("ZULFAA_LEGAL_PREVIEW") == "1"
 C = json.load(open(os.path.join(SCR, "content.preview.json" if PREVIEW else "content.json"), encoding="utf-8"))
 OUT_ROOT = os.path.join(SITE, ".preview") if PREVIEW else SITE
 SHOTS = json.load(open(os.path.join(SCR, "shots.json"), encoding="utf-8"))
-ORIGIN = "https://moner-dev.github.io/zulfaa/"
+# The public origin. Custom domain since 10 September 2026: GitHub Pages
+# served this repository at /zulfaa/ under the project URL, and serves the
+# same tree from the ROOT under the domain, so only this line changes and
+# every page path below it is unchanged.
+ORIGIN = "https://zulfaa.nl/"
 MAIL = "moner.intelligence@gmail.com"
 DEV = "MONER INTELLIGENCE SYSTEMS"
 
