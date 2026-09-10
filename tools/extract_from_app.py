@@ -70,10 +70,6 @@ RELEASE_MET = {
     "darkTheme": _flag("darkTheme"),
     "umrahSavings": UMRAH,
     "ramadanPlanner": _flag("ramadanPlanner"),
-    # not a feature flag: recovery is offered on the savings screen AND only
-    # when a sender is configured, so the clause that discloses storing an
-    # email address is true only when both hold
-    "recoveryTransport": UMRAH and _flag("RECOVERY_TRANSPORT_READY"),
 }
 PRIVACY_CLAUSE_RELEASE = _gate_map("PRIVACY_CLAUSE_RELEASE")
 TERMS_CLAUSE_RELEASE = _gate_map("TERMS_CLAUSE_RELEASE")
