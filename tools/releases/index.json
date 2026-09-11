@@ -16,5 +16,9 @@
     "QA serial, a build that was uploaded but never released - stays in the",
     "source as record and renders nowhere. See tools/releases.py."
   ],
-  "releases": ["1-1-0", "1-0-0"]
+  "releases": [
+    "1-2-0",
+    "1-1-0",
+    "1-0-0"
+  ]
 }

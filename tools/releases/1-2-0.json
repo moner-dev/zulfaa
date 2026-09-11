@@ -1,0 +1,313 @@
+{
+  "id": "1-2-0",
+  "updateNumber": 2,
+  "versionName": "1.2.0",
+  "versionProvisional": true,
+  "versionCode": null,
+  "track": null,
+  "distributed": false,
+  "status": "upcoming",
+  "publishedOn": null,
+  "datePrecision": "unknown",
+  "datePending": false,
+  "evidence": [
+    "Docs/releases/APP_UPDATE_HISTORY.md 4b (the 1.2.0 cycle)",
+    "Docs/releases/V1_2_0_USER_FACING_NOTES_DRAFT.md",
+    "Docs/audits/QURAN_FULL_AUDIT_2026-09-11.md (0f8c42c) and its 9b dispositions",
+    "Begins after restore/pre-updates-oasis-quran-audit-20260911 (db214bb); see Docs/releases/RELEASE_POLICY.md",
+    "Batch 1: efdc724, 6f353a4; verified on 2046 / 1.1.0-qa46 (2404f20)",
+    "Batch 2: f429368 (text integrity, internal), be538c1; verified on 2050 / 1.1.0-qa50 (36dd27b)"
+  ],
+  "title": {
+    "en": "The Qur'an, read the way you actually read",
+    "ar": "القرآن، كما تقرؤه فعلًا",
+    "nl": "De Koran, zoals je werkelijk leest"
+  },
+  "summary": {
+    "en": "A full review of the Qur'an experience and two batches of fixes from it: your place is kept only when you have really read, every surah is reachable with the player open, the player and the sheets tell the truth, and the whole reader works with a screen reader.",
+    "ar": "مراجعة كاملة لتجربة القرآن ودفعتان من الإصلاحات منها: يُحفظ موضعك فقط حين تكون قد قرأت فعلًا، وكل سورة يمكن الوصول إليها والمشغّل مفتوح، والمشغّل واللوحات تقول الحقيقة، والقارئ كلّه يعمل مع قارئ الشاشة.",
+    "nl": "Een volledige doorlichting van de Koran-ervaring en twee reeksen correcties eruit: je plek wordt alleen bewaard als je echt hebt gelezen, elke soera is bereikbaar met de speler open, de speler en de panelen vertellen de waarheid, en de hele lezer werkt met een schermlezer."
+  },
+  "headline": [
+    "quran-browsing-is-not-reading",
+    "quran-list-under-player",
+    "quran-a11y",
+    "quran-repeat-verse",
+    "quran-offline-fast"
+  ],
+  "media": [],
+  "stories": [
+    {
+      "area": "quran",
+      "title": {
+        "en": "What the review found, and what is fixed",
+        "ar": "ما وجدته المراجعة، وما أُصلح",
+        "nl": "Wat de doorlichting vond, en wat is opgelost"
+      },
+      "lead": {
+        "en": "The reader, the player, the sheets and the list were checked end to end, on the device. These are the fixes that have been made and verified so far; the review's remaining items are still open and are not listed here.",
+        "ar": "فُحص القارئ والمشغّل واللوحات والقائمة من أوّلها إلى آخرها على الجهاز. هذه هي الإصلاحات التي أُنجزت وتُحقِّق منها حتى الآن؛ أمّا بقية بنود المراجعة فما زالت مفتوحة ولا تُذكر هنا.",
+        "nl": "De lezer, de speler, de panelen en de lijst zijn van begin tot eind op het toestel gecontroleerd. Dit zijn de correcties die tot nu toe zijn doorgevoerd en geverifieerd; de resterende punten van de doorlichting staan nog open en worden hier niet genoemd."
+      }
+    }
+  ],
+  "changes": [
+    {
+      "id": "quran-browsing-is-not-reading",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Browsing a surah does not count as reading it",
+        "ar": "تصفّح السورة لا يُحتسب قراءةً",
+        "nl": "Door een soera bladeren telt niet als lezen"
+      },
+      "body": {
+        "en": "Opening a surah and backing out no longer overwrites your place. A position is saved once you have moved through the text, and a surah counts as finished only when you have read to its end — short surahs are no longer marked read the moment they open. Earlier saved positions carry over.",
+        "ar": "فتح السورة والرجوع منها لم يعد يمحو موضعك. يُحفظ الموضع حين تتقدّم في النص فعلًا، ولا تُعدّ السورة مختومة إلا حين تقرأها إلى آخرها — فالسور القصيرة لم تعد تُعلَّم مقروءةً بمجرّد فتحها. والمواضع المحفوظة سابقًا تبقى.",
+        "nl": "Een soera openen en teruggaan overschrijft uw plek niet meer. Een positie wordt bewaard zodra u door de tekst bent gegaan, en een soera geldt pas als uitgelezen wanneer u tot het einde hebt gelezen — korte soera's worden niet langer als gelezen gemarkeerd zodra ze openen. Eerder bewaarde posities blijven behouden."
+      }
+    },
+    {
+      "id": "quran-list-under-player",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Every surah is reachable while a recitation plays",
+        "ar": "كل سورة في متناولك والتلاوة تعمل",
+        "nl": "Elke soera is bereikbaar terwijl een recitatie speelt"
+      },
+      "body": {
+        "en": "With the player showing, the list used to end at Al-Ikhlāṣ — Al-Falaq and An-Nās sat under the bar. The list now leaves exactly the room the bar needs, expanded or collapsed.",
+        "ar": "كانت القائمة والمشغّل ظاهر تنتهي عند الإخلاص — فالفلق والناس تحت الشريط. وصارت القائمة تترك للشريط ما يحتاجه بالضبط، مبسوطًا كان أو مطويًّا.",
+        "nl": "Met de speler in beeld eindigde de lijst bij Al-Ikhlāṣ — Al-Falaq en An-Nās zaten onder de balk. De lijst laat nu precies de ruimte vrij die de balk nodig heeft, uitgeklapt of ingeklapt."
+      }
+    },
+    {
+      "id": "quran-reader-player-clearance",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Nothing hides behind the player, and nothing floats above a gap",
+        "ar": "لا شيء يختبئ خلف المشغّل، ولا شيء يطفو فوق فراغ",
+        "nl": "Niets verstopt achter de speler, en niets zweeft boven een gat"
+      },
+      "body": {
+        "en": "In the reader, the last lines of a surah cleared the bar by too little when it was expanded and by far too much when collapsed. The space is now measured from the bar itself, in every state.",
+        "ar": "في القارئ كانت آخر سطور السورة تتجاوز الشريط بمسافة أقل من اللازم وهو مبسوط وأكبر بكثير وهو مطويّ. وصارت المسافة تُقاس من الشريط نفسه في كل حالاته.",
+        "nl": "In de lezer lieten de laatste regels van een soera te weinig ruimte boven de balk wanneer die uitgeklapt was en veel te veel wanneer die ingeklapt was. De ruimte wordt nu vanaf de balk zelf gemeten, in elke toestand."
+      }
+    },
+    {
+      "id": "quran-translation-honest",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Translation shows when it says it is on",
+        "ar": "الترجمة تظهر حين تقول إنها مفعّلة",
+        "nl": "De vertaling verschijnt wanneer zij zegt aan te staan"
+      },
+      "body": {
+        "en": "Translation could be switched on while the flowing mushaf view showed none of it. Turning off verse-by-verse view now turns translation off with it, and the credit line appears only above a translation that is actually there.",
+        "ar": "كان يمكن أن تكون الترجمة مفعّلة والعرض المصحفي المتّصل لا يُظهر منها شيئًا. وصار إيقاف عرض الآية بآية يوقف الترجمة معه، وسطر النسبة لا يظهر إلا فوق ترجمة موجودة فعلًا.",
+        "nl": "De vertaling kon aanstaan terwijl de doorlopende moeshaf-weergave er niets van toonde. Vers-voor-vers uitzetten zet nu ook de vertaling uit, en de bronregel verschijnt alleen boven een vertaling die er werkelijk is."
+      }
+    },
+    {
+      "id": "quran-tafsir-source",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "The tafsir's source is readable",
+        "ar": "مصدر التفسير مقروء",
+        "nl": "De bron van de tafsir is leesbaar"
+      },
+      "body": {
+        "en": "The line naming the tafsir and its author sat half under the Android navigation bar. It now sits clear of it.",
+        "ar": "كان السطر الذي يسمّي التفسير ومؤلّفه نصفه تحت شريط تنقّل أندرويد. وصار فوقه بوضوح.",
+        "nl": "De regel met de naam van de tafsir en de auteur zat half onder de Android-navigatiebalk. Zij staat er nu vrij van."
+      }
+    },
+    {
+      "id": "quran-repeat-verse",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "“Repeat this verse” repeats that verse",
+        "ar": "«كرّر هذه الآية» يكرّر تلك الآية",
+        "nl": "‘Herhaal dit vers’ herhaalt dat vers"
+      },
+      "body": {
+        "en": "It used to set repeat to unlimited for the rest of the session, so every later verse looped until you noticed. It now applies to the verse you asked for, shows as on in the verse menu, and restores your previous setting when playback moves on. A second tap ends it.",
+        "ar": "كان يضبط التكرار على «بلا حدّ» لبقية الجلسة، فتظلّ كل آية تالية تدور حتى تنتبه. وصار يسري على الآية التي طلبتها، ويظهر مفعّلًا في قائمة الآية، ويعيد إعدادك السابق حين ينتقل التشغيل. ونقرة ثانية تنهيه.",
+        "nl": "Vroeger zette het herhalen op onbeperkt voor de rest van de sessie, zodat elk volgend vers bleef doorlopen tot u het merkte. Nu geldt het voor het vers dat u vroeg, staat het als aan in het versmenu, en keert uw vorige instelling terug zodra het afspelen doorgaat. Een tweede tik beëindigt het."
+      }
+    },
+    {
+      "id": "quran-external-pause",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "The player says so when something else pauses it",
+        "ar": "المشغّل يقول ذلك حين يوقفه شيء آخر",
+        "nl": "De speler zegt het wanneer iets anders hem pauzeert"
+      },
+      "body": {
+        "en": "A call or another app taking over the audio left the player showing a pause button over silence. It now shows play the moment playback is interrupted.",
+        "ar": "كان اتصال أو تطبيق آخر يأخذ الصوت فيترك المشغّل يُظهر زرّ الإيقاف فوق صمت. وصار يُظهر زرّ التشغيل لحظة انقطاع التشغيل.",
+        "nl": "Een oproep of een andere app die de audio overnam liet de speler een pauzeknop boven stilte tonen. Hij toont nu afspelen zodra het afspelen wordt onderbroken."
+      }
+    },
+    {
+      "id": "quran-a11y",
+      "area": "quran",
+      "kind": "improved",
+      "title": {
+        "en": "The Qur'an can be used with a screen reader and a keyboard",
+        "ar": "القرآن يمكن استعماله بقارئ الشاشة ولوحة المفاتيح",
+        "nl": "De Koran is met een schermlezer en een toetsenbord te gebruiken"
+      },
+      "body": {
+        "en": "Every verse is now a named control that opens its actions, and every surah can be reached and opened without touch. The reader has a proper heading, and play/pause announces itself in your language.",
+        "ar": "صارت كل آية عنصرًا مسمًّى يفتح إجراءاتها، وكل سورة يمكن بلوغها وفتحها دون لمس. وللقارئ عنوان صحيح، وزرّ التشغيل/الإيقاف يُعلن عن نفسه بلغتك.",
+        "nl": "Elk vers is nu een benoemd element dat zijn acties opent, en elke soera is zonder aanraking te bereiken en te openen. De lezer heeft een echte kop, en afspelen/pauzeren meldt zichzelf in uw taal."
+      }
+    },
+    {
+      "id": "quran-profile-verse-ref",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Your profile names the verse properly in English and Dutch",
+        "ar": "ملفّك الشخصي يسمّي الآية كما ينبغي بالإنجليزية والهولندية",
+        "nl": "Uw profiel noemt het vers correct in het Nederlands en Engels"
+      },
+      "body": {
+        "en": "The verse reference used to split, with the number stranded on its own line beside the Arabic. It now stays together.",
+        "ar": "كان مرجع الآية ينقسم، ويبقى الرقم وحيدًا في سطر بجانب العربية. وصار متماسكًا.",
+        "nl": "De versverwijzing brak vroeger af, met het nummer alleen op een regel naast het Arabisch. Zij blijft nu bij elkaar."
+      }
+    },
+    {
+      "id": "quran-history-resume",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Reading History opens a finished surah from the start",
+        "ar": "سجلّ القراءة يفتح السورة المختومة من أوّلها",
+        "nl": "Leesgeschiedenis opent een uitgelezen soera vanaf het begin"
+      },
+      "body": {
+        "en": "Opening a finished surah from your history used to land on its last verse. It now opens from the start, like everywhere else.",
+        "ar": "كان فتح سورة مختومة من سجلّك يوصلك إلى آخر آية فيها. وصار يفتحها من أوّلها، كسائر المواضع.",
+        "nl": "Een uitgelezen soera uit uw geschiedenis openen bracht u naar het laatste vers. Zij opent nu vanaf het begin, zoals overal."
+      }
+    },
+    {
+      "id": "quran-recent-search",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Searching works on the Recent tab too",
+        "ar": "البحث يعمل في تبويب «آخر قراءة» أيضًا",
+        "nl": "Zoeken werkt ook op het tabblad Recent"
+      },
+      "body": {
+        "en": "Typing in the search box while on Recent used to change nothing. It now narrows your recent surahs like every other tab, and shows an empty list when nothing matches instead of pretending the search was not there.",
+        "ar": "الكتابة في مربّع البحث وأنت في «آخر قراءة» لم تكن تغيّر شيئًا. صارت تضيّق سورك الأخيرة كسائر التبويبات، وتعرض قائمة فارغة حين لا يطابق شيء بدل التظاهر بأن البحث غير موجود.",
+        "nl": "Typen in het zoekveld op Recent veranderde niets. Het beperkt nu je recente soera's zoals elk ander tabblad, en toont een lege lijst als niets overeenkomt in plaats van te doen alsof er niet gezocht is."
+      }
+    },
+    {
+      "id": "quran-offline-fast",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "The player says straight away when there is no connection",
+        "ar": "المشغّل يخبرك فورًا حين لا يوجد اتصال",
+        "nl": "De speler zegt meteen wanneer er geen verbinding is"
+      },
+      "body": {
+        "en": "Starting a recitation with no network used to spin for over half a minute before admitting it could not play. It now tells you at once, with the same message and the same Retry. Reading is unaffected — the text is on your phone.",
+        "ar": "بدء تلاوة بلا شبكة كان يدور أكثر من نصف دقيقة قبل أن يقرّ بأنه لا يستطيع التشغيل. صار يخبرك في الحال، بالرسالة نفسها وزر «إعادة المحاولة» نفسه. أمّا القراءة فلا تتأثر — فالنص على هاتفك.",
+        "nl": "Een recitatie starten zonder netwerk bleef ruim een halve minuut draaien voordat hij toegaf niet te kunnen afspelen. Nu zegt hij het direct, met dezelfde melding en dezelfde knop Opnieuw. Lezen blijft ongemoeid — de tekst staat op je telefoon."
+      }
+    },
+    {
+      "id": "quran-continue-juz",
+      "area": "quran",
+      "kind": "improved",
+      "title": {
+        "en": "Continue reading names the juz",
+        "ar": "«متابعة القراءة» تذكر الجزء",
+        "nl": "Verder lezen noemt de djoez"
+      },
+      "body": {
+        "en": "The card now shows which of the thirty parts your position is in, using the same boundaries as the Juz tab.",
+        "ar": "تعرض البطاقة الآن في أيّ جزء من الثلاثين يقع موضعك، بالحدود نفسها التي في تبويب الأجزاء.",
+        "nl": "De kaart toont nu in welk van de dertig delen je plek valt, met dezelfde grenzen als het tabblad Djoez."
+      }
+    },
+    {
+      "id": "quran-tafsir-focus",
+      "area": "quran",
+      "kind": "improved",
+      "title": {
+        "en": "The tafsir sheet works fully with a keyboard and screen reader",
+        "ar": "لوحة التفسير تعمل بالكامل مع لوحة المفاتيح وقارئ الشاشة",
+        "nl": "Het tafsir-paneel werkt volledig met toetsenbord en schermlezer"
+      },
+      "body": {
+        "en": "Focus moves into it when it opens, stays inside while it is open, Escape closes it, and focus returns to the verse you came from. Every sheet in the app now behaves this way.",
+        "ar": "ينتقل التركيز إليها حين تُفتح، ويبقى داخلها ما دامت مفتوحة، وزر Escape يغلقها، ويعود التركيز إلى الآية التي جئت منها. كل لوحة في التطبيق تتصرّف هكذا الآن.",
+        "nl": "De focus gaat erin bij het openen, blijft erin zolang het open is, Escape sluit het, en de focus keert terug naar het vers waar je vandaan kwam. Elk paneel in de app gedraagt zich nu zo."
+      }
+    },
+    {
+      "id": "quran-save-labels",
+      "area": "quran",
+      "kind": "improved",
+      "title": {
+        "en": "Save controls say what they save",
+        "ar": "أزرار الحفظ تقول ما الذي تحفظه",
+        "nl": "Opslaan-knoppen zeggen wat ze opslaan"
+      },
+      "body": {
+        "en": "The bookmark at the top of the reader announces itself as the surah bookmark and whether it is set; the verse menu's save row announces save verse or remove verse. The two used to share the one word “Save”.",
+        "ar": "إشارة الحفظ أعلى القارئ تعلن نفسها إشارةَ حفظ السورة وهل هي مفعّلة؛ وصفّ الحفظ في قائمة الآية يعلن «حفظ الآية» أو «إزالة الآية». كانا يتشاركان كلمة «حفظ» وحدها.",
+        "nl": "De bladwijzer boven in de lezer kondigt zich aan als soera-bladwijzer en of hij is gezet; de opslaan-rij in het versmenu kondigt vers opslaan of vers verwijderen aan. De twee deelden voorheen het ene woord “Opslaan”."
+      }
+    }
+  ],
+  "worthKnowing": [
+    {
+      "id": "reading-not-visibility",
+      "kind": "behaviour",
+      "title": {
+        "en": "Seeing a verse is not reading it",
+        "ar": "رؤية الآية ليست قراءتها",
+        "nl": "Een vers zien is het niet lezen"
+      },
+      "body": {
+        "en": "ZULFAA records a reading position only once you have moved through the text, and marks a surah finished only when you have read your way to its end. A short surah that fits on one screen is therefore not marked read just by opening it; a recitation played to the last verse still finishes it. Positions saved by earlier versions carry over unchanged.",
+        "ar": "لا يسجّل زُلْفَى موضع قراءة إلا بعد أن تكون قد تحرّكت في النص، ولا يَعُدّ السورة منتهية إلا حين تقرأ حتى آخرها. فالسورة القصيرة التي تسع الشاشة لا تُعَدّ مقروءة بمجرّد فتحها؛ أمّا التلاوة حتى الآية الأخيرة فما زالت تُتمّها. والمواضع المحفوظة من إصدارات سابقة تبقى كما هي.",
+        "nl": "ZULFAA legt pas een leespositie vast als je door de tekst bent gegaan, en markeert een soera pas als uitgelezen wanneer je tot het einde hebt gelezen. Een korte soera die op één scherm past wordt dus niet als gelezen gemarkeerd door haar alleen te openen; een recitatie tot het laatste vers maakt haar nog steeds af. Eerder opgeslagen posities blijven ongewijzigd."
+      }
+    }
+  ],
+  "pending": [
+    {
+      "id": "quran-review-remaining",
+      "area": "quran",
+      "title": {
+        "en": "This release is still being built",
+        "ar": "هذا الإصدار ما زال قيد الإنجاز",
+        "nl": "Deze uitgave wordt nog gebouwd"
+      },
+      "body": {
+        "en": "The Qur'an review found more than the two batches above fixed. What remains is being decided and worked through, and will be added here only when it is finished and verified — nothing about it is written down yet. This version is not on anyone's device.",
+        "ar": "وجدت مراجعة القرآن أكثر ممّا أصلحته الدفعتان أعلاه. وما تبقّى يُبتّ فيه ويُعمل عليه، ولن يُضاف هنا إلا حين يكتمل ويُتحقَّق منه — ولم يُكتب عنه شيء بعد. هذا الإصدار ليس على جهاز أحد.",
+        "nl": "De Koran-doorlichting vond meer dan de twee reeksen hierboven hebben opgelost. Wat overblijft wordt beslist en uitgewerkt, en wordt hier pas toegevoegd zodra het klaar en geverifieerd is — er staat er nog niets over vast. Deze versie staat op niemands toestel."
+      }
+    }
+  ]
+}
