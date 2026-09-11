@@ -16,7 +16,8 @@
     "Docs/audits/QURAN_FULL_AUDIT_2026-09-11.md (0f8c42c) and its 9b dispositions",
     "Begins after restore/pre-updates-oasis-quran-audit-20260911 (db214bb); see Docs/releases/RELEASE_POLICY.md",
     "Batch 1: efdc724, 6f353a4; verified on 2046 / 1.1.0-qa46 (2404f20)",
-    "Batch 2: f429368 (text integrity, internal), be538c1; verified on 2050 / 1.1.0-qa50 (36dd27b)"
+    "Batch 2: f429368 (text integrity, internal), be538c1; verified on 2050 / 1.1.0-qa50 (36dd27b)",
+    "Batch 3: player dock on every tab (Q-B7a), completion at the true end (Q-AU3/AU2), player core + 24 behaviour tests (Q-TT6), short pages under the dock (Q-B12), the tafsir close label (Q-A9); verified on 2054 / 1.2.0-qa54"
   ],
   "title": {
     "en": "The Qur'an, read the way you actually read",
@@ -24,16 +25,16 @@
     "nl": "De Koran, zoals je werkelijk leest"
   },
   "summary": {
-    "en": "A full review of the Qur'an experience and two batches of fixes from it: your place is kept only when you have really read, every surah is reachable with the player open, the player and the sheets tell the truth, and the whole reader works with a screen reader.",
-    "ar": "مراجعة كاملة لتجربة القرآن ودفعتان من الإصلاحات منها: يُحفظ موضعك فقط حين تكون قد قرأت فعلًا، وكل سورة يمكن الوصول إليها والمشغّل مفتوح، والمشغّل واللوحات تقول الحقيقة، والقارئ كلّه يعمل مع قارئ الشاشة.",
-    "nl": "Een volledige doorlichting van de Koran-ervaring en twee reeksen correcties eruit: je plek wordt alleen bewaard als je echt hebt gelezen, elke soera is bereikbaar met de speler open, de speler en de panelen vertellen de waarheid, en de hele lezer werkt met een schermlezer."
+    "en": "A full review of the Qur'an experience and three batches of fixes from it: your place is kept only when you have really read, a surah is finished only when its last verse has really been heard, every surah is reachable with the player open, the player follows you to every tab, and the whole reader works with a screen reader.",
+    "ar": "مراجعة كاملة لتجربة القرآن وثلاث دفعات من الإصلاحات منها: يُحفظ موضعك فقط حين تكون قد قرأت فعلًا، ولا تُعدّ السورة منتهية إلا حين تُسمع آيتها الأخيرة فعلًا، وكل سورة يمكن الوصول إليها والمشغّل مفتوح، والمشغّل يتبعك إلى كل تبويب، والقارئ كلّه يعمل مع قارئ الشاشة.",
+    "nl": "Een volledige doorlichting van de Koran-ervaring en drie reeksen correcties eruit: je plek wordt alleen bewaard als je echt hebt gelezen, een soera is pas klaar als het laatste vers echt is gehoord, elke soera is bereikbaar met de speler open, de speler gaat mee naar elk tabblad, en de hele lezer werkt met een schermlezer."
   },
   "headline": [
     "quran-browsing-is-not-reading",
+    "quran-dock-everywhere",
     "quran-list-under-player",
     "quran-a11y",
-    "quran-repeat-verse",
-    "quran-offline-fast"
+    "quran-finished-when-heard"
   ],
   "media": [],
   "stories": [
@@ -276,6 +277,51 @@
         "ar": "إشارة الحفظ أعلى القارئ تعلن نفسها إشارةَ حفظ السورة وهل هي مفعّلة؛ وصفّ الحفظ في قائمة الآية يعلن «حفظ الآية» أو «إزالة الآية». كانا يتشاركان كلمة «حفظ» وحدها.",
         "nl": "De bladwijzer boven in de lezer kondigt zich aan als soera-bladwijzer en of hij is gezet; de opslaan-rij in het versmenu kondigt vers opslaan of vers verwijderen aan. De twee deelden voorheen het ene woord “Opslaan”."
       }
+    },
+    {
+      "id": "quran-dock-everywhere",
+      "area": "quran",
+      "kind": "improved",
+      "title": {
+        "en": "Pause a recitation from anywhere",
+        "ar": "أوقف التلاوة مؤقتًا من أي مكان",
+        "nl": "Pauzeer een recitatie vanaf elke plek"
+      },
+      "body": {
+        "en": "The player had controls on the Qur'an tab only; leave for Home, Prayer, Qibla or Profile and the recitation followed you, audible and untouchable. The bar now follows you to every tab and page, with the same play, pause, previous, next and stop. It steps aside only where the navigation bar does.",
+        "ar": "كانت أزرار المشغّل في تبويب القرآن وحده؛ فإذا انتقلت إلى الرئيسية أو الصلاة أو القبلة أو الملف تبعتك التلاوة مسموعةً بلا تحكّم. صار الشريط يتبعك إلى كل تبويب وصفحة، بالتشغيل والإيقاف المؤقت والسابق والتالي والإيقاف نفسها. ولا يتنحّى إلا حيث يتنحّى شريط التنقّل.",
+        "nl": "De speler had alleen op het Koran-tabblad knoppen; ging je naar Start, Gebed, Qibla of Profiel, dan volgde de recitatie je — hoorbaar, maar onbereikbaar. De balk gaat nu mee naar elk tabblad en elke pagina, met dezelfde knoppen voor afspelen, pauzeren, vorige, volgende en stoppen. Hij wijkt alleen waar de navigatiebalk dat ook doet."
+      }
+    },
+    {
+      "id": "quran-finished-when-heard",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "A surah is finished when its last verse has actually been heard",
+        "ar": "تُعدّ السورة منتهية حين تُسمع آيتها الأخيرة فعلًا",
+        "nl": "Een soera is klaar wanneer het laatste vers echt is gehoord"
+      },
+      "body": {
+        "en": "Starting the final verse used to mark the surah complete at once, so pressing next onto the last verse and leaving counted as having heard it. Completion is now recorded when the recitation reaches the end of that verse — every repeat included — and not before. Reading progress is unchanged.",
+        "ar": "كان بدء الآية الأخيرة يُعلّم السورة مكتملةً فورًا، فمجرّد الضغط على «التالي» إلى الآية الأخيرة ثم المغادرة كان يُحسب سماعًا. صار الإتمام يُسجَّل حين تبلغ التلاوة نهاية تلك الآية — بكل تكرار طُلب — لا قبل ذلك. وتقدّم القراءة لم يتغيّر.",
+        "nl": "Het starten van het laatste vers markeerde de soera meteen als voltooid, dus op volgende drukken naar het laatste vers en weggaan telde als gehoord. Voltooiing wordt nu vastgelegd wanneer de recitatie het einde van dat vers bereikt — elke herhaling meegerekend — en niet eerder. De leesvoortgang is ongewijzigd."
+      }
+    },
+    {
+      "id": "quran-short-page-dock",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Nothing hides behind the player on a short page",
+        "ar": "لا شيء يختفي خلف المشغّل في صفحة قصيرة",
+        "nl": "Niets verdwijnt achter de speler op een korte pagina"
+      },
+      "body": {
+        "en": "A single search result, or a Favorites list with one surah, sat under the player bar with no way to scroll it out. Every page now leaves exactly enough room to scroll such rows clear of the bar; nothing changes when no recitation is loaded.",
+        "ar": "كانت نتيجة البحث الوحيدة، أو قائمة مفضّلة فيها سورة واحدة، تقبع تحت شريط المشغّل بلا سبيل لإزاحتها. صارت كل صفحة تترك من المساحة ما يكفي بالضبط لتمرير هذه الصفوف بعيدًا عن الشريط؛ ولا يتغيّر شيء حين لا تكون تلاوة محمّلة.",
+        "nl": "Eén zoekresultaat, of een favorietenlijst met één soera, zat onder de spelerbalk zonder dat je hem eronderuit kon scrollen. Elke pagina laat nu precies genoeg ruimte om zulke rijen vrij van de balk te scrollen; er verandert niets als er geen recitatie is geladen."
+      }
     }
   ],
   "worthKnowing": [
@@ -304,9 +350,9 @@
         "nl": "Deze uitgave wordt nog gebouwd"
       },
       "body": {
-        "en": "The Qur'an review found more than the two batches above fixed. What remains is being decided and worked through, and will be added here only when it is finished and verified — nothing about it is written down yet. This version is not on anyone's device.",
-        "ar": "وجدت مراجعة القرآن أكثر ممّا أصلحته الدفعتان أعلاه. وما تبقّى يُبتّ فيه ويُعمل عليه، ولن يُضاف هنا إلا حين يكتمل ويُتحقَّق منه — ولم يُكتب عنه شيء بعد. هذا الإصدار ليس على جهاز أحد.",
-        "nl": "De Koran-doorlichting vond meer dan de twee reeksen hierboven hebben opgelost. Wat overblijft wordt beslist en uitgewerkt, en wordt hier pas toegevoegd zodra het klaar en geverifieerd is — er staat er nog niets over vast. Deze versie staat op niemands toestel."
+        "en": "The Qur'an review found more than the three batches above fixed. What remains is design and product decisions rather than defects, and will be added here only when it is finished and verified — nothing about it is written down yet. This version is not on anyone's device.",
+        "ar": "وجدت مراجعة القرآن أكثر ممّا أصلحته الدفعات الثلاث أعلاه. وما تبقّى قرارات تصميم ومنتج لا عيوب، ولن يُضاف هنا إلا حين يكتمل ويُتحقَّق منه — ولم يُكتب عنه شيء بعد. هذا الإصدار ليس على جهاز أحد.",
+        "nl": "De Koran-doorlichting vond meer dan de drie reeksen hierboven hebben opgelost. Wat overblijft zijn ontwerp- en productbeslissingen, geen gebreken, en wordt hier pas toegevoegd zodra het klaar en geverifieerd is — er staat er nog niets over vast. Deze versie staat op niemands toestel."
       }
     }
   ]
