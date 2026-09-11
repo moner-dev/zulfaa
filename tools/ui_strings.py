@@ -43,6 +43,27 @@ S["en"] = {
     "langShort": "EN",
     "menuLabel": "Menu",
     "closeLabel": "Close menu",
+    # ── and the chrome the GENERATED English page needs ──────────────────
+    # /updates/ is generated in all three languages, English included: every
+    # word of it comes from tools/releases/, so an English original kept by
+    # hand would be a fourth copy of the same data and the first to drift.
+    # These are the header and footer strings the hand-written English pages
+    # already carry, moved here once so the generated page matches them
+    # exactly rather than approximating them.
+    "home": "Home",
+    "deleteNav": "Data deletion",
+    "footerLabel": "Footer",
+    "devBy": "ZULFAA is designed and developed by",
+    "rights": "© 2026 MONER INTELLIGENCE SYSTEMS. All rights reserved.",
+    # The English PRIMARY nav is four links, not five: the English pages put
+    # Data deletion in the footer only. chrome.header() reads this list and
+    # keeps a generated English page in step with them. Arabic and Dutch have
+    # no such list and keep all five, as their pages already do.
+    "headerNav": ["", "privacy/", "terms/", "support/"],
+    # The English pages label the support link "Support" in their own header and
+    # footer, where content.json calls it "Help & Support" (the app's wording).
+    # The generated page follows the pages it sits beside, not the dictionary.
+    "navOverride": {"support/": "Support"},
 }
 
 # ─────────────────────────── ARABIC ───────────────────────────

@@ -41,7 +41,7 @@ CAPS = {
 }
 ALT = {"ar": "لقطة من تطبيق زُلْفَى: %s", "nl": "Schermafbeelding uit de ZULFAA-app: %s"}
 
-PAGES = ["", "privacy/", "terms/", "delete-data/", "support/"]
+PAGES = ["", "privacy/", "terms/", "delete-data/", "support/", "updates/"]
 
 
 def e(t):
@@ -180,8 +180,10 @@ def langswitch(lang, page, depth):
 def nav_items(lang):
     s = S[lang]
     n = C[lang]["nav"]
-    return [("", s["home"]), ("privacy/", n["privacy"]), ("terms/", n["terms"]),
-            ("delete-data/", s["deleteNav"]), ("support/", n["support"])]
+    items = [("", s["home"]), ("privacy/", n["privacy"]), ("terms/", n["terms"]),
+             ("delete-data/", s["deleteNav"]), ("support/", n["support"])]
+    over = s.get("navOverride") or {}
+    return [(h, over.get(h, label)) for h, label in items]
 
 
 def header_html(lang, page, depth, links):
@@ -241,7 +243,15 @@ def header_html(lang, page, depth, links):
 
 def header(lang, page, depth):
     a = up(depth)
-    links = [(a + LANGS[lang]["base"] + href, label, href == page) for href, label in nav_items(lang)]
+    items = nav_items(lang)
+    # The English primary nav carries four of the five links - the English
+    # pages put Data deletion in their footer only - so a generated English
+    # page filters to the same four rather than inventing a fifth. Arabic and
+    # Dutch declare no such list and keep all five, as their pages already do.
+    only = S[lang].get("headerNav")
+    if only is not None:
+        items = [(h, label) for h, label in items if h in only]
+    links = [(a + LANGS[lang]["base"] + href, label, href == page) for href, label in items]
     return header_html(lang, page, depth, links)
 
 

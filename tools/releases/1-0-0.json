@@ -1,0 +1,257 @@
+{
+  "id": "1-0-0",
+  "updateNumber": null,
+  "versionName": "1.0.0",
+  "versionProvisional": false,
+  "versionCode": 2,
+  "track": "closed-testing",
+  "distributed": true,
+  "status": "released",
+  "publishedOn": "2026-08",
+  "datePrecision": "month",
+  "datePending": true,
+  "evidence": [
+    "Docs/APP_UPDATE_HISTORY_WORKING.md 2, 2.1-2.5",
+    "commit 367ef75 (27 Aug 2026) - versionCode 2, versionName 1.0.0",
+    "tag release/v1.0.0-1 -> 2e9d8b3",
+    "android/app/build/outputs/bundle/release/app-release.aab, base/manifest read directly",
+    "Docs/RELEASE_ENGINEERING.md 1 - Play Console read 6 September 2026",
+    "Docs/DEV_LOG_2026-09-05.md - Closed Testing, 12 testers",
+    "Docs/RELEASE_CHECKLIST_NEXT_RELEASE.md - device still on versionCode 2 on 10 Sept 2026"
+  ],
+
+  "title": {
+    "en": "The first ZULFAA",
+    "ar": "زُلْفَى الأولى",
+    "nl": "De eerste ZULFAA"
+  },
+  "summary": {
+    "en": "ZULFAA's first release: prayer times, the qibla, the Qur'an and the Daily Challenge in one calm app, given to a closed group of about sixteen testers rather than to the public store.",
+    "ar": "أول إصدار من زُلْفَى: مواقيت الصلاة والقبلة والقرآن الكريم وتحدّي اليوم في تطبيق هادئ واحد، أُتيح لمجموعة مغلقة من نحو ستة عشر مختبِرًا، لا في المتجر العام.",
+    "nl": "De eerste uitgave van ZULFAA: gebedstijden, de qibla, de Koran en de dagelijkse uitdaging in één rustige app, gegeven aan een besloten groep van ongeveer zestien testers en niet aan de openbare winkel."
+  },
+
+  "headline": ["quran", "prayer-times", "qibla", "quran-player", "challenge"],
+
+  "media": [
+    {
+      "src": "assets/screenshots/home.webp",
+      "w": 462,
+      "h": 990,
+      "aspect": "phone-portrait",
+      "uiLang": "ar",
+      "alt": {
+        "en": "The ZULFAA home screen: the next prayer countdown, today's challenge, Qur'an progress and the verse of the day.",
+        "ar": "الشاشة الرئيسية لزُلْفَى: العدّ التنازلي للصلاة التالية، وتحدّي اليوم، وتقدّم القراءة في القرآن، وآية اليوم.",
+        "nl": "Het ZULFAA-startscherm: de aftelling naar het volgende gebed, de uitdaging van vandaag, de Koranvoortgang en het vers van de dag."
+      },
+      "caption": {
+        "en": "The home screen in ZULFAA 1.0.0.",
+        "ar": "الشاشة الرئيسية في زُلْفَى 1.0.0.",
+        "nl": "Het startscherm in ZULFAA 1.0.0."
+      }
+    }
+  ],
+
+  "changes": [
+    {
+      "id": "prayer-times",
+      "area": "prayer",
+      "kind": "new",
+      "title": {
+        "en": "Prayer times, worked out on your device",
+        "ar": "مواقيت الصلاة تُحسب على جهازك",
+        "nl": "Gebedstijden, op uw eigen toestel berekend"
+      },
+      "body": {
+        "en": "The five daily prayers, calculated on the phone itself from where you are, with the adhan and reminders. When ZULFAA has no location it says so rather than showing times for somewhere else.",
+        "ar": "الصلوات الخمس تُحسب على الجهاز نفسه من موقعك، مع الأذان والتذكيرات. وإن لم يكن لدى زُلْفَى موقع، قال ذلك بدل أن يعرض مواقيت مكان آخر.",
+        "nl": "De vijf dagelijkse gebeden, op het toestel zelf berekend vanaf waar u bent, met de adhan en herinneringen. Heeft ZULFAA geen locatie, dan zegt de app dat, in plaats van tijden van elders te tonen."
+      }
+    },
+    {
+      "id": "qibla",
+      "area": "prayer",
+      "kind": "new",
+      "title": {
+        "en": "The qibla compass",
+        "ar": "بوصلة القبلة",
+        "nl": "Het qiblakompas"
+      },
+      "body": {
+        "en": "The direction of the Ka'bah, following the phone's sensors as you turn.",
+        "ar": "اتجاه الكعبة يتبع حسّاسات الجهاز وأنت تدور.",
+        "nl": "De richting van de Ka'bah, die de sensoren van het toestel volgt terwijl u draait."
+      }
+    },
+    {
+      "id": "quran",
+      "area": "quran",
+      "kind": "new",
+      "title": {
+        "en": "The Qur'an, with its translation and tafsir",
+        "ar": "القرآن الكريم بترجمته وتفسيره",
+        "nl": "De Koran, met vertaling en tafsir"
+      },
+      "body": {
+        "en": "The full text, an English translation built into the app, and tafsir within reach while you read.",
+        "ar": "النص كاملًا، وترجمة إنجليزية مضمّنة في التطبيق، والتفسير في متناولك وأنت تقرأ.",
+        "nl": "De volledige tekst, een Engelse vertaling die in de app zelf zit, en tafsir binnen handbereik tijdens het lezen."
+      }
+    },
+    {
+      "id": "quran-player",
+      "area": "quran",
+      "kind": "new",
+      "title": {
+        "en": "The Qur'an player on the home screen",
+        "ar": "مشغّل القرآن في الشاشة الرئيسية",
+        "nl": "De Koranspeler op het startscherm"
+      },
+      "body": {
+        "en": "Recitation keeps playing when you leave the app, moves on to the next surah by itself, and the home screen shows how far you have read.",
+        "ar": "التلاوة تستمر بعد خروجك من التطبيق، وتنتقل وحدها إلى السورة التالية، والشاشة الرئيسية تُظهر إلى أين بلغت قراءتك.",
+        "nl": "De recitatie speelt door wanneer u de app verlaat, gaat vanzelf naar de volgende soera, en het startscherm laat zien hoever u hebt gelezen."
+      }
+    },
+    {
+      "id": "home",
+      "area": "app",
+      "kind": "new",
+      "title": {
+        "en": "A home screen that knows your day",
+        "ar": "شاشة رئيسية تعرف يومك",
+        "nl": "Een startscherm dat uw dag kent"
+      },
+      "body": {
+        "en": "The next prayer, today's challenge, where you had reached in the Qur'an and the verse of the day, all reading from the same place as the rest of the app.",
+        "ar": "الصلاة التالية، وتحدّي اليوم، وموضع قراءتك من القرآن، وآية اليوم — كلّها من المصدر نفسه الذي تقرأ منه بقية التطبيق.",
+        "nl": "Het volgende gebed, de uitdaging van vandaag, waar u in de Koran was gebleven en het vers van de dag — alle uit dezelfde bron als de rest van de app."
+      }
+    },
+    {
+      "id": "challenge",
+      "area": "challenge",
+      "kind": "new",
+      "title": {
+        "en": "The Daily Challenge",
+        "ar": "تحدّي اليوم",
+        "nl": "De dagelijkse uitdaging"
+      },
+      "body": {
+        "en": "A question a day, the tokens it awards and the honour board beside it.",
+        "ar": "سؤال كل يوم، والتوكنز التي يمنحها، ولوحة الشرف إلى جانبه.",
+        "nl": "Elke dag een vraag, de tokens die ze oplevert en het eerbord ernaast."
+      }
+    },
+    {
+      "id": "profile",
+      "area": "profile",
+      "kind": "new",
+      "title": {
+        "en": "Your own space",
+        "ar": "مساحتك",
+        "nl": "Uw eigen ruimte"
+      },
+      "body": {
+        "en": "A profile, and the settings that go with it.",
+        "ar": "ملفّك الشخصي والإعدادات التي تتبعه.",
+        "nl": "Een profiel en de instellingen die daarbij horen."
+      }
+    },
+    {
+      "id": "opening",
+      "area": "app",
+      "kind": "new",
+      "title": {
+        "en": "The opening",
+        "ar": "الافتتاحية",
+        "nl": "De opening"
+      },
+      "body": {
+        "en": "ZULFAA opens with the muqarnas sequence rather than with a blank screen.",
+        "ar": "يبدأ زُلْفَى بمشهد المقرنص بدل شاشة فارغة.",
+        "nl": "ZULFAA opent met de muqarnas-reeks in plaats van met een leeg scherm."
+      }
+    },
+    {
+      "id": "tablet",
+      "area": "app",
+      "kind": "improved",
+      "title": {
+        "en": "Room on a tablet",
+        "ar": "مساحة على الأجهزة اللوحية",
+        "nl": "Ruimte op een tablet"
+      },
+      "body": {
+        "en": "The screens lay themselves out for a larger display instead of stretching a phone layout across it.",
+        "ar": "الشاشات تتوزّع على الشاشة الأكبر بدل تمديد تخطيط الهاتف عليها.",
+        "nl": "De schermen richten zich in naar een groter scherm in plaats van een telefoonindeling uit te rekken."
+      }
+    },
+    {
+      "id": "privacy",
+      "area": "legal",
+      "kind": "new",
+      "title": {
+        "en": "One Privacy Policy",
+        "ar": "سياسة خصوصية واحدة",
+        "nl": "Eén privacybeleid"
+      },
+      "body": {
+        "en": "The same document in the app and on this website, so the two cannot say different things.",
+        "ar": "الوثيقة نفسها في التطبيق وعلى هذا الموقع، فلا يمكن أن يقول أحدهما غير ما يقول الآخر.",
+        "nl": "Hetzelfde document in de app en op deze website, zodat de twee niet uiteen kunnen lopen."
+      }
+    },
+    {
+      "id": "share",
+      "area": "app",
+      "kind": "new",
+      "title": {
+        "en": "A link to share",
+        "ar": "رابط للمشاركة",
+        "nl": "Een link om te delen"
+      },
+      "body": {
+        "en": "One public address to send ZULFAA to someone.",
+        "ar": "عنوان عام واحد ترسل به زُلْفَى إلى غيرك.",
+        "nl": "Eén openbaar adres om ZULFAA aan iemand door te sturen."
+      }
+    }
+  ],
+
+  "worthKnowing": [
+    {
+      "id": "closed-test",
+      "kind": "requirement",
+      "title": {
+        "en": "This release was a closed test",
+        "ar": "هذا الإصدار كان اختبارًا مغلقًا",
+        "nl": "Deze uitgave was een besloten test"
+      },
+      "body": {
+        "en": "1.0.0 went to a closed testing track of about sixteen invited testers. It has never been on Google Play's public listing.",
+        "ar": "ذهب الإصدار 1.0.0 إلى مسار اختبار مغلق ضمّ نحو ستة عشر مختبِرًا مدعوًّا، ولم يظهر قطّ في قائمة Google Play العامة.",
+        "nl": "1.0.0 ging naar een besloten testkanaal van ongeveer zestien uitgenodigde testers. De app heeft nooit in de openbare lijst van Google Play gestaan."
+      }
+    },
+    {
+      "id": "privacy-one-document",
+      "kind": "privacy",
+      "page": "privacy/",
+      "title": {
+        "en": "The Privacy Policy is one document",
+        "ar": "سياسة الخصوصية وثيقة واحدة",
+        "nl": "Het privacybeleid is één document"
+      },
+      "body": {
+        "en": "What the app shows you and what this website publishes are the same text, from the same source.",
+        "ar": "ما يعرضه التطبيق وما ينشره هذا الموقع نصٌّ واحد من مصدر واحد.",
+        "nl": "Wat de app u toont en wat deze website publiceert, is dezelfde tekst uit dezelfde bron."
+      }
+    }
+  ],
+
+  "pending": []
+}

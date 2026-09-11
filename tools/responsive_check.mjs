@@ -64,7 +64,7 @@ const WIDTHS = (opt("--widths", Object.keys(ALL_WIDTHS).join(",")))
   .map((w) => parseInt(w, 10))
   .map((w) => ({ w, ...(ALL_WIDTHS[w] || { h: 900, mobile: w <= 1024, note: "custom" }) }));
 const LANGS = opt("--langs", "en,ar,nl").split(",");
-const PAGES = opt("--pages", ",privacy/,terms/,delete-data/,support/").split(",");
+const PAGES = opt("--pages", ",privacy/,terms/,delete-data/,support/,updates/").split(",");
 const BASE = { en: "", ar: "ar/", nl: "nl/" };
 
 // ── static server ───────────────────────────────────────────────────────────

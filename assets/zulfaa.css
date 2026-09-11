@@ -1284,7 +1284,10 @@ section.band {
    screenshots are themselves cream-heavy, and on cream they would dissolve
    into the page. Full-bleed, so it reads as its own room. */
 
-.showcase {
+/* .spring - the Updates Oasis hero - is made of THE SAME MATERIAL, on purpose:
+   one deep band in the site, not two that drift apart shade by shade. */
+.showcase,
+.spring {
   position: relative;
   isolation: isolate;
   margin-top: 3.5rem;
@@ -1298,7 +1301,8 @@ section.band {
 }
 
 /* the khatim lattice again, struck in gold — the same motif as the page ground */
-.showcase::before {
+.showcase::before,
+.spring::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -1837,6 +1841,973 @@ section.band {
   }
   .lb-btn {
     transition: none;
+  }
+}
+
+/* ── the Updates Oasis ──────────────────────────────────────────────────
+   /updates/ - what has changed in ZULFAA, and what has not shipped yet.
+
+   THE ONE IDEA. A release a person can have is made of something: it sits on
+   the site's deep band, solid, dated, with a filled gold pill. A release that
+   does not exist yet is made of nothing: an unfilled panel with a dashed rim,
+   an outline pill and no date at all. A reader does not have to read a word to
+   know which is on their phone. Everything else on the page - the archive's
+   pills, the stop dots, the wording - repeats that same distinction rather
+   than inventing a second vocabulary for it.
+
+   Beneath the band, a gold thread runs down the reading edge with a node at
+   each release: the journey. It is drawn with logical properties throughout,
+   so it runs down the right in Arabic without a single mirrored rule.
+
+   NO SCRIPT. The archive is <details>; the area filter is a radio group this
+   stylesheet reads. Both work with scripting disabled, which is the promise
+   every other page here already makes. */
+
+/* ── the page head ──────────────────────────────────────────────────── */
+
+.oasis-head {
+  text-align: center;
+  padding: 1.5rem 0 0.5rem;
+}
+
+.oasis-head img {
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.oasis-eyebrow {
+  margin: 0.5rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+.oasis-head h1 {
+  margin: 0.25rem 0 0;
+  font-size: clamp(2rem, 7vw, 2.9rem);
+}
+
+.oasis-lede {
+  max-width: 34rem;
+  margin: 0.85rem auto 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
+}
+
+/* ── the spring: the newest release people ACTUALLY HAVE ─────────────── */
+
+.spring {
+  margin-top: 2rem;
+  padding-bottom: 3.75rem;
+  text-align: center;
+}
+
+.spring-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.spring h2 {
+  margin: 0.55rem 0 0;
+  font-size: clamp(1.5rem, 5vw, 2.1rem);
+  color: var(--cream);
+}
+
+.spring-meta {
+  margin: 0.55rem 0 0;
+  font-size: 0.9rem;
+  color: var(--on-band-soft);
+}
+
+.spring-summary {
+  max-width: 38rem;
+  margin: 0.9rem auto 0;
+  color: var(--on-band);
+}
+
+.spring-more {
+  margin: 1.6rem 0 0;
+}
+
+.spring-more a,
+.ontheway-more a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.1rem;
+}
+
+.spring-more a {
+  color: var(--gold);
+}
+
+.spring-more a:hover {
+  color: var(--cream);
+}
+
+/* The head of the path: one gold node straddling the band's lower edge,
+   where the dark water meets the cream. The thread picks up below it. */
+.spring-node {
+  position: absolute;
+  inset-block-end: -0.55rem;
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 999px;
+  background: var(--gold);
+  box-shadow: 0 0 0 0.4rem var(--cream);
+}
+
+/* ── the status pill ────────────────────────────────────────────────────
+   Two states and no more. Filled = you can have it. Outlined = you cannot. */
+
+.pill-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0.85rem 0 0;
+  padding: 0.34rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.pill-status::before {
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+}
+
+.pill-status.is-available {
+  background: var(--gold);
+  color: #3d2b05;
+  border: 1px solid var(--gold);
+}
+
+.pill-status.is-available::before {
+  background: #3d2b05;
+}
+
+.pill-status.is-upcoming {
+  background: none;
+  color: var(--teal-deep);
+  border: 1px dashed rgba(42, 138, 128, 0.55);
+}
+
+.pill-status.is-upcoming::before {
+  box-shadow: inset 0 0 0 1.5px var(--teal);
+}
+
+/* ── the headline: the three to five changes a hero shows ───────────── */
+
+.headline {
+  list-style: none;
+  margin: 1.5rem auto 0;
+  padding: 0;
+  max-width: 44rem;
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(13.5rem, 1fr));
+  text-align: start;
+}
+
+.headline li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.hl-ico {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.75rem;
+}
+
+.hl-ico svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.headline.on-band li {
+  color: var(--on-band-strong);
+}
+
+.headline.on-band .hl-ico {
+  background: rgba(254, 249, 240, 0.12);
+  color: var(--gold);
+}
+
+.headline.on-cream li {
+  color: var(--ink);
+}
+
+.headline.on-cream .hl-ico {
+  background: var(--teal-soft);
+  color: var(--teal-deep);
+}
+
+/* ── on the way: the release that does not exist yet ─────────────────── */
+
+.ontheway {
+  margin: 2.75rem 0 0;
+  padding: 1.75rem 1.5rem 1.9rem;
+  border: 1.5px dashed rgba(42, 138, 128, 0.42);
+  border-radius: var(--radius);
+  background: none; /* unfilled, on purpose: there is nothing here yet */
+  text-align: center;
+}
+
+.ontheway-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.ontheway h2 {
+  margin: 0.5rem 0 0;
+  font-size: clamp(1.35rem, 4.5vw, 1.8rem);
+}
+
+.ontheway-meta {
+  margin: 0.5rem 0 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.ontheway-summary {
+  max-width: 38rem;
+  margin: 0.85rem auto 0;
+}
+
+.ontheway-note {
+  max-width: 34rem;
+  margin: 0.85rem auto 0;
+  padding: 0.6rem 0.9rem;
+  border-radius: 0.9rem;
+  background: rgba(42, 138, 128, 0.07);
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.ontheway-more {
+  margin: 1.4rem 0 0;
+}
+
+.ontheway-more a {
+  color: var(--teal-deep);
+}
+
+/* ── the journey ────────────────────────────────────────────────────── */
+
+.journey {
+  padding: 3rem 0 0;
+}
+
+.how-versions {
+  padding: 2.5rem 0 1rem;
+}
+
+/* the area filter - ten radios and this stylesheet, no script */
+
+.filter-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.45rem;
+  margin: 0 auto 2.25rem;
+  max-width: 46rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(42, 138, 128, 0.22);
+  background: rgba(255, 255, 255, 0.75);
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: rgba(42, 138, 128, 0.45);
+  color: var(--teal-deep);
+}
+
+.chip-ico svg {
+  display: block;
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+/* the stops */
+
+.stops {
+  --spine-x: 0.95rem;
+  --stop-pad: 2.7rem;
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-inline-start: var(--stop-pad);
+}
+
+/* The thread. Beaded rather than ruled: a path of stepping stones reads as a
+   journey, where a solid line reads as a corporate timeline. */
+.stops::before {
+  content: "";
+  position: absolute;
+  inset-block: 1.1rem 1.6rem;
+  inset-inline-start: var(--spine-x);
+  width: 2px;
+  border-radius: 2px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(230, 184, 76, 0.85) 0 4px,
+    transparent 4px 10px
+  );
+}
+
+.stop {
+  position: relative;
+  margin-bottom: 1.1rem;
+}
+
+.stop-dot {
+  position: absolute;
+  top: 1.45rem;
+  inset-inline-start: calc(var(--spine-x) - var(--stop-pad) + 1px - 0.5rem);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 999px;
+  background: var(--cream);
+  box-shadow: inset 0 0 0 3px var(--teal);
+}
+
+/* A released stop is a filled node; an upcoming one is a hollow ring. The same
+   distinction the two hero panels make, at the size of a full stop. */
+.stop.is-released .stop-dot {
+  background: var(--teal-deep);
+  box-shadow: inset 0 0 0 3px var(--teal-deep), 0 0 0 0.3rem var(--cream);
+}
+
+.stop.is-upcoming .stop-dot {
+  box-shadow: inset 0 0 0 2px rgba(42, 138, 128, 0.55), 0 0 0 0.3rem var(--cream);
+}
+
+.release {
+  border: 1px solid rgba(42, 138, 128, 0.16);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 10px 28px -18px rgba(26, 90, 82, 0.45);
+}
+
+.stop.is-upcoming .release {
+  background: none;
+  border-style: dashed;
+  border-color: rgba(42, 138, 128, 0.4);
+  box-shadow: none;
+}
+
+.release > summary {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: 1.25rem 1.3rem;
+  cursor: pointer;
+  list-style: none;
+  border-radius: var(--radius);
+}
+
+.release > summary::-webkit-details-marker {
+  display: none;
+}
+
+.release > summary:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.stop-head {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.stop-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.7rem;
+}
+
+.stop-label {
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+}
+
+.stop-status {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+}
+
+.is-released .stop-status {
+  background: var(--gold-soft);
+  color: var(--gold-ink);
+}
+
+.is-upcoming .stop-status {
+  border: 1px dashed rgba(42, 138, 128, 0.5);
+  color: var(--teal-deep);
+}
+
+.release summary h3 {
+  margin: 0.3rem 0 0;
+  font-size: 1.2rem;
+}
+
+.stop-meta {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.stop-summary {
+  display: block;
+  margin-top: 0.55rem;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+.stop-marks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+}
+
+.stop-marks .mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 0.6rem;
+  background: rgba(42, 138, 128, 0.09);
+  color: var(--teal-deep);
+}
+
+.stop-marks .mark svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.stop-chev {
+  flex: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  margin-top: 0.35rem;
+  color: var(--teal);
+  transition: transform 0.18s ease;
+}
+
+.release[open] > summary .stop-chev {
+  transform: rotate(180deg);
+}
+
+/* ── a release, opened ──────────────────────────────────────────────── */
+
+.stop-body {
+  padding: 0 1.3rem 1.5rem;
+}
+
+.stop-body > section + section {
+  margin-top: 2rem;
+}
+
+.stop-body h4 {
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  color: var(--teal-deep);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(42, 138, 128, 0.14);
+}
+
+.area-group + .area-group {
+  margin-top: 1.6rem;
+}
+
+.area-group h5 {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  color: var(--teal-deep);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.g-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 0.65rem;
+  background: var(--teal-soft);
+  color: var(--teal-deep);
+}
+
+.g-ico svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+/* One column on a phone, two from the width where a single column's measure
+   starts to run long. Thirty-odd cards read as an editorial page in two
+   columns and as a wall in one. */
+.area-cards {
+  display: grid;
+  gap: 0.6rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 56rem) {
+  .area-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.7rem;
+  }
+}
+
+.change {
+  padding: 0.95rem 1.05rem;
+  border-radius: 1.1rem;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(42, 138, 128, 0.12);
+}
+
+/* The kind is a quiet word, not a badge. Gold is spent only on what is
+   genuinely new; everything else is said in the page's own ink. */
+.change-kind,
+.note-kind {
+  margin: 0 0 0.25rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.k-new .change-kind {
+  color: var(--gold-ink);
+}
+
+.change h6,
+.pending-item h5,
+.note h5 {
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  color: var(--teal-deep);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 0.3rem;
+}
+
+.change p,
+.note p,
+.pending-item p {
+  margin: 0;
+  font-size: 0.93rem;
+  color: var(--ink-soft);
+}
+
+.change-link,
+.note-link {
+  margin-top: 0.5rem !important;
+  font-size: 0.88rem !important;
+}
+
+/* ── worth knowing ──────────────────────────────────────────────────────
+   Rendered differently, and more prominently, than a change card: a reader
+   must not have to infer from a list of improvements that something about
+   their data or the app's behaviour is now different. */
+
+.note {
+  padding: 1rem 1.15rem;
+  border-radius: 1.1rem;
+  background: linear-gradient(to bottom right, #fdf7e8, var(--cream), #f6efdd);
+  border: 1px solid rgba(230, 184, 76, 0.38);
+  border-inline-start: 3px solid var(--gold);
+}
+
+.note + .note {
+  margin-top: 0.7rem;
+}
+
+.note-kind {
+  color: var(--gold-ink);
+}
+
+/* ── still being written ────────────────────────────────────────────────
+   An empty section, drawn the way an unreleased release is drawn, so a gap
+   stays visible instead of reading as a finished list. */
+
+.pending-note {
+  margin: -0.4rem 0 0.9rem;
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+}
+
+.pending-item {
+  padding: 0.95rem 1.05rem;
+  border-radius: 1.1rem;
+  border: 1.5px dashed rgba(42, 138, 128, 0.35);
+  background: none;
+}
+
+.pending-item + .pending-item {
+  margin-top: 0.6rem;
+}
+
+.pending-item h5 {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* ── a look at it ───────────────────────────────────────────────────── */
+
+.shot-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.shot-fig {
+  margin: 0;
+  max-width: 14.5rem;
+}
+
+.shot-fig img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1.1rem;
+  border: 1px solid rgba(42, 138, 128, 0.2);
+  background: var(--cream);
+  box-shadow: 0 14px 32px -20px rgba(26, 90, 82, 0.6);
+}
+
+.shot-fig figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+}
+
+/* ── the filter, in effect ──────────────────────────────────────────────
+   One rule set per area. Choosing an area hides every group that is not it,
+   and every part of a release that is not area-scoped; a release with nothing
+   in that area says so in one line rather than collapsing to an empty card. */
+
+.filter-empty {
+  display: none;
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+#fa-all:checked ~ .filter-bar label[for="fa-all"],
+#fa-quran:checked ~ .filter-bar label[for="fa-quran"],
+#fa-prayer:checked ~ .filter-bar label[for="fa-prayer"],
+#fa-ramadan:checked ~ .filter-bar label[for="fa-ramadan"],
+#fa-umrah:checked ~ .filter-bar label[for="fa-umrah"],
+#fa-dhikr:checked ~ .filter-bar label[for="fa-dhikr"],
+#fa-challenge:checked ~ .filter-bar label[for="fa-challenge"],
+#fa-profile:checked ~ .filter-bar label[for="fa-profile"],
+#fa-app:checked ~ .filter-bar label[for="fa-app"],
+#fa-legal:checked ~ .filter-bar label[for="fa-legal"] {
+  background: var(--teal-deep);
+  border-color: var(--teal-deep);
+  color: var(--cream);
+}
+
+#fa-all:focus-visible ~ .filter-bar label[for="fa-all"],
+#fa-quran:focus-visible ~ .filter-bar label[for="fa-quran"],
+#fa-prayer:focus-visible ~ .filter-bar label[for="fa-prayer"],
+#fa-ramadan:focus-visible ~ .filter-bar label[for="fa-ramadan"],
+#fa-umrah:focus-visible ~ .filter-bar label[for="fa-umrah"],
+#fa-dhikr:focus-visible ~ .filter-bar label[for="fa-dhikr"],
+#fa-challenge:focus-visible ~ .filter-bar label[for="fa-challenge"],
+#fa-profile:focus-visible ~ .filter-bar label[for="fa-profile"],
+#fa-app:focus-visible ~ .filter-bar label[for="fa-app"],
+#fa-legal:focus-visible ~ .filter-bar label[for="fa-legal"] {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+/* anything not area-scoped steps out of the way while a filter is on */
+#fa-quran:checked ~ .stops .worth,
+#fa-prayer:checked ~ .stops .worth,
+#fa-ramadan:checked ~ .stops .worth,
+#fa-umrah:checked ~ .stops .worth,
+#fa-dhikr:checked ~ .stops .worth,
+#fa-challenge:checked ~ .stops .worth,
+#fa-profile:checked ~ .stops .worth,
+#fa-app:checked ~ .stops .worth,
+#fa-legal:checked ~ .stops .worth,
+#fa-quran:checked ~ .stops .highlights,
+#fa-prayer:checked ~ .stops .highlights,
+#fa-ramadan:checked ~ .stops .highlights,
+#fa-umrah:checked ~ .stops .highlights,
+#fa-dhikr:checked ~ .stops .highlights,
+#fa-challenge:checked ~ .stops .highlights,
+#fa-profile:checked ~ .stops .highlights,
+#fa-app:checked ~ .stops .highlights,
+#fa-legal:checked ~ .stops .highlights {
+  display: none;
+}
+
+#fa-quran:checked ~ .stops .area-group:not(.g-quran),
+#fa-quran:checked ~ .stops .pending-item:not(.p-quran) {
+  display: none;
+}
+#fa-prayer:checked ~ .stops .area-group:not(.g-prayer),
+#fa-prayer:checked ~ .stops .pending-item:not(.p-prayer) {
+  display: none;
+}
+#fa-ramadan:checked ~ .stops .area-group:not(.g-ramadan),
+#fa-ramadan:checked ~ .stops .pending-item:not(.p-ramadan) {
+  display: none;
+}
+#fa-umrah:checked ~ .stops .area-group:not(.g-umrah),
+#fa-umrah:checked ~ .stops .pending-item:not(.p-umrah) {
+  display: none;
+}
+#fa-dhikr:checked ~ .stops .area-group:not(.g-dhikr),
+#fa-dhikr:checked ~ .stops .pending-item:not(.p-dhikr) {
+  display: none;
+}
+#fa-challenge:checked ~ .stops .area-group:not(.g-challenge),
+#fa-challenge:checked ~ .stops .pending-item:not(.p-challenge) {
+  display: none;
+}
+#fa-profile:checked ~ .stops .area-group:not(.g-profile),
+#fa-profile:checked ~ .stops .pending-item:not(.p-profile) {
+  display: none;
+}
+#fa-app:checked ~ .stops .area-group:not(.g-app),
+#fa-app:checked ~ .stops .pending-item:not(.p-app) {
+  display: none;
+}
+#fa-legal:checked ~ .stops .area-group:not(.g-legal),
+#fa-legal:checked ~ .stops .pending-item:not(.p-legal) {
+  display: none;
+}
+
+/* A "Still being written" heading with every one of its items filtered away
+   is a section about nothing. It goes with them. */
+#fa-quran:checked ~ .stops .pending:not(:has(.p-quran)),
+#fa-prayer:checked ~ .stops .pending:not(:has(.p-prayer)),
+#fa-ramadan:checked ~ .stops .pending:not(:has(.p-ramadan)),
+#fa-umrah:checked ~ .stops .pending:not(:has(.p-umrah)),
+#fa-dhikr:checked ~ .stops .pending:not(:has(.p-dhikr)),
+#fa-challenge:checked ~ .stops .pending:not(:has(.p-challenge)),
+#fa-profile:checked ~ .stops .pending:not(:has(.p-profile)),
+#fa-app:checked ~ .stops .pending:not(:has(.p-app)),
+#fa-legal:checked ~ .stops .pending:not(:has(.p-legal)) {
+  display: none;
+}
+
+#fa-quran:checked ~ .stops .release:not(:has(.g-quran)) .filter-empty,
+#fa-prayer:checked ~ .stops .release:not(:has(.g-prayer)) .filter-empty,
+#fa-ramadan:checked ~ .stops .release:not(:has(.g-ramadan)) .filter-empty,
+#fa-umrah:checked ~ .stops .release:not(:has(.g-umrah)) .filter-empty,
+#fa-dhikr:checked ~ .stops .release:not(:has(.g-dhikr)) .filter-empty,
+#fa-challenge:checked ~ .stops .release:not(:has(.g-challenge)) .filter-empty,
+#fa-profile:checked ~ .stops .release:not(:has(.g-profile)) .filter-empty,
+#fa-app:checked ~ .stops .release:not(:has(.g-app)) .filter-empty,
+#fa-legal:checked ~ .stops .release:not(:has(.g-legal)) .filter-empty {
+  display: block;
+}
+
+/* A link to a release that is collapsed opens it. The archive is deep-linkable
+   by contract - an id is permanent - so the link has to land on the content and
+   not on a shut lid.
+
+   Two rules because engines disagree about WHERE a closed <details> hides its
+   content: current Chrome does it on the ::details-content pseudo-element,
+   others on the children directly. Where neither applies the link still lands
+   on the release's own summary row, which is a smaller failure than a wrong
+   place on the page - and the two releases the hero links to are rendered
+   open anyway, so this only ever matters for older entries. */
+.release:target::details-content {
+  content-visibility: visible !important;
+}
+
+.release:target > .stop-body {
+  display: block !important;
+  content-visibility: visible !important;
+}
+
+/* ── Arabic ─────────────────────────────────────────────────────────────
+   Tracking breaks Arabic joining: every tracked label on this page drops it. */
+
+html[lang="ar"] .oasis-eyebrow,
+html[lang="ar"] .spring-eyebrow,
+html[lang="ar"] .ontheway-eyebrow,
+html[lang="ar"] .pill-status,
+html[lang="ar"] .stop-label,
+html[lang="ar"] .stop-status,
+html[lang="ar"] .stop-body h4,
+html[lang="ar"] .change-kind,
+html[lang="ar"] .note-kind {
+  letter-spacing: normal;
+}
+
+/* Cairo has no small-caps habit and Arabic has no case; the uppercase rule is
+   a no-op for the Arabic and only shouts at Latin words caught inside it. */
+html[lang="ar"] .pill-status,
+html[lang="ar"] .stop-label,
+html[lang="ar"] .stop-status,
+html[lang="ar"] .stop-body h4,
+html[lang="ar"] .change-kind,
+html[lang="ar"] .note-kind {
+  text-transform: none;
+}
+
+html[lang="ar"] .stop-label,
+html[lang="ar"] .stop-body h4,
+html[lang="ar"] .area-group h5,
+html[lang="ar"] .change h6,
+html[lang="ar"] .note h5,
+html[lang="ar"] .pending-item h5 {
+  font-family: "Cairo", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* the chevron on a summary points the way the reader travels */
+[dir="rtl"] .stop-chev {
+  transform: scaleX(-1);
+}
+
+[dir="rtl"] .release[open] > summary .stop-chev {
+  transform: scaleX(-1) rotate(-180deg);
+}
+
+/* ── phones ─────────────────────────────────────────────────────────── */
+
+@media (max-width: 34rem) {
+  .stops {
+    --spine-x: 0.6rem;
+    --stop-pad: 1.9rem;
+  }
+
+  .release > summary {
+    padding: 1.05rem 1rem;
+  }
+
+  .stop-body {
+    padding: 0 1rem 1.25rem;
+  }
+
+  .stop-dot {
+    top: 1.25rem;
+  }
+
+  .ontheway {
+    padding: 1.4rem 1.1rem 1.5rem;
+  }
+
+  .headline {
+    grid-template-columns: 1fr;
+  }
+
+  .shot-fig {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stop-chev {
+    transition: none;
+  }
+}
+
+@media print {
+  .filter-bar,
+  .spring-more,
+  .ontheway-more {
+    display: none;
+  }
+
+  /* a printed record shows every release, not only the one that was open */
+  .release > .stop-body {
+    display: block !important;
+    content-visibility: visible !important;
+  }
+
+  .spring {
+    background: none;
+    color: var(--ink);
+    border-block: 0;
+  }
+
+  .spring h2,
+  .spring-summary,
+  .headline.on-band li {
+    color: var(--ink);
+  }
+
+  .spring-eyebrow,
+  .spring-meta {
+    color: var(--ink-soft);
   }
 }
 
