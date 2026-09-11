@@ -59,7 +59,7 @@ when a feature ships.
 | **Owner preview** | `ZULFAA_LEGAL_PREVIEW=1 …` | `content.preview.json`, then `.preview/` | **no — both gitignored** |
 
 The extractor prints what it omitted on every public run. The full owner
-procedure is `Docs/LEGAL_RELEASE_WORKFLOW.md` in the app repository.
+procedure is `Docs/operations/LEGAL_RELEASE_WORKFLOW.md` in the app repository.
 
 > **The English pages are never touched in preview mode.** They are the
 > approved, Play-facing originals; rewriting them while showing you a preview is
@@ -71,8 +71,8 @@ procedure is `Docs/LEGAL_RELEASE_WORKFLOW.md` in the app repository.
 The one page generated in all three languages. Every word of release content is
 in `releases/<id>.json`; every word of the page's own furniture is in
 `updates_strings.py`; `updates.py` only renders. The content model it
-implements is `Docs/UPDATES_OASIS_CONTENT_MODEL.md` in the app repository, and
-its evidence gate is `Docs/APP_UPDATE_HISTORY_WORKING.md` there: **nothing goes
+implements is `Docs/releases/UPDATES_OASIS_CONTENT_MODEL.md` in the app repository, and
+its evidence gate is `Docs/releases/APP_UPDATE_HISTORY.md` there: **nothing goes
 into a release file that is not proven in that history.**
 
 **Adding a release:** write `releases/<id>.json`, put its id at the top of

@@ -5,7 +5,7 @@ WHAT THIS IS. `tools/releases/` holds one JSON file per release plus an index.
 Adding a future update is: write the file, add its id to the index, run
 `build.py`. Nothing in the page's markup is touched. If a release ever needs
 the page rebuilt, the content model has failed and should be fixed rather than
-worked around - Docs/UPDATES_OASIS_CONTENT_MODEL.md 7.
+worked around - Docs/releases/UPDATES_OASIS_CONTENT_MODEL.md 7.
 
 WHY FILES AND NOT A DATABASE. A release entry is written once and is then
 effectively immutable, and it must be reviewable in a diff: the content has to
@@ -46,7 +46,7 @@ DIR = os.path.join(SCR, "releases")
 
 LANGS3 = ("en", "ar", "nl")
 
-# The nine areas of Docs/UPDATES_OASIS_CONTENT_MODEL.md 4. The list is CLOSED on
+# The nine areas of Docs/releases/UPDATES_OASIS_CONTENT_MODEL.md 4. The list is CLOSED on
 # purpose: a new area is a deliberate edit to that document and to this line,
 # not something an entry can invent - otherwise the archive's grouping degrades
 # into a tag cloud within three releases.
@@ -90,7 +90,7 @@ def _langs(node, what, where):
 
 
 def validate(rel, seen_ids):
-    """Docs/UPDATES_OASIS_CONTENT_MODEL.md 7.1, plus the status rules.
+    """Docs/releases/UPDATES_OASIS_CONTENT_MODEL.md 7.1, plus the status rules.
 
     Every one of these is mechanically checkable and every one of them maps to a
     rule in that document. A release that fails any of them stops the build:
@@ -149,7 +149,7 @@ def validate(rel, seen_ids):
     ev = rel.get("evidence")
     if not isinstance(ev, list) or not ev:
         raise ReleaseError("%s: evidence must be a non-empty list. Nothing appears on the "
-                           "page that is not proven in APP_UPDATE_HISTORY_WORKING.md" % w)
+                           "page that is not proven in Docs/releases/APP_UPDATE_HISTORY.md" % w)
 
     # 3 - all three languages, everywhere prose appears
     _langs(rel.get("title"), "title", w)
