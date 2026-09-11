@@ -19,9 +19,13 @@
     "Prayer Page audit closeout: 94bc974, 65a8b1a, 0902788, 188a3de, b6e4766",
     "Cross-app: df667d7, be1701b, f8c481c, 20de5b0, a3b6b8a, 104d5d4, 82e1465",
     "Qur'an reading position: c2dad8b",
-    "Domain and legal: 7b1556b, 01ad023, 5c9219d"
+    "Domain and legal: 7b1556b, 01ad023, 5c9219d",
+    "Dark theme: src/release/nextRelease.ts (darkTheme flag), ab1f243 (prototype), 20de5b0, a3b6b8a, b6e4766",
+    "Eid, seasonal Home and wird integration: f1adfdc (sections 4 and 5), src/ramadan/calendar.ts",
+    "Du'a English and adhkar Dutch: 3f73250, 0142839",
+    "Daily Challenge in three languages: df667d7, ab1f243",
+    "Profile privacy wording: df667d7 (item 3)"
   ],
-
   "title": {
     "en": "Umrah, Ramadan, and a quieter app",
     "ar": "العمرة ورمضان وتطبيق أهدأ",
@@ -32,11 +36,14 @@
     "ar": "موضعان جديدان تحفظ فيهما مسيرك — ادّخار العمرة ومخطِّط رمضان — إلى جانب سلسلة طويلة من التصحيحات في الصفحة الرئيسية ومواقيت الصلاة وأثاث التطبيق نفسه.",
     "nl": "Twee nieuwe plekken om bij te houden — de Umrah-spaarpot en de Ramadan-planner — naast een lange reeks correcties op het startscherm, de gebedstijden en het meubilair van de app zelf."
   },
-
-  "headline": ["umrah-savings", "ramadan-planner", "adhan-row-icons", "nav-clearance", "quran-reading-position"],
-
+  "headline": [
+    "umrah-savings",
+    "ramadan-planner",
+    "dark-theme",
+    "adhan-row-icons",
+    "quran-reading-position"
+  ],
   "media": [],
-
   "stories": [
     {
       "area": "quran",
@@ -67,14 +74,14 @@
     {
       "area": "ramadan",
       "title": {
-        "en": "The Ramadan Planner",
-        "ar": "مخطِّط رمضان",
-        "nl": "De Ramadan-planner"
+        "en": "Ramadan, from Suhoor to Eid",
+        "ar": "رمضان، من السحور إلى العيد",
+        "nl": "Ramadan, van suhoor tot Eid"
       },
       "lead": {
-        "en": "Suhoor and Iftar from the same times the Prayer screen uses, five acts of worship a day, and a fasting record that only ever says what you told it.",
-        "ar": "السحور والإفطار من المواقيت نفسها التي تعرضها شاشة الصلاة، وخمسة أعمال في اليوم، وسجلّ صيام لا يقول إلا ما قلته له.",
-        "nl": "Suhoor en iftar uit dezelfde tijden als het gebedsscherm, vijf daden van aanbidding per dag, en een vastenregistratie die alleen zegt wat u haar hebt verteld."
+        "en": "Suhoor and Iftar from the same times as the Prayer screen, five acts of worship a day, a fasting record that only says what you told it, and a countdown to Eid that stays an estimate until the month ends.",
+        "ar": "السحور والإفطار من مواقيت شاشة الصلاة نفسها، وخمسة أعمال في اليوم، وسجلّ صيام لا يقول إلا ما قلته له، وعدّ تنازلي إلى العيد يبقى تقديرًا حتى ينتهي الشهر.",
+        "nl": "Suhoor en iftar uit dezelfde tijden als het gebedsscherm, vijf daden per dag, een vastenregistratie die alleen zegt wat u haar vertelde, en een aftelling naar Eid die een schatting blijft tot de maand voorbij is."
       }
     },
     {
@@ -98,13 +105,12 @@
         "nl": "Een rustiger app"
       },
       "lead": {
-        "en": "Panels you can pull back down, nothing hidden under the navigation, a theme switch that is a switch, and a start page that reads the same in all three languages.",
-        "ar": "لوحات تسحبها إلى أسفل، ولا شيء مخفيّ تحت شريط التنقّل، ومفتاح مظهر هو مفتاح حقًّا، وصفحة رئيسية تُقرأ سواءً في اللغات الثلاث.",
-        "nl": "Panelen die u weer omlaag kunt trekken, niets meer verstopt onder de navigatie, een themaknop die echt een schakelaar is, en een startscherm dat in alle drie de talen hetzelfde leest."
+        "en": "A dark appearance, panels you can pull back down, nothing hidden under the navigation, and a start page that reads the same in all three languages.",
+        "ar": "مظهر داكن، ولوحات تسحبها إلى أسفل، ولا شيء مخفيّ تحت شريط التنقّل، وصفحة رئيسية تُقرأ سواءً في اللغات الثلاث.",
+        "nl": "Een donkere weergave, panelen die u weer omlaag kunt trekken, niets meer verstopt onder de navigatie, en een startscherm dat in alle drie de talen hetzelfde leest."
       }
     }
   ],
-
   "changes": [
     {
       "id": "umrah-savings",
@@ -116,9 +122,9 @@
         "nl": "Umrah-spaarpot"
       },
       "body": {
-        "en": "Set what you are saving towards, then record what you put aside. ZULFAA works out what is saved, what remains, how far along you are and how many days are left — none of it stored, all of it read back from your own figures. ZULFAA holds no money and connects to no bank.",
-        "ar": "حدّد ما تدّخر من أجله، ثم سجّل ما تضعه جانبًا. يحسب زُلْفَى ما ادُّخر وما بقي وكم قطعت من الطريق وكم بقي من الأيام — لا يُحفظ شيء من ذلك، بل يُستخرج من أرقامك أنت. وزُلْفَى لا يحتفظ بمال ولا يتّصل بأي مصرف.",
-        "nl": "Stel in waarvoor u spaart en leg vast wat u opzijzet. ZULFAA rekent uit wat gespaard is, wat resteert, hoever u bent en hoeveel dagen er nog zijn — niets daarvan wordt bewaard, alles wordt uit uw eigen getallen afgeleid. ZULFAA houdt geen geld onder zich en maakt geen verbinding met een bank."
+        "en": "Set a goal, record what you put aside, and ZULFAA works out what is saved, what remains and how many days are left — all from your own figures. It holds no money and connects to no bank.",
+        "ar": "حدّد هدفًا وسجّل ما تضعه جانبًا، ويحسب زُلْفَى ما ادُّخر وما بقي وكم بقي من الأيام — من أرقامك أنت. ولا يحتفظ بمال ولا يتّصل بأي مصرف.",
+        "nl": "Stel een doel in, leg vast wat u opzijzet, en ZULFAA rekent uit wat gespaard is, wat resteert en hoeveel dagen er nog zijn — allemaal uit uw eigen getallen. De app houdt geen geld en maakt geen verbinding met een bank."
       }
     },
     {
@@ -131,9 +137,9 @@
         "nl": "Een weg terug, in de instellingen van het doel zelf"
       },
       "body": {
-        "en": "Reset the savings and keep the goal, or delete the goal and its record altogether. Both ask before they act, and the second asks twice.",
-        "ar": "صفِّر الادّخار مع الاحتفاظ بالهدف، أو احذف الهدف وسجلّه كلّه. وكلاهما يسأل قبل أن يفعل، والثاني يسأل مرّتين.",
-        "nl": "Zet het spaargeld terug op nul met behoud van het doel, of verwijder het doel en zijn geschiedenis helemaal. Beide vragen eerst, en de tweede vraagt twee keer."
+        "en": "Reset the savings and keep the goal, or delete the goal and its record altogether. Both ask first.",
+        "ar": "صفِّر الادّخار مع الاحتفاظ بالهدف، أو احذف الهدف وسجلّه كلّه. وكلاهما يسأل أوّلًا.",
+        "nl": "Zet het spaargeld op nul met behoud van het doel, of verwijder het doel en zijn geschiedenis helemaal. Beide vragen eerst."
       }
     },
     {
@@ -146,9 +152,9 @@
         "nl": "De Ramadan-planner"
       },
       "body": {
-        "en": "The day of Ramadan, Suhoor and Iftar taken from the same prayer times the Prayer screen uses, and a countdown on the app's own clock. Five acts of worship to keep for each day, and a du'a for the day from ZULFAA's own collection. With no location set it says so instead of inventing times.",
-        "ar": "يوم رمضان، والسحور والإفطار من مواقيت الصلاة نفسها التي تعرضها شاشة الصلاة، وعدّ تنازلي على ساعة التطبيق ذاتها. وخمسة أعمال تحفظها لكل يوم، ودعاء لليوم من مجموعة زُلْفَى نفسها. وإن لم يكن هناك موقع محدَّد، قال ذلك بدل أن يخترع المواقيت.",
-        "nl": "De dag van Ramadan, suhoor en iftar uit dezelfde gebedstijden die het gebedsscherm gebruikt, en een aftelling op de eigen klok van de app. Vijf daden van aanbidding om per dag bij te houden, en een doe'a voor de dag uit ZULFAA's eigen verzameling. Is er geen locatie ingesteld, dan zegt de app dat in plaats van tijden te verzinnen."
+        "en": "The day of Ramadan, Suhoor and Iftar from the same times as the Prayer screen, a countdown, five acts of worship to keep each day, and a du'a for the day. With no location set, it says so instead of inventing times.",
+        "ar": "يوم رمضان، والسحور والإفطار من مواقيت شاشة الصلاة نفسها، وعدّ تنازلي، وخمسة أعمال تحفظها كل يوم، ودعاء لليوم. وبلا موقع محدَّد يقول ذلك بدل أن يخترع المواقيت.",
+        "nl": "De dag van Ramadan, suhoor en iftar uit dezelfde tijden als het gebedsscherm, een aftelling, vijf daden van aanbidding om per dag bij te houden, en een doe'a voor de dag. Zonder locatie zegt de app dat, in plaats van tijden te verzinnen."
       }
     },
     {
@@ -161,9 +167,9 @@
         "nl": "De planner vraagt of u hebt gevast"
       },
       "body": {
-        "en": "It used to record a day as fasted the moment you ticked anything at all. It now asks, records only the answer you give, and lets that answer be withdrawn. A day can be left unanswered, and fasting is not scored — a day you were excused from is not a day you failed.",
-        "ar": "كان يسجّل اليوم صيامًا بمجرّد أن تعلّم أي بند. أمّا الآن فيسأل، ولا يسجّل إلا الجواب الذي تعطيه، ويتيح لك سحبه. ولك أن تترك اليوم بلا جواب، والصيام لا يُحتسب درجةً — فيوم العذر ليس يومًا فائتًا.",
-        "nl": "Vroeger gold een dag als gevast zodra u ook maar iets aanvinkte. Nu vraagt de app het, legt alleen uw antwoord vast, en laat dat antwoord ook weer intrekken. Een dag mag onbeantwoord blijven, en vasten wordt niet beoordeeld — een dag met vrijstelling is geen mislukte dag."
+        "en": "The planner asks, records only your answer, and lets you withdraw it. A day can stay unanswered, and fasting is not scored — a day you were excused from is not a day you failed.",
+        "ar": "يسأل المخطِّط، ولا يسجّل إلا جوابك، ويتيح لك سحبه. ولك أن تترك اليوم بلا جواب، والصيام لا يُحتسب درجةً — فيوم العذر ليس يومًا فائتًا.",
+        "nl": "De planner vraagt het, legt alleen uw antwoord vast en laat het weer intrekken. Een dag mag onbeantwoord blijven, en vasten wordt niet beoordeeld — een dag met vrijstelling is geen mislukte dag."
       }
     },
     {
@@ -176,9 +182,9 @@
         "nl": "De versverwijzing staat weer in de goede richting"
       },
       "body": {
-        "en": "The citation under the Verse of the Day was rendered right to left in every language, so an English or Dutch reader saw it reversed. Arabic was always correct and is unchanged.",
-        "ar": "كان مرجع آية اليوم يُعرض من اليمين إلى اليسار في كل اللغات، فيراه القارئ الإنجليزي والهولندي معكوسًا. أمّا العربية فكانت صحيحة دائمًا ولم تتغيّر.",
-        "nl": "De bronvermelding onder het vers van de dag werd in elke taal van rechts naar links weergegeven, zodat een Nederlandse of Engelse lezer haar omgekeerd zag. In het Arabisch was zij altijd al goed en blijft zij ongewijzigd."
+        "en": "The citation under the Verse of the Day was reversed for English and Dutch readers. It now reads the right way round; Arabic was always correct.",
+        "ar": "كان مرجع آية اليوم معكوسًا للقارئ الإنجليزي والهولندي. وصار يُقرأ في اتجاهه الصحيح؛ والعربية كانت صحيحة دائمًا.",
+        "nl": "De bronvermelding onder het vers van de dag stond omgekeerd voor Nederlandse en Engelse lezers. Zij staat nu in de goede richting; het Arabisch was altijd al goed."
       }
     },
     {
@@ -191,9 +197,9 @@
         "nl": "De uitdaging zegt niet langer dat u nog niet begonnen bent terwijl zij het eenvoudig niet kon nagaan"
       },
       "body": {
-        "en": "With no connection the card used to offer to start a challenge you may already have finished, and point an arrow at a screen that could not load. It now says it could not check, and offers no arrow.",
-        "ar": "كانت البطاقة بلا اتصال تعرض أن تبدأ تحدّيًا ربما أنهيته، وتشير بسهم إلى شاشة لا تستطيع التحميل. أمّا الآن فتقول إنها لم تستطع التحقّق، ولا تعرض سهمًا.",
-        "nl": "Zonder verbinding bood de kaart aan een uitdaging te starten die u misschien al had afgerond, en wees een pijl naar een scherm dat niet kon laden. Nu zegt zij dat zij het niet kon nagaan, en toont geen pijl."
+        "en": "With no connection the card used to offer a challenge you may already have finished. It now says it could not check, and offers nothing it cannot open.",
+        "ar": "بلا اتصال كانت البطاقة تعرض تحدّيًا ربما أنهيته. وصارت تقول إنها لم تستطع التحقّق، ولا تعرض ما لا تستطيع فتحه.",
+        "nl": "Zonder verbinding bood de kaart een uitdaging aan die u misschien al had afgerond. Nu zegt zij dat zij het niet kon nagaan, en biedt niets aan dat zij niet kan openen."
       }
     },
     {
@@ -206,9 +212,9 @@
         "nl": "De Koran-tegel zegt welke van haar twee dingen zij zal doen"
       },
       "body": {
-        "en": "With a saved reading position it reads Continue, in the accent colour; with none it stays the plain way in. It always behaved differently in those two cases — now it tells you which.",
-        "ar": "إن كان لك موضع قراءة محفوظ قالت «متابعة» بلون التمييز؛ وإن لم يكن بقيت المدخل المعتاد. وقد كانت تفعل في الحالتين شيئين مختلفين — وصارت الآن تقول أيّهما.",
-        "nl": "Met een bewaarde leespositie staat er Doorlezen, in de accentkleur; zonder positie blijft zij de gewone ingang. Zij deed in die twee gevallen altijd al iets anders — nu zegt zij ook welk."
+        "en": "With a saved reading position the tile reads Continue; with none it is the plain way into the Qur'an. It always did two different things — now it says which.",
+        "ar": "مع موضع قراءة محفوظ تقول البطاقة «متابعة»؛ وبدونه هي المدخل المعتاد إلى القرآن. وكانت تفعل شيئين مختلفين دائمًا — وصارت تقول أيّهما.",
+        "nl": "Met een bewaarde leespositie staat er Doorlezen; zonder is de tegel de gewone ingang naar de Koran. Zij deed altijd al twee verschillende dingen — nu zegt zij ook welk."
       }
     },
     {
@@ -221,9 +227,9 @@
         "nl": "Eén naam voor de beloning"
       },
       "body": {
-        "en": "The challenge card called the same thing tokens in one line and ZULFAA Coins in the next. It is tokens, everywhere, in all three languages.",
-        "ar": "كانت بطاقة التحدّي تسمّي الشيء نفسه «توكنز» في سطر و«ZULFAA Coins» في السطر الذي يليه. هي توكنز، في كل موضع، وفي اللغات الثلاث.",
-        "nl": "De uitdagingskaart noemde hetzelfde in de ene regel tokens en in de volgende ZULFAA Coins. Het zijn tokens, overal, in alle drie de talen."
+        "en": "The challenge card called the reward tokens in one line and ZULFAA Coins in the next. It is tokens everywhere, in all three languages.",
+        "ar": "كانت بطاقة التحدّي تسمّي المكافأة «توكنز» في سطر و«ZULFAA Coins» في التالي. هي توكنز في كل موضع، وفي اللغات الثلاث.",
+        "nl": "De uitdagingskaart noemde de beloning op de ene regel tokens en op de volgende ZULFAA Coins. Het zijn overal tokens, in alle drie de talen."
       }
     },
     {
@@ -236,9 +242,9 @@
         "nl": "Het startscherm is met een schermlezer te doorlopen"
       },
       "body": {
-        "en": "The Verse of the Day card now says that it opens the verse in the reader, and names the verse, instead of reading out a long Arabic string and the word button. Quick Access — the page's main way in, eight tiles of it — is a heading, so it can be reached by heading as well.",
-        "ar": "بطاقة آية اليوم صارت تقول إنها تفتح الآية في القارئ وتسمّي الآية، بدل أن تقرأ نصًّا عربيًّا طويلًا ثم كلمة «زر». و«الوصول السريع» — مدخل الصفحة الرئيسي بثماني بطاقات — صار عنوانًا، فيمكن بلوغه بالتنقّل بالعناوين أيضًا.",
-        "nl": "De kaart met het vers van de dag zegt nu dat zij het vers in de lezer opent, en noemt het vers, in plaats van een lange Arabische reeks en het woord knop voor te lezen. Snelle toegang — de belangrijkste ingang van het scherm, acht tegels groot — is een kop, en dus ook per kop te bereiken."
+        "en": "The Verse of the Day card now says what it opens and names the verse, and Quick Access is a heading, so a screen reader can reach the page's main way in.",
+        "ar": "بطاقة آية اليوم صارت تقول ما تفتحه وتسمّي الآية، و«الوصول السريع» صار عنوانًا، فيبلغ قارئ الشاشة مدخل الصفحة الرئيسي.",
+        "nl": "De kaart met het vers van de dag zegt nu wat zij opent en noemt het vers, en Snelle toegang is een kop, zodat een schermlezer de belangrijkste ingang van het scherm bereikt."
       }
     },
     {
@@ -251,9 +257,9 @@
         "nl": "Nederlandse en Engelse kaarten lezen als de andere"
       },
       "body": {
-        "en": "A long Dutch label pushed the reward chip onto a line of its own and wrapped the occasion title onto two, so Dutch alone saw a different composition. English had the same trouble in the finished-challenge state. Both now sit as Arabic always did.",
-        "ar": "كان عنوان هولندي طويل يدفع شارة المكافأة إلى سطر مستقل ويكسر عنوان المناسبة على سطرين، فتنفرد الهولندية بتكوين مختلف. وكان للإنجليزية العلّة نفسها في حالة التحدّي المكتمل. وصارتا الآن كما كانت العربية دائمًا.",
-        "nl": "Een lang Nederlands opschrift duwde de beloningschip op een eigen regel en liet de gelegenheidstitel over twee regels lopen, zodat alleen het Nederlands er anders uitzag. Het Engels had hetzelfde probleem in de afgeronde toestand. Beide staan nu zoals het Arabisch altijd al stond."
+        "en": "Long Dutch labels pushed the reward chip and the occasion title onto extra lines, and English had the same trouble once a challenge was finished. All three languages now sit the same way.",
+        "ar": "كانت العناوين الهولندية الطويلة تدفع شارة المكافأة وعنوان المناسبة إلى أسطر زائدة، وللإنجليزية العلّة نفسها بعد إتمام التحدّي. وصارت اللغات الثلاث تستقرّ بالطريقة نفسها.",
+        "nl": "Lange Nederlandse opschriften duwden de beloningschip en de gelegenheidstitel naar extra regels, en het Engels had hetzelfde probleem zodra een uitdaging was afgerond. Alle drie de talen staan nu hetzelfde."
       }
     },
     {
@@ -266,9 +272,9 @@
         "nl": "Een regel komt de belofte van haar pijl na"
       },
       "body": {
-        "en": "A trailing chevron means a page. Share ZULFAA opens a share sheet and no longer shows one; Prayer and calculation settings raises a panel and now shows an upward glyph instead of promising a page.",
-        "ar": "السهم في نهاية الصف يعني صفحة. فـ«شارك زُلْفَى» يفتح لوحة مشاركة ولم يعد يُظهر سهمًا؛ و«إعدادات الصلاة والحساب» ترفع لوحة، وصارت تُظهر سهمًا إلى أعلى بدل أن تَعِد بصفحة.",
-        "nl": "Een pijl aan het eind betekent een pagina. ZULFAA delen opent een deelvenster en toont er geen meer; Gebeds- en berekeningsinstellingen laat een paneel opkomen en toont nu een pijl omhoog in plaats van een pagina te beloven."
+        "en": "A trailing arrow now always means a page. Share ZULFAA opens a share sheet and no longer shows one; Prayer and calculation settings, which raises a panel, shows an upward mark instead.",
+        "ar": "السهم في نهاية الصف صار يعني صفحةً دائمًا. فـ«شارك زُلْفَى» يفتح لوحة مشاركة ولم يعد يُظهر سهمًا؛ و«إعدادات الصلاة والحساب»، التي ترفع لوحة، تُظهر علامة إلى أعلى بدلًا منه.",
+        "nl": "Een pijl aan het eind betekent nu altijd een pagina. ZULFAA delen opent een deelvenster en toont er geen meer; Gebeds- en berekeningsinstellingen, dat een paneel opent, toont in plaats daarvan een pijl omhoog."
       }
     },
     {
@@ -281,9 +287,9 @@
         "nl": "Eén talenlijst"
       },
       "body": {
-        "en": "The picker in the header and the list in the menu were two different implementations of the same three choices, with different sizes and different names for a screen reader. They are one list now, in both places.",
-        "ar": "كان مختار اللغة في الترويسة وقائمة اللغات في القائمة الجانبية تطبيقين مختلفين للخيارات الثلاثة نفسها، بمقاسات مختلفة وأسماء مختلفة عند قارئ الشاشة. وصارا قائمة واحدة، في الموضعين.",
-        "nl": "De keuzeknop in de kop en de lijst in het menu waren twee verschillende uitvoeringen van dezelfde drie keuzes, met verschillende afmetingen en verschillende namen voor een schermlezer. Het is nu één lijst, op beide plekken."
+        "en": "The header picker and the menu's language list were two different versions of the same three choices. They are one list now, in both places.",
+        "ar": "كان مختار اللغة في الترويسة وقائمة اللغات في القائمة نسختين مختلفتين للخيارات الثلاثة نفسها. وصارا قائمة واحدة، في الموضعين.",
+        "nl": "De keuzeknop in de kop en de talenlijst in het menu waren twee verschillende versies van dezelfde drie keuzes. Het is nu één lijst, op beide plekken."
       }
     },
     {
@@ -296,9 +302,9 @@
         "nl": "Alleen staand, op telefoons"
       },
       "body": {
-        "en": "The app is laid out for portrait and now says so, instead of rotating into a landscape it was never drawn for — where the floating navigation left about two lines of screen visible. Large screens still rotate.",
-        "ar": "التطبيق مصمَّم للوضع الرأسي، وصار يعلن ذلك بدل أن يدور إلى وضع أفقي لم يُرسم له قطّ — وكان شريط التنقّل العائم لا يترك فيه إلا سطرين من الشاشة. أمّا الشاشات الكبيرة فما تزال تدور.",
-        "nl": "De app is voor de staande stand ontworpen en zegt dat nu ook, in plaats van te draaien naar een liggende stand waarvoor zij nooit is getekend — waar de zwevende navigatie zo'n twee regels scherm overliet. Grote schermen draaien nog steeds mee."
+        "en": "On a phone the app now stays in portrait instead of rotating into a layout it was never drawn for. Large screens still rotate.",
+        "ar": "على الهاتف يبقى التطبيق في الوضع الرأسي بدل أن يدور إلى تخطيط لم يُرسم له. والشاشات الكبيرة ما تزال تدور.",
+        "nl": "Op een telefoon blijft de app nu staand in plaats van te draaien naar een indeling waarvoor zij nooit is getekend. Grote schermen draaien nog steeds mee."
       }
     },
     {
@@ -311,9 +317,9 @@
         "nl": "Niets zit onder de navigatie, en niets zweeft boven een gat"
       },
       "body": {
-        "en": "Every scrolling screen reserved more room than the floating bar needs — about fifty pixels too much on a phone — so the last card on Prayer, the Qur'an, Qibla, Adhkar, Profile, the start page and every sub-page ended in a visible empty band. Fixed once, for all of them.",
-        "ar": "كانت كل شاشة قابلة للتمرير تحجز مساحة أكبر ممّا يحتاجه الشريط العائم — نحو خمسين بكسلًا زائدة على الهاتف — فتنتهي آخر بطاقة في الصلاة والقرآن والقبلة والأذكار والملفّ الشخصي والصفحة الرئيسية وكل صفحة فرعية إلى شريط فارغ ظاهر. أُصلحت مرّة واحدة لها جميعًا.",
-        "nl": "Elk schuivend scherm hield meer ruimte vrij dan de zwevende balk nodig heeft — zo'n vijftig pixels te veel op een telefoon — zodat de laatste kaart op Gebedstijden, de Koran, Qibla, Adhkar, het profiel, het startscherm en elke subpagina eindigde in een zichtbare lege band. Eén keer opgelost, voor allemaal."
+        "en": "Every scrolling screen left an empty band above the floating navigation, and on some the last control sat underneath it. Fixed once, for every screen.",
+        "ar": "كانت كل شاشة قابلة للتمرير تترك شريطًا فارغًا فوق شريط التنقّل العائم، وفي بعضها كان آخر عنصر يقع تحته. أُصلح مرّة واحدة لكل الشاشات.",
+        "nl": "Elk schuivend scherm liet een lege band boven de zwevende navigatie, en op sommige zat het laatste element eronder. Eén keer opgelost, voor elk scherm."
       }
     },
     {
@@ -326,9 +332,9 @@
         "nl": "Een paneel dat omhoogschuift, kunt u weer omlaagtrekken"
       },
       "body": {
-        "en": "Every panel that rises from the bottom draws a small handle at its top edge, and that handle now does what it looks like it does: drag it down and the panel follows your finger, let go and it either closes or settles back. It also stays put while you scroll a long list, instead of scrolling away with the content. Tapping outside, the close button and the Back gesture all work exactly as before.",
-        "ar": "كل لوحة تصعد من الأسفل ترسم مقبضًا صغيرًا عند حافتها العليا، وصار المقبض يفعل ما يبدو أنه يفعله: اسحبه إلى أسفل فتتبع اللوحة إصبعك، وارفع يدك فإمّا أن تُغلق وإمّا أن تستقرّ. ويبقى المقبض في مكانه وأنت تمرّر قائمة طويلة، بدل أن يمضي مع المحتوى. أمّا النقر خارجها وزرّ الإغلاق وإيماءة الرجوع فتعمل كما كانت تمامًا.",
-        "nl": "Elk paneel dat van onderen opkomt tekent een klein handvat aan de bovenrand, en dat handvat doet nu wat het lijkt te doen: trek het omlaag en het paneel volgt uw vinger, laat los en het sluit of zakt terug. Het blijft ook staan terwijl u door een lange lijst schuift, in plaats van met de inhoud mee weg te schuiven. Buiten het paneel tikken, de sluitknop en het terug-gebaar werken precies als voorheen."
+        "en": "The handle at the top of every panel now does what it looks like it does: drag it down and the panel follows, let go and it closes or settles back. It also stays put while you scroll a long list.",
+        "ar": "المقبض أعلى كل لوحة صار يفعل ما يبدو أنه يفعله: اسحبه إلى أسفل فتتبعه اللوحة، وارفع يدك فتُغلق أو تستقرّ. ويبقى في مكانه وأنت تمرّر قائمة طويلة.",
+        "nl": "Het handvat bovenaan elk paneel doet nu wat het lijkt te doen: trek het omlaag en het paneel volgt, laat los en het sluit of zakt terug. Het blijft ook staan terwijl u door een lange lijst schuift."
       }
     },
     {
@@ -341,9 +347,9 @@
         "nl": "Het zijmenu toont zijn laatste regel"
       },
       "body": {
-        "en": "At the foot of the menu the version line sat behind the Android navigation bar with only its top edge showing. It now clears the system area properly, in every language and both themes.",
-        "ar": "كان سطر الإصدار في أسفل القائمة يقع خلف شريط تنقّل أندرويد ولا يظهر منه إلا حافته العليا. وصار الآن يتجاوز منطقة النظام كما ينبغي، في كل لغة وفي المظهرين.",
-        "nl": "Onderaan het menu stond de versieregel achter de Android-navigatiebalk, met alleen de bovenrand zichtbaar. Zij blijft nu netjes vrij van het systeemgebied, in elke taal en beide thema's."
+        "en": "The version line at the foot of the side menu sat behind the Android navigation bar. It now clears it, in every language and both themes.",
+        "ar": "كان سطر الإصدار في أسفل القائمة الجانبية خلف شريط تنقّل أندرويد. وصار يتجاوزه، في كل لغة وفي المظهرين.",
+        "nl": "De versieregel onderaan het zijmenu stond achter de Android-navigatiebalk. Zij staat er nu vrij van, in elke taal en beide thema's."
       }
     },
     {
@@ -356,9 +362,9 @@
         "nl": "Licht en Donker wisselen in één beeld"
       },
       "body": {
-        "en": "The interface used to fade from one theme into the other, and not all at once — some cards finished before others, so you could watch the change sweep across the screen. It now behaves like a light switch. Every other animation in the app is unchanged.",
-        "ar": "كانت الواجهة تتلاشى من مظهر إلى آخر، ولا تفعل ذلك دفعةً واحدة — فتنتهي بعض البطاقات قبل غيرها، فترى التغيير يجتاح الشاشة. وصارت الآن كمفتاح الإضاءة. وسائر حركات التطبيق لم تتغيّر.",
-        "nl": "De interface vervaagde vroeger van het ene thema naar het andere, en niet in één keer — sommige kaarten waren eerder klaar dan andere, zodat u de verandering over het scherm zag trekken. Nu gedraagt zij zich als een lichtschakelaar. Elke andere animatie in de app is ongewijzigd."
+        "en": "Switching used to fade across the screen, some cards later than others. It now behaves like a light switch, everywhere at once.",
+        "ar": "كان التبديل يتلاشى عبر الشاشة، وبعض البطاقات أبطأ من غيرها. وصار كمفتاح الإضاءة، في كل مكان دفعةً واحدة.",
+        "nl": "Het wisselen vervaagde vroeger over het scherm, sommige kaarten later dan andere. Nu werkt het als een lichtschakelaar, overal tegelijk."
       }
     },
     {
@@ -371,9 +377,9 @@
         "nl": "Een paneel ligt over de pagina in plaats van haar te vervangen"
       },
       "body": {
-        "en": "Opening the city picker used to black the screen out in dark mode and wash it pale in light, so the panel felt like a separate screen. The page behind is now softly frosted and still visibly there, in both themes; and in dark mode the panel is a shade lighter than the page and the cards on it lighter again — depth rather than one dark slab. Every other panel in the app shares the change.",
-        "ar": "كان فتح مختار المدينة يُسوّد الشاشة في المظهر الداكن ويُشحبها في الفاتح، فتبدو اللوحة شاشة منفصلة. أمّا الآن فالصفحة خلفها مغشّاة برفق وما تزال ظاهرة، في المظهرين؛ وفي الداكن تكون اللوحة أفتح درجةً من الصفحة وبطاقاتها أفتح منها درجةً أخرى — عمقٌ بدل لوح داكن واحد. وسائر لوحات التطبيق تشاركها هذا التغيير.",
-        "nl": "De stedenkiezer maakte het scherm in het donkere thema zwart en in het lichte bleek, zodat het paneel als een apart scherm aanvoelde. De pagina erachter is nu zacht bevroren en nog zichtbaar aanwezig, in beide thema's; en in het donker is het paneel een tint lichter dan de pagina en zijn de kaarten erop nog een tint lichter — diepte in plaats van één donkere plaat. Elk ander paneel in de app deelt die verandering."
+        "en": "A panel now sits over a softly frosted page instead of blacking it out or washing it pale, and in dark mode the panel and its cards are each a shade lighter than what is behind them — depth instead of one dark slab.",
+        "ar": "صارت اللوحة تستقرّ فوق صفحة مغشّاة برفق بدل أن تُسوّدها أو تُشحبها، وفي المظهر الداكن تكون اللوحة وبطاقاتها كلٌّ أفتح درجةً ممّا خلفها — عمقٌ بدل لوح داكن واحد.",
+        "nl": "Een paneel ligt nu over een zacht bevroren pagina in plaats van die zwart te maken of bleek te wassen, en in het donker zijn het paneel en zijn kaarten elk een tint lichter dan wat erachter ligt — diepte in plaats van één donkere plaat."
       }
     },
     {
@@ -386,9 +392,9 @@
         "nl": "Lezen telt als lezen"
       },
       "body": {
-        "en": "A position you could return to was only ever recorded while recitation audio was playing, so someone who reads silently never had one and was never offered Continue reading. Scrolling through a surah now records where you actually are, once the page settles — on the start page, on the Qur'an tab and in the reader itself.",
-        "ar": "لم يكن الموضع الذي تعود إليه يُسجَّل إلا وصوت التلاوة يعمل، فمن يقرأ صامتًا لم يكن له موضع قطّ ولم تُعرض عليه «متابعة القراءة». وصار التمرير في السورة يسجّل موضعك الحقيقي حين تستقرّ الصفحة — في الصفحة الرئيسية، وفي تبويب القرآن، وفي القارئ نفسه.",
-        "nl": "Een positie om naar terug te keren werd alleen vastgelegd terwijl de recitatie speelde, dus wie in stilte las had er nooit een en kreeg nooit Doorlezen aangeboden. Door een soera schuiven legt nu vast waar u werkelijk bent, zodra de pagina tot rust komt — op het startscherm, op het Koran-tabblad en in de lezer zelf."
+        "en": "Your place was only ever saved while recitation played, so silent readers never got Continue reading. Scrolling through a surah now saves where you are — on the start page, the Qur'an tab and in the reader.",
+        "ar": "لم يكن موضعك يُحفظ إلا والتلاوة تعمل، فلم يكن لمن يقرأ صامتًا «متابعة القراءة» قطّ. وصار التمرير في السورة يحفظ موضعك — في الصفحة الرئيسية وتبويب القرآن والقارئ.",
+        "nl": "Uw plek werd alleen bewaard terwijl de recitatie speelde, dus wie in stilte las kreeg nooit Doorlezen. Door een soera schuiven bewaart nu waar u bent — op het startscherm, het Koran-tabblad en in de lezer."
       }
     },
     {
@@ -401,9 +407,9 @@
         "nl": "Een uitgelezen soera biedt niet langer aan door te lezen"
       },
       "body": {
-        "en": "Reading or playing a surah to its last ayah used to leave every Continue surface pointing at that last ayah, which is not a place to return to. A finished surah now steps aside and the most recent unfinished one is offered instead. Recitation audio is unchanged: it still plays, highlights the ayah, follows it, and records progress as before.",
-        "ar": "كانت قراءة السورة أو تشغيلها إلى آخر آية تُبقي كل موضع «متابعة» مشيرًا إلى تلك الآية الأخيرة، وليست موضعًا يُعاد إليه. وصارت السورة المختومة تتنحّى، وتُعرض بدلها أحدث سورة لم تُختم. أمّا صوت التلاوة فلم يتغيّر: ما يزال يعمل ويُبرز الآية ويتبعها ويسجّل التقدّم كما كان.",
-        "nl": "Een soera tot het laatste vers lezen of afspelen liet elke Doorlezen-plek naar dat laatste vers wijzen, en dat is geen plek om naar terug te keren. Een uitgelezen soera treedt nu terzijde en de meest recente onafgemaakte wordt aangeboden. De recitatie is ongewijzigd: zij speelt, licht het vers op, volgt het en legt de voortgang vast als voorheen."
+        "en": "Reaching the last ayah used to leave every Continue pointing at it. A finished surah now steps aside and the most recent unfinished one is offered instead. Recitation is unchanged.",
+        "ar": "كان بلوغ آخر آية يُبقي كل «متابعة» مشيرةً إليها. وصارت السورة المختومة تتنحّى وتُعرض بدلها أحدث سورة لم تُختم. والتلاوة لم تتغيّر.",
+        "nl": "Het laatste vers bereiken liet elke Doorlezen ernaar wijzen. Een uitgelezen soera treedt nu terzijde en de meest recente onafgemaakte wordt aangeboden. De recitatie is ongewijzigd."
       }
     },
     {
@@ -416,9 +422,9 @@
         "nl": "Elke openbare link wijst naar zulfaa.nl"
       },
       "body": {
-        "en": "The share link, the Privacy Policy, the Terms of Use and Help and Support moved from the old project address to the official domain, and About has a row that opens the website over a secure connection. The pages themselves are the same.",
-        "ar": "انتقل رابط المشاركة وسياسة الخصوصية وشروط الاستخدام والمساعدة والدعم من عنوان المشروع القديم إلى النطاق الرسمي، وصار في «عن زُلْفَى» صفٌّ يفتح الموقع عبر اتصال آمن. أمّا الصفحات نفسها فهي هي.",
-        "nl": "De deellink, het privacybeleid, de gebruiksvoorwaarden en Hulp en ondersteuning zijn van het oude projectadres naar het officiële domein verhuisd, en Over ZULFAA heeft een regel die de website over een beveiligde verbinding opent. De pagina's zelf zijn dezelfde."
+        "en": "The share link, Privacy Policy, Terms of Use and Help & Support now point at zulfaa.nl, and About has a row that opens the website. The pages themselves are unchanged.",
+        "ar": "رابط المشاركة وسياسة الخصوصية وشروط الاستخدام والمساعدة والدعم صارت تشير إلى zulfaa.nl، وفي «عن زُلْفَى» صفٌّ يفتح الموقع. والصفحات نفسها لم تتغيّر.",
+        "nl": "De deellink, het privacybeleid, de gebruiksvoorwaarden en Hulp & ondersteuning wijzen nu naar zulfaa.nl, en Over ZULFAA heeft een regel die de website opent. De pagina's zelf zijn ongewijzigd."
       }
     },
     {
@@ -432,9 +438,9 @@
         "nl": "De juridische pagina's dragen de datum waarop zij zijn herzien"
       },
       "body": {
-        "en": "The Privacy Policy and the Terms of Use show when they were actually last revised, in all three languages, and the app and this website read that date from one source — so the two can no longer disagree.",
-        "ar": "سياسة الخصوصية وشروط الاستخدام تُظهران تاريخ آخر مراجعة فعلية لهما، في اللغات الثلاث، ويقرأ التطبيق وهذا الموقع ذلك التاريخ من مصدر واحد — فلا يمكن أن يختلفا.",
-        "nl": "Het privacybeleid en de gebruiksvoorwaarden tonen wanneer zij werkelijk voor het laatst zijn herzien, in alle drie de talen, en de app en deze website lezen die datum uit één bron — zodat de twee niet meer uiteen kunnen lopen."
+        "en": "The Privacy Policy and Terms of Use now show when they were last revised, in all three languages, and the app and the website read that date from one place.",
+        "ar": "سياسة الخصوصية وشروط الاستخدام صارتا تُظهران تاريخ آخر مراجعة لهما، في اللغات الثلاث، ويقرأ التطبيق والموقع ذلك التاريخ من موضع واحد.",
+        "nl": "Het privacybeleid en de gebruiksvoorwaarden tonen nu wanneer zij voor het laatst zijn herzien, in alle drie de talen, en de app en de website lezen die datum uit één bron."
       }
     },
     {
@@ -447,9 +453,9 @@
         "nl": "Na het laatste gebed van de dag is het scherm het met zichzelf eens"
       },
       "body": {
-        "en": "Between Isha and midnight the highlighted next prayer showed that morning's Fajr — a time already hours past, and a minute or two away from what the countdown beside it was counting down to. It now shows tomorrow's Fajr, labelled Tomorrow, at exactly the time the countdown is running to. The start page's prayer card was showing the same wrong time and is fixed with it.",
-        "ar": "بين العشاء ومنتصف الليل كانت «الصلاة التالية» المميَّزة تعرض فجر ذلك الصباح — وقتًا مضى عليه ساعات، ويبعد دقيقة أو دقيقتين عمّا يعدّ إليه العدّاد بجانبه. وصارت تعرض فجر الغد موسومًا بـ«غدًا»، في الوقت نفسه الذي يجري إليه العدّ. وكانت بطاقة الصلاة في الصفحة الرئيسية تعرض الوقت الخاطئ نفسه، وأُصلحت معها.",
-        "nl": "Tussen Isha en middernacht toonde het gemarkeerde volgende gebed de Fajr van die ochtend — een tijd die al uren voorbij was, en een minuut of twee verwijderd van waar de aftelling ernaast naartoe liep. Nu toont het de Fajr van morgen, met het label Morgen, precies op de tijd waarnaar de aftelling loopt. De gebedskaart op het startscherm toonde dezelfde verkeerde tijd en is mee opgelost."
+        "en": "Between Isha and midnight the page highlighted that morning's Fajr while the countdown ran to tomorrow's. It now shows tomorrow's Fajr, labelled Tomorrow, at the time the countdown counts to. The start page's prayer card is fixed with it.",
+        "ar": "بين العشاء ومنتصف الليل كانت الصفحة تميّز فجر ذلك الصباح بينما يعدّ العدّاد إلى فجر الغد. وصارت تعرض فجر الغد موسومًا بـ«غدًا» في الوقت الذي يعدّ إليه. وأُصلحت معها بطاقة الصلاة في الصفحة الرئيسية.",
+        "nl": "Tussen Isha en middernacht markeerde het scherm de Fajr van die ochtend terwijl de aftelling naar die van morgen liep. Nu toont het de Fajr van morgen, met het label Morgen, op de tijd waarnaar wordt afgeteld. De gebedskaart op het startscherm is mee opgelost."
       }
     },
     {
@@ -462,9 +468,9 @@
         "nl": "Elke gebedsregel toont wat zij werkelijk zal doen"
       },
       "body": {
-        "en": "Each row now carries its own icon for the choice saved against that prayer: a crossed-out bell means silent, a bell means a notification, a horn means the adhan. A mixed set-up reads at a glance — Fajr on the adhan, Dhuhr on a notification and the rest silent is three different icons rather than three identical bells. The state is spoken in words to a screen reader as well, so it does not depend on recognising a shape or a colour.",
-        "ar": "صار لكل صفّ رمزه الخاص بما هو محفوظ لتلك الصلاة: جرس مشطوب يعني الصمت، وجرس يعني إشعارًا، وبوق يعني الأذان. فالإعداد المختلط يُقرأ بنظرة واحدة — الفجر على الأذان والظهر على إشعار وسائرها صامتة: ثلاثة رموز مختلفة بدل ثلاثة أجراس متطابقة. وتُنطق الحالة بالكلمات لقارئ الشاشة أيضًا، فلا تتوقّف على تمييز شكل أو لون.",
-        "nl": "Elke regel draagt nu een eigen pictogram voor de keuze die bij dat gebed is opgeslagen: een doorgestreepte bel betekent stil, een bel een melding, een hoorn de adhan. Een gemengde instelling is in één oogopslag te lezen — Fajr op de adhan, Dhuhr op een melding en de rest stil is nu drie verschillende pictogrammen in plaats van drie gelijke bellen. De toestand wordt ook in woorden aan een schermlezer voorgelezen, zodat zij niet afhangt van het herkennen van een vorm of een kleur."
+        "en": "Each prayer row carries its own icon for what is saved against it: a crossed-out bell for silent, a bell for a notification, a horn for the adhan. A mixed set-up reads at a glance, and a screen reader hears the state in words.",
+        "ar": "كل صفّ صلاة يحمل رمزه لما هو محفوظ له: جرس مشطوب للصمت، وجرس للإشعار، وبوق للأذان. فالإعداد المختلط يُقرأ بنظرة، ويسمع قارئ الشاشة الحالة بالكلمات.",
+        "nl": "Elke gebedsregel draagt een eigen pictogram voor wat erbij is opgeslagen: een doorgestreepte bel voor stil, een bel voor een melding, een hoorn voor de adhan. Een gemengde instelling leest in één oogopslag, en een schermlezer hoort de toestand in woorden."
       }
     },
     {
@@ -477,9 +483,9 @@
         "nl": "Op het pictogram van een gebed tikken doorloopt alle drie de toestanden"
       },
       "body": {
-        "en": "Off, then a notification, then the adhan, then off again. It used to skip one of them, and which one it skipped depended on what a different prayer was set to: if any prayer was on the adhan, every other prayer jumped straight from silent to adhan and the plain notification could not be chosen from this page at all. The Prayer page and the reminder settings have always written the same saved value, so a change made in either shows immediately in the other.",
-        "ar": "صامت، ثم إشعار، ثم أذان، ثم صامت من جديد. وكان يتخطّى واحدة منها، وأيّها يتخطّى يتوقّف على ما هو محدَّد لصلاة أخرى: فإن كانت أي صلاة على الأذان قفزت كل صلاة سواها من الصمت إلى الأذان مباشرة، ولم يكن الإشعار المجرّد قابلًا للاختيار من هذه الصفحة أصلًا. وصفحة الصلاة وإعدادات التذكيرات تكتبان القيمة المحفوظة نفسها دائمًا، فما تغيّره في إحداهما يظهر في الأخرى فورًا.",
-        "nl": "Uit, dan een melding, dan de adhan, dan weer uit. Vroeger sloeg het er één over, en welke hing af van wat er bij een ánder gebed stond ingesteld: stond één gebed op de adhan, dan sprong elk ander gebed meteen van stil naar adhan en was de gewone melding op deze pagina helemaal niet te kiezen. Het gebedsscherm en de herinneringsinstellingen schrijven altijd al dezelfde waarde weg, dus een wijziging op de ene plek is meteen op de andere te zien."
+        "en": "Tapping steps through silent, notification and adhan, in that order. It used to skip one — and which one depended on how another prayer was set. The Prayer page and the reminder settings always show the same choice.",
+        "ar": "النقر يمرّ بالصمت ثم الإشعار ثم الأذان، بهذا الترتيب. وكان يتخطّى واحدة — وأيّها يتوقّف على ضبط صلاة أخرى. وصفحة الصلاة وإعدادات التذكيرات تعرضان الاختيار نفسه دائمًا.",
+        "nl": "Tikken doorloopt stil, melding en adhan, in die volgorde. Vroeger sloeg het er één over — en welke hing af van hoe een ander gebed stond ingesteld. Het gebedsscherm en de herinneringsinstellingen tonen altijd dezelfde keuze."
       }
     },
     {
@@ -492,9 +498,9 @@
         "nl": "De regels tonen altijd uw eigen keuzes"
       },
       "body": {
-        "en": "If Android has notifications turned off for ZULFAA, a single line at the top of the section says so and offers the way there — but no row changes, and nothing you have set is altered. The same line appears if Android is allowed to delay alerts, so you can ask for them to arrive exactly at prayer time. Nothing is ever switched on for you.",
-        "ar": "إن كان أندرويد قد أوقف إشعارات زُلْفَى، قال سطر واحد أعلى القسم ذلك وعرض الطريق إليه — ولا يتغيّر صفٌّ واحد، ولا يُمسّ شيء ممّا ضبطته. ويظهر السطر نفسه إن كان أندرويد مأذونًا له بتأخير التنبيهات، فتطلب وصولها في وقت الصلاة بالضبط. ولا يُشغَّل لك شيء أبدًا.",
-        "nl": "Heeft Android meldingen voor ZULFAA uitgezet, dan zegt één regel bovenaan het onderdeel dat, en biedt de weg erheen — maar geen enkele regel verandert, en niets van wat u hebt ingesteld wordt aangepast. Dezelfde regel verschijnt wanneer Android waarschuwingen mag vertragen, zodat u kunt vragen ze precies op gebedstijd te laten aankomen. Er wordt nooit iets voor u aangezet."
+        "en": "If Android has notifications off for ZULFAA, or may delay them, one line at the top says so and offers the way to Android's settings. Your rows are never changed for you.",
+        "ar": "إن كان أندرويد قد أوقف إشعارات زُلْفَى أو قد يؤخّرها، قال سطر واحد في الأعلى ذلك وعرض الطريق إلى إعدادات أندرويد. ولا تُغيَّر صفوفك عنك أبدًا.",
+        "nl": "Heeft Android meldingen voor ZULFAA uit, of mag het ze vertragen, dan zegt één regel bovenaan dat en wijst de weg naar de Android-instellingen. Uw regels worden nooit voor u gewijzigd."
       }
     },
     {
@@ -507,9 +513,9 @@
         "nl": "Hoog in het noorden kiest u hoe de korte zomernacht wordt behandeld"
       },
       "body": {
-        "en": "Prayer settings has a new High-latitude rule — Twilight angle, Middle of the night, or One seventh of the night — for places and seasons where the sun never reaches the Fajr or Isha angle, as in northern Europe in June. It has no effect anywhere the sun does reach it, and the existing default is unchanged, so nothing moves unless you change it.",
-        "ar": "في إعدادات الصلاة قاعدة جديدة لخطوط العرض العليا — زاوية الشفق، أو منتصف الليل، أو سُبع الليل — للأماكن والمواسم التي لا تبلغ فيها الشمس زاوية الفجر أو العشاء، كشمال أوروبا في يونيو. ولا أثر لها حيث تبلغها الشمس، والوضع الافتراضي القائم لم يتغيّر، فلا يتحرّك شيء ما لم تغيّره أنت.",
-        "nl": "De gebedsinstellingen hebben een nieuwe Hogebreedteregel — Schemerhoek, Midden van de nacht, of Een zevende van de nacht — voor plaatsen en seizoenen waar de zon de Fajr- of Isha-hoek nooit bereikt, zoals in Noord-Europa in juni. Zij heeft geen effect waar de zon die hoek wel bereikt, en de bestaande standaard blijft ongewijzigd, dus er verschuift niets tenzij u het zelf wijzigt."
+        "en": "Prayer settings has a new High-latitude rule — Twilight angle, Middle of the night or One seventh of the night — for places where the sun never reaches the Fajr or Isha angle in summer. Nothing changes unless you choose it.",
+        "ar": "في إعدادات الصلاة قاعدة جديدة لخطوط العرض العليا — زاوية الشفق، أو منتصف الليل، أو سُبع الليل — للأماكن التي لا تبلغ فيها الشمس زاوية الفجر أو العشاء صيفًا. ولا يتغيّر شيء ما لم تختره أنت.",
+        "nl": "De gebedsinstellingen hebben een nieuwe Hogebreedteregel — Schemerhoek, Midden van de nacht of Een zevende van de nacht — voor plaatsen waar de zon 's zomers de Fajr- of Isha-hoek nooit bereikt. Er verandert niets tenzij u het kiest."
       }
     },
     {
@@ -522,9 +528,9 @@
         "nl": "Waar een gebedstijd echt niet te berekenen is, zegt ZULFAA dat"
       },
       "body": {
-        "en": "Beyond the Arctic and Antarctic circles the sun can stay up, or stay down, for weeks. Fajr, Maghrib and Isha are derived from sunset and sunrise, and without them there is no answer to give: those times now show a dash with a short explanation, the countdown moves to the next prayer that can be calculated, and Dhuhr and Asr — which do not depend on the horizon — are shown as usual.",
-        "ar": "خلف الدائرتين القطبيتين قد تبقى الشمس طالعةً أو غاربةً أسابيع. والفجر والمغرب والعشاء تُستخرج من الشروق والغروب، وبغيرهما لا جواب يُعطى: فتُعرض تلك الأوقات الآن بشَرطة مع شرح قصير، وينتقل العدّ التنازلي إلى أقرب صلاة يمكن حسابها، ويُعرض الظهر والعصر — وهما لا يتوقّفان على الأفق — كالمعتاد.",
-        "nl": "Voorbij de poolcirkels kan de zon wekenlang op of onder blijven. Fajr, Maghrib en Isha volgen uit zonsopgang en zonsondergang, en zonder die is er geen antwoord te geven: die tijden tonen nu een streepje met een korte uitleg, de aftelling gaat naar het volgende gebed dat wél te berekenen is, en Dhuhr en Asr — die niet van de horizon afhangen — worden gewoon getoond."
+        "en": "Beyond the polar circles the sun can stay up or down for weeks, and Fajr, Maghrib and Isha then have no answer. They now show a dash with a short note, the countdown moves to the next prayer that exists, and Dhuhr and Asr are shown as usual.",
+        "ar": "خلف الدائرتين القطبيتين قد تبقى الشمس طالعة أو غاربة أسابيع، فلا جواب حينها للفجر والمغرب والعشاء. فتُعرض بشَرطة مع ملاحظة قصيرة، وينتقل العدّ إلى أقرب صلاة موجودة، ويُعرض الظهر والعصر كالمعتاد.",
+        "nl": "Voorbij de poolcirkels kan de zon wekenlang op of onder blijven, en dan is er voor Fajr, Maghrib en Isha geen antwoord. Zij tonen nu een streepje met een korte notitie, de aftelling gaat naar het volgende gebed dat er wél is, en Dhuhr en Asr worden gewoon getoond."
       }
     },
     {
@@ -537,9 +543,9 @@
         "nl": "Zonder ingestelde locatie noemt het scherm geen gebed meer"
       },
       "body": {
-        "en": "It used to show a prayer name and a countdown before it had anywhere to count for. It now says prayer times appear once you set your location, and offers the picker. The line under the heading is punctuated properly in English and Dutch too — it used an Arabic comma in every language, and a stray one when nothing was set.",
-        "ar": "كانت تعرض اسم صلاة وعدًّا تنازليًّا قبل أن يكون لها مكان تعدّ له. وصارت تقول إن المواقيت تظهر حين تحدّد موقعك، وتعرض المختار. والسطر تحت العنوان صار منقوطًا كما ينبغي في الإنجليزية والهولندية أيضًا — فقد كان يستعمل الفاصلة العربية في كل اللغات، وفاصلةً شاردةً حين لا يكون شيء محدَّدًا.",
-        "nl": "Vroeger toonde het een gebedsnaam en een aftelling voordat het ergens naartoe kon tellen. Nu zegt het dat de gebedstijden verschijnen zodra u uw locatie instelt, en biedt het de kiezer aan. De regel onder de kop is ook in het Nederlands en het Engels goed geïnterpungeerd — zij gebruikte in elke taal een Arabische komma, en een losse komma wanneer er niets was ingesteld."
+        "en": "With no location set, the page used to name a prayer and count down to nothing. It now says prayer times appear once you set your location, and offers the picker. The place line is also punctuated properly in English and Dutch.",
+        "ar": "بلا موقع محدَّد كانت الصفحة تسمّي صلاةً وتعدّ إلى لا شيء. وصارت تقول إن المواقيت تظهر حين تحدّد موقعك، وتعرض المختار. وسطر المكان صار منقوطًا كما ينبغي في الإنجليزية والهولندية أيضًا.",
+        "nl": "Zonder ingestelde locatie noemde het scherm een gebed en telde af naar niets. Nu zegt het dat de gebedstijden verschijnen zodra u uw locatie instelt, en biedt het de kiezer aan. De plaatsregel is ook in het Nederlands en Engels goed geïnterpungeerd."
       }
     },
     {
@@ -552,9 +558,9 @@
         "nl": "De gebedsinstellingen zijn met een schermlezer te bedienen"
       },
       "body": {
-        "en": "The ten plus and minus buttons that adjust each prayer by a minute had no spoken name at all — they now say which prayer and which direction, and the value announces itself when it changes. The calculation-method list and the Asr madhhab pair report which option is selected instead of showing it only in colour, and the location line says the place you have set and that tapping it changes it.",
-        "ar": "أزرار الزيادة والنقصان العشرة التي تعدّل كل صلاة دقيقةً لم يكن لها اسم منطوق البتّة — وصارت تقول أيّ صلاة وأيّ اتجاه، وتُعلن القيمة عن نفسها حين تتغيّر. وقائمة طرق الحساب وزوج مذهب العصر صارا يُعلنان الخيار المحدَّد بدل إظهاره باللون وحده، وسطر الموقع يقول المكان الذي حدّدته وأنّ النقر عليه يغيّره.",
-        "nl": "De tien plus- en minknoppen die elk gebed met een minuut verschuiven hadden helemaal geen uitgesproken naam — zij zeggen nu welk gebed en welke richting, en de waarde meldt zichzelf wanneer zij verandert. De lijst met berekeningsmethoden en het Asr-madhhabpaar melden welke optie gekozen is in plaats van dat alleen met kleur te tonen, en de locatieregel noemt de plaats die u hebt ingesteld en zegt dat erop tikken haar wijzigt."
+        "en": "The plus and minus buttons that adjust each prayer by a minute now say which prayer and which direction, the calculation-method and Asr choices say which is selected, and the location line says what tapping it does.",
+        "ar": "أزرار الزيادة والنقصان التي تعدّل كل صلاة دقيقةً صارت تقول أيّ صلاة وأيّ اتجاه، وخيارات طريقة الحساب والعصر تقول أيّها محدَّد، وسطر الموقع يقول ما يفعله النقر عليه.",
+        "nl": "De plus- en minknoppen die elk gebed met een minuut verschuiven zeggen nu welk gebed en welke richting, de keuzes voor berekeningsmethode en Asr zeggen welke gekozen is, en de locatieregel zegt wat tikken doet."
       }
     },
     {
@@ -567,9 +573,9 @@
         "nl": "De voortgangsbalk is zichtbaar in het donkere thema"
       },
       "body": {
-        "en": "Its unfilled track had been the same colour as the card behind it, so early in an interval the bar read as a small green dot floating in the card. Light mode is unchanged.",
-        "ar": "كان مساره غير الممتلئ بلون البطاقة التي خلفه، فيبدو الشريط في أول المدّة نقطةً خضراء صغيرة تطفو في البطاقة. والمظهر الفاتح لم يتغيّر.",
-        "nl": "Het niet-gevulde deel had dezelfde kleur als de kaart erachter, zodat de balk vroeg in een interval als een klein groen stipje in de kaart leek te zweven. Het lichte thema is ongewijzigd."
+        "en": "In dark mode the bar's empty track was the same colour as the card, so early in an interval it looked like a small dot. It is visible now; light mode is unchanged.",
+        "ar": "في المظهر الداكن كان مسار الشريط الفارغ بلون البطاقة، فيبدو في أول المدّة نقطةً صغيرة. وصار ظاهرًا؛ والمظهر الفاتح لم يتغيّر.",
+        "nl": "In het donkere thema had het lege deel van de balk dezelfde kleur als de kaart, zodat hij vroeg in een interval op een stipje leek. Hij is nu zichtbaar; het lichte thema is ongewijzigd."
       }
     },
     {
@@ -582,13 +588,117 @@
         "nl": "Dhuhr en Asr delen niet langer één afbeelding"
       },
       "body": {
-        "en": "Both rows carried the same sun. Asr now has its own late-afternoon glyph, so the two midday prayers are told apart by their icon and not only by their place in the list.",
-        "ar": "كان الصفّان يحملان الشمس نفسها. وصار للعصر رمزه الخاص بآخر النهار، فتُميَّز صلاتا الظهيرة برمزيهما لا بموضعهما في القائمة وحده.",
-        "nl": "Beide regels droegen dezelfde zon. Asr heeft nu een eigen laatmiddagteken, zodat de twee middaggebeden aan hun pictogram te onderscheiden zijn en niet alleen aan hun plaats in de lijst."
+        "en": "Both rows carried the same sun. Asr now has its own late-afternoon glyph, so the two are told apart by their icon, not only by their place in the list.",
+        "ar": "كان الصفّان يحملان الشمس نفسها. وصار للعصر رمزه الخاص بآخر النهار، فيُميَّزان برمزيهما لا بموضعهما في القائمة وحده.",
+        "nl": "Beide regels droegen dezelfde zon. Asr heeft nu een eigen laatmiddagteken, zodat de twee aan hun pictogram te onderscheiden zijn en niet alleen aan hun plaats in de lijst."
+      }
+    },
+    {
+      "id": "eid-and-seasons",
+      "area": "ramadan",
+      "kind": "new",
+      "title": {
+        "en": "Ramadan, Eid and the rest of the year",
+        "ar": "رمضان والعيد وسائر السنة",
+        "nl": "Ramadan, Eid en de rest van het jaar"
+      },
+      "body": {
+        "en": "A countdown to Eid runs from the Hijri calendar rather than a fixed thirty days, and stays an estimate until the month ends. After Eid the planner still shows the month you kept, and Ramadan leads the start page through Sha'ban and Ramadan, then steps back for the rest of the year.",
+        "ar": "العدّ التنازلي إلى العيد يجري من التقويم الهجري لا من ثلاثين يومًا ثابتة، ويبقى تقديرًا حتى ينتهي الشهر. وبعد العيد يظلّ المخطِّط يعرض الشهر الذي أتممته، ويتصدّر رمضان الصفحة الرئيسية في شعبان ورمضان ثم يتنحّى بقية السنة.",
+        "nl": "De aftelling naar Eid loopt vanaf de Hijri-kalender in plaats van vaste dertig dagen, en blijft een schatting tot de maand voorbij is. Na Eid blijft de planner de maand tonen die u hebt gehouden, en Ramadan staat voorop op het startscherm in Sha'ban en Ramadan en treedt de rest van het jaar terug."
+      }
+    },
+    {
+      "id": "wird-ramadan",
+      "area": "ramadan",
+      "kind": "improved",
+      "title": {
+        "en": "Your adhkar count for the day",
+        "ar": "أذكارك تُحتسب لليوم",
+        "nl": "Uw adhkar tellen mee voor de dag"
+      },
+      "body": {
+        "en": "Finishing the day's adhkar ticks the planner's dhikr item for you, once, for the current day only. Unticking it in the planner always wins.",
+        "ar": "إتمام أذكار اليوم يعلّم بند الذكر في المخطِّط عنك، مرّة واحدة ولليوم الحالي فقط. وإزالة العلامة في المخطِّط هي الغالبة دائمًا.",
+        "nl": "Wie de adhkar van de dag afrondt, ziet het dhikr-item in de planner vanzelf aangevinkt — één keer, alleen voor vandaag. Het uitvinken in de planner wint altijd."
+      }
+    },
+    {
+      "id": "dark-theme",
+      "area": "app",
+      "kind": "new",
+      "title": {
+        "en": "A dark appearance, and one that follows your phone",
+        "ar": "مظهر داكن، وآخر يتبع هاتفك",
+        "nl": "Een donkere weergave, en een die uw telefoon volgt"
+      },
+      "body": {
+        "en": "Choose Light, Dark or Follow system in Settings. Dark is drawn for the whole app — every screen, panel and card — not laid over the light one. Where a phone cannot show it, ZULFAA says so.",
+        "ar": "اختر فاتحًا أو داكنًا أو «حسب النظام» من الإعدادات. المظهر الداكن مرسوم للتطبيق كلّه — كل شاشة ولوحة وبطاقة — لا مُلقًى فوق الفاتح. وحيث لا يستطيع الهاتف عرضه، يقول زُلْفَى ذلك.",
+        "nl": "Kies Licht, Donker of Systeem volgen in de instellingen. Donker is voor de hele app getekend — elk scherm, paneel en kaart — en niet over de lichte gelegd. Waar een telefoon het niet kan tonen, zegt ZULFAA dat."
+      }
+    },
+    {
+      "id": "dua-translations",
+      "area": "dhikr",
+      "kind": "improved",
+      "title": {
+        "en": "Every du'a in English",
+        "ar": "كل دعاء بالإنجليزية",
+        "nl": "Elke doe'a in het Engels"
+      },
+      "body": {
+        "en": "The Qur'anic du'as used to have no English. They now carry the app's own attributed Qur'an translation, so the Translation action works for every du'a — and the credit line names whose words they are.",
+        "ar": "لم يكن للأدعية القرآنية ترجمة إنجليزية. وصارت تحمل ترجمة القرآن المعتمدة في التطبيق نفسه، فيعمل زرّ الترجمة لكل دعاء — وسطر النسبة يسمّي لمن الكلمات.",
+        "nl": "De Koranische doe'a's hadden geen Engels. Zij dragen nu de eigen, verantwoorde Koranvertaling van de app, zodat Vertaling voor elke doe'a werkt — en de bronregel zegt van wie de woorden zijn."
+      }
+    },
+    {
+      "id": "adhkar-dutch",
+      "area": "dhikr",
+      "kind": "improved",
+      "title": {
+        "en": "All the adhkar in Dutch",
+        "ar": "الأذكار كلّها بالهولندية",
+        "nl": "Alle adhkar in het Nederlands"
+      },
+      "body": {
+        "en": "All 69 adhkar now have a Dutch rendering, translated from the Arabic and credited as ZULFAA's own. The Arabic above each one remains the authority.",
+        "ar": "صار للأذكار التسعة والستين كلّها ترجمة هولندية، من العربية مباشرة ومنسوبة إلى زُلْفَى. والعربية فوق كلٍّ منها تبقى هي الأصل.",
+        "nl": "Alle 69 adhkar hebben nu een Nederlandse weergave, vertaald uit het Arabisch en als ZULFAA's eigen vertaling vermeld. Het Arabisch erboven blijft de bron."
+      }
+    },
+    {
+      "id": "challenge-languages",
+      "area": "challenge",
+      "kind": "new",
+      "title": {
+        "en": "The challenge asks in your language",
+        "ar": "التحدّي يسألك بلغتك",
+        "nl": "De uitdaging vraagt in uw taal"
+      },
+      "body": {
+        "en": "Questions and their answers now come in English and Dutch as well as Arabic. When a question is only available in Arabic, the card says so rather than mixing the two.",
+        "ar": "صارت الأسئلة وخياراتها تأتي بالإنجليزية والهولندية إلى جانب العربية. وحين لا يتوفّر سؤال إلا بالعربية تقول البطاقة ذلك بدل أن تخلط بينهما.",
+        "nl": "Vragen en hun antwoorden komen nu in het Engels en Nederlands naast het Arabisch. Is een vraag alleen in het Arabisch beschikbaar, dan zegt de kaart dat in plaats van de twee te mengen."
+      }
+    },
+    {
+      "id": "profile-privacy-line",
+      "area": "profile",
+      "kind": "fixed",
+      "title": {
+        "en": "The profile says where your activity really is",
+        "ar": "الملفّ الشخصي يقول أين نشاطك حقًّا",
+        "nl": "Het profiel zegt waar uw activiteit werkelijk staat"
+      },
+      "body": {
+        "en": "The line saying your activity is stored only on this device appeared exactly when you had a username — that is, when a public identity exists on the server. The wording now says what is actually the case, in all three languages.",
+        "ar": "كان سطر «نشاطك محفوظ على هذا الجهاز فقط» يظهر تحديدًا حين يكون لك اسم مستخدم — أي حين توجد هويّة عامة على الخادم. وصارت الصياغة تقول ما هو واقع فعلًا، في اللغات الثلاث.",
+        "nl": "De regel dat uw activiteit alleen op dit toestel wordt bewaard verscheen juist wanneer u een gebruikersnaam had — dus wanneer er een openbare identiteit op de server bestaat. De tekst zegt nu wat werkelijk het geval is, in alle drie de talen."
       }
     }
   ],
-
   "worthKnowing": [
     {
       "id": "no-estimates",
@@ -633,7 +743,6 @@
       }
     }
   ],
-
   "pending": [
     {
       "id": "quran-audit",

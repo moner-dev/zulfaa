@@ -112,6 +112,14 @@ the page; the URL fragment decides which one is SHOWN - the stylesheet reads
 `assets/updates.js` sets `.is-selected` with it on. The newest release shows
 when there is no fragment.
 
+**The writing rule.** Say what changed, why the user will notice it, then
+stop. A change's `body` is one short paragraph - one to three sentences,
+roughly 25-55 words in English - with no internal mechanics, no audit
+reasoning and no edge cases a normal reader does not need. The title carries
+the headline; the body does not repeat it. Behaviour that matters (what is
+never switched on for you, what stays an estimate) is kept; justification is
+cut. All three languages are written to the same length.
+
 **Curated stories.** A release may carry `stories: [{area, title, lead}]` -
 the headline and lead an area's section opens with. An area without one opens
 with its most important change instead, so a story is never required. The

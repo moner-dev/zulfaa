@@ -274,14 +274,25 @@ def hero(rel, state, lang):
 """
 
 
+# The khatim - the eight-pointed star the site's ground is tiled with
+# (assets/star.svg, the same two-square construction) - drawn once, in gold,
+# as the bar's identity mark. One mark, not decoration.
+KHATIM = ('<svg class="sec-mark" viewBox="6 6 52 52" fill="none" stroke="currentColor" '
+          'stroke-width="2.2" stroke-linejoin="round" aria-hidden="true">'
+          '<path d="M54.63 32 48 38.63 48 48 38.63 48 32 54.63 25.37 48 16 48 16 38.63 9.37 32 '
+          '16 25.37 16 16 25.37 16 32 9.37 38.63 16 48 16 48 25.37Z"/><circle cx="32" cy="32" r="4"/></svg>')
+
+
 def section_nav(rel, lang, areas):
     u = U[lang]
     rid = rel["id"]
-    links = '            <a href="#r-%s">%s</a>\n' % (rid, e(u["overview"]))
-    links += "".join('            <a href="#r-%s-%s">%s</a>\n' % (rid, a, e(area_nav_label(a, lang)))
+    links = '              <a href="#r-%s">%s</a>\n' % (rid, e(u["overview"]))
+    links += "".join('              <a href="#r-%s-%s">%s</a>\n' % (rid, a, e(area_nav_label(a, lang)))
                      for a in areas)
-    return ('          <nav class="sec-nav" aria-label="%s">\n%s          </nav>\n'
-            % (e(u["sectionsLabel"]), links))
+    return ('          <nav class="sec-nav" aria-label="%s">\n'
+            '            %s\n'
+            '            <div class="sec-links">\n%s            </div>\n'
+            '          </nav>\n' % (e(u["sectionsLabel"]), KHATIM, links))
 
 
 def full_list(rel, cards, area, lang, all_shown=False):

@@ -2283,24 +2283,62 @@ html:has(.oasis) .site-head .shell {
   margin-inline-start: auto;
 }
 
-/* ── the section nav ──────────────────────────────────────────────────── */
+/* ── the section nav ──────────────────────────────────────────────────
+   Sticky, and made of the site's deep band so it is unmistakably ZULFAA's
+   as it follows the reader: the khatim struck once in gold at its start,
+   cream labels, and a gold underline - not colour alone - for the section
+   in view. It scrolls sideways on a phone; the mark stays put. */
 
 .sec-nav {
   position: sticky;
-  top: 0;
+  top: 0.75rem;
   z-index: 5;
   display: flex;
-  gap: 1.75rem;
-  padding: 0.85rem 0;
-  margin: 0 0 0.5rem;
-  border-block: 1px solid rgba(42, 138, 128, 0.16);
+  align-items: center;
+  gap: 1rem;
+  padding: 0.55rem 1.1rem 0.55rem 1rem;
+  margin: 0.25rem 0 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid var(--band-edge);
+  background-color: var(--band-mid);
+  background-image: linear-gradient(120deg, var(--band-top) 0%, var(--band-mid) 55%, var(--band-deep) 100%);
+  box-shadow: 0 18px 40px -30px rgba(14, 51, 46, 0.75);
+  color: var(--cream);
+}
+
+/* the bar floats a little below the top edge; this covers the strip above
+   it, so scrolling text does not show through the gap */
+.sec-nav::before {
+  content: "";
+  position: absolute;
+  inset-inline: -1px;
+  bottom: 100%;
+  height: 0.8rem;
   background: var(--cream);
+}
+
+.sec-mark {
+  flex: none;
+  width: 1.45rem;
+  height: 1.45rem;
+  color: var(--gold);
+  padding-inline-end: 0.9rem;
+  margin-inline-end: 0.1rem;
+  border-inline-end: 1px solid rgba(254, 249, 240, 0.16);
+  box-sizing: content-box;
+}
+
+.sec-links {
+  display: flex;
+  gap: 1.6rem;
+  min-width: 0;
   overflow-x: auto;
   scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+  padding: 0.3rem 0.15rem;
 }
 
-.sec-nav::-webkit-scrollbar {
+.sec-links::-webkit-scrollbar {
   display: none;
 }
 
@@ -2310,22 +2348,25 @@ html:has(.oasis) .site-head .shell {
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
-  color: var(--ink-soft);
+  color: var(--on-band);
   border-bottom: 2px solid transparent;
 }
 
 .sec-nav a:hover {
-  color: var(--teal-deep);
+  color: var(--on-band-strong);
+  border-bottom-color: rgba(230, 184, 76, 0.55);
 }
 
 .sec-nav a[aria-current] {
-  color: var(--teal-deep);
+  color: var(--on-band-strong);
+  font-weight: 700;
   border-bottom-color: var(--gold);
 }
 
 .sec-nav a:focus-visible {
-  outline: 2px solid var(--teal);
-  outline-offset: 2px;
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
 /* ── a feature story ──────────────────────────────────────────────────── */
@@ -2336,7 +2377,7 @@ html:has(.oasis) .site-head .shell {
   gap: 1.75rem;
   padding: clamp(2.5rem, 5vw, 4.5rem) 0;
   border-top: 1px solid rgba(42, 138, 128, 0.14);
-  scroll-margin-top: 3.5rem;
+  scroll-margin-top: 4.75rem;
 }
 
 .rel-body > .story:first-child,
@@ -2577,7 +2618,7 @@ html[lang="ar"] .keys li::before {
   gap: 1.25rem;
   padding: 0;
   border-top: 0;
-  scroll-margin-top: 4.5rem;
+  scroll-margin-top: 5.75rem;
 }
 
 .story-split .story.small + .story.small {
@@ -2672,7 +2713,7 @@ html[lang="ar"] .keys li::before {
 .pending {
   padding: clamp(2.5rem, 5vw, 4rem) 0;
   border-top: 1px solid rgba(42, 138, 128, 0.14);
-  scroll-margin-top: 3.5rem;
+  scroll-margin-top: 4.75rem;
 }
 
 .worth h3,
