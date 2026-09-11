@@ -18,10 +18,11 @@ Live at <https://zulfaa.nl/>
 Static HTML and CSS, served by GitHub Pages from the `main` branch at the repository root.
 There is no build step: the files here are the files that are served.
 
-- Two small scripts of our own and nothing else: `assets/nav.js` (the side drawer and the
-  language menu) and `assets/carousel.js` (the screenshot lightbox). Every
-  page, including the Privacy Policy, is fully readable and fully navigable with scripting
-  disabled: the header then renders its links inline.
+- Three small scripts of our own and nothing else: `assets/nav.js` (the side drawer and the
+  language menu), `assets/carousel.js` (the screenshot lightbox) and `assets/updates.js` (the
+  Updates page's release navigator and section nav). Every page, including the Privacy Policy,
+  is fully readable and fully navigable with scripting disabled: the header then renders its
+  links inline, and the Updates page shows the release its URL fragment names.
 - No third-party requests. The typefaces (Fredoka, Plus Jakarta Sans and Cairo, all under the
   SIL Open Font License — see `assets/fonts/OFL.txt`) are served from this repository.
 - No advertising, no analytics, no tracking pixels and no cookies.
@@ -49,7 +50,10 @@ page, the English originals included, so change it in `tools/chrome.py`, never b
 
 `/updates/` (the Updates Oasis) is the one page generated in **all three** languages, English
 included: every word of it comes from structured release files, so an English copy kept by hand
-would be a fourth transcription of the same data.
+would be a fourth transcription of the same data. It is an editorial two-column page: a release
+navigator on the reading-start side (a one-line selector on a phone) and one release at a time on
+the other, told as a story - a hero, a section nav, one section per feature area with the two or
+three changes that matter most, and the full list behind "View all … changes".
 
 ```
 tools/releases/index.json      the release list, newest first

@@ -6,71 +6,62 @@ from tools/releases/*.json; every word of the page's own furniture comes from
 tools/updates_strings.py. Adding a future update touches neither this file nor
 the stylesheet.
 
-THE SHAPE, and why it is this shape.
+THE SHAPE - an editorial two-column composition, not a changelog.
 
-  1  The head        the emblem, the word Updates, one line saying what the
-                     page is for.
+    ┌──────────────┬──────────────────────────────────────────────┐
+    │ Releases     │  UPDATE 1 · 1.1.0 · Upcoming                 │
+    │              │  A headline.                                  │
+    │ ● Update 1   │  One paragraph.              [what's inside]  │
+    │   1.1.0      │                                               │
+    │   Upcoming   │  Overview · Qur'an · Prayer · Ramadan · …     │
+    │ ○ Launch     │                                               │
+    │   1.0.0      │  ── Qur'an ──────────────────────────────     │
+    │   Closed     │  A story headline.        1  key change       │
+    │   testing    │  A short lead.            2  key change       │
+    │              │  ▸ View all Qur'an changes (3)                │
+    │              │  ── Prayer ──  (flipped)  …                   │
+    └──────────────┴──────────────────────────────────────────────┘
 
-  2  The spring      a full-bleed band in the site's own deep-teal material -
-                     the same surface the landing page's showcase and the
-                     footer are made of - carrying the newest release that a
-                     person can ACTUALLY HAVE. Solid, dark, dated, with a gold
-                     "Available now" pill. It exists, so it is made of
-                     something.
+LEFT, the release navigator: every release, newest first, on a thin journey
+thread - a solid node for a release people received, a hollow one for a release
+that is still to come. It navigates; it does not summarise. On a phone the same
+markup folds into a one-line selector ("Update 1 · 1.1.0 ▾") because it is a
+<details>: the stylesheet hides its summary above the breakpoint, and the small
+script closes it below.
 
-  3  On the way      immediately beneath, on cream: the upcoming release as an
-                     UNFILLED panel with a dashed rim, a plain outline pill,
-                     and no date at all. It does not exist yet, so it is not
-                     made of anything.
+RIGHT, one release at a time. Every release is in the DOM with its permanent
+id, so a link shared today resolves after ten more updates; which one is SHOWN
+is decided by the URL fragment. With scripting off the stylesheet reads
+:target for that, and with scripting on assets/updates.js does the same thing
+explicitly and keeps the navigator's "current" mark and the section nav in
+step. Nothing on the page depends on the script.
 
-     The contrast between 2 and 3 is the message. A reader does not have to
-     parse a word to know which of the two is on their phone: one is a solid
-     dark slab with a date, the other is an empty outline without one. The
-     pills and the wording then say it again in language.
-
-  4  The journey     the archive. A gold thread down the reading edge with a
-                     node at each release, newest first. Every release keeps a
-                     permanent id, so a link shared today still resolves after
-                     ten more updates. The newest stop is open; older ones are
-                     collapsed and open in place.
-
-  5  The footer note how versions work, and where to report something wrong.
-
-NO SCRIPT. Nothing on this page needs JavaScript: the archive uses <details>,
-and the area filter is a radio group the stylesheet reads. The site's guarantee
-that every page is fully readable and navigable with scripting disabled holds
-here too.
+Each release is a story: a hero, a section nav for the areas it touched, and
+one editorial section per area - headline, lead, the two or three changes that
+matter most - with the complete list behind "View all … changes (n)". Large
+areas alternate their composition; small ones pair up. Launch is told more
+briefly, as history: it is the baseline, not the current story.
 """
-import os, sys
+import os, re, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from chrome import S, LANGS, e, head, header, footer, up, num, nav_items  # noqa: E402
+from chrome import S, LANGS, e, head, header, footer, up, num, nav_items, asset  # noqa: E402
 from updates_strings import U, AREA_ICON, ICON, AREA_ORDER, KIND_ORDER  # noqa: E402
 import releases as R  # noqa: E402
 
 PAGE = "updates/"
 
+# An area with this many changes, or with a picture, gets a full editorial
+# section of its own. Smaller ones pair up in a split row.
+LARGE_AREA = 3
+# How many changes a section shows before "View all".
+KEY_CHANGES = 3
+
 
 def depth(lang):
     """How far the page's file sits below the site root, which is what up()
-    counts back over.
-
-    English is /updates/ while Arabic and Dutch are /ar/updates/ and
-    /nl/updates/, so the two generated language trees are one level deeper.
-    Every other generated page here is Arabic-and-Dutch only and can hard-code
-    2; this one is generated in all three languages and cannot.
-    """
+    counts back over. English is /updates/; Arabic and Dutch are one deeper."""
     return 1 if LANGS[lang]["base"] == "" else 2
-
-
-# How many stops on the journey stand open. The newest release is the one a
-# reader came for; everything behind it is an archive and collapses, so the
-# page does not grow without bound as releases accumulate.
-#
-# Whatever this is, a release THE HERO LINKS TO is always open as well: "Read
-# what changed" must land on the changes and not on a shut lid, and that has to
-# be true without depending on a browser honouring a :target override.
-OPEN_STOPS = 1
 
 
 # ── small pieces ────────────────────────────────────────────────────────────
@@ -79,14 +70,12 @@ def icon(area):
 
 
 def internal(lang, page):
-    """A site page, in this reader's language, from /updates/."""
     return up(depth(lang)) + LANGS[lang]["base"] + page
 
 
 def page_link(lang, page):
     """A link to another page of this site, labelled the way the site's own
-    navigation labels it - so the link reads "Privacy Policy" and not the name
-    of the card's feature area."""
+    navigation labels it."""
     label = dict(nav_items(lang)).get(page, page)
     return '<a href="%s">%s</a>' % (internal(lang, page), e(label))
 
@@ -115,307 +104,378 @@ def rel_label(rel, lang):
     return u["update"] % num(rel["updateNumber"], lang)
 
 
-def version_line(rel, lang):
-    u = U[lang]
-    # The version name is the one fact a reader can check against their own
-    # device, so it is never transliterated into Arabic-Indic digits: it must
-    # match, character for character, what Profile shows them.
-    v = "%s %s" % (u["version"], rel["versionName"])
+def version_text(rel, lang):
+    # Never transliterated: it must match, character for character, what the
+    # reader's own device shows under Profile.
+    v = rel["versionName"]
     if rel.get("versionProvisional"):
-        v += " (%s)" % u["proposed"]
+        v += " (%s)" % U[lang]["proposed"]
     return v
 
 
-def pill(lang, state):
+def status_short(rel, state, lang):
     u = U[lang]
-    if state == "released":
-        return '<p class="pill-status is-available">%s</p>' % e(u["availableNow"])
-    return '<p class="pill-status is-upcoming">%s</p>' % e(u["notReleasedYet"])
+    if state == "upcoming":
+        return u["upcomingShort"]
+    return u["trackShort"].get(rel.get("track"), u["availableNow"])
 
 
-def headline_list(rel, lang, tone):
-    """The three to five changes the hero shows. A reader who leaves after the
-    hero should already know what is new."""
-    by_id = {c["id"]: c for c in rel["changes"]}
-    rows = "".join(
-        '            <li><span class="hl-ico" aria-hidden="true">%s</span>'
-        '<span class="hl-text">%s</span></li>\n'
-        % (icon(by_id[h]["area"]), e(by_id[h]["title"][lang]))
-        for h in rel["headline"] if h in by_id)
-    return '          <ul class="headline %s">\n%s          </ul>\n' % (tone, rows)
+def status_long(rel, state, lang):
+    u = U[lang]
+    if state == "upcoming":
+        return u["notReleasedYet"]
+    return u["track"].get(rel.get("track"), u["availableNow"])
 
 
-# ── the hero panels ─────────────────────────────────────────────────────────
-def spring(rel, lang):
-    """Region 2 - the latest release that people actually have, on the band."""
+SENTENCE_END = re.compile(r"(?<=[.!?؟])\s+")
+
+
+def first_sentence(text):
+    """The one line a key change gets before "View all"."""
+    return SENTENCE_END.split(text.strip(), 1)[0]
+
+
+def area_nav_label(area, lang):
+    """The short word the section nav uses for an area, where the full name
+    would crowd it ("Across the app" -> "Experience")."""
+    u = U[lang]
+    return u.get("navAreas", {}).get(area) or u["areas"][area]
+
+
+def key_changes(rel, cards):
+    """The two or three changes a section shows. The release's own headline
+    picks first; the rest fill by kind, new before fixed."""
+    hl = rel.get("headline") or []
+    picked = [c for c in cards if c["id"] in hl]
+    for c in sorted(cards, key=lambda c: (KIND_ORDER[c["kind"]], cards.index(c))):
+        if len(picked) >= KEY_CHANGES:
+            break
+        if c not in picked:
+            picked.append(c)
+    return picked[:KEY_CHANGES]
+
+
+def lead_change(rel, cards, lang):
+    """When an area has no curated story, one change stands in as its
+    headline: a headline change if there is one, else the newest kind with
+    the shortest title - a headline has to read as a headline."""
+    hl = rel.get("headline") or []
+    for c in cards:
+        if c["id"] in hl:
+            return c
+    return min(cards, key=lambda c: (KIND_ORDER[c["kind"]], len(c["title"][lang])))
+
+
+def media_for(rel, area=None):
+    """The release's lead visual, or the first change picture in an area."""
+    if area is None:
+        return (rel.get("media") or [None])[0]
+    for c in rel["changes"]:
+        if c["area"] == area and c.get("media"):
+            return c["media"]
+    return None
+
+
+def figure(m, lang, cls=""):
+    """A picture only where it is the honest explanation. uiLang is not
+    decoration: a screenshot of the Arabic app shown to a Dutch reader is
+    captioned as such."""
     u, a = U[lang], up(depth(lang))
-    date = fmt_date(rel, lang)
-    if rel.get("datePending"):
-        date += " · " + u["datePending"]
-    return f"""    <section class="spring" aria-labelledby="latest-title">
-      <div class="shell">
-        <p class="spring-eyebrow">{e(u['latestTitle'])}</p>
-        {pill(lang, 'released')}
-        <h2 id="latest-title">{e(rel['title'][lang])}</h2>
-        <p class="spring-meta">{e(rel_label(rel, lang))} <span aria-hidden="true">&middot;</span> {e(version_line(rel, lang))} <span aria-hidden="true">&middot;</span> {e(date)}</p>
-        <p class="spring-summary">{e(rel['summary'][lang])}</p>
-{headline_list(rel, lang, 'on-band')}
-        <p class="spring-more"><a href="#r-{rel['id']}">{e(u['readMore'])}</a></p>
-      </div>
-      <span class="spring-node" aria-hidden="true"></span>
-    </section>
+    cap = (m.get("caption") or {}).get(lang, "")
+    if m["uiLang"] != lang:
+        note = u["screenshotOf"] % u["langName"][m["uiLang"]]
+        cap = (cap + " " + note).strip()
+    return ('<figure class="device %s %s">\n'
+            '  <img src="%s%s" width="%d" height="%d" alt="%s" loading="lazy" decoding="async" />\n'
+            '%s</figure>\n'
+            % (m["aspect"], cls, a, m["src"], m["w"], m["h"], e(m["alt"][lang]),
+               '  <figcaption>%s</figcaption>\n' % e(cap) if cap else ""))
 
+
+# ── the release navigator ───────────────────────────────────────────────────
+CHEV = ('<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+        'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" '
+        'aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>')
+
+
+def release_nav(rels, lang):
+    """One markup for two shapes. Above the breakpoint the stylesheet hides the
+    summary and this is the sidebar; below it, it is a one-line selector that
+    opens into the same list. With scripting off on a phone it simply stands
+    open - two lines, no harm."""
+    u = U[lang]
+    first, first_state = rels[0]
+    items = ""
+    for i, (r, state) in enumerate(rels):
+        items += (
+            '            <li class="rn-item is-%s">\n'
+            '              <a href="#r-%s"%s>\n'
+            '                <span class="rn-node" aria-hidden="true"></span>\n'
+            '                <span class="rn-label">%s</span>\n'
+            '                <span class="rn-version">%s</span>\n'
+            '                <span class="rn-status">%s</span>\n'
+            '              </a>\n'
+            '            </li>\n'
+            % (state, r["id"], ' aria-current="true"' if i == 0 else "",
+               e(rel_label(r, lang)), e(r["versionName"]), e(status_short(r, state, lang))))
+    return f"""        <details class="release-nav" open>
+          <summary aria-label="{e(u['pickRelease'])}">
+            <span class="rn-current"><b data-rn-label>{e(rel_label(first, lang))}</b> <span aria-hidden="true">&middot;</span> <span data-rn-version>{e(first['versionName'])}</span></span>
+            {CHEV}
+          </summary>
+          <nav aria-label="{e(u['releasesLabel'])}">
+            <p class="rn-title">{e(u['releasesLabel'])}</p>
+            <ol class="rn-list">
+{items}            </ol>
+          </nav>
+        </details>
 """
 
 
-def ontheway(rel, lang):
-    """Region 3 - the upcoming release. Unfilled, undated, and said in words."""
+# ── a release ───────────────────────────────────────────────────────────────
+def hero(rel, state, lang):
     u = U[lang]
-    return f"""        <section class="ontheway" aria-labelledby="upcoming-title">
-          <p class="ontheway-eyebrow">{e(u['onTheWayTitle'])}</p>
-          {pill(lang, 'upcoming')}
-          <h2 id="upcoming-title">{e(rel['title'][lang])}</h2>
-          <p class="ontheway-meta">{e(rel_label(rel, lang))} <span aria-hidden="true">&middot;</span> {e(version_line(rel, lang))} <span aria-hidden="true">&middot;</span> {e(u['dateUnknown'])}</p>
-          <p class="ontheway-summary">{e(rel['summary'][lang])}</p>
-          <p class="ontheway-note">{e(u['notReleasedNote'])}</p>
-{headline_list(rel, lang, 'on-cream')}
-          <p class="ontheway-more"><a href="#r-{rel['id']}">{e(u['readMore'])}</a></p>
-        </section>
-
+    rid = rel["id"]
+    eyebrow = "%s <span aria-hidden=\"true\">&middot;</span> %s" % (
+        e(rel_label(rel, lang)), e(version_text(rel, lang)))
+    if state == "upcoming":
+        meta = "%s <span aria-hidden=\"true\">&middot;</span> %s" % (
+            e(u["dateUnknown"]), e(u["notReleasedNote"]))
+    else:
+        date = fmt_date(rel, lang)
+        if rel.get("datePending"):
+            date += " · " + u["datePending"]
+        meta = "%s <span aria-hidden=\"true\">&middot;</span> %s" % (e(date), e(u["testersOnly"])
+                                                                    if rel.get("track") != "production"
+                                                                    else e(date))
+    m = media_for(rel)
+    if m:
+        side = figure(m, lang, "hero-device")
+    else:
+        by_id = {c["id"]: c for c in rel["changes"]}
+        rows = "".join(
+            '              <li><span class="ico" aria-hidden="true">%s</span><span>%s</span></li>\n'
+            % (icon(by_id[h]["area"]), e(by_id[h]["title"][lang]))
+            for h in rel.get("headline") or [] if h in by_id)
+        side = ('<div class="hero-inside">\n'
+                '            <p class="hero-inside-title">%s</p>\n'
+                '            <ul class="hero-inside-list">\n%s            </ul>\n'
+                '          </div>\n' % (e(u["inThisUpdate"]), rows))
+    return f"""          <header class="rel-hero">
+            <div class="rel-hero-text">
+              <p class="rel-eyebrow">{eyebrow} <span aria-hidden="true">&middot;</span> <span class="rel-status is-{state}">{e(status_long(rel, state, lang))}</span></p>
+              <h2 id="t-{rid}">{e(rel['title'][lang])}</h2>
+              <p class="rel-lead">{e(rel['summary'][lang])}</p>
+              <p class="rel-meta">{meta}</p>
+            </div>
+            <div class="rel-hero-side">
+          {side}        </div>
+          </header>
 """
 
 
-# ── a release, in full ──────────────────────────────────────────────────────
-def change_card(rel, ch, lang):
+def section_nav(rel, lang, areas):
     u = U[lang]
-    body = e(ch["body"][lang])
-    link = ""
-    if ch.get("page"):
-        link = ('\n                  <p class="change-link">%s</p>'
-                % page_link(lang, ch["page"]))
-    return (
-        '                <article class="change k-%s" id="c-%s-%s">\n'
-        '                  <p class="change-kind">%s</p>\n'
-        '                  <h6>%s</h6>\n'
-        '                  <p>%s</p>%s\n'
-        '                </article>\n'
-        % (ch["kind"], rel["id"], ch["id"], e(u["kinds"][ch["kind"]]),
-           e(ch["title"][lang]), body, link))
+    rid = rel["id"]
+    links = '            <a href="#r-%s">%s</a>\n' % (rid, e(u["overview"]))
+    links += "".join('            <a href="#r-%s-%s">%s</a>\n' % (rid, a, e(area_nav_label(a, lang)))
+                     for a in areas)
+    return ('          <nav class="sec-nav" aria-label="%s">\n%s          </nav>\n'
+            % (e(u["sectionsLabel"]), links))
 
 
-def area_groups(rel, lang):
-    """The What changed cards, grouped by area.
-
-    A release does not have to touch every area, and most do not: only the
-    areas this release actually changed appear, in the fixed order of
-    AREA_ORDER, so a reader meets the same vocabulary in the same sequence
-    every time.
-    """
+def full_list(rel, cards, area, lang, all_shown=False):
+    """The complete list for one area, behind a disclosure. A refined vertical
+    list: a quiet kind word, a title, the body. No boxes."""
     u = U[lang]
-    out = []
-    for area in AREA_ORDER:
-        cards = [c for c in rel["changes"] if c["area"] == area]
-        if not cards:
-            continue
-        cards.sort(key=lambda c: (KIND_ORDER[c["kind"]], rel["changes"].index(c)))
-        out.append(
-            '              <section class="area-group g-%s" aria-labelledby="g-%s-%s">\n'
-            '                <h5 id="g-%s-%s"><span class="g-ico" aria-hidden="true">%s</span>%s</h5>\n'
-            '                <div class="area-cards">\n%s                </div>\n'
-            '              </section>\n'
-            % (area, rel["id"], area, rel["id"], area, icon(area), e(u["areas"][area]),
-               "".join(change_card(rel, c, lang) for c in cards)))
+    cards = sorted(cards, key=lambda c: (KIND_ORDER[c["kind"]], rel["changes"].index(c)))
+    rows = ""
+    for c in cards:
+        link = ('\n                  <p class="fl-link">%s</p>' % page_link(lang, c["page"])) if c.get("page") else ""
+        rows += ('                <li class="k-%s" id="c-%s-%s">\n'
+                 '                  <span class="fl-kind">%s</span>\n'
+                 '                  <div class="fl-body"><b>%s</b><p>%s</p>%s</div>\n'
+                 '                </li>\n'
+                 % (c["kind"], rel["id"], c["id"], e(u["kinds"][c["kind"]]),
+                    e(c["title"][lang]), e(c["body"][lang]), link))
+    if all_shown:
+        label = u["readInFull"]
+    else:
+        tpl = u.get("viewAllArea", {}).get(area) or u["viewAll"]
+        label = tpl % {"area": u["areas"][area], "n": num(len(cards), lang)}
+    return ('            <details class="story-all">\n'
+            '              <summary><span class="sa-open">%s</span><span class="sa-close">%s</span>%s</summary>\n'
+            '              <ol class="full-list">\n%s              </ol>\n'
+            '            </details>\n'
+            % (e(label), e(u["hideAll"]), CHEV, rows))
+
+
+def story(rel, area, lang, flip, small=False):
+    """One editorial section for one area."""
+    u = U[lang]
+    rid = rel["id"]
+    cards = [c for c in rel["changes"] if c["area"] == area]
+    st = next((s for s in rel.get("stories") or [] if s["area"] == area), None)
+    keys = key_changes(rel, cards)
+    lead_card = None if st else lead_change(rel, cards, lang)
+    title = st["title"][lang] if st else lead_card["title"][lang]
+    lead = st["lead"][lang] if st else lead_card["body"][lang]
+    # what the headline already says is not said again as a key change
+    shown = [c for c in keys if c is not lead_card and c["title"][lang] != title] or keys
+    visible = set(c["id"] for c in shown) | ({lead_card["id"]} if lead_card else set())
+    all_shown = all(c["id"] in visible for c in cards)
+    m = media_for(rel, area)
+    if m:
+        side = figure(m, lang, "story-device")
+    else:
+        # the key changes ARE the visual side: a large, numbered, quiet list
+        rows = "".join(
+            '                <li><b>%s</b><span>%s</span></li>\n'
+            % (e(c["title"][lang]), e(first_sentence(c["body"][lang]))) for c in shown)
+        side = '<ol class="keys">\n%s              </ol>\n' % rows
+    cls = "story" + (" small" if small else "") + (" flip" if flip else "")
+    return f"""          <section class="{cls}" id="r-{rid}-{area}" aria-labelledby="h-{rid}-{area}">
+            <div class="story-text">
+              <p class="story-area"><span class="ico" aria-hidden="true">{icon(area)}</span>{e(u['areas'][area])}</p>
+              <h3 id="h-{rid}-{area}">{e(title)}</h3>
+              <p class="story-lead">{e(lead)}</p>
+            </div>
+            <div class="story-side">
+              {side}            </div>
+{full_list(rel, cards, area, lang, all_shown)}          </section>
+"""
+
+
+def stories(rel, lang, areas):
+    """Large areas alternate composition; small ones pair up in a split row,
+    so the page has a rhythm rather than one repeated component."""
+    out, pending_small, flip = [], [], False
+    counts = {a: sum(1 for c in rel["changes"] if c["area"] == a) for a in areas}
+
+    def flush_small():
+        if not pending_small:
+            return
+        if len(pending_small) == 1:
+            out.append(story(rel, pending_small[0], lang, False, small=True))
+        else:
+            out.append('          <div class="story-split">\n'
+                       + "".join(story(rel, a, lang, False, small=True) for a in pending_small)
+                       + '          </div>\n')
+        pending_small.clear()
+
+    for a in areas:
+        large = counts[a] >= LARGE_AREA or media_for(rel, a) is not None
+        if large:
+            flush_small()
+            out.append(story(rel, a, lang, flip))
+            flip = not flip
+        else:
+            pending_small.append(a)
+            if len(pending_small) == 2:
+                flush_small()
+    flush_small()
     return "".join(out)
 
 
+def compact_list(rel, lang, areas):
+    """Launch is history, not the current story: one refined list of what it
+    contained, grouped lightly by area, and nothing to unfold."""
+    u = U[lang]
+    groups = ""
+    for a in areas:
+        cards = [c for c in rel["changes"] if c["area"] == a]
+        rows = "".join('                <li><b>%s</b><span>%s</span></li>\n'
+                       % (e(c["title"][lang]), e(c["body"][lang])) for c in cards)
+        groups += ('            <div class="held-group" id="r-%s-%s">\n'
+                   '              <p class="story-area"><span class="ico" aria-hidden="true">%s</span>%s</p>\n'
+                   '              <ul class="held">\n%s              </ul>\n'
+                   '            </div>\n' % (rel["id"], a, icon(a), e(u["areas"][a]), rows))
+    return ('          <section class="compact" aria-labelledby="hc-%s">\n'
+            '            <h3 id="hc-%s">%s</h3>\n%s          </section>\n'
+            % (rel["id"], rel["id"], e(u["whatItHeld"]), groups))
+
+
 def worth_block(rel, lang):
-    """Region 3 of the content model. Rendered differently and more prominently
-    than a change card: a reader must not have to infer, from a list of
-    improvements, that something about their data or the app's behaviour is now
-    different."""
+    """Behaviour and privacy, said plainly and on their own: a reader must not
+    have to infer from a list of improvements that something about their data
+    is now different."""
     notes = rel.get("worthKnowing") or []
     if not notes:
         return ""
     u = U[lang]
     rows = ""
     for n in notes:
-        link = ""
-        if n.get("page"):
-            link = ('\n                  <p class="note-link">%s</p>'
-                    % page_link(lang, n["page"]))
-        rows += ('                <article class="note n-%s">\n'
-                 '                  <p class="note-kind">%s</p>\n'
-                 '                  <h5>%s</h5>\n'
-                 '                  <p>%s</p>%s\n'
-                 '                </article>\n'
-                 % (n["kind"], e(u["notes"][n["kind"]]), e(n["title"][lang]),
-                    e(n["body"][lang]), link))
-    return ('              <section class="worth" aria-labelledby="w-%s">\n'
-            '                <h4 id="w-%s">%s</h4>\n%s'
-            '              </section>\n'
-            % (rel["id"], rel["id"], e(u["worthTitle"]), rows))
+        link = ('\n                <p class="note-link">%s</p>' % page_link(lang, n["page"])) if n.get("page") else ""
+        rows += ('              <div class="note n-%s">\n'
+                 '                <p class="note-kind">%s</p>\n'
+                 '                <h4>%s</h4>\n'
+                 '                <p>%s</p>%s\n'
+                 '              </div>\n'
+                 % (n["kind"], e(u["notes"][n["kind"]]), e(n["title"][lang]), e(n["body"][lang]), link))
+    return ('          <section class="worth" id="r-%s-worth" aria-labelledby="w-%s">\n'
+            '            <h3 id="w-%s">%s</h3>\n'
+            '            <div class="worth-list">\n%s            </div>\n'
+            '          </section>\n' % (rel["id"], rel["id"], rel["id"], e(u["worthTitle"]), rows))
 
 
 def pending_block(rel, lang):
-    """What is deliberately not written yet.
-
-    An empty section on a release is how a gap stays visible instead of looking
-    like a finished list. Only an upcoming release can carry one - a shipped
-    release is a record, not a plan - and the validator holds that.
-    """
+    """What is deliberately not written yet, kept visible so the list never
+    looks finished. When the content arrives it becomes ordinary changes in
+    the same file and the item is deleted; the page needs no change."""
     items = rel.get("pending") or []
     if not items:
         return ""
     u = U[lang]
     rows = "".join(
-        '                <article class="pending-item p-%s">\n'
-        '                  <h5><span class="g-ico" aria-hidden="true">%s</span>%s</h5>\n'
-        '                  <p>%s</p>\n'
-        '                </article>\n'
-        % (p["area"], icon(p["area"]), e(p["title"][lang]), e(p["body"][lang]))
-        for p in items)
-    return ('              <section class="pending" aria-labelledby="p-%s">\n'
-            '                <h4 id="p-%s">%s</h4>\n'
-            '                <p class="pending-note">%s</p>\n%s'
-            '              </section>\n'
+        '              <div class="pending-item">\n'
+        '                <h4><span class="ico" aria-hidden="true">%s</span>%s</h4>\n'
+        '                <p>%s</p>\n'
+        '              </div>\n'
+        % (icon(p["area"]), e(p["title"][lang]), e(p["body"][lang])) for p in items)
+    return ('          <section class="pending" aria-labelledby="p-%s">\n'
+            '            <h3 id="p-%s">%s</h3>\n'
+            '            <p class="pending-note">%s</p>\n'
+            '            <div class="pending-list">\n%s            </div>\n'
+            '          </section>\n'
             % (rel["id"], rel["id"], e(u["pendingTitle"]), e(u["pendingNote"]), rows))
 
 
-def media_block(rel, lang):
-    """A picture only where it is the honest explanation.
-
-    uiLang is not decoration: a screenshot of the English app shown to an Arabic
-    reader is captioned as such, so the reader knows what they are looking at
-    rather than wondering why the app looks different from theirs.
-    """
-    shots = rel.get("media") or []
-    if not shots:
-        return ""
-    u, a = U[lang], up(depth(lang))
-    figs = ""
-    for m in shots:
-        cap = (m.get("caption") or {}).get(lang, "")
-        if m["uiLang"] != lang:
-            note = u["screenshotOf"] % u["langName"][m["uiLang"]]
-            cap = (cap + " " + note).strip() if note not in cap else cap
-        figs += ('                <figure class="shot-fig %s">\n'
-                 '                  <img src="%s%s" width="%d" height="%d" alt="%s"\n'
-                 '                       loading="lazy" decoding="async" />\n'
-                 '                  <figcaption>%s</figcaption>\n'
-                 '                </figure>\n'
-                 % (m["aspect"], a, m["src"], m["w"], m["h"], e(m["alt"][lang]), e(cap)))
-    return ('              <section class="highlights" aria-labelledby="h-%s">\n'
-            '                <h4 id="h-%s">%s</h4>\n'
-            '                <div class="shot-row">\n%s                </div>\n'
-            '              </section>\n'
-            % (rel["id"], rel["id"], e(u["highlightsTitle"]), figs))
-
-
-CHEV = ('<svg class="stop-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
-        'stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" '
-        'aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>')
-
-
-def stop(rel, lang, state, is_open):
-    """One stop on the journey. Its id is permanent: it is the address a link
-    shared today resolves against, and it must still resolve in ten releases'
-    time."""
-    u = U[lang]
-    date = fmt_date(rel, lang)
-    if state == "released" and rel.get("datePending"):
-        date += " · " + u["datePending"]
+def release(rel, state, lang):
     areas = [a for a in AREA_ORDER if any(c["area"] == a for c in rel["changes"])]
-    marks = "".join('<span class="mark" aria-hidden="true">%s</span>' % icon(a) for a in areas)
-    return f"""          <li class="stop is-{state}">
-            <details id="r-{rel['id']}" class="release"{' open' if is_open else ''}>
-              <summary>
-                <span class="stop-dot" aria-hidden="true"></span>
-                <span class="stop-head">
-                  <span class="stop-line">
-                    <span class="stop-label">{e(rel_label(rel, lang))}</span>
-                    <span class="stop-status">{e(u['availableNow'] if state == 'released' else u['notReleasedYet'])}</span>
-                  </span>
-                  <h3>{e(rel['title'][lang])}</h3>
-                  <span class="stop-meta">{e(version_line(rel, lang))} <span aria-hidden="true">&middot;</span> {e(date)}</span>
-                  <span class="stop-summary">{e(rel['summary'][lang])}</span>
-                  <span class="stop-marks">{marks}</span>
-                </span>
-                {CHEV}
-              </summary>
-              <div class="stop-body">
-                <section class="changes" aria-labelledby="ch-{rel['id']}">
-                  <h4 id="ch-{rel['id']}">{e(u['changesTitle'])}</h4>
-                  <p class="filter-empty">{e(u['filterNone'])}</p>
-{area_groups(rel, lang)}                </section>
-{worth_block(rel, lang)}{media_block(rel, lang)}{pending_block(rel, lang)}              </div>
-            </details>
-          </li>
+    compact = rel["updateNumber"] is None
+    body = compact_list(rel, lang, areas) if compact else stories(rel, lang, areas)
+    return f"""        <article class="release is-{state}{' is-compact' if compact else ''}" id="r-{rel['id']}" aria-labelledby="t-{rel['id']}">
+{hero(rel, state, lang)}{'' if compact else section_nav(rel, lang, areas)}          <div class="rel-body">
+{body}{worth_block(rel, lang)}{pending_block(rel, lang)}          </div>
+        </article>
 """
-
-
-# ── the area filter ─────────────────────────────────────────────────────────
-def filter_bar(rels, lang):
-    """"Show me everything that ever changed in the Qur'an" - the one question a
-    normal changelog cannot answer, and the reason the archive is worth keeping.
-
-    Ten radio buttons and a stylesheet, no script: the page works the same with
-    scripting disabled. Only the areas the archive actually contains get a chip;
-    an area no release has ever touched would be a dead control.
-    """
-    u = U[lang]
-    present = [a for a in AREA_ORDER
-               if any(c["area"] == a for r in rels for c in r["changes"])]
-    inputs = '          <input class="filter-input" type="radio" name="area" id="fa-all" checked />\n'
-    inputs += "".join('          <input class="filter-input" type="radio" name="area" id="fa-%s" />\n' % a
-                      for a in present)
-    chips = ('            <label class="chip" for="fa-all">%s</label>\n' % e(u["filterAll"]))
-    chips += "".join(
-        '            <label class="chip" for="fa-%s"><span class="chip-ico" aria-hidden="true">%s</span>%s</label>\n'
-        % (a, icon(a), e(u["areas"][a])) for a in present)
-    return (inputs +
-            '          <div class="filter-bar" role="group" aria-label="%s">\n%s          </div>\n'
-            % (e(u["filterLabel"]), chips))
 
 
 # ── the page ────────────────────────────────────────────────────────────────
 def build_updates(lang):
     u, a = U[lang], up(depth(lang))
     rels = R.rendered(R.load())
-
-    latest_released = next((r for r, s in rels if s == "released"), None)
-    upcoming = next((r for r, s in rels if s == "upcoming"), None)
-
-    hero = spring(latest_released, lang) if latest_released else ""
-    coming = ontheway(upcoming, lang) if upcoming else ""
-    linked = {r["id"] for r in (latest_released, upcoming) if r}
-    stops = "".join(stop(r, lang, s, i < OPEN_STOPS or r["id"] in linked)
-                    for i, (r, s) in enumerate(rels))
-
-    return (head(lang, PAGE, depth(lang), u["title"], u["desc"]) + header(lang, PAGE, depth(lang)) + f"""    <main>
-      <div class="shell">
-        <section class="oasis-head" aria-labelledby="oasis-title">
-          <img src="{a}assets/emblem-256.webp" alt="" width="256" height="256" />
+    articles = "".join(release(r, s, lang) for r, s in rels)
+    return (head(lang, PAGE, depth(lang), u["title"], u["desc"]) + header(lang, PAGE, depth(lang)) + f"""    <main class="oasis">
+      <div class="oasis-shell">
+        <header class="oasis-head">
           <p class="oasis-eyebrow">{e(u['eyebrow'])}</p>
-          <h1 id="oasis-title">{e(u['h1'])}</h1>
+          <h1>{e(u['h1'])}</h1>
           <p class="oasis-lede">{e(u['lede'])}</p>
-        </section>
-      </div>
+        </header>
 
-{hero}      <div class="shell">
-{coming}        <section class="journey" aria-labelledby="journey-title">
-          <h2 class="section-title" id="journey-title">{e(u['journeyTitle'])}</h2>
-          <p class="section-note">{e(u['journeyNote'])}</p>
-
-{filter_bar([r for r, _ in rels], lang)}
-          <ol class="stops">
-{stops}          </ol>
-        </section>
+        <div class="oasis-grid">
+{release_nav(rels, lang)}
+          <div class="stage">
+{articles}          </div>
+        </div>
 
         <section class="how-versions" aria-labelledby="how-title">
-          <h2 class="section-title" id="how-title">{e(u['footTitle'])}</h2>
-          <p class="section-note">{e(u['footNote'])}</p>
-          <p class="section-note">{e(u['footReport'])} <a href="{internal(lang, 'support/')}">{e(u['supportLink'])}</a></p>
+          <h2 id="how-title">{e(u['footTitle'])}</h2>
+          <p>{e(u['footNote'])}</p>
+          <p>{e(u['footReport'])} <a href="{internal(lang, 'support/')}">{e(u['supportLink'])}</a></p>
         </section>
       </div>
     </main>
+    <script src="{a}{asset("assets/updates.js")}" defer></script>
 """ + footer(lang, PAGE, depth(lang)))

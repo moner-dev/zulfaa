@@ -37,6 +37,74 @@
 
   "media": [],
 
+  "stories": [
+    {
+      "area": "quran",
+      "title": {
+        "en": "Your place in the Qur'an is kept",
+        "ar": "موضعك في القرآن محفوظ",
+        "nl": "Uw plek in de Koran blijft bewaard"
+      },
+      "lead": {
+        "en": "Your place in a surah is kept whether or not recitation is playing, a finished surah steps aside, and the Qur'an tile says which of its two things it will do. The full review of the Qur'an experience is still under way.",
+        "ar": "موضعك في السورة محفوظ سواء كانت التلاوة تعمل أم لا، والسورة المختومة تتنحّى، وبطاقة القرآن تقول أيّ الأمرين ستفعل. والمراجعة الكاملة لتجربة القرآن ما تزال جارية.",
+        "nl": "Uw plek in een soera blijft bewaard, of de recitatie nu speelt of niet; een uitgelezen soera treedt terzijde, en de Koran-tegel zegt welke van haar twee dingen zij zal doen. De volledige doorlichting van de Koran-ervaring is nog bezig."
+      }
+    },
+    {
+      "area": "prayer",
+      "title": {
+        "en": "The Prayer page, put right",
+        "ar": "صفحة الصلاة، على ما ينبغي",
+        "nl": "Het gebedsscherm, rechtgezet"
+      },
+      "lead": {
+        "en": "Every row now says what it will actually do, the countdown and the highlighted prayer finally agree after Isha, and where a time genuinely cannot be calculated, ZULFAA says so instead of guessing.",
+        "ar": "كل صفّ يقول الآن ما سيفعله فعلًا، والعدّاد والصلاة المميَّزة يتّفقان أخيرًا بعد العشاء، وحيث يتعذّر حساب وقت حقًّا يقول زُلْفَى ذلك بدل أن يخمّن.",
+        "nl": "Elke regel zegt nu wat zij werkelijk zal doen, de aftelling en het gemarkeerde gebed zijn het na Isha eindelijk eens, en waar een tijd echt niet te berekenen is, zegt ZULFAA dat in plaats van te gokken."
+      }
+    },
+    {
+      "area": "ramadan",
+      "title": {
+        "en": "The Ramadan Planner",
+        "ar": "مخطِّط رمضان",
+        "nl": "De Ramadan-planner"
+      },
+      "lead": {
+        "en": "Suhoor and Iftar from the same times the Prayer screen uses, five acts of worship a day, and a fasting record that only ever says what you told it.",
+        "ar": "السحور والإفطار من المواقيت نفسها التي تعرضها شاشة الصلاة، وخمسة أعمال في اليوم، وسجلّ صيام لا يقول إلا ما قلته له.",
+        "nl": "Suhoor en iftar uit dezelfde tijden als het gebedsscherm, vijf daden van aanbidding per dag, en een vastenregistratie die alleen zegt wat u haar hebt verteld."
+      }
+    },
+    {
+      "area": "umrah",
+      "title": {
+        "en": "Umrah Savings",
+        "ar": "ادّخار العمرة",
+        "nl": "Umrah-spaarpot"
+      },
+      "lead": {
+        "en": "A goal, the contributions you record against it, and everything else worked out from those two — never stored, never touching a bank.",
+        "ar": "هدف، ومساهمات تسجّلها مقابله، وكل ما عداهما يُحسب منهما — لا يُحفظ ولا يمسّ مصرفًا.",
+        "nl": "Een doel, de bijdragen die u erop vastlegt, en al het overige uit die twee berekend — nooit opgeslagen, nooit langs een bank."
+      }
+    },
+    {
+      "area": "app",
+      "title": {
+        "en": "A quieter app",
+        "ar": "تطبيق أهدأ",
+        "nl": "Een rustiger app"
+      },
+      "lead": {
+        "en": "Panels you can pull back down, nothing hidden under the navigation, a theme switch that is a switch, and a start page that reads the same in all three languages.",
+        "ar": "لوحات تسحبها إلى أسفل، ولا شيء مخفيّ تحت شريط التنقّل، ومفتاح مظهر هو مفتاح حقًّا، وصفحة رئيسية تُقرأ سواءً في اللغات الثلاث.",
+        "nl": "Panelen die u weer omlaag kunt trekken, niets meer verstopt onder de navigatie, een themaknop die echt een schakelaar is, en een startscherm dat in alle drie de talen hetzelfde leest."
+      }
+    }
+  ],
+
   "changes": [
     {
       "id": "umrah-savings",

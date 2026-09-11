@@ -206,6 +206,22 @@ def validate(rel, seen_ids):
     for m in rel.get("media") or []:
         _media(m, w)
 
+    # stories - optional curated headline and lead for an area's section. An
+    # area with no story still renders: its most important change stands in.
+    areas_present = {c["area"] for c in rel.get("changes") or []}
+    seen_story = set()
+    for st in rel.get("stories") or []:
+        sw = "%s/story %s" % (w, st.get("area"))
+        if st.get("area") not in AREAS:
+            raise ReleaseError("%s: area is not one of the nine" % sw)
+        if st["area"] not in areas_present:
+            raise ReleaseError("%s: a story for an area this release did not touch" % sw)
+        if st["area"] in seen_story:
+            raise ReleaseError("%s: two stories for one area" % sw)
+        seen_story.add(st["area"])
+        _langs(st.get("title"), "title", sw)
+        _langs(st.get("lead"), "lead", sw)
+
 
 def _media(m, where):
     if not m.get("src"):

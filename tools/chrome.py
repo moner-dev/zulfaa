@@ -128,7 +128,7 @@ def asset(rel):
         return "%s?v=%s" % (rel, hashlib.sha1(fh.read()).hexdigest()[:8])
 
 
-ASSET_RE = re.compile(r"assets/(?:zulfaa\.css|nav\.js|carousel\.js)(?:\?v=[0-9a-f]+)?")
+ASSET_RE = re.compile(r"assets/(?:zulfaa\.css|nav\.js|carousel\.js|updates\.js)(?:\?v=[0-9a-f]+)?")
 
 
 def reversion(text):

@@ -105,10 +105,18 @@ block, so the gap is visible instead of the list looking finished. When the
 content arrives it becomes ordinary `changes` entries in the same file and the
 pending item is deleted. The page needs no change for that.
 
-**A deep link** is `/updates/#r-<id>`, and each card is `#c-<id>-<change id>`.
-Ids are permanent. The newest release, and any release the hero links to, is
-rendered open; older ones collapse, and a link into a collapsed one opens it
-(`:target` in the stylesheet).
+**A deep link** is `/updates/#r-<id>`; a section is `#r-<id>-<area>` and a
+single change `#c-<id>-<change id>`. Ids are permanent. Every release is in
+the page; the URL fragment decides which one is SHOWN - the stylesheet reads
+`:target` (and `:has()` for a link into a section) with scripting off, and
+`assets/updates.js` sets `.is-selected` with it on. The newest release shows
+when there is no fragment.
+
+**Curated stories.** A release may carry `stories: [{area, title, lead}]` -
+the headline and lead an area's section opens with. An area without one opens
+with its most important change instead, so a story is never required. The
+two or three changes a section shows are the release's `headline` entries for
+that area first, then the newest kind; the rest sit behind "View all".
 
 ## Running it
 
