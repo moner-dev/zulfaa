@@ -170,6 +170,7 @@
       w: i.getAttribute("width"),
       h: i.getAttribute("height"),
       cap: s.getAttribute("data-cap") || "",
+      device: s.classList.contains("shot--device"),
     };
   });
 
@@ -190,6 +191,7 @@
     img.setAttribute("height", s.h);
     img.src = s.src;
     img.alt = s.alt;
+    img.classList.toggle("is-device", s.device);
     if (elIndex) elIndex.textContent = pad(current + 1);
     if (elName) elName.textContent = s.cap;
   }

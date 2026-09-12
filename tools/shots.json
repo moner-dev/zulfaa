@@ -1,100 +1,162 @@
 [
  {
-  "file": "home.webp",
-  "w": 462,
-  "h": 990,
+  "file": "home",
+  "w": 941,
+  "h": 1672,
+  "device": false,
   "caption": "Home",
-  "alt": "The ZULFAA home screen: the next prayer countdown, today's challenge, Qur'an progress and the verse of the day."
+  "alt": "ZULFAA's home screen on a phone, introduced as a daily companion for worship: the next prayer countdown, today's challenge and quick access to every section."
  },
  {
-  "file": "prayer-times.webp",
-  "w": 462,
-  "h": 990,
+  "file": "prayer-times",
+  "w": 941,
+  "h": 1672,
+  "device": false,
   "caption": "Prayer times",
-  "alt": "The prayer times screen, showing the five daily prayers for the chosen location with the current prayer highlighted."
+  "alt": "The prayer times screen: the next prayer with its countdown and the five daily prayers, each with its own alert."
  },
  {
-  "file": "qibla.webp",
-  "w": 462,
-  "h": 990,
+  "file": "qibla",
+  "w": 941,
+  "h": 1672,
+  "device": false,
   "caption": "Qibla",
-  "alt": "The qibla compass, pointing to the Ka'bah with the bearing and distance from the current location."
+  "alt": "The qibla compass, pointing to the Ka'bah from the chosen location with the bearing and the remaining difference."
  },
  {
-  "file": "quran.webp",
-  "w": 462,
-  "h": 990,
+  "file": "quran",
+  "w": 941,
+  "h": 1672,
+  "device": false,
   "caption": "The Noble Qur'an",
-  "alt": "The Qur'an reader, listing the surahs with reading progress and the last position."
+  "alt": "The Qur'an index: all 114 surahs, with search and tabs for surahs, juz', favourites and the last reading."
  },
  {
-  "file": "reciters.webp",
-  "w": 462,
-  "h": 990,
+  "file": "surah-reader",
+  "w": 941,
+  "h": 1672,
+  "device": false,
+  "caption": "Reading & listening",
+  "alt": "Surah Al-Baqarah open in the dark theme, with a choice of reciters above the Arabic text."
+ },
+ {
+  "file": "reciters",
+  "w": 941,
+  "h": 1672,
+  "device": true,
   "caption": "Reciters",
-  "alt": "The reciter picker, offering a list of Qur'an reciters to listen to."
+  "alt": "The full list of reciters, with each name in Arabic and English."
  },
  {
-  "file": "adhkar.webp",
-  "w": 462,
-  "h": 990,
-  "caption": "Adhkar",
-  "alt": "The adhkar collection, with morning and evening remembrances grouped by occasion."
+  "file": "adhkar-dua",
+  "w": 941,
+  "h": 1672,
+  "device": true,
+  "caption": "Adhkar & Du'a",
+  "alt": "Adhkar and Du'a in the dark theme: the daily wird, favourites, search and du'as grouped by theme."
  },
  {
-  "file": "dua.webp",
-  "w": 462,
-  "h": 990,
-  "caption": "Du'a",
-  "alt": "The du'a collection, grouped by theme with translation and source."
- },
- {
-  "file": "daily-challenge.webp",
-  "w": 462,
-  "h": 990,
+  "file": "daily-challenge",
+  "w": 941,
+  "h": 1672,
+  "device": false,
   "caption": "Daily Challenge",
-  "alt": "The daily knowledge challenge, offering a set of questions and the tokens they award."
+  "alt": "The daily challenge: five questions from reliable sources, in-app tokens for correct answers and the Honor Board."
  },
  {
-  "file": "notifications.webp",
-  "w": 462,
-  "h": 990,
+  "file": "challenge-questions",
+  "w": 941,
+  "h": 1672,
+  "device": true,
+  "caption": "Challenge questions",
+  "alt": "A daily challenge question in the dark theme, with four answers to choose from."
+ },
+ {
+  "file": "ramadan-planner",
+  "w": 941,
+  "h": 1672,
+  "device": false,
+  "caption": "Ramadan Planner",
+  "alt": "The Ramadan Planner: the days until Ramadan, the estimated start date and an explanation of how the dates are estimated."
+ },
+ {
+  "file": "umrah-savings",
+  "w": 941,
+  "h": 1672,
+  "device": false,
+  "caption": "Umrah Savings",
+  "alt": "Umrah Savings: set a personal target, add contributions and see what is saved and what remains."
+ },
+ {
+  "file": "notifications",
+  "w": 941,
+  "h": 1672,
+  "device": true,
   "caption": "Reminders",
-  "alt": "The notification settings, with a mode for each prayer and for the adhkar and Qur'an reminders."
+  "alt": "The notification settings, with an off, alert or adhan mode and a reminder time for each prayer."
  },
  {
-  "file": "prayer-settings.webp",
-  "w": 462,
-  "h": 990,
+  "file": "prayer-settings",
+  "w": 887,
+  "h": 1774,
+  "device": true,
   "caption": "Prayer settings",
-  "alt": "The prayer calculation settings: method, madhhab and per-prayer minute adjustments."
+  "alt": "The prayer settings: calculation method, Asr madhhab and the high-latitude rule."
  },
  {
-  "file": "profile.webp",
-  "w": 462,
-  "h": 986,
+  "file": "app-settings",
+  "w": 941,
+  "h": 1672,
+  "device": false,
+  "caption": "App settings",
+  "alt": "The app settings: language, light, dark or follow-system theme, notifications and prayer location."
+ },
+ {
+  "file": "home-dark",
+  "w": 1122,
+  "h": 1402,
+  "device": false,
+  "caption": "Dark theme",
+  "alt": "ZULFAA's home screen in the dark theme and in English, with the next prayer, today's challenge and quick access."
+ },
+ {
+  "file": "profile",
+  "w": 941,
+  "h": 1672,
+  "device": true,
   "caption": "Your space",
-  "alt": "The personal space, showing saved items, favourites and the daily wird."
+  "alt": "The personal space: username, favourites, saved items, Qur'an progress and today's wird."
  },
  {
-  "file": "menu.webp",
-  "w": 462,
-  "h": 990,
+  "file": "menu",
+  "w": 941,
+  "h": 1672,
+  "device": false,
   "caption": "Navigation",
-  "alt": "The side menu, listing the app's sections from the Daily Challenge to Help and Support."
+  "alt": "The side menu, with everything in one place: the daily challenge, saved items, settings, help and the legal pages."
  },
  {
-  "file": "about.webp",
-  "w": 462,
-  "h": 990,
+  "file": "help-support",
+  "w": 941,
+  "h": 1672,
+  "device": true,
+  "caption": "Help & Support",
+  "alt": "Help and Support in the dark theme: frequently asked questions and a way to contact the ZULFAA team."
+ },
+ {
+  "file": "about",
+  "w": 941,
+  "h": 1672,
+  "device": false,
   "caption": "About ZULFAA",
-  "alt": "The about screen, describing ZULFAA and crediting the sources its content comes from."
+  "alt": "The About ZULFAA screen: what the app brings together and the sources its content comes from."
  },
  {
-  "file": "intro.webp",
-  "w": 462,
-  "h": 990,
+  "file": "intro",
+  "w": 940,
+  "h": 1672,
+  "device": true,
   "caption": "The opening",
-  "alt": "The ZULFAA opening screen: the gold emblem centred on the cream muqarnas vault."
+  "alt": "The ZULFAA opening screen: the gold emblem centred on the cream vault."
  }
 ]

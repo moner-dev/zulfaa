@@ -33,10 +33,12 @@ MAIL = "moner.intelligence@gmail.com"
 DEV = "MONER INTELLIGENCE SYSTEMS"
 
 CAPS = {
- "ar": ["الرئيسية","أوقات الصلاة","القبلة","القرآن الكريم","القرّاء","الأذكار","الأدعية",
-        "تحدّي اليوم","التذكيرات","إعدادات الصلاة","مساحتك","القائمة","عن زُلْفَى","الافتتاحية"],
- "nl": ["Start","Gebedstijden","Qibla","De Nobele Koran","Reciteurs","Adhkar","Doe'a",
-        "Dagelijkse uitdaging","Herinneringen","Gebedsinstellingen","Uw ruimte","Navigatie",
+ "ar": ["الرئيسية","أوقات الصلاة","القبلة","القرآن الكريم","القراءة والاستماع","القرّاء","الأذكار والأدعية",
+        "تحدّي اليوم","أسئلة التحدّي","مخطط رمضان","ادخار العمرة","التذكيرات","إعدادات الصلاة",
+        "إعدادات التطبيق","الوضع الداكن","مساحتك","القائمة","المساعدة والدعم","عن زُلْفَى","الافتتاحية"],
+ "nl": ["Start","Gebedstijden","Qibla","De Nobele Koran","Lezen en luisteren","Reciteurs","Adhkar en doe'a",
+        "Dagelijkse uitdaging","Uitdagingsvragen","Ramadanplanner","Umrah-sparen","Herinneringen",
+        "Gebedsinstellingen","App-instellingen","Donker thema","Uw ruimte","Navigatie","Hulp en support",
         "Over ZULFAA","De opening"],
 }
 ALT = {"ar": "لقطة من تطبيق زُلْفَى: %s", "nl": "Schermafbeelding uit de ZULFAA-app: %s"}

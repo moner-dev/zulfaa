@@ -1337,7 +1337,9 @@ section.band {
 /* ── the carousel ───────────────────────────────────────────────────── */
 
 .carousel {
-  --shot-w: clamp(10.5rem, 44vw, 14rem);
+  /* the width of a slide in the common 941x1672 proportion; a slide of another
+     shape is --k times as wide, so every slide in the row shares one height */
+  --shot-w: clamp(11.5rem, 56vw, 16rem);
   position: relative;
   margin-top: 2rem;
 }
@@ -1373,7 +1375,7 @@ section.band {
 }
 
 .shot {
-  flex: 0 0 var(--shot-w);
+  flex: 0 0 calc(var(--shot-w) * var(--k, 1));
   scroll-snap-align: center;
   scroll-snap-stop: always;
   transition: opacity 0.45s ease;
@@ -1413,6 +1415,21 @@ section.band {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* A phone mockup on a transparent ground already has its own bezel and edge:
+   a card border, fill and box shadow around it would draw a box round the
+   phone. It keeps the scale and hover behaviour and casts a shadow that
+   follows the phone's outline instead. */
+.carousel .shot.shot--device .shot-frame,
+.carousel .shot.shot--device:hover .shot-frame,
+.carousel.is-enhanced .shot.shot--device.is-active .shot-frame {
+  overflow: visible;
+  border-color: transparent;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(0 18px 22px rgba(0, 0, 0, 0.45));
 }
 
 .carousel.is-enhanced .shot.is-active .shot-frame {
@@ -1721,6 +1738,14 @@ section.band {
   box-shadow:
     0 32px 70px -24px rgba(0, 0, 0, 0.9),
     0 6px 18px -8px rgba(0, 0, 0, 0.7);
+}
+
+.lb-img.is-device {
+  border-color: transparent;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  filter: drop-shadow(0 28px 36px rgba(0, 0, 0, 0.6));
 }
 
 @supports (height: 100dvh) {

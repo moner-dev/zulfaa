@@ -25,6 +25,37 @@ X = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2
      'stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>')
 
 
+# The showcase images are the Store artwork as supplied: full-bleed posters and
+# phone mockups on a transparent ground. Every slide shares one height; `--k` is
+# the slide's width relative to the common 941x1672 proportion, so a wider or
+# narrower image keeps its own shape instead of being cropped or letterboxed.
+BASE_RATIO = 941 / 1672
+THUMB_W = 640
+
+
+def shot_k(sh):
+    return "%.4f" % ((sh["w"] / sh["h"]) / BASE_RATIO)
+
+
+def shot_class(sh):
+    return "shot shot--device" if sh.get("device") else "shot"
+
+
+def shot_src(a, sh):
+    return "%sassets/showcase/%s.webp" % (a, sh["file"])
+
+
+def shot_srcset(a, sh):
+    return "%sassets/showcase/%s-%d.webp %dw, %sassets/showcase/%s.webp %dw" % (
+        a, sh["file"], THUMB_W, THUMB_W, a, sh["file"], sh["w"])
+
+
+def shot_sizes(sh):
+    k = (sh["w"] / sh["h"]) / BASE_RATIO
+    # the row width is clamp(11.5rem, 56vw, 16rem) x k; 16rem meets 56vw at 457px
+    return "(max-width: 457px) %.0fvw, %.1frem" % (56 * k, 16 * k)
+
+
 def build_home(lang):
     p, d = "", 1
     s, prod, n = S[lang], C[lang]["product"], C[lang]["nav"]
@@ -42,17 +73,18 @@ def build_home(lang):
     for i, sh in enumerate(SHOTS):
         cap = CAPS[lang][i]
         slides += (
-            '          <li\n            class="shot"\n            role="group"\n'
+            '          <li\n            class="%s"\n            style="--k: %s"\n            role="group"\n'
             '            aria-roledescription="slide"\n            aria-label="%d / %d: %s"\n'
             '            data-cap="%s"\n          >\n'
             '            <div class="shot-frame">\n'
-            '              <img\n                src="%sassets/screenshots/%s"\n'
+            '              <img\n                src="%s"\n                srcset="%s"\n                sizes="%s"\n'
             '                width="%d"\n                height="%d"\n                alt="%s"\n'
             '                loading="%s"\n                decoding="async"%s\n              />\n'
             '              <button\n                class="shot-zoom"\n                type="button"\n'
             '                data-zoom="%d"\n                aria-label="%s"\n              >%s</button>\n'
             '            </div>\n            <p class="shot-cap">%s</p>\n          </li>\n'
-            % (i + 1, N, e(cap), e(cap), a, sh["file"], sh["w"], sh["h"], e(ALT[lang] % cap),
+            % (shot_class(sh), shot_k(sh), i + 1, N, e(cap), e(cap), shot_src(a, sh), shot_srcset(a, sh),
+               shot_sizes(sh), sh["w"], sh["h"], e(ALT[lang] % cap),
                "eager" if i < 3 else "lazy", ' fetchpriority="high"' if i == 0 else "",
                i, e(s["zoomLabel"] % cap), MAG, e(cap)))
 
@@ -148,7 +180,7 @@ def build_home(lang):
 
         <div class="lb-stage" data-lb-close>
           <figure class="lb-figure">
-            <img class="lb-img" alt="" width="462" height="990" decoding="async" />
+            <img class="lb-img" alt="" width="941" height="1672" decoding="async" />
             <figcaption class="lb-cap">
               <b data-lb-index>01</b> / <span data-lb-total>{N:02d}</span> &middot; <span data-lb-name></span>
             </figcaption>
