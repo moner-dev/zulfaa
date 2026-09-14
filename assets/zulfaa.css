@@ -796,11 +796,6 @@ html[lang="ar"] .brand-name {
   letter-spacing: normal; /* tracking breaks Arabic joining */
 }
 
-/* the hero wordmark is already Arabic and already sized for it */
-html[lang="ar"] .hero h1 {
-  letter-spacing: 0.06em;
-}
-
 /* ── RTL ────────────────────────────────────────────────────────────────
    The layout is built on logical properties, so most of it mirrors itself.
    These are the handful of physical offsets that cannot. */
@@ -831,39 +826,447 @@ html[lang="ar"] .hero h1 {
    "previous" lands on the reader's right, which is where it belongs. Nothing
    to override — only the absolutely positioned pieces above needed help. */
 
-/* ── hero ───────────────────────────────────────────────────────────── */
+/* ── hero ─────────────────────────────────────────────────────────────
+   Asymmetric: the words sit at the reading start, the phone at the reading
+   end. Both are logical, so RTL mirrors the whole composition without a
+   single directional override.
+
+   The emblem that used to open this section is gone: the header carries it
+   two inches above, and showing it twice made the page open with a splash
+   screen instead of a product. */
 
 .hero {
-  text-align: center;
-  padding: 2.5rem 0 1rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.88fr);
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(1.5rem, 4vw, 3.25rem) 0 clamp(2rem, 5vw, 3.5rem);
 }
 
-.hero-emblem {
-  width: 9.5rem;
-  height: 9.5rem;
-  filter: drop-shadow(0 14px 30px rgba(26, 90, 82, 0.22));
+.hero-copy {
+  min-width: 0;
 }
 
+/* Arabic first, small and gold: the name of the app in its own script, set
+   as a mark rather than a heading. */
 .wordmark-ar {
-  font-family: "Cairo", serif;
-  font-size: 2rem;
+  font-family: "Cairo", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.5rem, 4.5vw, 1.9rem);
   color: var(--gold-ink);
-  margin: 0.85rem 0 0;
-  line-height: 1.5;
+  margin: 0;
+  line-height: 1.6;
 }
 
 .hero h1 {
-  font-size: clamp(2.4rem, 9vw, 3.6rem);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin: 0.15rem 0 0;
+  font-size: clamp(2.1rem, 5.4vw, 3.15rem);
+  line-height: 1.12;
+  letter-spacing: -0.005em;
+  margin: 0.35rem 0 0;
+  text-wrap: balance;
+  color: var(--teal-deep);
 }
 
 .hero .tagline {
-  font-size: clamp(1rem, 3.4vw, 1.2rem);
+  font-size: clamp(1rem, 2.2vw, 1.12rem);
+  line-height: 1.65;
   color: var(--ink-soft);
-  margin: 0.6rem auto 0;
-  max-width: 34rem;
+  margin: 1rem 0 0;
+  max-width: 34ch;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.6rem;
+}
+
+/* the quiet line under the actions - the strongest thing ZULFAA can say,
+   said plainly and once */
+.hero-trust {
+  margin: 1.15rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-width: 32ch;
+}
+
+/* ── hero actions ───────────────────────────────────────────────────────
+   The buttons are the site's own `.btn` / `.btn.primary`, one size up: a
+   hero action that matches the body-copy links reads as a footnote. Only
+   the scale and the lift are new. */
+
+.hero-actions .btn {
+  padding: 0.82rem 1.5rem;
+  font-size: 0.98rem;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease;
+}
+
+.hero-actions .btn.primary {
+  box-shadow: 0 6px 18px rgba(26, 90, 82, 0.26);
+}
+
+.hero-actions .btn:hover {
+  transform: translateY(-1px);
+}
+
+.hero-actions .btn.primary:hover {
+  box-shadow: 0 10px 24px rgba(26, 90, 82, 0.3);
+}
+
+/* ── the Play status ────────────────────────────────────────────────────
+   ZULFAA is not on Google Play yet, so this is a state, not a link. It is
+   shaped like a badge because that is what it will become, and the dot says
+   "pending" without a word. Nothing here is clickable: a button that cannot
+   do its job is worse than an honest label. */
+
+.play-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem 0.5rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(230, 184, 76, 0.5);
+  background: var(--gold-soft);
+  color: var(--gold-ink);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.play-status svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  flex: none;
+}
+
+.play-status .dot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--gold);
+  flex: none;
+}
+
+/* ── the phone ──────────────────────────────────────────────────────────
+   One object with weight: a dark bezel, a real inner screen, and light that
+   falls on it from behind. The ambient glow is what sells the depth - it
+   warms in daylight and cools at night, so the phone looks lit by whatever
+   the screen is showing. */
+
+.hero-stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  min-width: 0;
+}
+
+.phone {
+  --ambient-warm: rgba(230, 184, 76, 0.34);
+  --ambient-cool: rgba(26, 90, 82, 0.42);
+  position: relative;
+  width: min(17.5rem, 100%);
+  aspect-ratio: 941 / 1672;
+}
+
+/* the light the screen throws onto the page behind it */
+.phone::before {
+  content: "";
+  position: absolute;
+  inset: -12% -16% -8%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--ambient-warm), transparent 72%);
+  filter: blur(16px);
+  transition: background 0.4s ease 0.2s;
+}
+
+/* The photographed frame sits ON TOP of the screens: its bezel is opaque, so
+   it does the masking - the rounded corners of the aperture are the frame's
+   own, not a border-radius guessed in CSS. */
+.phone-frame {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 18px 26px rgba(14, 51, 46, 0.28))
+    drop-shadow(0 4px 8px rgba(14, 51, 46, 0.2));
+}
+
+/* the aperture, measured off the frame: 758x1538 inside 941x1672 */
+.phone-screen {
+  position: absolute;
+  z-index: 1;
+  inset-inline-start: 9.777%;
+  top: 3.947%;
+  width: 80.553%;
+  height: 91.986%;
+  overflow: hidden;
+  background: var(--cream);
+}
+
+.phone-screen img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* The two themes are stacked and swapped instantly. There is no crossfade:
+   half-dissolved UI is the thing that looks cheap, and these two screens do
+   not even share a writing direction, so any overlap at all reads as a
+   glitch. The blink below is what hides the swap. */
+.screen-dark {
+  opacity: 0;
+}
+
+.phone[data-theme="dark"] .screen-dark {
+  opacity: 1;
+}
+
+/* ── the blink ──────────────────────────────────────────────────────────
+   Two lids close to the centre line, the image changes behind them, they
+   open again. A thin warm line rides the closing edge - the specular catch
+   a real screen gives as it goes dark - and it is the only ornament. */
+
+.lid {
+  position: absolute;
+  inset-inline: 0;
+  height: 50.5%; /* the overlap is what stops a seam at the meeting line */
+  z-index: 3;
+  pointer-events: none;
+  transform: scaleY(0);
+  background: #060f0d;
+}
+
+.lid-top {
+  top: 0;
+  transform-origin: top center;
+}
+
+.lid-bottom {
+  bottom: 0;
+  transform-origin: bottom center;
+}
+
+.lid::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  height: 1px;
+  opacity: 0;
+  background: linear-gradient(90deg, transparent, rgba(247, 230, 189, 0.75), transparent);
+}
+
+.lid-top::after {
+  bottom: 0;
+}
+
+.lid-bottom::after {
+  top: 0;
+}
+
+.phone.is-blinking .lid {
+  animation: lid-blink 560ms cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+.phone.is-blinking .lid::after {
+  animation: lid-catch 560ms ease both;
+}
+
+@keyframes lid-blink {
+  0% {
+    transform: scaleY(0);
+  }
+  40%,
+  58% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0);
+  }
+}
+
+@keyframes lid-catch {
+  0%,
+  10% {
+    opacity: 0;
+  }
+  38%,
+  60% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.phone[data-theme="dark"] {
+  --ambient-warm: var(--ambient-cool);
+}
+
+/* ── the day/night control ──────────────────────────────────────────────
+   The app has this exact control in its own header; the site borrows it so
+   the first thing a visitor touches is something they will meet again
+   inside ZULFAA. */
+
+.theme-demo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.5rem 0.4rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 90, 82, 0.22);
+  background: rgba(254, 249, 240, 0.9);
+  color: var(--teal-deep);
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.theme-demo:hover {
+  border-color: rgba(26, 90, 82, 0.45);
+  background: var(--cream);
+}
+
+.theme-demo:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.theme-demo .knob {
+  position: relative;
+  width: 2.6rem;
+  height: 1.45rem;
+  border-radius: 999px;
+  background: var(--gold-soft);
+  border: 1px solid rgba(230, 184, 76, 0.55);
+  flex: none;
+  transition:
+    background-color 0.45s ease,
+    border-color 0.45s ease;
+}
+
+.theme-demo .knob::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 0.16rem;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 999px;
+  background: var(--gold);
+  transform: translate(0, -50%);
+  transition:
+    transform 0.45s cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 0.45s ease;
+}
+
+.theme-demo[aria-pressed="true"] .knob {
+  background: #1b3b37;
+  border-color: rgba(208, 235, 232, 0.35);
+}
+
+.theme-demo[aria-pressed="true"] .knob::after {
+  background: var(--teal-soft);
+  transform: translate(1.15rem, -50%);
+}
+
+/* RTL: the knob travels the other way */
+html[dir="rtl"] .theme-demo[aria-pressed="true"] .knob::after {
+  transform: translate(-1.15rem, -50%);
+}
+
+.theme-demo .label-day,
+.theme-demo .label-night {
+  display: none;
+}
+
+.theme-demo[aria-pressed="false"] .label-day,
+.theme-demo[aria-pressed="true"] .label-night {
+  display: inline;
+  padding-inline-end: 0.35rem;
+}
+
+/* ── hero night wash ────────────────────────────────────────────────────
+   The page answers the phone. A deep-teal veil fades in behind the hero
+   when the screen goes dark, so the whole composition changes light
+   together instead of the phone changing alone. */
+
+.hero-night {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 100%;
+  z-index: -2;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 90% at 72% 34%,
+    rgba(14, 51, 46, 0.17),
+    rgba(14, 51, 46, 0.05) 52%,
+    transparent 74%
+  );
+  transition: opacity 0.45s ease 0.2s;
+}
+
+.hero-wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-wrap:has(.phone[data-theme="dark"]) .hero-night {
+  opacity: 1;
+}
+
+/* ── hero, narrow ───────────────────────────────────────────────────── */
+
+@media (max-width: 56.25rem) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.25rem;
+    padding-top: 0.5rem;
+    text-align: start;
+  }
+  .hero .tagline,
+  .hero-trust {
+    max-width: 46ch;
+  }
+  .phone {
+    width: min(15.5rem, 76vw);
+  }
+}
+
+/* ── motion, refused ────────────────────────────────────────────────────
+   Everything above still works: the toggle still switches the screen, the
+   ambient light still changes. It simply happens at once. */
+
+@media (prefers-reduced-motion: reduce) {
+  .phone.is-blinking .lid,
+  .phone.is-blinking .lid::after {
+    animation: none;
+  }
+  .hero-night,
+  .phone::before,
+  .theme-demo .knob,
+  .theme-demo .knob::after {
+    transition: none;
+  }
 }
 
 .rule {
@@ -879,28 +1282,6 @@ html[lang="ar"] .hero h1 {
   margin: 0 auto;
   font-size: 1.05rem;
   color: var(--ink-soft);
-}
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1.5rem;
-  padding: 0.5rem 1.1rem;
-  border-radius: 999px;
-  border: 1px solid rgba(230, 184, 76, 0.45);
-  background: var(--gold-soft);
-  color: var(--gold-ink);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-.pill::before {
-  content: "";
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 999px;
-  background: var(--gold);
 }
 
 /* ── cards ──────────────────────────────────────────────────────────── */
@@ -1012,6 +1393,11 @@ section.band {
 .btn.primary:hover {
   background: var(--teal);
   color: #fff;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
 }
 
 /* ── documents (privacy / terms / support) ──────────────────────────── */
@@ -1269,13 +1655,6 @@ section.band {
 @media (max-width: 34rem) {
   .toc ol {
     columns: 1;
-  }
-  .hero {
-    padding-top: 1.5rem;
-  }
-  .hero-emblem {
-    width: 8rem;
-    height: 8rem;
   }
 }
 
@@ -1912,6 +2291,153 @@ section.band {
   .car-arrow,
   .car-status,
   .car-hint {
+    display: none;
+  }
+}
+
+/* ══ navigation bar ═════════════════════════════════════════════════════
+   Sticky and transparent over the hero, then glass once the page moves
+   under it. The change is the only thing in the header that animates, and
+   it earns it: it tells you the page has scrolled and keeps the links
+   reachable without a bar sitting on top of the composition from the
+   start.
+
+   `.is-stuck` is set by nav.js from an IntersectionObserver on a sentinel,
+   not from a scroll listener - no work on the scroll thread. With
+   scripting off the header is simply always in its resting state, which is
+   fully usable. */
+
+.site-head {
+  position: sticky;
+  top: 0;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.site-head.is-stuck {
+  background: rgba(254, 249, 240, 0.82);
+  -webkit-backdrop-filter: saturate(1.5) blur(14px);
+  backdrop-filter: saturate(1.5) blur(14px);
+  border-bottom-color: rgba(26, 90, 82, 0.12);
+  box-shadow: 0 6px 22px -14px rgba(14, 51, 46, 0.5);
+}
+
+.head-sentinel {
+  height: 1px;
+  margin-bottom: -1px;
+}
+
+/* the brand keeps its Arabic name beside the Latin one - two scripts, one
+   mark, which is what ZULFAA is */
+.brand-ar {
+  font-family: "Cairo", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: var(--gold-ink);
+  margin-inline-start: 0.15rem;
+  font-weight: 600;
+}
+
+/* ── the actions at the reading end ─────────────────────────────────── */
+
+.head-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* one social link, because one is what exists. A row of five icons where
+   four lead nowhere is clutter pretending to be presence. */
+.icon-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 999px;
+  color: var(--teal-deep);
+  border: 1px solid rgba(26, 90, 82, 0.18);
+  background: rgba(254, 249, 240, 0.6);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.icon-link svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.icon-link:hover {
+  border-color: rgba(26, 90, 82, 0.45);
+  background: var(--cream);
+}
+
+.icon-link:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* the header's Play state: the same material as the hero's, one size down */
+.play-status.is-compact {
+  padding: 0.38rem 0.75rem 0.38rem 0.6rem;
+  font-size: 0.75rem;
+  gap: 0.45rem;
+}
+
+.play-status.is-compact svg {
+  width: 0.92rem;
+  height: 0.92rem;
+}
+
+/* Below the header breakpoint the nav folds into the drawer. The Play state
+   and the social link go with it rather than crowding the bar - the drawer
+   is where the secondary chrome belongs on a phone. */
+@media (max-width: 68.75rem) {
+  html.js .head-actions {
+    display: none;
+  }
+  .drawer-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid rgba(26, 90, 82, 0.14);
+  }
+  .drawer-actions .play-status,
+  .drawer-actions .icon-link {
+    align-self: flex-start;
+  }
+  .drawer-actions .icon-link {
+    width: auto;
+    padding-inline: 0.85rem;
+    gap: 0.5rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  /* in the bar the mark alone is enough; in the drawer, where there is room
+     and no tooltip on touch, the name is shown instead of only announced */
+  .drawer-actions .icon-link .vh {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+    white-space: nowrap;
+  }
+}
+
+@media (min-width: 68.8125rem) {
+  .drawer-actions {
     display: none;
   }
 }

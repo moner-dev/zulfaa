@@ -90,13 +90,64 @@ def build_home(lang):
 
     return (head(lang, p, d, s["homeTitle"], s["homeDesc"]) + header(lang, p, d) + f"""    <main>
       <div class="shell">
-        <section class="hero">
-          <img class="hero-emblem" src="{a}assets/emblem-768.webp" alt="ZULFAA" width="768" height="768" />
-          <p class="wordmark-ar" lang="ar" dir="rtl">زُلْفَى</p>
-          <h1>Zulfaa</h1>
-          <p class="tagline">{e(prod['tagline'])}</p>
-          <p class="pill">{e(s['pill'])}</p>
-        </section>
+        <div class="hero-wrap">
+          <div class="hero-night" aria-hidden="true"></div>
+          <section class="hero">
+            <div class="hero-copy">
+              <p class="wordmark-ar" lang="ar">زُلْفَى</p>
+              <h1>{e(s['heroTitle'])}</h1>
+              <p class="tagline">{e(s['heroLead'])}</p>
+              <div class="hero-actions">
+                <a class="btn primary" href="mailto:{MAIL}?subject=ZULFAA">{e(s['ctaNotify'])}</a>
+                <a class="btn" href="#more-title">{e(s['ctaInside'])}</a>
+              </div>
+              <p class="hero-trust">{e(s['heroTrust'])}</p>
+            </div>
+            <div class="hero-stage">
+              <div class="phone" data-theme="light">
+                <div class="phone-screen">
+                  <img
+                    class="screen-light"
+                    src="{a}assets/hero/home-light-600.webp"
+                    srcset="{a}assets/hero/home-light-600.webp 600w, {a}assets/hero/home-light-900.webp 900w"
+                    sizes="(max-width: 56.25rem) 74vw, 17rem"
+                    alt="{e(s['shotAlt'])}"
+                    width="945"
+                    height="1928"
+                  />
+                  <img
+                    class="screen-dark"
+                    src="{a}assets/hero/home-dark-600.webp"
+                    srcset="{a}assets/hero/home-dark-600.webp 600w, {a}assets/hero/home-dark-900.webp 900w"
+                    sizes="(max-width: 56.25rem) 74vw, 17rem"
+                    alt=""
+                    aria-hidden="true"
+                    width="945"
+                    height="1928"
+                  />
+                  <span class="lid lid-top" aria-hidden="true"></span>
+                  <span class="lid lid-bottom" aria-hidden="true"></span>
+                </div>
+                <img
+                  class="phone-frame"
+                  src="{a}assets/hero/frame-600.webp"
+                  srcset="{a}assets/hero/frame-600.webp 600w, {a}assets/hero/frame-900.webp 900w"
+                  sizes="(max-width: 56.25rem) 76vw, 17.5rem"
+                  alt=""
+                  aria-hidden="true"
+                  width="941"
+                  height="1672"
+                />
+              </div>
+              <button class="theme-demo" type="button" aria-pressed="false">
+                <span class="knob" aria-hidden="true"></span>
+                <span class="vh">{e(s['themeLabel'])}</span>
+                <span class="label-day" aria-hidden="true">{e(s['dayLabel'])}</span>
+                <span class="label-night" aria-hidden="true">{e(s['nightLabel'])}</span>
+              </button>
+            </div>
+          </section>
+        </div>
 
         <hr class="rule" />
 

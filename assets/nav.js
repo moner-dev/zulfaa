@@ -237,3 +237,73 @@
     if (e.persisted && open) open.set(false);
   });
 })();
+
+/* ZULFAA — the sticky header's state.
+ *
+ * An IntersectionObserver on a 1px sentinel placed above the header, not a
+ * scroll listener: the browser tells us when the header starts sticking and
+ * nothing runs on the scroll thread. With scripting off the header simply
+ * stays in its resting state, which is fully usable. */
+(function () {
+  var head = document.querySelector(".site-head");
+  var sentinel = document.querySelector(".head-sentinel");
+  if (!head || !sentinel || !("IntersectionObserver" in window)) return;
+  new IntersectionObserver(function (entries) {
+    head.classList.toggle("is-stuck", !entries[0].isIntersecting);
+  }).observe(sentinel);
+})();
+
+/* ZULFAA — the hero's day/night control.
+ *
+ * The phone in the hero shows the app's own light and dark themes. The button
+ * is the only control; the stylesheet does the reveal, so nothing here runs
+ * per frame. Absent on every page but the home page, where it returns early. */
+(function () {
+  var btn = document.querySelector(".theme-demo");
+  var phone = document.querySelector(".hero .phone");
+  if (!btn || !phone) return;
+
+  var touched = false;
+
+  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var swapTimer, endTimer;
+
+  /* The lids are shut between 224ms and 324ms; the image is swapped at 280ms,
+     in the middle of that window, so the change happens behind a closed
+     screen and the two themes are never both visible. */
+  function set(dark) {
+    btn.setAttribute("aria-pressed", dark ? "true" : "false");
+    if (calm) {
+      phone.setAttribute("data-theme", dark ? "dark" : "light");
+      return;
+    }
+    window.clearTimeout(swapTimer);
+    window.clearTimeout(endTimer);
+    phone.classList.remove("is-blinking");
+    void phone.offsetWidth; /* restart the animation if it is already running */
+    phone.classList.add("is-blinking");
+    swapTimer = window.setTimeout(function () {
+      phone.setAttribute("data-theme", dark ? "dark" : "light");
+    }, 280);
+    endTimer = window.setTimeout(function () {
+      phone.classList.remove("is-blinking");
+    }, 580);
+  }
+
+  btn.addEventListener("click", function () {
+    touched = true;
+    set(btn.getAttribute("aria-pressed") !== "true");
+  });
+
+  /* One orchestrated moment on arrival: night falls and lifts again, once, so
+   * a visitor sees the app has both themes without being told. It never runs
+   * when motion is refused, and it yields the moment the visitor takes over. */
+  if (calm) return;
+  window.setTimeout(function () {
+    if (touched) return;
+    set(true);
+    window.setTimeout(function () {
+      if (!touched) set(false);
+    }, 2800);
+  }, 1600);
+})();
