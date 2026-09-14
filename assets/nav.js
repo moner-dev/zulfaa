@@ -179,24 +179,35 @@
   var lang = disclosure(langBtn, langList, { focusFirst: true, arrowKeys: true });
   if (lang) lang.firstFocus = function () { return lang.links[0]; };
 
-  /* Menu semantics belong to the desktop control only. Inside the drawer the
-     same list is a segmented row of ordinary links, and it must tab like one. */
-  function applyLangMode() {
-    if (!lang) return;
-    var isMenu = !COLLAPSED.matches;
+  // ── the Top Bar's language menu (phones and tablets) ───────────────────
+  /* Same markup contract, same factory. Built here rather than in its own
+     block so it shares `open` with the drawer and the navbar menu: opening
+     one closes the other, and the document-level Escape and outside-click
+     handlers below already cover it. */
+  var topBtn = document.querySelector(".topbar-lang-btn");
+  var topList = topBtn && document.getElementById(topBtn.getAttribute("aria-controls"));
+  var topLang = disclosure(topBtn, topList, { focusFirst: true, arrowKeys: true });
+  if (topLang) topLang.firstFocus = function () { return topLang.links[0]; };
+
+  /* Menu semantics belong to whichever control is actually on screen. The
+     other one's list is either a segmented row of ordinary links (the drawer)
+     or display:none (the Top Bar above the breakpoint), and neither should
+     advertise itself as a menu or hold a tabindex. */
+  function setMenuSemantics(d, isMenu) {
+    if (!d) return;
     if (isMenu) {
-      langBtn.setAttribute("aria-haspopup", "menu");
-      langList.setAttribute("role", "menu");
+      d.btn.setAttribute("aria-haspopup", "menu");
+      d.panel.setAttribute("role", "menu");
     } else {
-      langBtn.removeAttribute("aria-haspopup");
-      langList.removeAttribute("role");
-      lang.set(false);
+      d.btn.removeAttribute("aria-haspopup");
+      d.panel.removeAttribute("role");
+      d.set(false);
     }
-    Array.prototype.forEach.call(langList.children, function (li) {
+    Array.prototype.forEach.call(d.panel.children, function (li) {
       if (isMenu) li.setAttribute("role", "none");
       else li.removeAttribute("role");
     });
-    lang.links.forEach(function (a) {
+    d.links.forEach(function (a) {
       if (isMenu) {
         a.setAttribute("role", "menuitem");
         /* menu items are reached with the arrow keys; Tab leaves the menu */
@@ -206,6 +217,13 @@
         a.removeAttribute("tabindex");
       }
     });
+  }
+
+  /* One header selector at every width: above the breakpoint the navbar's,
+     at or below it the Top Bar's. Never both. */
+  function applyLangMode() {
+    setMenuSemantics(lang, !COLLAPSED.matches);
+    setMenuSemantics(topLang, COLLAPSED.matches);
   }
   applyLangMode();
 

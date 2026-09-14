@@ -2316,6 +2316,10 @@ section.band {
    on sticking. */
 
 .topbar {
+  position: relative;
+  /* above .site-head's 30 so the language panel can hang over the navbar,
+     below the drawer's backdrop at 55 and the lightbox at 100 */
+  z-index: 40;
   background: var(--band-deep);
   border-bottom: 1px solid var(--band-edge);
 }
@@ -2416,8 +2420,176 @@ section.band {
   }
 }
 
+/* 320px, the narrowest phones still in use. The longest Play string
+   ("Coming soon to Google Play") ran 4px past the edge here, so the row is
+   tightened rather than allowed to push the page sideways. */
 @media (max-width: 22.5rem) {
-  .topbar-status {
-    font-size: 0.72rem;
+  .topbar-inner {
+    gap: 0.5rem;
+    padding: 0 0.75rem;
   }
+  .topbar-status {
+    font-size: 0.7rem;
+    gap: 0.35rem;
+  }
+  .topbar-lang-btn {
+    gap: 0.25rem;
+    padding: 0 0.45rem;
+  }
+  .topbar-link {
+    width: 2rem;
+  }
+}
+
+/* ── Top Bar: the language selector ─────────────────────────────────────
+   Present only where the navbar's own selector has folded into the side
+   menu, so exactly one header selector exists at any width. 68.75rem is
+   the drawer's breakpoint, reused rather than invented: iPad portrait
+   (768) and landscape (1024) both fall below it and get this one; a
+   desktop or a 12.9" iPad landscape (1366) gets the navbar's.
+
+   Enhanced in, like the navbar's button: without `html.js` it never
+   appears, and the header's own inline language links remain reachable. */
+
+.topbar-lang {
+  display: none;
+  position: relative;
+}
+
+@media (max-width: 68.75rem) {
+  html.js .topbar-lang {
+    display: block;
+  }
+}
+
+.topbar-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  height: 2.25rem;
+  padding: 0 0.6rem;
+  border: 1px solid rgba(254, 249, 240, 0.22);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--on-band);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.topbar-lang-btn > svg {
+  width: 1rem;
+  height: 1rem;
+  flex: none;
+}
+
+.topbar-lang-btn .chev {
+  width: 0.85rem;
+  height: 0.85rem;
+  opacity: 0.75;
+  transition: transform 0.2s ease;
+}
+
+.topbar-lang-btn[aria-expanded="true"] .chev {
+  transform: rotate(180deg);
+}
+
+.topbar-lang-btn:hover {
+  color: var(--on-band-strong);
+  border-color: rgba(254, 249, 240, 0.4);
+  background: rgba(254, 249, 240, 0.08);
+}
+
+.topbar-lang-btn[aria-expanded="true"] {
+  color: var(--on-band-strong);
+  border-color: var(--band-edge);
+  background: rgba(254, 249, 240, 0.1);
+}
+
+.topbar-lang-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* the short code stands in where the full name would crowd the row */
+.topbar-lang-code {
+  display: none;
+}
+
+@media (max-width: 24rem) {
+  .topbar-lang-name {
+    display: none;
+  }
+  .topbar-lang-code {
+    display: inline;
+  }
+}
+
+/* The panel. Absolute, so opening it shifts nothing; anchored to the
+   button's own start edge, which mirrors itself in Arabic because the
+   property is logical. */
+.topbar-lang-list {
+  position: absolute;
+  z-index: 1;
+  top: calc(100% + 0.45rem);
+  inset-inline-start: 0;
+  min-width: 100%;
+  margin: 0;
+  padding: 0.3rem;
+  list-style: none;
+  border: 1px solid var(--band-edge);
+  border-radius: 0.85rem;
+  background: var(--band-mid);
+  box-shadow: 0 16px 34px -12px rgba(7, 24, 21, 0.75);
+}
+
+.topbar-lang-btn[aria-expanded="false"] + .topbar-lang-list {
+  display: none;
+}
+
+.topbar-lang-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 0.55rem;
+  color: var(--on-band);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.topbar-lang-list a:hover {
+  color: var(--on-band-strong);
+  background: rgba(254, 249, 240, 0.1);
+}
+
+.topbar-lang-list a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+
+/* the language you are already reading */
+.topbar-lang-list a[aria-current="true"] {
+  color: var(--gold);
+}
+
+/* `.lang-check` is display:none globally; only the current item turns it
+   back on, which means setting `display`, not just a size. */
+.topbar-lang-list a[aria-current="true"] .lang-check {
+  display: block;
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: none;
 }

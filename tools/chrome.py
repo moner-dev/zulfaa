@@ -149,6 +149,15 @@ CHECK = ('<svg class="lang-check" viewBox="0 0 24 24" fill="none" stroke="curren
          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>')
 
 
+def lang_links(lang, page, depth):
+    """(code, href, is_current) for the three languages, pointing at the SAME
+    page in each. Both language menus call this, so "stay on this page when
+    the language changes" is implemented once."""
+    a = up(depth)
+    return [(l, (a + LANGS[l]["base"] + page) or "./", l == lang)
+            for l in ("en", "ar", "nl")]
+
+
 def langswitch(lang, page, depth):
     """The language menu.
 
@@ -169,11 +178,10 @@ def langswitch(lang, page, depth):
            '              %s' % CHEV,
            '            </button>',
            '            <ul class="lang-list" id="lang-menu">']
-    for l in ("en", "ar", "nl"):
-        href = (a + LANGS[l]["base"] + page) or "./"
-        cur = ' aria-current="true"' if l == lang else ""
+    for l, href, cur in lang_links(lang, page, depth):
         out.append('              <li><a href="%s" lang="%s" hreflang="%s"%s>%s%s</a></li>'
-                   % (href, l, l, cur, e(LANGS[l]["name"]), CHECK if l == lang else ""))
+                   % (href, l, l, ' aria-current="true"' if cur else "",
+                      e(LANGS[l]["name"]), CHECK if cur else ""))
     out.append("            </ul>")
     out.append("          </nav>")
     return "\n".join(out)
@@ -198,7 +206,40 @@ GH_SVG = ('<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">'
           '<path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>')
 
 
-def topbar(lang, depth):
+def topbar_lang(lang, page, depth):
+    """The Top Bar's language menu: globe, the current language, a chevron.
+
+    Same markup contract as the navbar's - a button plus a plain <ul> of the
+    three links - so assets/nav.js drives it with the very same `disclosure`
+    it uses for the navbar menu and the drawer, and Escape, outside-click,
+    arrow keys and focus return all come with it.
+
+    Without scripting the button is hidden and this whole control is hidden
+    with it; the header still renders its three language links inline, so
+    language is never unreachable."""
+    s = S[lang]
+    out = ['          <div class="topbar-lang">',
+           '            <button class="topbar-lang-btn" type="button" aria-haspopup="true" '
+           'aria-expanded="false" aria-controls="topbar-lang-menu">',
+           '              %s' % GLOBE,
+           '              <span class="vh">%s</span>' % e(s["langPrefix"]),
+           '              <span class="topbar-lang-name" lang="%s">%s</span>'
+           % (lang, e(LANGS[lang]["name"])),
+           '              <span class="topbar-lang-code" aria-hidden="true" lang="%s">%s</span>'
+           % (lang, e(s["langShort"])),
+           '              %s' % CHEV,
+           '            </button>',
+           '            <ul class="topbar-lang-list" id="topbar-lang-menu">']
+    for l, href, cur in lang_links(lang, page, depth):
+        out.append('              <li><a href="%s" lang="%s" hreflang="%s"%s>%s%s</a></li>'
+                   % (href, l, l, ' aria-current="true"' if cur else "",
+                      e(LANGS[l]["name"]), CHECK if cur else ""))
+    out.append("            </ul>")
+    out.append("          </div>")
+    return "\n".join(out)
+
+
+def topbar(lang, page, depth):
     """A slim bar ABOVE the navigation: the project's social presence at the
     reading start, the Google Play state at the reading end, and one line of
     availability between them on wide screens.
@@ -222,6 +263,7 @@ def topbar(lang, depth):
           <a class="topbar-link" href="{GITHUB}" rel="me noopener" target="_blank">
             {GH_SVG}<span class="vh">{e(s['ghLabel'])}</span>
           </a>
+{topbar_lang(lang, page, depth)}
         </div>
         <p class="topbar-note">{e(s['topNote'])}</p>
         <p class="topbar-play">
@@ -261,7 +303,7 @@ def header_html(lang, page, depth, links):
     rows = "\n".join('            <a href="%s"%s>%s</a>'
                      % (h, ' aria-current="page"' if cur else "", e(label)) for h, label, cur in links)
     return f"""    <!-- site-chrome:start -->
-{topbar(lang, depth)}    <div class="head-sentinel" aria-hidden="true"></div>
+{topbar(lang, page, depth)}    <div class="head-sentinel" aria-hidden="true"></div>
     <header class="site-head">
       <div class="shell">
         <a class="brand" href="{home}">
