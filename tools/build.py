@@ -44,7 +44,14 @@ if PREVIEW:
     print("wrote %d files -> %s" % (len(written), OUT_ROOT))
     raise SystemExit(0)
 
-HEADER_RE = re.compile(r'    <header class="site-head">.*?</header>\n\n', re.S)
+# The generated chrome is a marked region so it can be replaced as a unit.
+# The second alternative is the legacy shape - a bare header, optionally
+# preceded by sentinels a previous build left behind - so pages written before
+# the markers existed are repaired on the next run rather than accumulating.
+HEADER_RE = re.compile(
+    r'    <!-- site-chrome:start -->.*?    <!-- site-chrome:end -->\n\n'
+    r'|(?:    <div class="head-sentinel"[^>]*></div>\n)*'
+    r'    <header class="site-head">.*?</header>\n\n', re.S)
 NAV_LINK_RE = re.compile(r'<a href="([^"]*)"( aria-current="page")?>([^<]*)</a>')
 
 

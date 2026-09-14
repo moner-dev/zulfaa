@@ -198,19 +198,38 @@ GH_SVG = ('<svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">'
           '<path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg>')
 
 
-def play(lang, compact=False):
-    """ZULFAA is not on Google Play yet. This renders the STATE, never a link:
-    a badge that leads nowhere is worse than a label that tells the truth.
-    When the listing goes live this becomes an <a> and nothing else moves."""
-    cls = "play-status is-compact" if compact else "play-status"
-    return ('          <span class="%s">%s%s</span>'
-            % (cls, PLAY_SVG, e(S[lang]["playSoon"])))
+def topbar(lang, depth):
+    """A slim bar ABOVE the navigation: the project's social presence at the
+    reading start, the Google Play state at the reading end, and one line of
+    availability between them on wide screens.
 
+    Every class here is prefixed `topbar-` and every rule is scoped to
+    `.topbar`, so nothing in it can reach the header, the side menu, the
+    buttons or the hero. It is deliberately NOT sticky - it scrolls away and
+    the navbar below it keeps sticking.
 
-def github(lang, cls):
-    label = e(S[lang]["ghLabel"])
-    return ('          <a class="%s" href="%s" rel="me noopener" target="_blank" title="%s">'
-            '%s<span class="vh">%s</span></a>' % (cls, GITHUB, label, GH_SVG, label))
+    The Play element is a <span>. ZULFAA has no Play listing and no testing
+    URL, so there is nothing honest to link to yet; when there is, this
+    becomes an <a href> and no layout around it changes.
+
+    Instagram and Facebook are absent because no account for either exists in
+    this project. An icon linking nowhere is worse than one fewer icon.
+    """
+    s = S[lang]
+    return f"""    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="topbar-social">
+          <a class="topbar-link" href="{GITHUB}" rel="me noopener" target="_blank">
+            {GH_SVG}<span class="vh">{e(s['ghLabel'])}</span>
+          </a>
+        </div>
+        <p class="topbar-note">{e(s['topNote'])}</p>
+        <p class="topbar-play">
+          <span class="topbar-status">{PLAY_SVG}{e(s['playSoon'])}</span>
+        </p>
+      </div>
+    </div>
+"""
 
 
 def header_html(lang, page, depth, links):
@@ -241,13 +260,13 @@ def header_html(lang, page, depth, links):
     home = (a + LANGS[lang]["base"]) or "./"
     rows = "\n".join('            <a href="%s"%s>%s</a>'
                      % (h, ' aria-current="page"' if cur else "", e(label)) for h, label, cur in links)
-    return f"""    <div class="head-sentinel" aria-hidden="true"></div>
+    return f"""    <!-- site-chrome:start -->
+{topbar(lang, depth)}    <div class="head-sentinel" aria-hidden="true"></div>
     <header class="site-head">
       <div class="shell">
         <a class="brand" href="{home}">
           <img src="{a}assets/emblem-256.webp" alt="" width="256" height="256" />
           <span class="brand-name">Zulfaa</span>
-          <span class="brand-ar" lang="ar" dir="rtl" aria-hidden="true">زُلْفَى</span>
         </a>
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="{e(s['menuLabel'])}">
           <span class="bars" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span>
@@ -262,18 +281,11 @@ def header_html(lang, page, depth, links):
 {rows}
           </nav>
 {langswitch(lang, page, depth)}
-          <div class="drawer-actions">
-{play(lang)}
-{github(lang, "icon-link")}
-          </div>
-        </div>
-        <div class="head-actions">
-{github(lang, "icon-link")}
-{play(lang, compact=True)}
         </div>
         <div class="scrim" hidden></div>
       </div>
     </header>
+    <!-- site-chrome:end -->
 
 """
 
