@@ -1,0 +1,24 @@
+{
+  "_comment": [
+    "The Updates Oasis release index. Newest first.",
+    "",
+    "Adding a release is: write tools/releases/<id>.json, add its id to the top",
+    "of this list, run `python tools/build.py`. Nothing else. If a future",
+    "release ever needs the page's markup changed, the content model has failed",
+    "and should be fixed rather than worked around.",
+    "",
+    "An id is permanent and is never reused or renumbered: it is the fragment",
+    "a shared link resolves against, and a link made today must still resolve",
+    "after ten more releases.",
+    "",
+    "The gate: an entry reaches the page only when it is distributed, or when",
+    "it is explicitly marked upcoming. Everything else - an internal phase, a",
+    "QA serial, a build that was uploaded but never released - stays in the",
+    "source as record and renders nowhere. See tools/releases.py."
+  ],
+  "releases": [
+    "1-2-0",
+    "1-1-0",
+    "1-0-0"
+  ]
+}
