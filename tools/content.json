@@ -7,7 +7,7 @@
   },
   "privacy": {
    "subtitle": "كيف نتعامل مع بياناتك",
-   "updated": "١٠ سبتمبر ٢٠٢٦",
+   "updated": "١٦ سبتمبر ٢٠٢٦",
    "updatedLabel": "آخر تحديث",
    "summary": "الأولوية لجهازك. حساب مسابقة تقني واحد، يُستخدم للمسابقة وحدها.",
    "intro": "خصوصيتك أمانة. تشرح هذه السياسة ما يفعله زُلْفَى فعليًا ببياناتك اليوم. فمعظم بياناتك الدينية وإعداداتك — أوقات الصلاة والقرآن والأذكار والأدعية والقبلة — تُحسب وتبقى على جهازك. أمّا ميزات المسابقة، وبعض الميزات الاختيارية المتعلّقة بالمحتوى والموقع والصوت، فتستعين بخدمات خارجية على النحو المبيَّن لاحقًا في هذه السياسة. ولا توجد إعلانات ولا تحليلات ولا تتبّع في أي جزء من التطبيق.",
@@ -31,6 +31,11 @@
      "id": "device",
      "title": "ما يبقى على جهازك",
      "body": "يُحفظ ما يلي في التخزين المحلي على جهازك: لغة الواجهة؛ موقع الصلاة وطريقة الحساب والمذهب والتعديلات الزمنية؛ تفضيل تتبّع القبلة المباشر؛ تفضيلات الإشعارات؛ تقدّم قراءة القرآن والعلامات وآخر موضع واختيار القارئ؛ المحفوظات والمفضلة من الآيات والأدعية والأذكار؛ تقدّم الأذكار؛ سجل القراءة؛ بيانات الجلسة التقنية اللازمة للحفاظ على حساب المسابقة؛ ونسخة من آخر اسم مستخدم أكّده الخادم، محفوظة لكي يظهر لك اسمك أنت عندما يتعذّر الوصول إلى حسابك؛ ونسخة مؤقتة من مقاطع التفسير التي فتحتها. ولا تُزامَن هذه الإعدادات بين أجهزتك ولا تُرفع إلى حساب. وزُلْفَى نفسه لا يزامنها ولا يرفعها. أمّا النسخ الاحتياطي في نظام أندرويد فأمر منفصل وبيدك أنت: إن كان النسخ الاحتياطي مفعّلًا في إعدادات جهازك، فقد يُدرج النظام بيانات هذا التطبيق ضمن النسخة المحفوظة في حسابك أنت على Google، ويستعيدها عند إعداد جهاز جديد. وتلك النسخة تخصّك أنت وGoogle لا زُلْفَى، ويمكنك إيقافها من إعدادات النسخ الاحتياطي في جهازك. وما يُرسل إلى خدمات خارجية عند استخدام ميزات بعينها مبيَّن في بند «الخدمات الخارجية»."
+    },
+    {
+     "id": "deviceTheme",
+     "title": "تفضيل المظهر",
+     "body": "إن اخترت مظهرًا للتطبيق — فاتحًا أو داكنًا أو متابعًا لإعداد جهازك — حُفِظ هذا الاختيار على جهازك وحده، ولا يُرسل إلى أي خادم ولا يُربط بحسابك ولا يُزامَن بين أجهزتك. وهو تفضيل واجهة فحسب، ولا يقول شيئًا عنك. ويُمحى مع بقية بيانات هذا الجهاز عند استخدام زرّ المسح في أسفل هذه الصفحة."
     },
     {
      "id": "prayerLocation",
@@ -88,6 +93,16 @@
      "body": "لا يُحتفظ ببيانات المسابقة إلا ما دام الحساب مستخدَمًا. فالحساب الفارغ — بلا اسم مستخدم، وبلا محاولات أو إجابات في التحدّي، وبلا سجلّ توكنز، ورصيده صفر — قد يُحذف تلقائيًا بعد ٦٠ يومًا متتاليًا من عدم النشاط. أمّا الحساب الذي يحمل اسم مستخدم أو أي سجلّ مسابقة فقد يُحذف تلقائيًا بعد ٣٦٥ يومًا متتاليًا من عدم النشاط. وأيّ نشاط جديد يعيد المدة إلى بدايتها، ففتح زُلْفَى وحده يُبقي الحساب قائمًا. ولست مضطرًا للانتظار: يمكنك حذف حساب المسابقة بنفسك في أي وقت من الزر أسفل هذه الصفحة. والحذف نهائي، ويزيل اسم المستخدم ورصيد التوكنز وسجلّها ومحاولات التحدّي وإجاباتها وأي موضع في لوحة الشرف. وإن استخدمت ميزات المسابقة بعد ذلك أُنشئ لك حساب مسابقة جديد يبدأ من الصفر."
     },
     {
+     "id": "ramadanData",
+     "title": "مخطِّط رمضان",
+     "body": "يظهر هذا القسم لك فقط إن كان مخطِّط رمضان متاحًا في نسختك من التطبيق. وإن استخدمته، يحفظ زُلْفَى في الخادم نفسه الخاص بحسابك، ولك وحدك، سجلًّا واحدًا لكل يوم من رمضان: ما أجبت به عن الصيام (صائم أو معذور أو غير صائم)، وأي الصلوات الخمس علّمتها مؤدّاة، وما علّمته منجزًا من القرآن والذكر والدعاء والصدقة. ولا يُنشأ السجلّ إلا حين تعلّم أنت بندًا بنفسك، ولا يسجّل التطبيق صيامك من تلقاء نفسه أبدًا؛ و«لم تُجب» حالة قائمة بذاتها تعني أنك لم تقل شيئًا. وكل سجلّ مربوط بالتاريخ الميلادي لليوم الذي عشته، لا برقم اليوم في الشهر، لأن رقم اليوم وصفٌ يُوضع على اليوم بعد وقوعه. ويحفظ زُلْفَى كذلك، مرّةً واحدة لكل رمضان، التاريخ الذي تخبره أنت أنّ رمضان بدأ فيه عندك: فتقدير التطبيق حسابٌ، وبداية الشهر الحقيقية تثبت بالرؤية أو بما تعلنه الجهة التي تتبعها، وما لم تصحّحه يعرض المخطِّط التقدير ويصرّح بأنه تقدير. وهذا التاريخ يأتي منك أنت، ولا يستنتجه التطبيق من موقعك أبدًا، ويُحفظ في الخادم لا على هذا الجهاز وحده لكي يكون ترقيم أيام الشهر واحدًا على كل جهاز تدخل منه. وتغييره أو سحبه يغيّر تسمية الأيام فحسب، ولا يبدّل شيئًا مما سجّلته ولا ينقله ولا يحذفه. وهذا السجلّ يصف عبادة، ولا يظهر لأحد غيرك، وهو محميّ بقواعد الأمان على مستوى الصفوف نفسها التي تحمي بقية حسابك. ولكي يفتح المخطِّط دون اتصال، يحتفظ هذا الجهاز أيضًا بنسخة من آخر التواريخ التي أكّدها حسابك، ويحفظ ما تعلّمه دون اتصال حتى يمكن إرساله. ويُمحى الاثنان حين تمسح بيانات زُلْفَى على هذا الجهاز أو حين يدخل حساب آخر. ويمكنك تعديل أي يوم في أي وقت، وحذف الحساب يزيل ذلك كله. وبخصوص مدد الاحتفاظ المذكورة أعلاه: الحساب الذي يحمل سجلّ يوم في رمضان أو بدايةَ رمضان مؤكَّدة لا يُعدّ حسابًا فارغًا، فلا تسري عليه مدة الستين يومًا، وتسري عليه مدة الـ٣٦٥ يومًا. ويمكنك كذلك أن تسجّل في التطبيق الجهة الدينية التي تتبعها، أو اسم مسجدك. وهذه معلومة دينية، فتُحفظ على هذا الجهاز وحده ما لم تختر أنت صراحةً حفظها في حسابك لتظهر على أجهزتك الأخرى؛ وإن سحبت موافقتك حُذف ذلك من الخادم. واسم المسجد لا يُرسل إلى الخادم أبدًا ويبقى على جهازك. ولا يُرسل أيّ من ذلك إلى أي طرف آخر، ولا يُستخدم في أي تحليلات. واختيار الجهة يسجّل مَن تتبع فحسب، ولا يغيّر تواريخ رمضان المعروضة."
+    },
+    {
+     "id": "umrahData",
+     "title": "ادّخار العمرة",
+     "body": "يظهر هذا القسم لك فقط إن كان ادّخار العمرة متاحًا في نسختك من التطبيق. وإن استخدمته، يحفظ زُلْفَى في الخادم نفسه الخاص بحسابك، ولك وحدك: المبلغ الذي حدّدته هدفًا، وعملته، وموعدًا مستهدفًا اختياريًا، وخطة ادّخار اختيارية، وكل مساهمة تسجّلها بمبلغها وتاريخها وأي ملاحظة تكتبها معها. والتقدّم الذي يعرضه التطبيق محسوب من هذه الأرقام، ولا يُحفظ بذاته. وزُلْفَى ليس مصرفًا ولا وسيط دفع ولا جهة استثمار: فهو لا يحفظ أي بيانات دفع، ولا يتّصل بأي مصرف، ولا ينقل أي أموال، ولا يحتفظ بمالك؛ فهذه أرقام تكتبها بنفسك لتتابع مالًا تحتفظ به في مكان آخر. ولأن الملاحظة نص حر، يُستحسن ألّا تكتب فيها بيانات شخصية. وهذا كله محميّ بقواعد الأمان على مستوى الصفوف نفسها التي تحمي بقية حسابك، فلا يستطيع أي جهاز آخر قراءته. ولكي تبقى مدّخراتك ظاهرة حين يُفتح التطبيق دون اتصال، يحتفظ هذا الجهاز أيضًا بنسخة من آخر الأرقام التي أكّدها الخادم. وتُستبدل هذه النسخة كلما أجاب الخادم، وتُمحى حين تمسح بيانات زُلْفَى على هذا الجهاز أو حين يدخل حساب آخر، ولا تُرسل إلى أي جهة. ويمكنك في أي وقت تعديل مساهمة أو حذفها، أو تصفير الادّخار كلّه مع الاحتفاظ بالهدف، أو حذف الهدف بكامله فيذهب معه سجلّ المساهمات. وحذف الحساب يزيل ذلك كله. وبخصوص مدد الاحتفاظ المذكورة أعلاه: الحساب الذي يحمل هدف ادّخار أو مساهمة لا يُعدّ حسابًا فارغًا، فلا تسري عليه مدة الستين يومًا، وتسري عليه مدة الـ٣٦٥ يومًا."
+    },
+    {
      "id": "children",
      "title": "الأطفال",
      "body": "زُلْفَى تطبيق عبادة عام، وليس موجَّهًا إلى الأطفال على وجه الخصوص. ولا يطلب الاستخدام المعتاد اسمًا ولا بريدًا ولا رقم هاتف ولا تاريخ ميلاد. والمعلومة الوحيدة التي يجعلها المستخدم علنية عن قصد من خلال المسابقة هي اسم المستخدم الذي يختاره، وهو يظهر علنًا في لوحة الشرف، فلا ينبغي أن يتضمّن اسمًا حقيقيًا ولا أي بيانات شخصية. وعلى وليّ الأمر الذي يأذن لطفله بدخول المسابقة أن ينتبه إلى أنّ الاسم المختار يُعرض للعموم."
@@ -108,7 +123,7 @@
    "subtitle": "الشروط التي تحكم استخدامك للتطبيق",
    "summary": "باستخدامك زُلْفَى فإنك توافق على هذه الشروط.",
    "intro": "تشرح هذه الشروط ما يقدّمه زُلْفَى، وما يمكنك توقّعه منه، وما هي مسؤوليتك عند استخدامه. نرجو قراءتها؛ وهي مكتوبة بلغة واضحة قدر الإمكان.",
-   "updated": "١٠ سبتمبر ٢٠٢٦",
+   "updated": "١٦ سبتمبر ٢٠٢٦",
    "updatedLabel": "آخر تحديث",
    "sections": [
     {
@@ -140,6 +155,16 @@
      "id": "calendar",
      "title": "التقويم الهجري وتواريخ رمضان",
      "body": "التواريخ الهجرية التي يعرضها التطبيق — بما فيها المناسبات القادمة وبداية رمضان ونهايته — محسوبة من تقويم أم القرى، وهو تقويم حسابي منشور. وبداية الشهر الحقيقية تثبت بالرؤية أو بإعلان الجهة التي تتبعها، وقد تخالف الحساب بيوم في كثير من البلدان وكثير من السنين. فما يعرضه التطبيق تقدير، ويقول عن نفسه إنه تقدير، ولا يصلح وحده لتقرير أمر شرعي. وأنت وحدك من يقرّر الجهة التي يتبعها، والرجوع إليها عند الاختلاف هو الأصل."
+    },
+    {
+     "id": "ramadanDates",
+     "title": "تأكيد بداية رمضان بنفسك",
+     "body": "حيث يتيح لك مخطِّط رمضان تأكيد تاريخ بداية الشهر بنفسك، فذلك التأكيد هو ما يعتمده التطبيق في تسمية أيام الشهر عندك، ويحلّ محلّ التقدير الحسابي. وهو تأكيد لك وحدك، لا يُنشر ولا يُقترح على غيرك، ولا يُعدّ إعلانًا شرعيًا ولا يغني عن الرجوع إلى الجهة التي تتبعها. وتغييره أو سحبه يعيد تسمية الأيام فحسب، ولا يبدّل شيئًا مما سجّلته ولا ينقله ولا يحذفه. ونهاية الشهر تبقى تقديرًا في كل الأحوال، لأن تأكيد البداية لا يؤكّد النهاية."
+    },
+    {
+     "id": "savings",
+     "title": "ادّخار العمرة",
+     "body": "ادّخار العمرة أداة تخطيط شخصية: تكتب فيها هدفًا وعملةً ومبالغَ تقول أنت إنك جنّبتها. وزُلْفَى ليس مصرفًا ولا مؤسسة مالية ولا وسيط دفع ولا مقدّم خدمة استثمار، ولا يحتفظ بأي بيانات دفع، ولا يتّصل بأي حساب مصرفي، ولا يحرّك مالًا، ولا يحفظ لك شيئًا، ولا يقدّم مشورة مالية. وليست الأرقام التي تكتبها إثباتًا لرصيد ولا التزامًا من أحد تجاهك، وإنما هي سجلّك أنت لمالٍ تحتفظ به في مكان آخر. ولا يبيع التطبيق رحلات عمرة ولا يحجزها ولا يرتّبها."
     },
     {
      "id": "sources",
@@ -285,7 +310,7 @@
   },
   "privacy": {
    "subtitle": "How we handle your data",
-   "updated": "10 September 2026",
+   "updated": "16 September 2026",
    "updatedLabel": "Last updated",
    "summary": "Local first. One technical competition account, used only for the ranked challenge.",
    "intro": "Your privacy is a trust. This policy describes what ZULFAA actually does with your data today. Most of your religious data and your settings — prayer times, the Qur'an, adhkar, du'as and the qibla — are calculated and kept on your device. The competition features, and some optional content, location and audio features, use external services as described later in this policy. There is no advertising, no analytics and no tracking anywhere in the app.",
@@ -309,6 +334,11 @@
      "id": "device",
      "title": "What stays on your device",
      "body": "Kept in local storage on your device: your interface language; your prayer location, calculation method, madhhab and time adjustments; your live-qibla preference; your notification preferences; Qur'an reading progress, bookmarks, last position and chosen reciter; saved and favorited verses, du'as and adhkar; adhkar progress; your reading history; the technical session data required to maintain the competition account; a copy of the username the server last confirmed, kept so your own name is still shown to you when your account cannot be reached; and a short-lived cache of the tafsir passages you have opened. None of these settings are synced between your devices or uploaded to an account. ZULFAA itself neither syncs them nor uploads them. Android's own system backup is a separate matter and is under your control: if device backup is switched on in your Android settings, the system may include this app's data in the backup held in your own Google account, and restore it when you set up a new device. That backup belongs to you and to Google, not to ZULFAA, and you can switch it off in your device's backup settings. What is sent to external services when you use particular features is set out under Third-party services."
+    },
+    {
+     "id": "deviceTheme",
+     "title": "Theme preference",
+     "body": "If you choose an appearance for the app — light, dark, or following your device setting — that choice is stored on your device only. It is not sent to any server, not linked to your account, and not synced between your devices. It is an interface preference and says nothing about you. It is erased along with the rest of this device’s data by the clear button at the bottom of this page."
     },
     {
      "id": "prayerLocation",
@@ -366,6 +396,16 @@
      "body": "Competition data is kept only while the account is in use. A competition account that is still empty — no username, no challenge attempts or answers, no token history and a zero balance — may be deleted automatically after 60 consecutive days without activity. An account that carries a username or any competition history may be deleted automatically after 365 consecutive days without activity. Any new activity resets that period, so simply opening ZULFAA keeps an account alive. You do not have to wait: you can delete your competition account yourself at any time, from the button at the bottom of this page. Deletion is permanent and removes the username, token balance, token history, challenge attempts and answers, and any Honor Board position. If you use the competition features again afterwards, a new competition account is created for you and starts from zero."
     },
     {
+     "id": "ramadanData",
+     "title": "Ramadan Planner",
+     "body": "This section appears only if the Ramadan Planner is available in your build of the app. If you use it, ZULFAA stores on the same server as your account, for you alone, one record per day of Ramadan: the answer you gave about fasting (fasting, exempt or not fasting), which of the five prayers you marked as prayed, and which of the Qur’an, dhikr, du’a and charity items you marked as done. A record is created only when you mark something yourself; the app never records a fast on your behalf, and “not answered” is its own state meaning you have not said. Each record is attached to the calendar date of the day you lived, not to a day number, because the day number is a label placed on a day afterwards. ZULFAA also stores, once for each Ramadan, the date you tell it Ramadan began for you: the app’s own estimate is a calculation, the real beginning is settled by moon sighting or by the authority you follow, and until you correct it the planner shows the estimate and says that it is one. That date comes from you — the app never works it out from your location — and it is kept on the server rather than only on this device so that the same month is numbered the same way on every device you sign in from. Changing or withdrawing it only changes how the days are labelled, and never alters, moves or deletes anything you recorded. This record describes religious practice, is never shown to anyone else, and is protected by the same row-level security as the rest of your account. So that the planner still opens without a connection, this device also keeps a copy of the dates your account last confirmed, and holds anything you mark while offline until it can be sent. Both are removed when you clear this device's ZULFAA data or when a different account signs in. You can change any day at any time, and deleting your account removes all of it. On the retention periods above: an account holding a Ramadan record or a confirmed Ramadan start is not treated as empty, so the 60-day rule does not apply to it — the 365-day rule does. You can also record in the app which religious authority you follow, or the name of your mosque. This is religious information, so it is kept on this device only unless you explicitly choose to save it to your account so that it is the same on your other devices; withdrawing that choice deletes it from the server. The mosque name is never sent to the server at all and stays on your device. None of it is sent to any third party or used for any analytics. Choosing an authority records who you follow and does not change the Ramadan dates the app shows you."
+    },
+    {
+     "id": "umrahData",
+     "title": "Umrah Savings",
+     "body": "This section appears only if Umrah Savings is available in your build of the app. If you use it, ZULFAA stores on the same server as your account, for you alone: the amount you set as your goal, its currency, an optional target date, an optional saving plan, and every contribution you record with its amount, its date and any note you add. The progress the app shows is calculated from those figures and is not stored separately. ZULFAA is not a bank, a payment service or an investment service: it holds no payment details, connects to no bank, moves no money and holds none of your money; these are figures you type in order to keep track of savings you hold somewhere else. Because the note is free text, it is best not to type personal details into it. All of it is protected by the same row-level security as the rest of your account, so no other device can read it. So that your savings are still shown when the app opens without a connection, this device also keeps a copy of the figures the server last confirmed. That copy is replaced whenever the server answers, is removed when you clear this device's ZULFAA data or when a different account signs in, and is never sent anywhere. You can edit or delete any contribution at any time, reset the savings while keeping the goal, or delete the goal entirely, which takes its contribution history with it. Deleting your account removes all of it. On the retention periods above: an account holding a savings goal or a contribution is not treated as empty, so the 60-day rule does not apply to it — the 365-day rule does."
+    },
+    {
      "id": "children",
      "title": "Children",
      "body": "ZULFAA is a general worship app and is not directed specifically at children. Ordinary use asks for no name, email address, phone number or date of birth. The only information a user intentionally makes public through the competition is the username they choose, which is shown publicly on the Honor Board, and it should not contain a real name or any other personal detail. A parent allowing a child to take part in the ranked challenge should be aware that the chosen username is shown publicly."
@@ -386,7 +426,7 @@
    "subtitle": "The terms that govern your use of the app",
    "summary": "By using ZULFAA you agree to these Terms.",
    "intro": "These Terms explain what ZULFAA provides, what you can expect from it, and what is expected of you when you use it. They are written in plain language wherever the law allows.",
-   "updated": "10 September 2026",
+   "updated": "16 September 2026",
    "updatedLabel": "Last updated",
    "sections": [
     {
@@ -418,6 +458,16 @@
      "id": "calendar",
      "title": "The Hijri calendar and Ramadan dates",
      "body": "The Hijri dates the app shows — including upcoming occasions and the beginning and end of Ramadan — are calculated from the Umm al-Qura calendar, a published arithmetic projection. The real beginning of a month is settled by moon sighting or by the authority you follow, and can differ from the calculation by a day in many countries in many years. What the app shows is therefore an estimate, it says so, and it is not on its own a basis for a religious decision. Choosing which authority to follow is yours alone, and where they differ, theirs is the answer."
+    },
+    {
+     "id": "ramadanDates",
+     "title": "Confirming the start of Ramadan yourself",
+     "body": "Where the Ramadan Planner lets you confirm the date the month began for you, that confirmation is what the app uses to label the days of the month, in place of the calculated estimate. It is yours alone: it is not published, not suggested to anyone else, and it is not a religious announcement or a substitute for asking the authority you follow. Changing or withdrawing it re-labels the days and nothing more — it never alters, moves or deletes anything you have recorded. The end of the month remains an estimate either way, because confirming when a month began does not confirm when it ends."
+    },
+    {
+     "id": "savings",
+     "title": "Umrah Savings",
+     "body": "Umrah Savings is a personal planning tool: you type a goal, a currency, and the amounts you say you have set aside. ZULFAA is not a bank, a financial institution, a payment provider or an investment service. It holds no payment details, connects to no bank account, moves no money, holds nothing on your behalf, and gives no financial advice. The figures you enter are not proof of a balance and are not a commitment by anyone to you; they are your own record of money you keep somewhere else. ZULFAA does not sell, book or arrange Umrah travel."
     },
     {
      "id": "sources",
@@ -563,7 +613,7 @@
   },
   "privacy": {
    "subtitle": "Hoe wij met uw gegevens omgaan",
-   "updated": "10 september 2026",
+   "updated": "16 september 2026",
    "updatedLabel": "Laatst bijgewerkt",
    "summary": "Lokaal eerst. Eén technisch wedstrijdaccount, alleen voor de wedstrijd.",
    "intro": "Uw privacy is een vertrouwen. Dit beleid beschrijft wat ZULFAA vandaag daadwerkelijk met uw gegevens doet. Het meeste van uw religieuze gegevens en uw instellingen — gebedstijden, de Koran, adhkar, doe'a's en de qibla — wordt op uw apparaat berekend en bewaard. De wedstrijdfuncties, en enkele optionele functies voor inhoud, locatie en audio, maken gebruik van externe diensten zoals verderop in dit beleid wordt beschreven. Er zit nergens in de app advertentie-, analytics- of trackingcode.",
@@ -587,6 +637,11 @@
      "id": "device",
      "title": "Wat op uw apparaat blijft",
      "body": "In de lokale opslag op uw apparaat wordt bewaard: uw interfacetaal; uw gebedslocatie, berekeningsmethode, madhhab en tijdcorrecties; uw voorkeur voor live qibla-tracking; uw meldingsvoorkeuren; Koranvoortgang, bladwijzers, laatste leespositie en gekozen reciteur; opgeslagen en favoriete verzen, doe'a's en adhkar; adhkar-voortgang; uw leesgeschiedenis; de technische sessiegegevens die nodig zijn om het wedstrijdaccount in stand te houden; een kopie van de gebruikersnaam die de server het laatst heeft bevestigd, bewaard zodat uw eigen naam nog wordt getoond wanneer uw account niet bereikbaar is; en een kortstondige cache van de tafsir-passages die u hebt geopend. Deze instellingen worden niet tussen uw apparaten gesynchroniseerd en niet naar een account geüpload. ZULFAA zelf synchroniseert ze niet en uploadt ze niet. De systeemback-up van Android staat daar los van en is aan u: staat back-up in uw Android-instellingen aan, dan kan het systeem de gegevens van deze app opnemen in de back-up in uw eigen Google-account en die terugzetten wanneer u een nieuw apparaat inricht. Die back-up is van u en van Google, niet van ZULFAA, en u kunt hem uitschakelen in de back-upinstellingen van uw apparaat. Wat er bij het gebruik van bepaalde functies naar externe diensten gaat, staat beschreven onder Diensten van derden."
+    },
+    {
+     "id": "deviceTheme",
+     "title": "Voorkeur voor het thema",
+     "body": "Kiest u een weergave voor de app — licht, donker, of volgend op de instelling van uw apparaat — dan wordt die keuze alleen op uw apparaat bewaard. Ze wordt naar geen enkele server gestuurd, niet aan uw account gekoppeld en niet tussen uw apparaten gesynchroniseerd. Het is een voorkeur voor de weergave en zegt niets over u. Ze wordt samen met de overige gegevens van dit apparaat gewist met de knop onderaan deze pagina."
     },
     {
      "id": "prayerLocation",
@@ -644,6 +699,16 @@
      "body": "Wedstrijdgegevens worden alleen bewaard zolang het account in gebruik is. Een wedstrijdaccount dat nog leeg is — geen gebruikersnaam, geen pogingen of antwoorden, geen tokengeschiedenis en een saldo van nul — kan automatisch worden verwijderd na 60 opeenvolgende dagen zonder activiteit. Een account met een gebruikersnaam of enige wedstrijdgeschiedenis kan automatisch worden verwijderd na 365 opeenvolgende dagen zonder activiteit. Elke nieuwe activiteit zet die periode terug op nul, dus alleen al het openen van ZULFAA houdt een account in stand. U hoeft niet te wachten: u kunt uw wedstrijdaccount op elk moment zelf verwijderen met de knop onderaan deze pagina. Verwijderen is definitief en wist de gebruikersnaam, het tokensaldo, de tokengeschiedenis, de pogingen en antwoorden en elke plaats op de Erelijst. Gebruikt u de wedstrijdfuncties daarna opnieuw, dan wordt een nieuw wedstrijdaccount voor u aangemaakt dat bij nul begint."
     },
     {
+     "id": "ramadanData",
+     "title": "Ramadan-planner",
+     "body": "Dit onderdeel verschijnt alleen als de Ramadan-planner in uw versie van de app beschikbaar is. Gebruikt u hem, dan bewaart ZULFAA op dezelfde server als uw account, alleen voor u, één record per Ramadan-dag: het antwoord dat u over vasten gaf (ik vast, vrijgesteld of ik vast niet), welke van de vijf gebeden u als verricht markeerde, en welke van de items Koran, dhikr, du’a en liefdadigheid u als gedaan markeerde. Een record ontstaat alleen wanneer u zelf iets markeert; de app legt nooit namens u een vasten vast, en “niet beantwoord” is een eigen toestand die betekent dat u niets hebt gezegd. Elk record hangt aan de kalenderdatum van de dag die u beleefde, niet aan een dagnummer, want het dagnummer is een benaming die achteraf op een dag wordt gelegd. ZULFAA bewaart daarnaast, één keer per Ramadan, de datum waarvan u aangeeft dat de Ramadan voor u begon: de schatting van de app is een berekening, het werkelijke begin wordt vastgesteld door maanwaarneming of door de instantie die u volgt, en zolang u die schatting niet corrigeert toont de planner haar en vermeldt erbij dat het een schatting is. Die datum komt van u — de app leidt hem nooit af uit uw locatie — en hij wordt op de server bewaard in plaats van alleen op dit apparaat, zodat dezelfde maand op elk apparaat waarop u zich aanmeldt op dezelfde manier genummerd wordt. Hem wijzigen of intrekken verandert alleen hoe de dagen worden benoemd en wijzigt, verplaatst of verwijdert nooit iets wat u hebt vastgelegd. Dit record beschrijft religieuze praktijk, wordt nooit aan iemand anders getoond en is beschermd door dezelfde beveiliging op rijniveau als de rest van uw account. Zodat de planner ook zonder verbinding opent, bewaart dit apparaat daarnaast een kopie van de datums die uw account het laatst heeft bevestigd, en houdt het vast wat u zonder verbinding aanvinkt totdat het verstuurd kan worden. Beide verdwijnen wanneer u de ZULFAA-gegevens op dit apparaat wist of wanneer een ander account zich aanmeldt. U kunt elke dag op elk moment wijzigen, en uw account verwijderen wist alles. Over de bewaartermijnen hierboven: een account met een Ramadan-record of een bevestigd begin van de Ramadan geldt niet als leeg, dus de termijn van 60 dagen geldt daarvoor niet — die van 365 dagen wel. U kunt in de app ook vastleggen welke religieuze instantie u volgt, of de naam van uw moskee. Dit is religieuze informatie en blijft daarom alleen op dit apparaat, tenzij u er uitdrukkelijk voor kiest ze bij uw account op te slaan zodat ze op uw andere apparaten hetzelfde is; trekt u die keuze in, dan wordt ze van de server verwijderd. De naam van de moskee wordt nooit naar de server gestuurd en blijft op uw apparaat. Niets hiervan gaat naar derden of wordt voor analyses gebruikt. Het kiezen van een instantie legt vast wie u volgt en verandert de Ramadan-data die de app toont niet."
+    },
+    {
+     "id": "umrahData",
+     "title": "Umrah-sparen",
+     "body": "Dit onderdeel verschijnt alleen als Umrah-sparen in uw versie van de app beschikbaar is. Gebruikt u het, dan bewaart ZULFAA op dezelfde server als uw account, alleen voor u: het bedrag dat u als doel instelt, de valuta ervan, een optionele streefdatum, een optioneel spaarplan, en elke bijdrage die u vastlegt met bedrag, datum en een eventuele notitie. De voortgang die de app toont, wordt uit die getallen berekend en niet apart bewaard. ZULFAA is geen bank, geen betaaldienst en geen beleggingsdienst: de app bewaart geen betaalgegevens, maakt geen verbinding met een bank, verplaatst geen geld en houdt geen geld van u onder zich; dit zijn getallen die u zelf invoert om spaargeld bij te houden dat elders staat. Omdat de notitie vrije tekst is, kunt u er beter geen persoonlijke gegevens in zetten. Dit alles is beschermd door dezelfde beveiliging op rijniveau als de rest van uw account, zodat geen ander apparaat het kan lezen. Zodat uw spaargeld ook zichtbaar blijft wanneer de app zonder verbinding wordt geopend, bewaart dit apparaat daarnaast een kopie van de laatst door de server bevestigde getallen. Die kopie wordt vervangen zodra de server antwoordt, verdwijnt wanneer u de ZULFAA-gegevens op dit apparaat wist of wanneer een ander account zich aanmeldt, en wordt nergens naartoe gestuurd. U kunt elke bijdrage op elk moment wijzigen of verwijderen, het spaargeld opnieuw instellen met behoud van het doel, of het doel volledig verwijderen, waarmee ook de bijdragegeschiedenis verdwijnt. Uw account verwijderen wist alles. Over de bewaartermijnen hierboven: een account met een spaardoel of een bijdrage geldt niet als leeg, dus de termijn van 60 dagen geldt daarvoor niet — die van 365 dagen wel."
+    },
+    {
      "id": "children",
      "title": "Kinderen",
      "body": "ZULFAA is een algemene aanbiddings-app en richt zich niet specifiek op kinderen. Gewoon gebruik vraagt niet om een naam, e-mailadres, telefoonnummer of geboortedatum. Het enige gegeven dat een gebruiker via de wedstrijd bewust openbaar maakt, is de gebruikersnaam die hij of zij kiest en die openbaar op de Erelijst wordt getoond; die naam hoort geen echte naam of andere persoonlijke gegevens te bevatten. Een ouder die een kind aan de wedstrijd laat deelnemen, dient te weten dat de gekozen gebruikersnaam openbaar wordt getoond."
@@ -664,7 +729,7 @@
    "subtitle": "De voorwaarden voor uw gebruik van de app",
    "summary": "Door ZULFAA te gebruiken gaat u akkoord met deze voorwaarden.",
    "intro": "Deze voorwaarden leggen uit wat ZULFAA biedt, wat u ervan mag verwachten en wat er van u wordt verwacht bij het gebruik. Ze zijn zo begrijpelijk mogelijk geschreven.",
-   "updated": "10 september 2026",
+   "updated": "16 september 2026",
    "updatedLabel": "Laatst bijgewerkt",
    "sections": [
     {
@@ -696,6 +761,16 @@
      "id": "calendar",
      "title": "De Hijri-kalender en Ramadan-data",
      "body": "De Hijri-data die de app toont — waaronder komende gelegenheden en het begin en einde van de Ramadan — worden berekend met de Umm al-Qura-kalender, een gepubliceerde rekenkundige projectie. Het werkelijke begin van een maand wordt vastgesteld door maanwaarneming of door de instantie die u volgt, en kan in veel landen en veel jaren een dag afwijken van de berekening. Wat de app toont is dus een schatting, hij vermeldt dat ook, en het is op zichzelf geen grond voor een religieuze beslissing. Welke instantie u volgt bepaalt u zelf, en waar die afwijkt, geldt haar antwoord."
+    },
+    {
+     "id": "ramadanDates",
+     "title": "Zelf het begin van de Ramadan bevestigen",
+     "body": "Waar de Ramadan-planner u de datum laat bevestigen waarop de maand voor u begon, is die bevestiging wat de app gebruikt om de dagen van de maand te benoemen, in plaats van de berekende schatting. Ze is alleen van u: ze wordt niet gepubliceerd, niet aan anderen voorgesteld, en ze is geen religieuze aankondiging en geen vervanging van navraag bij de instantie die u volgt. Ze wijzigen of intrekken benoemt de dagen opnieuw en verder niets — het wijzigt, verplaatst of verwijdert nooit iets wat u hebt vastgelegd. Het einde van de maand blijft hoe dan ook een schatting, want bevestigen wanneer een maand begon bevestigt niet wanneer ze eindigt."
+    },
+    {
+     "id": "savings",
+     "title": "Umrah-sparen",
+     "body": "Umrah-sparen is een persoonlijk hulpmiddel om te plannen: u voert een doel in, een valuta, en de bedragen waarvan u zegt dat u ze opzij hebt gezet. ZULFAA is geen bank, geen financiële instelling, geen betaaldienstverlener en geen beleggingsdienst. De app bewaart geen betaalgegevens, maakt geen verbinding met een bankrekening, verplaatst geen geld, bewaart niets namens u en geeft geen financieel advies. De bedragen die u invoert zijn geen bewijs van een saldo en geen toezegging van wie dan ook aan u; ze zijn uw eigen administratie van geld dat u elders bewaart. ZULFAA verkoopt, boekt of regelt geen Umrah-reizen."
     },
     {
      "id": "sources",
