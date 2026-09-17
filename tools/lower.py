@@ -57,7 +57,7 @@ T = {
         "name": "Name",
         "nameHint": "Optional",
         "email": "Email",
-        "emailHint": "So a reply can reach you",
+        "emailHint": " so a reply can reach you",
         "message": "Message",
         # the button, in each mode: with no endpoint it opens the visitor's own
         # email app, and says so; "Send message" only where something is sent
@@ -179,7 +179,7 @@ T = {
         "name": "Naam",
         "nameHint": "Optioneel",
         "email": "E-mail",
-        "emailHint": "Zodat een antwoord u kan bereiken",
+        "emailHint": "zodat een antwoord u kan bereiken",
         "message": "Bericht",
         "send": "Bericht versturen",
         "sending": "Versturen…",
