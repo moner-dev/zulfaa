@@ -2505,6 +2505,14 @@ html[lang="ar"] .fo-say h2 {
    than read as the next screen. The centre leads on scale and shadow instead. */
 .carousel.is-enhanced .shot {
   opacity: 0.78;
+  /* Each slide is its own compositing layer, permanently. Without this the
+     browser folds a slide's caption into the layer of the NEIGHBOURING slide's
+     scaled, shadowed frame whenever the two overlap, and after an arrow step
+     that shared layer kept a stale gold copy of the previous caption at the old
+     centre - "Adhka…" or "…lanner" bleeding into the next label. Contained per
+     slide, a caption can only ever repaint with its own slide. Nothing is
+     clipped: the layer covers the slide's whole painted area. */
+  will-change: opacity;
 }
 
 .carousel.is-enhanced .shot.is-active {
