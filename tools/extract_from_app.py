@@ -220,7 +220,7 @@ for doc in ("privacy", "terms"):
         raise SystemExit("%s clauses differ between languages; missing per language: %r" % (doc, missing))
     print("  %-8s %d clauses, identical in ar/en/nl" % (doc, len(ids["en"])))
 
-json.dump(content, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+json.dump(content, open(OUT, "w", encoding="utf-8", newline=""), ensure_ascii=False, indent=1)  # LF on every OS
 
 print("extracted ->", OUT)
 print("  MODE:", "NEXT-RELEASE PREVIEW (owner only)" if PREVIEW else "PUBLIC (current release)")
