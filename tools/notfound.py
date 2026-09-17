@@ -96,6 +96,14 @@ COPY = {
     },
 }
 
+# While the journal is unpublished (articles.PUBLISHED), the secondary action
+# is the one the 403 already offers, in the 403's own words: Contact support.
+from articles import PUBLISHED as ARTICLES_PUBLISHED  # noqa: E402
+if not ARTICLES_PUBLISHED:
+    from forbidden import COPY as _FORBIDDEN  # noqa: E402
+    for _l, _c in COPY.items():
+        _c["more"], _c["atMore"] = _FORBIDDEN[_l]["more"], _c["at"] + "support/"
+
 LANGS_BY_PATH = ("ar", "nl")
 
 

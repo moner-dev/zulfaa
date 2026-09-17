@@ -6,7 +6,7 @@ from chrome import (SITE, LANGS, S, C, write, e, up, PREVIEW, OUT_ROOT, ORIGIN,
                     header_html, JS_CLASS, NAV_JS, reversion)
 from pages import build_privacy, build_terms, build_support, build_delete
 from home import build_home
-from articles import ARTICLES, build_index as build_articles_index, build_article
+from articles import ARTICLES, PUBLISHED as ARTICLES_PUBLISHED, build_index as build_articles_index, build_article
 from notfound import build as build_notfound
 from updates import build_updates
 
@@ -22,7 +22,8 @@ for lang in ("ar", "nl"):
 # ── the journal ─────────────────────────────────────────────────────────────
 # The articles are new pages with no hand-written English original, so all
 # three languages are generated from tools/articles.py - English included.
-for lang in ("en", "ar", "nl"):
+# Nothing is written while articles.PUBLISHED is False.
+for lang in (("en", "ar", "nl") if ARTICLES_PUBLISHED else ()):
     base = LANGS[lang]["base"]
     written.append(write(os.path.join(base, "articles", "index.html").replace("\\", "/"),
                          build_articles_index(lang)))

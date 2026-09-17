@@ -373,13 +373,18 @@ def _links(lang, depth, wanted):
     base = up(depth) + LANGS[lang]["base"]
     labels = dict(nav_items(lang))
     labels["articles/"] = T[lang]["articles"]
+    # the Updates page's own heading, so the link and the page agree
+    from updates_strings import U
+    labels["updates/"] = U[lang]["h1"]
     return "\n".join('              <li><a href="%s">%s</a></li>' % ((base + href) or "./", e(labels[href]))
                      for href in wanted)
 
 
 def main_links(lang, depth):
     """what the site is: the pages a visitor browses"""
-    return _links(lang, depth, ["", "articles/", "support/"])
+    from articles import PUBLISHED
+    pages = ["", "articles/", "updates/", "support/"] if PUBLISHED else ["", "updates/", "support/"]
+    return _links(lang, depth, pages)
 
 
 def legal_links(lang, depth):

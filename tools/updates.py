@@ -46,6 +46,7 @@ import os, re, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from chrome import S, LANGS, e, head, header, footer, up, num, nav_items, asset  # noqa: E402
+from lantern import host as lantern_host  # noqa: E402
 from updates_strings import U, AREA_ICON, ICON, AREA_ORDER, KIND_ORDER  # noqa: E402
 import releases as R  # noqa: E402
 
@@ -469,7 +470,7 @@ def build_updates(lang):
     articles = "".join(release(r, s, lang) for r, s in rels)
     return (head(lang, PAGE, depth(lang), u["title"], u["desc"]) + header(lang, PAGE, depth(lang)) + f"""    <main class="oasis">
       <div class="oasis-shell">
-        <header class="oasis-head">
+{lantern_host(lang, a)}        <header class="oasis-head">
           <p class="oasis-eyebrow">{e(u['eyebrow'])}</p>
           <h1>{e(u['h1'])}</h1>
           <p class="oasis-lede">{e(u['lede'])}</p>

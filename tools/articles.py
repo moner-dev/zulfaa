@@ -32,6 +32,15 @@ from chrome import S, LANGS, e, head, header, footer, up, asset, main_open, them
 
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# PUBLISHED decides whether the journal exists on the public site at all: the
+# article pages, the home page's journal section, the footer's Articles link,
+# the 404's "Read the articles" and the sitemap entries. It is False for the
+# first release of the redesign (17 September 2026) because all three articles
+# are still drafts awaiting the owner's editorial review, and a static host
+# publishes whatever is committed. Turn it on only when they are approved, then
+# run the build and add the /articles/ URLs back to sitemap.xml.
+PUBLISHED = False
+
 DRAFT = {"en": "Draft", "ar": "مسودة", "nl": "Concept"}
 DRAFT_NOTE = {
     "en": "A draft. It is written from what the app does today and is waiting for editorial review before publication.",
@@ -258,6 +267,10 @@ def draft_chip(lang, art):
 
 def render_journal(lang, a=""):
     """The home page's editorial section: one lead article, two beside it."""
+    if not PUBLISHED:
+        # the markers stay, so write_en.py still finds the region it owns
+        return ('        <!-- journal:start -->\n'
+                '        <!-- journal:end -->')
     T = UI[lang]
     lead, rest = ARTICLES[0], ARTICLES[1:]
     # the language's own tree, the way chrome.footer addresses pages: on the
