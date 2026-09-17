@@ -69,17 +69,23 @@ S["en"] = {
     "zoomLabel": "Open the %s screenshot full size",
     "lbTitle": "Screenshot preview",
     "lbClose": "Close preview",
-    # The English PRIMARY nav is four links, not five: the English pages put
-    # Data deletion in the footer only. chrome.header() reads this list and
-    # keeps a generated English page (articles, updates) in step with them.
-    # Arabic and Dutch have no such list and keep all five.
-    "headerNav": ["", "privacy/", "terms/", "support/"],
+    # The primary navigation, the same four destinations on every page and in
+    # the drawer (chrome.primary_nav). Privacy, Terms and Data deletion live in
+    # the footer's Legal group.
+    "pnStart": "Start",
+    "pnUpdates": "Updates",
+    "pnSupport": "Support",
+    "pnContact": "Contact",
 }
 
 # ─────────────────────────── ARABIC ───────────────────────────
 S["ar"] = {
     "skip": "تخطّي إلى المحتوى",
     "navLabel": "التنقل الرئيسي",
+    "pnStart": "الرئيسية",
+    "pnUpdates": "التحديثات",
+    "pnSupport": "الدعم",
+    "pnContact": "تواصل معنا",
     "footerLabel": "روابط التذييل",
     "langLabel": "اللغة",
     "langPrefix": "اللغة: ",
@@ -146,6 +152,10 @@ S["ar"] = {
 S["nl"] = {
     "skip": "Naar de inhoud",
     "navLabel": "Hoofdnavigatie",
+    "pnStart": "Start",
+    "pnUpdates": "Updates",
+    "pnSupport": "Ondersteuning",
+    "pnContact": "Contact",
     "footerLabel": "Voettekst",
     "langLabel": "Taal",
     "langPrefix": "Taal: ",

@@ -87,6 +87,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* in-page jumps (Contact, a clause from the contents) move without animation
+   for anyone who asked their system for less motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 body {
   margin: 0;
   background: var(--cream);
@@ -4399,11 +4407,21 @@ html[lang="ar"] .tr-eyebrow {
 .contact {
   position: relative;
   isolation: isolate;
+  /* Contact in the navigation jumps here: land below the sticky header (4.6rem)
+     so the section's eyebrow and heading are not hidden under it */
+  scroll-margin-top: 4.6rem;
   padding: clamp(3.5rem, 7.5vw, 5rem) 0 clamp(2.75rem, 6vw, 3.75rem);
   border-top: 1px solid var(--band-edge);
   background-color: var(--band-top);
   background-image: linear-gradient(168deg, var(--band-top) 0%, var(--band-mid) 100%);
   color: var(--on-band-strong);
+}
+
+/* Support: the band follows the page's reading column rather than another
+   band, so it takes the room a section break needs. (On the home page it
+   follows the trust band and this does not apply.) */
+main > .shell + .contact {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
 }
 
 .contact::before {

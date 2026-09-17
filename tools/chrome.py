@@ -312,8 +312,8 @@ def topbar(lang, page, depth):
 
 def header_html(lang, page, depth, links):
     """The header for any language. `links` is a list of (href, label, current)
-    with hrefs already resolved - the English pages hand in the links they
-    already contain, the generated pages the ones nav_items() computes.
+    with hrefs already resolved - always chrome.primary_nav() (nav_items() is
+    the footer's list).
 
     Order matters and is deliberate: brand, menu button, primary nav, language
     menu. The brand opens the header at the reading start and `margin-inline-end:
@@ -368,18 +368,32 @@ def header_html(lang, page, depth, links):
 """
 
 
+# The id of the home page's contact section. Contact in the primary nav and
+# the footer's "Write to ZULFAA" both point at it, in the page's language.
+CONTACT_ID = "contact"
+
+
+def primary_nav(lang, page, depth):
+    """THE primary navigation, for every page in every language - the desktop
+    row and the phone drawer are the same links (header_html).
+
+        Start · Updates · Support · Contact
+
+    Contact is the home page's contact section in this language (/#contact,
+    /ar/#contact, /nl/#contact): a plain link, so it works from any page, on
+    reload and without scripting. It is never marked current - on the home
+    page Start is, and two current destinations would contradict each other.
+    Privacy, Terms and Data deletion are NOT here; they are in the footer."""
+    s = S[lang]
+    home = (up(depth) + LANGS[lang]["base"]) or "./"
+    items = [("", s["pnStart"]), ("updates/", s["pnUpdates"]), ("support/", s["pnSupport"])]
+    links = [((home + href) if href else home, label, href == page) for href, label in items]
+    links.append((home + "#" + CONTACT_ID, s["pnContact"], False))
+    return links
+
+
 def header(lang, page, depth):
-    a = up(depth)
-    items = nav_items(lang)
-    # The English primary nav carries four of the five links - the English
-    # pages put Data deletion in their footer only - so a generated English
-    # page filters to the same four rather than inventing a fifth. Arabic and
-    # Dutch declare no such list and keep all five, as their pages already do.
-    only = S[lang].get("headerNav")
-    if only is not None:
-        items = [(h, label) for h, label in items if h in only]
-    links = [(a + LANGS[lang]["base"] + href, label, href == page) for href, label in items]
-    return header_html(lang, page, depth, links)
+    return header_html(lang, page, depth, primary_nav(lang, page, depth))
 
 
 def footer(lang, page, depth):

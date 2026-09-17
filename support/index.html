@@ -15,7 +15,7 @@
     <link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/support/" />
     <link rel="icon" type="image/png" href="../assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
-    <link rel="stylesheet" href="../assets/zulfaa.css?v=99cda269" />
+    <link rel="stylesheet" href="../assets/zulfaa.css?v=b7fd67d4" />
     <script>document.documentElement.classList.add("js");</script>
     <script>(function(){try{var t=localStorage.getItem("zulfaa-site-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-site-theme",t)}catch(e){}})();</script>
     <meta name="theme-color" content="#fef9f0" />
@@ -74,10 +74,10 @@
             </button>
           </div>
           <nav class="site-nav" aria-label="Primary">
-            <a href="../">Home</a>
-            <a href="../privacy/">Privacy Policy</a>
-            <a href="../terms/">Terms of Use</a>
-            <a href="./" aria-current="page">Support</a>
+            <a href="../">Start</a>
+            <a href="../updates/">Updates</a>
+            <a href="../support/" aria-current="page">Support</a>
+            <a href="../#contact">Contact</a>
           </nav>
           <nav class="lang-switch" aria-label="Language">
             <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu">
@@ -298,9 +298,87 @@
           </section>
         </div>
       </div>
+
+      <!-- contact:start -->
+      <section class="contact" id="message" aria-labelledby="contact-title">
+        <div class="shell">
+          <div class="co-grid">
+            <div class="co-intro">
+              <p class="co-eyebrow">Contact</p>
+              <h2 id="contact-title">Write to ZULFAA</h2>
+              <p class="co-lead">A question, a correction, or something that behaved oddly on your phone — this reaches the developer directly.</p>
+              <p class="co-mail"><a href="mailto:moner.intelligence@gmail.com">moner.intelligence@gmail.com</a></p>
+            </div>
+            <div class="cf cf-fallback" data-cf-fallback>
+              <p class="cf-fallback-text">The form isn’t available right now, but you can write to us from your own email app.</p>
+              <p class="cf-actions">
+                <a class="btn primary cf-send" href="mailto:moner.intelligence@gmail.com?subject=Message%20from%20the%20ZULFAA%20website">Write an email</a>
+              </p>
+              <p class="cf-fallback-addr"><a href="mailto:moner.intelligence@gmail.com?subject=Message%20from%20the%20ZULFAA%20website" dir="ltr">moner.intelligence@gmail.com</a></p>
+            </div>
+            <form class="cf" id="contact-form" method="post" novalidate hidden
+              data-recipient="moner.intelligence@gmail.com"
+              data-subject="Message from the ZULFAA website"
+              data-lang="en"
+              data-send="Send message"
+              data-sending="Sending…"
+              data-write-email="Write an email"
+              data-unavailable="Sending isn’t available on this page right now, so nothing was sent. Your text is still here. You can also"
+              data-unavailable-preview="Sending isn’t available in this preview, so nothing was sent. Your text is still here. You can also"
+              data-received="Thank you — your message has been received."
+              data-fail="Your message could not reach us. Your text is still here — please try again. You can also"
+              data-rate="Several messages were just sent from this connection. Please wait a few minutes and try again — your text is still here."
+              data-invalid="Something in the form could not be accepted. Please check it and try again."
+              data-err-email="Please enter an email address so a reply can reach you."
+              data-err-email-format="That does not look like an email address."
+              data-err-email-long="That email address is too long."
+              data-err-name-long="Please keep the name to 100 characters or fewer."
+              data-err-message="Please write a message."
+              data-err-message-short="Please write a little more — at least 10 characters."
+              data-err-message-long="Please keep the message to 300 characters or fewer."
+              data-count-left="{n} characters left"
+              data-count-over="{n} characters over the limit"
+              data-max-name="100"
+              data-max-email="254"
+              data-min-message="10"
+              data-max-message="300"
+              data-privacy-endpoint="When you send this form, your name (if you give one), email address and message are stored by our contact service on Cloudflare so we can handle your enquiry. Messages are deleted automatically after 365 days, and you can ask us to delete yours sooner."
+              data-disabled="The form isn’t accepting messages at the moment, so nothing was sent. Your text is still here. You can also"
+            >
+              <p class="cf-row">
+                <label for="cf-name">Name <span class="cf-hint">Optional</span></label>
+                <input id="cf-name" name="name" type="text" autocomplete="name" dir="auto"
+                  aria-describedby="cf-name-err" />
+                <span class="cf-err" id="cf-name-err" hidden></span>
+              </p>
+              <p class="cf-row">
+                <label for="cf-email">Email <span class="cf-hint">So a reply can reach you</span></label>
+                <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email"
+                  dir="ltr" required aria-describedby="cf-email-err" />
+                <span class="cf-err" id="cf-email-err" hidden></span>
+              </p>
+              <p class="cf-row">
+                <label for="cf-message">Message</label>
+                <textarea id="cf-message" name="message" rows="5" dir="auto" required
+                  maxlength="300" aria-describedby="cf-message-err"></textarea>
+                <span class="cf-count" id="cf-message-count" hidden></span>
+                <span class="cf-err" id="cf-message-err" hidden></span>
+              </p>
+              <p class="cf-actions">
+                <button class="btn primary cf-send" type="submit">Send message</button>
+              </p>
+              <p class="cf-state" role="status" aria-live="polite" tabindex="-1" hidden></p>
+              <p class="cf-privacy">Sending isn’t available on this page, so nothing you type here is sent or stored.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- contact:end -->
     </main>
 
-    <footer class="site-foot">
+    <script src="../assets/contact-config.js?v=fd202749" defer></script>
+    <script src="../assets/contact.js?v=8439f9e6" defer></script>
+    <footer class="site-foot is-joined">
       <div class="shell">
         <div class="fo-grid">
           <div class="fo-brand">

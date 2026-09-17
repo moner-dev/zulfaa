@@ -4,8 +4,9 @@ import os, sys, json, html
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from chrome import (S, LANGS, C, SHOTS, CAPS, ALT, MAIL, DEV, PAGES, SITE,
                         e, head, header, footer, toc, dochead, clauses, up, write, num,
-                        main_open)
+                        main_open, asset)
 from dd_strings import DD
+from lower import render_contact, CONTACT_PLACES
 
 NL = chr(10)
 
@@ -69,8 +70,17 @@ def build_support(lang):
               '              <a href="../terms/">%s</a><br />\n'
               '              <a href="../delete-data/">%s</a>\n            </p>\n          </section>\n'
               % (e(s["supLegal"]), e(n["privacy"]), e(n["terms"]), e(s["deleteNav"]))
-            + "        </div>\n      </div>\n    </main>\n\n"
+            + "        </div>\n      </div>\n\n"
+            + render_contact(lang, up(d), CONTACT_PLACES[p]) + "\n    </main>\n\n"
+            + contact_scripts(up(d))
             + footer(lang, p, d))
+
+
+def contact_scripts(a):
+    """Configuration first, then the handler: both defer, so they run in this
+    order, once per page. The same two tags home.py writes."""
+    return ('    <script src="%s%s" defer></script>\n' % (a, asset("assets/contact-config.js"))
+            + '    <script src="%s%s" defer></script>\n' % (a, asset("assets/contact.js")))
 
 
 def build_delete(lang):

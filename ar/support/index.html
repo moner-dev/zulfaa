@@ -12,7 +12,7 @@
     <link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/support/" />
     <link rel="icon" type="image/png" href="../../assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
-    <link rel="stylesheet" href="../../assets/zulfaa.css?v=99cda269" />
+    <link rel="stylesheet" href="../../assets/zulfaa.css?v=b7fd67d4" />
     <script>document.documentElement.classList.add("js");</script>
     <script>(function(){try{var t=localStorage.getItem("zulfaa-site-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-site-theme",t)}catch(e){}})();</script>
     <meta name="theme-color" content="#fef9f0" />
@@ -73,10 +73,9 @@
           </div>
           <nav class="site-nav" aria-label="التنقل الرئيسي">
             <a href="../../ar/">الرئيسية</a>
-            <a href="../../ar/privacy/">سياسة الخصوصية</a>
-            <a href="../../ar/terms/">شروط الاستخدام</a>
-            <a href="../../ar/delete-data/">حذف البيانات</a>
-            <a href="../../ar/support/" aria-current="page">المساعدة والدعم</a>
+            <a href="../../ar/updates/">التحديثات</a>
+            <a href="../../ar/support/" aria-current="page">الدعم</a>
+            <a href="../../ar/#contact">تواصل معنا</a>
           </nav>
           <nav class="lang-switch" aria-label="اللغة">
             <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu">
@@ -266,9 +265,87 @@
           </section>
         </div>
       </div>
+
+      <!-- contact:start -->
+      <section class="contact" id="message" aria-labelledby="contact-title">
+        <div class="shell">
+          <div class="co-grid">
+            <div class="co-intro">
+              <p class="co-eyebrow">تواصل</p>
+              <h2 id="contact-title">راسِل زُلْفَى</h2>
+              <p class="co-lead">سؤال أو تصحيح أو أمر بدا غريبًا على هاتفك — تصل رسالتك إلى المطوّر مباشرة.</p>
+              <p class="co-mail"><a href="mailto:moner.intelligence@gmail.com">moner.intelligence@gmail.com</a></p>
+            </div>
+            <div class="cf cf-fallback" data-cf-fallback>
+              <p class="cf-fallback-text">النموذج غير متاح الآن، لكن يمكنك مراسلتنا من تطبيق البريد لديك.</p>
+              <p class="cf-actions">
+                <a class="btn primary cf-send" href="mailto:moner.intelligence@gmail.com?subject=%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%20%D8%B2%D9%8F%D9%84%D9%92%D9%81%D9%8E%D9%89">اكتب رسالة بريد</a>
+              </p>
+              <p class="cf-fallback-addr"><a href="mailto:moner.intelligence@gmail.com?subject=%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%20%D8%B2%D9%8F%D9%84%D9%92%D9%81%D9%8E%D9%89" dir="ltr">moner.intelligence@gmail.com</a></p>
+            </div>
+            <form class="cf" id="contact-form" method="post" novalidate hidden
+              data-recipient="moner.intelligence@gmail.com"
+              data-subject="رسالة من موقع زُلْفَى"
+              data-lang="ar"
+              data-send="إرسال الرسالة"
+              data-sending="جارٍ الإرسال…"
+              data-write-email="اكتب رسالة بريد"
+              data-unavailable="الإرسال غير متاح في هذه الصفحة الآن، لذلك لم يُرسَل شيء. نصّك ما زال هنا. ويمكنك أيضًا أن"
+              data-unavailable-preview="الإرسال غير متاح في هذه المعاينة، لذلك لم يُرسَل شيء. نصّك ما زال هنا. ويمكنك أيضًا أن"
+              data-received="شكرًا لك — استلمنا رسالتك."
+              data-fail="تعذّر إيصال رسالتك إلينا. نصّك ما زال هنا — حاول مرة أخرى. ويمكنك أيضًا أن"
+              data-rate="أُرسلت عدة رسائل من هذا الاتصال للتو. انتظر بضع دقائق ثم حاول مرة أخرى — نصّك ما زال هنا."
+              data-invalid="تعذّر قبول شيء في النموذج. راجِعه وحاول مرة أخرى."
+              data-err-email="اكتب بريدًا إلكترونيًا ليصلك الرد."
+              data-err-email-format="هذا لا يبدو بريدًا إلكترونيًا."
+              data-err-email-long="عنوان البريد هذا طويل جدًا."
+              data-err-name-long="اجعل الاسم ١٠٠ حرف أو أقل من فضلك."
+              data-err-message="اكتب رسالتك من فضلك."
+              data-err-message-short="اكتب أكثر قليلًا — ١٠ أحرف على الأقل."
+              data-err-message-long="اجعل الرسالة ٣٠٠ حرف أو أقل من فضلك."
+              data-count-left="الأحرف المتبقية: {n}"
+              data-count-over="زيادة على الحد: {n}"
+              data-max-name="100"
+              data-max-email="254"
+              data-min-message="10"
+              data-max-message="300"
+              data-privacy-endpoint="عند إرسال هذا النموذج تُحفَظ رسالتك وعنوان بريدك الإلكتروني واسمك (إن كتبته) لدى خدمة التواصل الخاصة بنا على Cloudflare، لنتمكّن من متابعة استفسارك. تُحذَف الرسائل تلقائيًا بعد ٣٦٥ يومًا، ويمكنك أن تطلب منا حذف رسالتك قبل ذلك."
+              data-disabled="النموذج لا يستقبل الرسائل في الوقت الحالي، لذلك لم يُرسَل شيء. نصّك ما زال هنا. ويمكنك أيضًا أن"
+            >
+              <p class="cf-row">
+                <label for="cf-name">الاسم <span class="cf-hint">اختياري</span></label>
+                <input id="cf-name" name="name" type="text" autocomplete="name" dir="auto"
+                  aria-describedby="cf-name-err" />
+                <span class="cf-err" id="cf-name-err" hidden></span>
+              </p>
+              <p class="cf-row">
+                <label for="cf-email">البريد الإلكتروني <span class="cf-hint">ليصلك الرد</span></label>
+                <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email"
+                  dir="ltr" required aria-describedby="cf-email-err" />
+                <span class="cf-err" id="cf-email-err" hidden></span>
+              </p>
+              <p class="cf-row">
+                <label for="cf-message">الرسالة</label>
+                <textarea id="cf-message" name="message" rows="5" dir="auto" required
+                  maxlength="300" aria-describedby="cf-message-err"></textarea>
+                <span class="cf-count" id="cf-message-count" hidden></span>
+                <span class="cf-err" id="cf-message-err" hidden></span>
+              </p>
+              <p class="cf-actions">
+                <button class="btn primary cf-send" type="submit">إرسال الرسالة</button>
+              </p>
+              <p class="cf-state" role="status" aria-live="polite" tabindex="-1" hidden></p>
+              <p class="cf-privacy">الإرسال غير متاح في هذه الصفحة، لذلك لا يُرسَل ولا يُحفَظ شيء مما تكتبه هنا.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- contact:end -->
     </main>
 
-    <footer class="site-foot">
+    <script src="../../assets/contact-config.js?v=fd202749" defer></script>
+    <script src="../../assets/contact.js?v=8439f9e6" defer></script>
+    <footer class="site-foot is-joined">
       <div class="shell">
         <div class="fo-grid">
           <div class="fo-brand">

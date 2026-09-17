@@ -23,7 +23,7 @@ import os, re, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from chrome import SITE, asset, THEME_BOOT  # noqa: E402
 from articles import render_journal  # noqa: E402
-from lower import render_trust, render_contact, render_footer  # noqa: E402
+from lower import render_trust, render_contact, render_footer, CONTACT_PLACES  # noqa: E402
 from lantern import host as lantern_host  # noqa: E402
 from scrolldock import render as render_dock  # noqa: E402
 from showcase import render_showcase, render_lightbox  # noqa: E402
@@ -145,6 +145,27 @@ def fix_home(t):
     return fix_contact_scripts(t)
 
 
+# Support: the shared contact section as a marked region at the end of <main>,
+# and the two contact scripts in one block right before the footer.
+SUPPORT_CONTACT = re.compile(r"      <!-- contact:start -->.*?<!-- contact:end -->\n", re.S)
+SUPPORT_MAIN_END = "      </div>\n    </main>\n"
+
+
+def fix_support(t):
+    block = render_contact("en", "../", CONTACT_PLACES["support/"]) + "\n"
+    if SUPPORT_CONTACT.search(t):
+        t = SUPPORT_CONTACT.sub(lambda m: block, t, count=1)
+    else:
+        assert t.count(SUPPORT_MAIN_END) == 1, "support/index.html: no end of <main> to place the contact section at"
+        t = t.replace(SUPPORT_MAIN_END, "      </div>\n\n" + block + "    </main>\n", 1)
+    for js in SCRIPTS:
+        t = re.sub(r'    <script src="[^"]*assets/%s(?:\?v=[0-9a-f]+)?" defer></script>\n' % re.escape(js), "", t)
+    scripts = "".join('    <script src="../%s" defer></script>\n' % asset("assets/" + js) for js in SCRIPTS)
+    m = FOOTER_RE.search(t)
+    assert m, "support/index.html: no footer to place the contact scripts before"
+    return t[:m.start()] + scripts + t[m.start():]
+
+
 def fix_contact_scripts(t):
     """The contact scripts, as ONE block in ONE order, right after carousel.js.
 
@@ -180,6 +201,8 @@ def main():
         t = fix_lantern_script(t, "../" * depth, rel)
         if rel == "index.html":
             t = fix_home(t)
+        if rel == "support/index.html":
+            t = fix_support(t)
         assert FOOTER_RE.search(t), rel + ": no footer to replace"
         t = FOOTER_RE.sub(lambda m: render_footer("en", page, depth), t, count=1)
         t = fix_dock(t, rel)  # ... and every one carries the scroll dock

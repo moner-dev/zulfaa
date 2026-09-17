@@ -384,13 +384,23 @@ def legal_links(lang, depth):
     return _links(lang, depth, ["privacy/", "terms/", "delete-data/"])
 
 
-def render_contact(lang, a=""):
-    """The home page's contact block. It sits directly above the footer and
-    shares its deep material, so the two read as one closing composition."""
+# Where the one contact section is placed, and the id it takes on each page.
+# Home keeps "contact" (chrome.CONTACT_ID, the primary nav's Contact target);
+# Support already has its own <section id="contact"> (the address and advice),
+# so the form section below it is "message".
+CONTACT_PLACES = {"": "contact", "support/": "message"}
+
+
+def render_contact(lang, a="", section_id="contact"):
+    """The contact block - the SAME markup, strings, form and disclosure on
+    every page that has one (CONTACT_PLACES): the home page and Support. It
+    sits directly above the footer and shares its deep material, so the two
+    read as one closing composition. assets/contact.js finds the form by
+    #contact-form and depends on nothing else on the page."""
     t = T[lang]
     return (
         '      <!-- contact:start -->\n'
-        '      <section class="contact" id="contact" aria-labelledby="contact-title">\n'
+        '      <section class="contact" id="%s" aria-labelledby="contact-title">\n' % section_id +
         '        <div class="shell">\n'
         '          <div class="co-grid">\n'
         '            <div class="co-intro">\n'
@@ -425,7 +435,7 @@ def render_footer(lang, page, depth):
     # On the home page the contact block sits directly above, so the footer
     # continues its material instead of starting a new one. A sibling selector
     # cannot say this - </main> closes between the two - so the page says it.
-    joined = " is-joined" if page == "" else ""
+    joined = " is-joined" if page in CONTACT_PLACES else ""
     return f"""    <footer class="site-foot{joined}">
       <div class="shell">
         <div class="fo-grid">

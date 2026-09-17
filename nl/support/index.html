@@ -12,7 +12,7 @@
     <link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/support/" />
     <link rel="icon" type="image/png" href="../../assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png" />
-    <link rel="stylesheet" href="../../assets/zulfaa.css?v=99cda269" />
+    <link rel="stylesheet" href="../../assets/zulfaa.css?v=b7fd67d4" />
     <script>document.documentElement.classList.add("js");</script>
     <script>(function(){try{var t=localStorage.getItem("zulfaa-site-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-site-theme",t)}catch(e){}})();</script>
     <meta name="theme-color" content="#fef9f0" />
@@ -73,10 +73,9 @@
           </div>
           <nav class="site-nav" aria-label="Hoofdnavigatie">
             <a href="../../nl/">Start</a>
-            <a href="../../nl/privacy/">Privacybeleid</a>
-            <a href="../../nl/terms/">Gebruiksvoorwaarden</a>
-            <a href="../../nl/delete-data/">Gegevens verwijderen</a>
-            <a href="../../nl/support/" aria-current="page">Hulp &amp; Ondersteuning</a>
+            <a href="../../nl/updates/">Updates</a>
+            <a href="../../nl/support/" aria-current="page">Ondersteuning</a>
+            <a href="../../nl/#contact">Contact</a>
           </nav>
           <nav class="lang-switch" aria-label="Taal">
             <button class="lang-btn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="lang-menu">
@@ -266,9 +265,87 @@
           </section>
         </div>
       </div>
+
+      <!-- contact:start -->
+      <section class="contact" id="message" aria-labelledby="contact-title">
+        <div class="shell">
+          <div class="co-grid">
+            <div class="co-intro">
+              <p class="co-eyebrow">Contact</p>
+              <h2 id="contact-title">Schrijf ZULFAA</h2>
+              <p class="co-lead">Een vraag, een correctie, of iets dat zich vreemd gedroeg op uw telefoon — dit komt rechtstreeks bij de ontwikkelaar aan.</p>
+              <p class="co-mail"><a href="mailto:moner.intelligence@gmail.com">moner.intelligence@gmail.com</a></p>
+            </div>
+            <div class="cf cf-fallback" data-cf-fallback>
+              <p class="cf-fallback-text">Het formulier is nu niet beschikbaar, maar u kunt ons schrijven vanuit uw eigen e-mailprogramma.</p>
+              <p class="cf-actions">
+                <a class="btn primary cf-send" href="mailto:moner.intelligence@gmail.com?subject=Bericht%20via%20de%20ZULFAA-website">Schrijf een e-mail</a>
+              </p>
+              <p class="cf-fallback-addr"><a href="mailto:moner.intelligence@gmail.com?subject=Bericht%20via%20de%20ZULFAA-website" dir="ltr">moner.intelligence@gmail.com</a></p>
+            </div>
+            <form class="cf" id="contact-form" method="post" novalidate hidden
+              data-recipient="moner.intelligence@gmail.com"
+              data-subject="Bericht via de ZULFAA-website"
+              data-lang="nl"
+              data-send="Bericht versturen"
+              data-sending="Versturen…"
+              data-write-email="Schrijf een e-mail"
+              data-unavailable="Versturen is op deze pagina nu niet beschikbaar; er is dus niets verzonden. Uw tekst staat er nog. U kunt ook"
+              data-unavailable-preview="Versturen is niet beschikbaar in deze preview; er is dus niets verzonden. Uw tekst staat er nog. U kunt ook"
+              data-received="Dank u — uw bericht is ontvangen."
+              data-fail="Uw bericht kon ons niet bereiken. Uw tekst staat er nog — probeer het opnieuw. U kunt ook"
+              data-rate="Er zijn zojuist meerdere berichten vanaf deze verbinding verstuurd. Wacht een paar minuten en probeer het opnieuw — uw tekst staat er nog."
+              data-invalid="Iets in het formulier kon niet worden geaccepteerd. Controleer het en probeer het opnieuw."
+              data-err-email="Vul een e-mailadres in zodat een antwoord u kan bereiken."
+              data-err-email-format="Dat lijkt geen e-mailadres."
+              data-err-email-long="Dat e-mailadres is te lang."
+              data-err-name-long="Houd de naam op 100 tekens of minder."
+              data-err-message="Schrijf een bericht."
+              data-err-message-short="Schrijf iets meer — minstens 10 tekens."
+              data-err-message-long="Houd het bericht op 300 tekens of minder."
+              data-count-left="Nog {n} tekens"
+              data-count-over="{n} tekens te veel"
+              data-max-name="100"
+              data-max-email="254"
+              data-min-message="10"
+              data-max-message="300"
+              data-privacy-endpoint="Als u dit formulier verstuurt, worden uw naam (als u die invult), uw e-mailadres en uw bericht opgeslagen in onze contactdienst bij Cloudflare, zodat we uw vraag kunnen afhandelen. Berichten worden na 365 dagen automatisch verwijderd; u kunt ons vragen uw bericht eerder te verwijderen."
+              data-disabled="Het formulier neemt op dit moment geen berichten aan; er is dus niets verzonden. Uw tekst staat er nog. U kunt ook"
+            >
+              <p class="cf-row">
+                <label for="cf-name">Naam <span class="cf-hint">Optioneel</span></label>
+                <input id="cf-name" name="name" type="text" autocomplete="name" dir="auto"
+                  aria-describedby="cf-name-err" />
+                <span class="cf-err" id="cf-name-err" hidden></span>
+              </p>
+              <p class="cf-row">
+                <label for="cf-email">E-mail <span class="cf-hint">Zodat een antwoord u kan bereiken</span></label>
+                <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email"
+                  dir="ltr" required aria-describedby="cf-email-err" />
+                <span class="cf-err" id="cf-email-err" hidden></span>
+              </p>
+              <p class="cf-row">
+                <label for="cf-message">Bericht</label>
+                <textarea id="cf-message" name="message" rows="5" dir="auto" required
+                  maxlength="300" aria-describedby="cf-message-err"></textarea>
+                <span class="cf-count" id="cf-message-count" hidden></span>
+                <span class="cf-err" id="cf-message-err" hidden></span>
+              </p>
+              <p class="cf-actions">
+                <button class="btn primary cf-send" type="submit">Bericht versturen</button>
+              </p>
+              <p class="cf-state" role="status" aria-live="polite" tabindex="-1" hidden></p>
+              <p class="cf-privacy">Versturen is op deze pagina niet beschikbaar; niets van wat u hier typt wordt verzonden of opgeslagen.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- contact:end -->
     </main>
 
-    <footer class="site-foot">
+    <script src="../../assets/contact-config.js?v=fd202749" defer></script>
+    <script src="../../assets/contact.js?v=8439f9e6" defer></script>
+    <footer class="site-foot is-joined">
       <div class="shell">
         <div class="fo-grid">
           <div class="fo-brand">

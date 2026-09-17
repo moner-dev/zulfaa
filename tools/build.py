@@ -3,7 +3,7 @@
 import os, re, sys, html
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from chrome import (SITE, LANGS, S, C, write, e, up, PREVIEW, OUT_ROOT, ORIGIN,
-                    header_html, JS_CLASS, NAV_JS, reversion)
+                    header_html, primary_nav, JS_CLASS, NAV_JS, reversion)
 from pages import build_privacy, build_terms, build_support, build_delete
 from home import build_home
 from articles import ARTICLES, PUBLISHED as ARTICLES_PUBLISHED, build_index as build_articles_index, build_article
@@ -64,10 +64,9 @@ EN_PAGES = {"index.html": ("", 0), "privacy/index.html": ("privacy/", 1),
 # These are hand-written, Play-facing originals. build.py touches exactly
 # three things in them, each idempotent:
 #
-#   1. the <header>: re-rendered from the header strings in ui_strings.S["en"]
-#      and from the primary links the page already contains (same hrefs, same
-#      labels, same aria-current) - so the menu button and the language menu
-#      are the one implementation across all fifteen pages;
+#   1. the <header>: re-rendered from ui_strings.S["en"] and chrome.primary_nav,
+#      so the navigation, the menu button and the language menu are the one
+#      implementation across every page;
 #   2. the one-line `js` class script in <head> and assets/nav.js before
 #      </body>, which the header needs;
 #   3. the hreflang alternates.
@@ -92,17 +91,14 @@ HEADER_RE = re.compile(
     r'    <!-- site-chrome:start -->.*?    <!-- site-chrome:end -->\n\n'
     r'|(?:    <div class="head-sentinel"[^>]*></div>\n)*'
     r'    <header class="site-head">.*?</header>\n\n', re.S)
-NAV_LINK_RE = re.compile(r'<a href="([^"]*)"( aria-current="page")?>([^<]*)</a>')
 
 
 def english_header(t, page, depth):
+    # The English originals carry the one primary navigation (chrome.primary_nav)
+    # like every generated page; the links they used to hold are not read.
     m = HEADER_RE.search(t)
     assert m, "no <header class=\"site-head\"> in the English page"
-    nav = re.search(r'<nav class="site-nav"[^>]*>(.*?)</nav>', m.group(0), re.S)
-    assert nav, "no primary nav in the English header"
-    links = [(h, html.unescape(label), bool(cur)) for h, cur, label in NAV_LINK_RE.findall(nav.group(1))]
-    assert links, "no links in the English primary nav"
-    return t[:m.start()] + header_html("en", page, depth, links) + t[m.end():]
+    return t[:m.start()] + header_html("en", page, depth, primary_nav("en", page, depth)) + t[m.end():]
 
 
 for f, (page, depth) in EN_PAGES.items():
