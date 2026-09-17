@@ -15,7 +15,7 @@
     <link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/" />
     <link rel="icon" type="image/png" href="assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-    <link rel="stylesheet" href="assets/zulfaa.css?v=6580ff71" />
+    <link rel="stylesheet" href="assets/zulfaa.css?v=99cda269" />
     <script>document.documentElement.classList.add("js");</script>
     <script>(function(){try{var t=localStorage.getItem("zulfaa-site-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-site-theme",t)}catch(e){}})();</script>
     <meta name="theme-color" content="#fef9f0" />
@@ -1066,19 +1066,14 @@
               data-err-name-long="Please keep the name to 100 characters or fewer."
               data-err-message="Please write a message."
               data-err-message-short="Please write a little more — at least 10 characters."
-              data-err-message-long="Please keep the message to 5,000 characters or fewer."
+              data-err-message-long="Please keep the message to 300 characters or fewer."
               data-count-left="{n} characters left"
               data-count-over="{n} characters over the limit"
               data-max-name="100"
               data-max-email="254"
               data-min-message="10"
-              data-max-message="5000"
+              data-max-message="300"
               data-privacy-endpoint="When you send this form, your name (if you give one), email address and message are stored by our contact service on Cloudflare so we can handle your enquiry. Messages are deleted automatically after 365 days, and you can ask us to delete yours sooner."
-              data-privacy-more-title="How your message is stored"
-              data-privacy-more="Storage: at Cloudflare, in a database located in Western Europe. No EU-only storage requirement is set, so we do not promise that the data stays within the EU.
-Backups: the database keeps a restorable history for up to 7 days, so a deleted message can remain in that history for up to 7 days before it is gone for good.
-Requests: write to moner.intelligence@gmail.com to ask for your message to be deleted, or for a copy of it.
-This covers the website contact form only. The ZULFAA app has its own Privacy Policy."
               data-disabled="The form isn’t accepting messages at the moment, so nothing was sent. Your text is still here. You can also"
             >
               <p class="cf-row">
@@ -1096,7 +1091,7 @@ This covers the website contact form only. The ZULFAA app has its own Privacy Po
               <p class="cf-row">
                 <label for="cf-message">Message</label>
                 <textarea id="cf-message" name="message" rows="5" dir="auto" required
-                  aria-describedby="cf-message-err"></textarea>
+                  maxlength="300" aria-describedby="cf-message-err"></textarea>
                 <span class="cf-count" id="cf-message-count" hidden></span>
                 <span class="cf-err" id="cf-message-err" hidden></span>
               </p>
@@ -1208,7 +1203,7 @@ This covers the website contact form only. The ZULFAA app has its own Privacy Po
     <script src="assets/quick-access.js?v=70337742" defer></script>
     <script src="assets/carousel.js?v=cbf3bc8c" defer></script>
     <script src="assets/contact-config.js?v=fd202749" defer></script>
-    <script src="assets/contact.js?v=9a2027b1" defer></script>
+    <script src="assets/contact.js?v=8439f9e6" defer></script>
     <script type="module" src="assets/hero3d.js?v=df9257a9"></script>
     <script src="assets/nav.js?v=bb6bbd3a" defer></script>
     <script src="assets/lantern.js?v=cc056950" defer></script>

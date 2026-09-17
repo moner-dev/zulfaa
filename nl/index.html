@@ -12,7 +12,7 @@
     <link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/" />
     <link rel="icon" type="image/png" href="../assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
-    <link rel="stylesheet" href="../assets/zulfaa.css?v=6580ff71" />
+    <link rel="stylesheet" href="../assets/zulfaa.css?v=99cda269" />
     <script>document.documentElement.classList.add("js");</script>
     <script>(function(){try{var t=localStorage.getItem("zulfaa-site-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-site-theme",t)}catch(e){}})();</script>
     <meta name="theme-color" content="#fef9f0" />
@@ -1056,19 +1056,14 @@
               data-err-name-long="Houd de naam op 100 tekens of minder."
               data-err-message="Schrijf een bericht."
               data-err-message-short="Schrijf iets meer — minstens 10 tekens."
-              data-err-message-long="Houd het bericht op 5.000 tekens of minder."
+              data-err-message-long="Houd het bericht op 300 tekens of minder."
               data-count-left="Nog {n} tekens"
               data-count-over="{n} tekens te veel"
               data-max-name="100"
               data-max-email="254"
               data-min-message="10"
-              data-max-message="5000"
+              data-max-message="300"
               data-privacy-endpoint="Als u dit formulier verstuurt, worden uw naam (als u die invult), uw e-mailadres en uw bericht opgeslagen in onze contactdienst bij Cloudflare, zodat we uw vraag kunnen afhandelen. Berichten worden na 365 dagen automatisch verwijderd; u kunt ons vragen uw bericht eerder te verwijderen."
-              data-privacy-more-title="Hoe uw bericht wordt opgeslagen"
-              data-privacy-more="Opslag: bij Cloudflare, in een database in West-Europa. Er is geen verplichting ingesteld dat de gegevens uitsluitend in de EU blijven, dus dat beloven we niet.
-Back-ups: de database bewaart een herstelbare geschiedenis van maximaal 7 dagen; een verwijderd bericht kan daarin nog tot 7 dagen staan voordat het definitief weg is.
-Verzoeken: schrijf naar moner.intelligence@gmail.com om uw bericht te laten verwijderen of om een kopie ervan te vragen.
-Dit geldt alleen voor het contactformulier van de website. De ZULFAA-app heeft een eigen privacybeleid."
               data-disabled="Het formulier neemt op dit moment geen berichten aan; er is dus niets verzonden. Uw tekst staat er nog. U kunt ook"
             >
               <p class="cf-row">
@@ -1086,7 +1081,7 @@ Dit geldt alleen voor het contactformulier van de website. De ZULFAA-app heeft e
               <p class="cf-row">
                 <label for="cf-message">Bericht</label>
                 <textarea id="cf-message" name="message" rows="5" dir="auto" required
-                  aria-describedby="cf-message-err"></textarea>
+                  maxlength="300" aria-describedby="cf-message-err"></textarea>
                 <span class="cf-count" id="cf-message-count" hidden></span>
                 <span class="cf-err" id="cf-message-err" hidden></span>
               </p>
@@ -1134,7 +1129,7 @@ Dit geldt alleen voor het contactformulier van de website. De ZULFAA-app heeft e
     <script src="../assets/quick-access.js?v=70337742" defer></script>
     <script src="../assets/carousel.js?v=cbf3bc8c" defer></script>
     <script src="../assets/contact-config.js?v=fd202749" defer></script>
-    <script src="../assets/contact.js?v=9a2027b1" defer></script>
+    <script src="../assets/contact.js?v=8439f9e6" defer></script>
     <script type="module" src="../assets/hero3d.js?v=df9257a9"></script>
     <footer class="site-foot is-joined">
       <div class="shell">

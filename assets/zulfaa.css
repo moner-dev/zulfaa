@@ -4521,9 +4521,13 @@ html[lang="ar"] .co-eyebrow {
   font-size: 0.95rem;
 }
 
+/* A fixed writing box: roomy enough for about five lines, never dragged to an
+   absurd height. The message is capped at 300 characters (maxlength and
+   contact.js), so a longer text scrolls inside the box rather than growing it. */
 .cf-row textarea {
-  resize: vertical;
-  min-height: 7rem;
+  resize: none;
+  height: 10rem;
+  overflow-y: auto;
   line-height: 1.6;
 }
 

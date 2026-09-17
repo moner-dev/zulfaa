@@ -79,8 +79,6 @@ T = {
         # refuses endpoint mode without it. It describes the website form, not
         # the app, and promises no email reply while email is deferred.
         "privacyEndpoint": "When you send this form, your name (if you give one), email address and message are stored by our contact service on Cloudflare so we can handle your enquiry. Messages are deleted automatically after 365 days, and you can ask us to delete yours sooner.",
-        "privacyMoreTitle": "How your message is stored",
-        "privacyMore": "Storage: at Cloudflare, in a database located in Western Europe. No EU-only storage requirement is set, so we do not promise that the data stays within the EU.\nBackups: the database keeps a restorable history for up to 7 days, so a deleted message can remain in that history for up to 7 days before it is gone for good.\nRequests: write to moner.intelligence@gmail.com to ask for your message to be deleted, or for a copy of it.\nThis covers the website contact form only. The ZULFAA app has its own Privacy Policy.",
         # the service answered 503: collection is switched off
         "disabled": "The form isn’t accepting messages at the moment, so nothing was sent. Your text is still here. You can also",
         "fallback": "The form isn’t available right now, but you can write to us from your own email app.",
@@ -95,7 +93,7 @@ T = {
         "errNameLong": "Please keep the name to 100 characters or fewer.",
         "errMessage": "Please write a message.",
         "errMessageShort": "Please write a little more — at least 10 characters.",
-        "errMessageLong": "Please keep the message to 5,000 characters or fewer.",
+        "errMessageLong": "Please keep the message to 300 characters or fewer.",
         "countLeft": "{n} characters left",
         "countOver": "{n} characters over the limit",
         "footTag": "Prayer times, the Qur'an, adhkar and the qibla in one calm place, calculated on your own phone.",
@@ -136,8 +134,6 @@ T = {
         "unavailable": "الإرسال غير متاح في هذه الصفحة الآن، لذلك لم يُرسَل شيء. نصّك ما زال هنا. ويمكنك أيضًا أن",
         "subject": "رسالة من موقع زُلْفَى",
         "privacyEndpoint": "عند إرسال هذا النموذج تُحفَظ رسالتك وعنوان بريدك الإلكتروني واسمك (إن كتبته) لدى خدمة التواصل الخاصة بنا على Cloudflare، لنتمكّن من متابعة استفسارك. تُحذَف الرسائل تلقائيًا بعد ٣٦٥ يومًا، ويمكنك أن تطلب منا حذف رسالتك قبل ذلك.",
-        "privacyMoreTitle": "كيف تُحفَظ رسالتك",
-        "privacyMore": "التخزين: لدى Cloudflare، في قاعدة بيانات موقعها غرب أوروبا. لم يُفرَض شرط يُلزم ببقاء البيانات داخل الاتحاد الأوروبي حصرًا، لذلك لا نَعِد بذلك.\nالنسخ الاحتياطية: تحتفظ قاعدة البيانات بسجل قابل للاسترجاع مدة تصل إلى ٧ أيام، فقد تبقى الرسالة المحذوفة في هذا السجل حتى ٧ أيام قبل أن تزول نهائيًا.\nالطلبات: اكتب إلى moner.intelligence@gmail.com لتطلب حذف رسالتك أو نسخة منها.\nهذا يخص نموذج التواصل في الموقع فقط، ولتطبيق زُلْفَى سياسة خصوصية خاصة به.",
         "disabled": "النموذج لا يستقبل الرسائل في الوقت الحالي، لذلك لم يُرسَل شيء. نصّك ما زال هنا. ويمكنك أيضًا أن",
         "fallback": "النموذج غير متاح الآن، لكن يمكنك مراسلتنا من تطبيق البريد لديك.",
         "fallbackAction": "اكتب رسالة بريد",
@@ -151,7 +147,7 @@ T = {
         "errNameLong": "اجعل الاسم ١٠٠ حرف أو أقل من فضلك.",
         "errMessage": "اكتب رسالتك من فضلك.",
         "errMessageShort": "اكتب أكثر قليلًا — ١٠ أحرف على الأقل.",
-        "errMessageLong": "اجعل الرسالة ٥٠٠٠ حرف أو أقل من فضلك.",
+        "errMessageLong": "اجعل الرسالة ٣٠٠ حرف أو أقل من فضلك.",
         "countLeft": "الأحرف المتبقية: {n}",
         "countOver": "زيادة على الحد: {n}",
         "footTag": "مواقيت الصلاة والقرآن والأذكار والقبلة في مكان هادئ واحد، تُحسب على هاتفك.",
@@ -192,8 +188,6 @@ T = {
         "unavailable": "Versturen is op deze pagina nu niet beschikbaar; er is dus niets verzonden. Uw tekst staat er nog. U kunt ook",
         "subject": "Bericht via de ZULFAA-website",
         "privacyEndpoint": "Als u dit formulier verstuurt, worden uw naam (als u die invult), uw e-mailadres en uw bericht opgeslagen in onze contactdienst bij Cloudflare, zodat we uw vraag kunnen afhandelen. Berichten worden na 365 dagen automatisch verwijderd; u kunt ons vragen uw bericht eerder te verwijderen.",
-        "privacyMoreTitle": "Hoe uw bericht wordt opgeslagen",
-        "privacyMore": "Opslag: bij Cloudflare, in een database in West-Europa. Er is geen verplichting ingesteld dat de gegevens uitsluitend in de EU blijven, dus dat beloven we niet.\nBack-ups: de database bewaart een herstelbare geschiedenis van maximaal 7 dagen; een verwijderd bericht kan daarin nog tot 7 dagen staan voordat het definitief weg is.\nVerzoeken: schrijf naar moner.intelligence@gmail.com om uw bericht te laten verwijderen of om een kopie ervan te vragen.\nDit geldt alleen voor het contactformulier van de website. De ZULFAA-app heeft een eigen privacybeleid.",
         "disabled": "Het formulier neemt op dit moment geen berichten aan; er is dus niets verzonden. Uw tekst staat er nog. U kunt ook",
         "fallback": "Het formulier is nu niet beschikbaar, maar u kunt ons schrijven vanuit uw eigen e-mailprogramma.",
         "fallbackAction": "Schrijf een e-mail",
@@ -207,7 +201,7 @@ T = {
         "errNameLong": "Houd de naam op 100 tekens of minder.",
         "errMessage": "Schrijf een bericht.",
         "errMessageShort": "Schrijf iets meer — minstens 10 tekens.",
-        "errMessageLong": "Houd het bericht op 5.000 tekens of minder.",
+        "errMessageLong": "Houd het bericht op 300 tekens of minder.",
         "countLeft": "Nog {n} tekens",
         "countOver": "{n} tekens te veel",
         "footTag": "Gebedstijden, de Koran, adhkar en de qibla op één rustige plek, berekend op uw eigen telefoon.",
@@ -262,7 +256,7 @@ def render_trust(lang, a=""):
 # nothing more. A future endpoint must enforce its own (the plan, section 4.2),
 # because anything in a browser can be bypassed. Counted in characters (code
 # points), the same unit Postgres char_length uses.
-LIMITS = {"name": 100, "email": 254, "messageMin": 10, "messageMax": 5000}
+LIMITS = {"name": 100, "email": 254, "messageMin": 10, "messageMax": 300}
 
 
 def mailto(lang):
@@ -303,8 +297,6 @@ def contact_form(lang, a=""):
         # add the APPROVED wording per language as T[lang]["privacyEndpoint"]
         # (draft: Docs/website/CONTACT_STORAGE_DISCLOSURE_DRAFT.md).
         ("privacy-endpoint", t.get("privacyEndpoint", "")),
-        ("privacy-more-title", t.get("privacyMoreTitle", "")),
-        ("privacy-more", t.get("privacyMore", "")),
         ("disabled", t["disabled"]),
     ]
     attrs = "".join('\n              data-%s="%s"' % (k, esc(str(v))) for k, v in data)
@@ -333,7 +325,7 @@ def contact_form(lang, a=""):
         '              <p class="cf-row">\n'
         '                <label for="cf-message">%s</label>\n'
         '                <textarea id="cf-message" name="message" rows="5" dir="auto" required\n'
-        '                  aria-describedby="cf-message-err"></textarea>\n'
+        '                  maxlength="%d" aria-describedby="cf-message-err"></textarea>\n'
         '                <span class="cf-count" id="cf-message-count" hidden></span>\n'
         '                <span class="cf-err" id="cf-message-err" hidden></span>\n'
         '              </p>\n'
@@ -346,7 +338,7 @@ def contact_form(lang, a=""):
         % (esc(t["fallback"]), esc(mailto(lang)), esc(t["fallbackAction"]), esc(mailto(lang)), MAIL,
            attrs,
            esc(t["name"]), esc(t["nameHint"]), esc(t["email"]), esc(t["emailHint"]),
-           esc(t["message"]), esc(t["send"]), esc(t["privacy"])))
+           esc(t["message"]), LIMITS["messageMax"], esc(t["send"]), esc(t["privacy"])))
 
 
 def socials(lang, cls="fo-social"):

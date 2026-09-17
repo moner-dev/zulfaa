@@ -12,7 +12,7 @@
     <link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/" />
     <link rel="icon" type="image/png" href="../assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
-    <link rel="stylesheet" href="../assets/zulfaa.css?v=6580ff71" />
+    <link rel="stylesheet" href="../assets/zulfaa.css?v=99cda269" />
     <script>document.documentElement.classList.add("js");</script>
     <script>(function(){try{var t=localStorage.getItem("zulfaa-site-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-site-theme",t)}catch(e){}})();</script>
     <meta name="theme-color" content="#fef9f0" />
@@ -1056,19 +1056,14 @@
               data-err-name-long="اجعل الاسم ١٠٠ حرف أو أقل من فضلك."
               data-err-message="اكتب رسالتك من فضلك."
               data-err-message-short="اكتب أكثر قليلًا — ١٠ أحرف على الأقل."
-              data-err-message-long="اجعل الرسالة ٥٠٠٠ حرف أو أقل من فضلك."
+              data-err-message-long="اجعل الرسالة ٣٠٠ حرف أو أقل من فضلك."
               data-count-left="الأحرف المتبقية: {n}"
               data-count-over="زيادة على الحد: {n}"
               data-max-name="100"
               data-max-email="254"
               data-min-message="10"
-              data-max-message="5000"
+              data-max-message="300"
               data-privacy-endpoint="عند إرسال هذا النموذج تُحفَظ رسالتك وعنوان بريدك الإلكتروني واسمك (إن كتبته) لدى خدمة التواصل الخاصة بنا على Cloudflare، لنتمكّن من متابعة استفسارك. تُحذَف الرسائل تلقائيًا بعد ٣٦٥ يومًا، ويمكنك أن تطلب منا حذف رسالتك قبل ذلك."
-              data-privacy-more-title="كيف تُحفَظ رسالتك"
-              data-privacy-more="التخزين: لدى Cloudflare، في قاعدة بيانات موقعها غرب أوروبا. لم يُفرَض شرط يُلزم ببقاء البيانات داخل الاتحاد الأوروبي حصرًا، لذلك لا نَعِد بذلك.
-النسخ الاحتياطية: تحتفظ قاعدة البيانات بسجل قابل للاسترجاع مدة تصل إلى ٧ أيام، فقد تبقى الرسالة المحذوفة في هذا السجل حتى ٧ أيام قبل أن تزول نهائيًا.
-الطلبات: اكتب إلى moner.intelligence@gmail.com لتطلب حذف رسالتك أو نسخة منها.
-هذا يخص نموذج التواصل في الموقع فقط، ولتطبيق زُلْفَى سياسة خصوصية خاصة به."
               data-disabled="النموذج لا يستقبل الرسائل في الوقت الحالي، لذلك لم يُرسَل شيء. نصّك ما زال هنا. ويمكنك أيضًا أن"
             >
               <p class="cf-row">
@@ -1086,7 +1081,7 @@
               <p class="cf-row">
                 <label for="cf-message">الرسالة</label>
                 <textarea id="cf-message" name="message" rows="5" dir="auto" required
-                  aria-describedby="cf-message-err"></textarea>
+                  maxlength="300" aria-describedby="cf-message-err"></textarea>
                 <span class="cf-count" id="cf-message-count" hidden></span>
                 <span class="cf-err" id="cf-message-err" hidden></span>
               </p>
@@ -1134,7 +1129,7 @@
     <script src="../assets/quick-access.js?v=70337742" defer></script>
     <script src="../assets/carousel.js?v=cbf3bc8c" defer></script>
     <script src="../assets/contact-config.js?v=fd202749" defer></script>
-    <script src="../assets/contact.js?v=9a2027b1" defer></script>
+    <script src="../assets/contact.js?v=8439f9e6" defer></script>
     <script type="module" src="../assets/hero3d.js?v=df9257a9"></script>
     <footer class="site-foot is-joined">
       <div class="shell">

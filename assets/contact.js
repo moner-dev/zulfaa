@@ -141,30 +141,6 @@
     });
     if (mode === "endpoint" && privacy) {
       privacy.textContent = disclosure;
-      /* The storage details, folded under the sentence: where the data is,
-         the backup window, and how to ask for deletion. Built as text nodes,
-         one paragraph per line of the attribute. */
-      var moreTitle = say("privacy-more-title");
-      var moreText = say("privacy-more");
-      if (moreTitle && moreText) {
-        var details = document.createElement("details");
-        details.className = "cf-privacy-more";
-        details.style.marginTop = "0.5rem";
-        var summary = document.createElement("summary");
-        summary.textContent = moreTitle;
-        summary.style.cursor = "pointer";
-        summary.style.textDecoration = "underline";
-        summary.style.textUnderlineOffset = "0.2em";
-        details.appendChild(summary);
-        moreText.split("\n").forEach(function (line) {
-          if (!line.trim()) return;
-          var para = document.createElement("p");
-          para.textContent = line;
-          para.style.margin = "0.4rem 0 0";
-          details.appendChild(para);
-        });
-        privacy.appendChild(details);
-      }
     }
 
     // ── client-side validation (convenience; the server decides) ──────────
@@ -226,12 +202,13 @@
       FIELDS[f].addEventListener("input", function () { check(f, false); });
     });
 
-    /* The counter appears near the limit. It is not a live region: the error
-       on submit is what a screen reader hears, not every keystroke. */
+    /* The counter appears in the last third of the allowance (100 of 300). It
+       is not a live region: the error on submit is what a screen reader hears,
+       not every keystroke. */
     function updateCount() {
       if (!count) return;
       var left = LIMIT.messageMax - length(message.value.trim());
-      if (left > 500) {
+      if (left > Math.floor(LIMIT.messageMax / 3)) {
         count.hidden = true;
         count.textContent = "";
         return;
