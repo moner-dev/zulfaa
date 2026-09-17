@@ -162,18 +162,24 @@
   var btnNext = lb.querySelector(".lb-next");
   var focusables = [btnClose, btnPrev, btnNext];
 
-  var shots = slides.map(function (s) {
+  /* Read when the preview shows a picture, not once at load: the full-size file
+     is the one for the site theme at that moment (data-src-<theme> on the
+     slide, written by tools/showcase.py; plain src when a slide has no themes). */
+  function shotAt(index) {
+    var s = slides[index];
     var i = s.querySelector("img");
+    var theme = document.documentElement.getAttribute("data-site-theme") === "dark" ? "dark" : "light";
     return {
-      src: i.getAttribute("src"),
+      src: i.getAttribute("data-src-" + theme) || i.getAttribute("src"),
       alt: i.getAttribute("alt") || "",
       w: i.getAttribute("width"),
       h: i.getAttribute("height"),
       cap: s.getAttribute("data-cap") || "",
       device: s.classList.contains("shot--device"),
     };
-  });
+  }
 
+  var count = slides.length;
   var open = false;
   var current = 0;
   var opener = null;
@@ -182,11 +188,18 @@
 
   function pad(n) { return (n < 10 ? "0" : "") + n; }
 
-  if (elTotal) elTotal.textContent = pad(shots.length);
+  if (elTotal) elTotal.textContent = pad(count);
+
+  /* The theme changed while the preview is open: the same screenshot, in the
+     other theme. The dialog, its focus and the scroll lock are untouched. The
+     slides themselves are switched by assets/lantern.js, which sends this. */
+  document.addEventListener("zulfaa:theme", function () {
+    if (open) show(current);
+  });
 
   function show(i) {
-    current = (i + shots.length) % shots.length; // wrap-around
-    var s = shots[current];
+    current = (i + count) % count; // wrap-around
+    var s = shotAt(current);
     img.setAttribute("width", s.w);
     img.setAttribute("height", s.h);
     img.src = s.src;

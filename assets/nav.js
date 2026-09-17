@@ -271,57 +271,46 @@
   }).observe(sentinel);
 })();
 
-/* ZULFAA — the hero's day/night control.
+/* ZULFAA — the hero's day/night control, WITHOUT the live phone.
  *
- * The phone in the hero shows the app's own light and dark themes. The button
- * is the only control; the stylesheet does the reveal, so nothing here runs
- * per frame. Absent on every page but the home page, where it returns early. */
+ * assets/hero3d.js owns this button whenever it runs: it claims the phone by
+ * setting data-controller="hero3d" before this file executes (module and
+ * deferred scripts run in document order, and the module comes first), and
+ * then turns the phone to change theme. This block is only the fallback for
+ * a browser that did not run the module at all - no module support, the file
+ * failed to load - where the stills are all there is: it shows them and
+ * switches between them directly.
+ *
+ * Either way the visitor's choice is kept for the session under the same key,
+ * so switching language (a plain link to another page) keeps the phone in the
+ * theme they picked. Absent on every page but the home page. */
 (function () {
   var btn = document.querySelector(".theme-demo");
-  var phone = document.querySelector(".hero .phone");
+  var phone = document.querySelector(".hero .phone3d");
   if (!btn || !phone) return;
+  if (phone.getAttribute("data-controller") === "hero3d") return;
 
-  var touched = false;
+  phone.setAttribute("data-stage", "still");
+  var KEY = "zulfaa-hero-theme";
 
-  var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var swapTimer, endTimer;
-
-  /* The lids are shut between 224ms and 324ms; the image is swapped at 280ms,
-     in the middle of that window, so the change happens behind a closed
-     screen and the two themes are never both visible. */
-  function set(dark) {
+  function set(dark, remember) {
     btn.setAttribute("aria-pressed", dark ? "true" : "false");
-    if (calm) {
-      phone.setAttribute("data-theme", dark ? "dark" : "light");
-      return;
+    phone.setAttribute("data-theme", dark ? "dark" : "light");
+    if (!remember) return;
+    try {
+      window.sessionStorage.setItem(KEY, dark ? "dark" : "light");
+    } catch (e) {
+      /* storage refused (private mode): the choice lasts for this page only */
     }
-    window.clearTimeout(swapTimer);
-    window.clearTimeout(endTimer);
-    phone.classList.remove("is-blinking");
-    void phone.offsetWidth; /* restart the animation if it is already running */
-    phone.classList.add("is-blinking");
-    swapTimer = window.setTimeout(function () {
-      phone.setAttribute("data-theme", dark ? "dark" : "light");
-    }, 280);
-    endTimer = window.setTimeout(function () {
-      phone.classList.remove("is-blinking");
-    }, 580);
   }
 
-  btn.addEventListener("click", function () {
-    touched = true;
-    set(btn.getAttribute("aria-pressed") !== "true");
-  });
+  var saved = null;
+  try {
+    saved = window.sessionStorage.getItem(KEY);
+  } catch (e) {}
+  if (saved === "dark") set(true, false);
 
-  /* One orchestrated moment on arrival: night falls and lifts again, once, so
-   * a visitor sees the app has both themes without being told. It never runs
-   * when motion is refused, and it yields the moment the visitor takes over. */
-  if (calm) return;
-  window.setTimeout(function () {
-    if (touched) return;
-    set(true);
-    window.setTimeout(function () {
-      if (!touched) set(false);
-    }, 2800);
-  }, 1600);
+  btn.addEventListener("click", function () {
+    set(btn.getAttribute("aria-pressed") !== "true", true);
+  });
 })();

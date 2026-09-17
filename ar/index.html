@@ -12,8 +12,9 @@
     <link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/" />
     <link rel="icon" type="image/png" href="../assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
-    <link rel="stylesheet" href="../assets/zulfaa.css?v=977335da" />
+    <link rel="stylesheet" href="../assets/zulfaa.css?v=3e49efdf" />
     <script>document.documentElement.classList.add("js");</script>
+    <script>(function(){try{var t=localStorage.getItem("zulfaa-site-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-site-theme",t)}catch(e){}})();</script>
     <meta name="theme-color" content="#fef9f0" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ZULFAA" />
@@ -99,8 +100,122 @@
 
     <main>
       <div class="shell">
+        <!-- lantern:start -->
+        <div class="lantern-host">
+          <button
+            class="lantern"
+            type="button"
+            aria-pressed="false"
+            aria-label="التبديل إلى الوضع الداكن"
+            title="الوضع الداكن"
+            data-to-dark="التبديل إلى الوضع الداكن"
+            data-to-light="التبديل إلى الوضع الفاتح"
+            data-tip-dark="الوضع الداكن"
+            data-tip-light="الوضع الفاتح"
+          >
+            <span class="ln-spill" aria-hidden="true"></span>
+            <span class="ln-halo" aria-hidden="true"></span>
+            <span class="ln-bloom" aria-hidden="true"></span>
+            <svg class="ln-svg" viewBox="0 0 140 340" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="ln-metal" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#0e241f" />
+                  <stop offset="28%" stop-color="#2d564c" />
+                  <stop offset="47%" stop-color="#7f9d91" />
+                  <stop offset="58%" stop-color="#456d61" />
+                  <stop offset="78%" stop-color="#1c3b34" />
+                  <stop offset="100%" stop-color="#0b1d19" />
+                </linearGradient>
+                <linearGradient id="ln-brass" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#6d5119" />
+                  <stop offset="22%" stop-color="#c79a35" />
+                  <stop offset="44%" stop-color="#f6e2a6" />
+                  <stop offset="62%" stop-color="#d7a93c" />
+                  <stop offset="84%" stop-color="#8a681f" />
+                  <stop offset="100%" stop-color="#5c4514" />
+                </linearGradient>
+                <!-- The glass panel is painted OVER the dark metal frame, so a
+                     low alpha here does not show the cream page through it - it
+                     shows the frame, which is why the unlit lantern used to read
+                     as a solid olive canister. It is pale and nearly opaque
+                     instead, and the flame is drawn after it. Dark mode replaces
+                     this fill outright, in the stylesheet. (Do not name a real
+                     asset path in this comment: the build rewrites every one it
+                     finds into a versioned URL, and write_en puts the pristine
+                     text back, so the two would rewrite each other for ever.) -->
+                <linearGradient id="ln-glass" x1="0.1" y1="0" x2="0.9" y2="1">
+                  <stop offset="0%" stop-color="#f7fbf8" stop-opacity="0.92" />
+                  <stop offset="38%" stop-color="#dcebe2" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#9fbdae" stop-opacity="0.72" />
+                </linearGradient>
+                <radialGradient id="ln-core" cx="0.5" cy="0.58" r="0.52">
+                  <stop offset="0%" stop-color="#fff8e8" />
+                  <stop offset="30%" stop-color="#ffe0a0" />
+                  <stop offset="64%" stop-color="#eeb44e" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="#e09a2c" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient id="ln-sheen" x1="0" y1="0" x2="1" y2="0.6">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.40" />
+                  <stop offset="55%" stop-color="#ffffff" stop-opacity="0.08" />
+                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+
+              <!-- the ceiling hook: fixed, the sway happens under it -->
+              <path class="ln-hook" d="M70 3v7" />
+              <circle class="ln-hook-ring" cx="70" cy="14" r="4" />
+
+              <g class="ln-swing">
+                <!-- chain: interlocking links, alternating so it reads as chain -->
+                <g class="ln-chain">
+                  <ellipse cx="70" cy="26" rx="3.4" ry="5.4" />
+                  <ellipse cx="70" cy="36" rx="2.2" ry="5.4" />
+                  <ellipse cx="70" cy="46" rx="3.4" ry="5.4" />
+                  <ellipse cx="70" cy="56" rx="2.2" ry="5.4" />
+                  <ellipse cx="70" cy="66" rx="3.4" ry="5.4" />
+                  <ellipse cx="70" cy="76" rx="2.2" ry="5.4" />
+                </g>
+
+                <!-- crown: a small finial, then the shouldered dome -->
+                <path class="ln-brass-fill" d="M70 82c1.6 0 2.6 1 2.6 2.4S71.6 87 70 87s-2.6-1-2.6-2.6S68.4 82 70 82Z" />
+                <path class="ln-cap-top" d="M70 88c10 5 17 12.5 20 21H50c3-8.5 10-16 20-21Z" />
+                <path class="ln-cap-sheen" d="M70 88c-5.5 2.8-10 6.8-13 11.4 3.6-2.6 8-4.4 13-5.2Z" />
+                <rect class="ln-brass" x="46" y="109" width="48" height="7" rx="3" />
+
+                <!-- the body: glass held between two brass rings, four uprights -->
+                <path class="ln-frame" d="M48 116h44l6 84a8 8 0 0 1-8 9H50a8 8 0 0 1-8-9Z" />
+                <path class="ln-glass" d="M52 120h36l5 76a5 5 0 0 1-5 5.5H52a5 5 0 0 1-5-5.5Z" />
+                <g class="ln-rib">
+                  <path d="M49 118 54 202" />
+                  <path d="M91 118 86 202" />
+                  <path d="M63 118v84" />
+                  <path d="M77 118v84" />
+                </g>
+                <path class="ln-sheen" d="M56 123h7l-2.5 72h-7Z" />
+
+                <!-- the flame: small, sitting on its burner, inside a lit volume -->
+                <ellipse class="ln-core" cx="70" cy="168" rx="26" ry="38" />
+                <path class="ln-flame" d="M70 146c4.6 7.2 7 11.4 7 15.4a7 7 0 0 1-14 0c0-4 2.4-8.2 7-15.4Z" />
+                <path class="ln-flame-inner" d="M70 155c2 3.2 3 5.2 3 7a3 3 0 0 1-6 0c0-1.8 1-3.8 3-7Z" />
+                <rect class="ln-burner" x="64" y="176" width="12" height="4.5" rx="1.6" />
+
+                <!-- base: brass ring, a perforated band, splayed foot, drop finial -->
+                <rect class="ln-brass" x="42" y="203" width="56" height="8" rx="3" />
+                <path class="ln-cap" d="M46 211h48l-7 15H53Z" />
+                <g class="ln-perf">
+                  <path d="M58 214.5 61.5 218 58 221.5 54.5 218Z" />
+                  <path d="M70 214.5 73.5 218 70 221.5 66.5 218Z" />
+                  <path d="M82 214.5 85.5 218 82 221.5 78.5 218Z" />
+                </g>
+                <rect class="ln-brass" x="56" y="226" width="28" height="5" rx="2" />
+                <path class="ln-brass-fill" d="M66 231h8l-4 13Z" />
+                <circle class="ln-brass-fill" cx="70" cy="247" r="3.1" />
+              </g>
+            </svg>
+          </button>
+        </div>
+        <!-- lantern:end -->
         <div class="hero-wrap">
-          <div class="hero-night" aria-hidden="true"></div>
           <section class="hero">
             <div class="hero-copy">
               <p class="wordmark-ar" lang="ar">زُلْفَى</p>
@@ -108,52 +223,58 @@
               <p class="tagline">مواقيت الصلاة والقرآن الكريم والأذكار واتجاه القبلة، تُحسب على جهازك ومعظمها يعمل دون اتصال.</p>
               <div class="hero-actions">
                 <a class="btn primary" href="mailto:moner.intelligence@gmail.com?subject=ZULFAA">أخبِرني عند الإطلاق</a>
-                <a class="btn" href="#more-title">شاهِد داخل التطبيق</a>
+                <a class="btn" href="#showcase-title">شاهِد داخل التطبيق</a>
               </div>
               <p class="hero-trust">بلا إعلانات. بلا تحليلات. بلا أي كود تتبّع.</p>
             </div>
             <div class="hero-stage">
-              <div class="phone" data-theme="light">
-                <div class="phone-screen">
-                  <img
-                    class="screen-light"
-                    src="../assets/hero/home-light-600.webp"
-                    srcset="../assets/hero/home-light-600.webp 600w, ../assets/hero/home-light-900.webp 900w"
-                    sizes="(max-width: 56.25rem) 74vw, 17rem"
-                    alt="الشاشة الرئيسية في زُلْفَى: التحية، والعدّ إلى الصلاة القادمة، وتحدّي اليوم، والوصول السريع."
-                    width="945"
-                    height="1928"
-                  />
-                  <img
-                    class="screen-dark"
-                    src="../assets/hero/home-dark-600.webp"
-                    srcset="../assets/hero/home-dark-600.webp 600w, ../assets/hero/home-dark-900.webp 900w"
-                    sizes="(max-width: 56.25rem) 74vw, 17rem"
-                    alt=""
-                    aria-hidden="true"
-                    width="945"
-                    height="1928"
-                  />
-                  <span class="lid lid-top" aria-hidden="true"></span>
-                  <span class="lid lid-bottom" aria-hidden="true"></span>
-                </div>
+              <div
+                class="phone3d"
+                role="img"
+                aria-label="الشاشة الرئيسية في زُلْفَى: التحية، والعدّ إلى الصلاة القادمة، وتحدّي اليوم، والوصول السريع."
+                data-theme="light"
+                data-stage="loading"
+                data-model="../assets/hero3d/zulfaa-phone.glb"
+                data-screen-light="../assets/hero3d/screen-ar-light.webp"
+                data-screen-dark="../assets/hero3d/screen-ar-dark.webp"
+              >
                 <img
-                  class="phone-frame"
-                  src="../assets/hero/frame-600.webp"
-                  srcset="../assets/hero/frame-600.webp 600w, ../assets/hero/frame-900.webp 900w"
-                  sizes="(max-width: 56.25rem) 76vw, 17.5rem"
+                  class="phone3d-still still-light"
+                  src="../assets/hero3d/still-ar-light-704.webp"
+                  srcset="../assets/hero3d/still-ar-light-352.webp 352w, ../assets/hero3d/still-ar-light-704.webp 704w, ../assets/hero3d/still-ar-light-1056.webp 1056w"
+                  sizes="(max-width: 56.25rem) min(18rem, 76vw), 22rem"
                   alt=""
-                  aria-hidden="true"
-                  width="941"
-                  height="1672"
+                  width="704"
+                  height="1408"
+                  decoding="async"
+                  fetchpriority="high"
                 />
+                <img
+                  class="phone3d-still still-dark"
+                  src="../assets/hero3d/still-ar-dark-704.webp"
+                  srcset="../assets/hero3d/still-ar-dark-352.webp 352w, ../assets/hero3d/still-ar-dark-704.webp 704w, ../assets/hero3d/still-ar-dark-1056.webp 1056w"
+                  sizes="(max-width: 56.25rem) min(18rem, 76vw), 22rem"
+                  alt=""
+                  width="704"
+                  height="1408"
+                  decoding="async"
+                />
+                <p class="drag-hint" aria-hidden="true" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8 3 12l4 4M17 8l4 4-4 4M3 12h18"/></svg><span>اسحب لتدوير الهاتف</span></p>
               </div>
-              <button class="theme-demo" type="button" aria-pressed="false">
-                <span class="knob" aria-hidden="true"></span>
-                <span class="vh">الوضع الداكن</span>
-                <span class="label-day" aria-hidden="true">نهار</span>
-                <span class="label-night" aria-hidden="true">ليل</span>
-              </button>
+              <div class="hero-controls">
+                <button class="theme-demo" type="button" aria-pressed="false">
+                  <span class="knob" aria-hidden="true"></span>
+                  <span class="vh">الوضع الداكن</span>
+                  <span class="label-day" aria-hidden="true">نهار</span>
+                  <span class="label-night" aria-hidden="true">ليل</span>
+                </button>
+                <button class="motion-toggle" type="button" aria-pressed="false" title="إيقاف حركة الهاتف مؤقتًا" hidden>
+                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.2"/></svg>
+                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4a1 1 0 0 0 0-1.8l-10-6.4C8.9 4.3 8 4.8 8 5.6Z"/></svg>
+                  <span class="vh">إيقاف حركة الهاتف مؤقتًا</span>
+                </button>
+              </div>
+              <p class="vh" aria-live="polite" data-hero3d-status data-dark="الوضع الداكن معروض" data-light="الوضع الفاتح معروض"></p>
             </div>
           </section>
         </div>
@@ -162,56 +283,149 @@
 
         <p class="lede">زُلْفَى تطبيق إسلامي يجمع مواقيت الصلاة الدقيقة والقرآن الكريم والأذكار والأدعية واتجاه القبلة في تجربة هادئة وأنيقة. يعمل على جهازك أوّلًا، ومعظمه يعمل دون اتصال.</p>
 
-        <section class="band" aria-labelledby="features">
-          <h2 class="section-title" id="features">ما يقدّمه زُلْفَى</h2>
-          <p class="section-note">كل ما يحتاجه المسلم في يومه، في مكان واحد هادئ.</p>
-          <div class="grid">
-            <article class="card">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg></span>
-              <h3>مواقيت الصلاة</h3>
-              <p>تُحسب على جهازك من موقعك وطريقة الحساب والمذهب، مع إمكان التعديل اليدوي لكل صلاة.</p>
-            </article>
-
-            <article class="card">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5Z" /><path d="M19 18v3H6.5A2.5 2.5 0 0 1 4 18.5" /></svg></span>
-              <h3>القرآن الكريم</h3>
-              <p>النص العثماني كاملًا مع الترجمة الإنجليزية، مضمّن داخل التطبيق، مع العلامات والمحفوظات وتقدّم القراءة.</p>
-            </article>
-
-            <article class="card">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-7.5-10A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7.5 3c0 5.4-7.5 10-7.5 10Z" /></svg></span>
-              <h3>الأذكار والأدعية</h3>
-              <p>أذكار الصباح والمساء ومجموعة أدعية مع الترجمة والصوت، كلها تعمل دون اتصال.</p>
-            </article>
-
-            <article class="card">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5 13.6 13.6 8.5 15.5l1.9-5.1Z" /></svg></span>
-              <h3>اتجاه القبلة</h3>
-              <p>الاتجاه والمسافة إلى الكعبة، تُحسب على جهازك، مع تتبّع مباشر اختياري وبوصلة.</p>
-            </article>
-
-            <article class="card">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 6-2.5 7-2.5 7h17S18 14 18 8Z" /><path d="M10.5 20a2 2 0 0 0 3 0" /></svg></span>
-              <h3>التذكيرات</h3>
-              <p>تذكيرات محلية للصلوات الخمس والأذكار وورد القرآن والمناسبات الإسلامية. لا يُرسل شيء من أي خادم.</p>
-            </article>
-
-            <article class="card gold">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v4a4 4 0 0 1-8 0Z" /><path d="M16 5h3v2a3 3 0 0 1-3 3M8 5H5v2a3 3 0 0 0 3 3" /><path d="M12 12v4M9 20h6" /></svg></span>
-              <h3>تحدّي اليوم</h3>
-              <p>سؤال معرفي يومي اختياري، مع توكنز ولوحة شرف. والتوكنز نقاط داخل التطبيق فقط، لا قيمة مالية لها ولا تُباع ولا تُشترى.</p>
-            </article>
-
+        <!-- quick-access:start -->
+        <section class="qa" aria-labelledby="features" data-qa>
+          <div class="qa-head">
+            <h2 class="qa-title" id="features">بلمسة من الشاشة الرئيسية</h2>
+            <p class="qa-note">ثمانية اختصارات على الشاشة الرئيسية في زُلْفَى. اختر واحدًا لترى ما يفتحه.</p>
           </div>
+          <div class="qa-body">
+            <div class="qa-dial-col">
+              <div class="qa-dial-box">
+                <div class="qa-dial">
+                  <svg class="qa-face" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle class="qa-bz" cx="50" cy="50" r="49"/><circle class="qa-bz2" cx="50" cy="50" r="46.2"/><g class="qa-tk"><line x1="54.09" y1="3.28" x2="54.22" y2="1.78"/><line x1="58.14" y1="3.81" x2="58.40" y2="2.34"/><line x1="62.14" y1="4.70" x2="62.53" y2="3.25"/><line x1="66.04" y1="5.93" x2="66.55" y2="4.52"/><line x1="69.82" y1="7.49" x2="70.45" y2="6.13"/><line x1="73.45" y1="9.38" x2="74.20" y2="8.08"/><line x1="76.90" y1="11.58" x2="77.76" y2="10.35"/><line x1="80.15" y1="14.07" x2="81.11" y2="12.92"/><line x1="85.93" y1="19.85" x2="87.08" y2="18.89"/><line x1="88.42" y1="23.10" x2="89.65" y2="22.24"/><line x1="90.62" y1="26.55" x2="91.92" y2="25.80"/><line x1="92.51" y1="30.18" x2="93.87" y2="29.55"/><line x1="94.07" y1="33.96" x2="95.48" y2="33.45"/><line x1="95.30" y1="37.86" x2="96.75" y2="37.47"/><line x1="96.19" y1="41.86" x2="97.66" y2="41.60"/><line x1="96.72" y1="45.91" x2="98.22" y2="45.78"/><line x1="96.72" y1="54.09" x2="98.22" y2="54.22"/><line x1="96.19" y1="58.14" x2="97.66" y2="58.40"/><line x1="95.30" y1="62.14" x2="96.75" y2="62.53"/><line x1="94.07" y1="66.04" x2="95.48" y2="66.55"/><line x1="92.51" y1="69.82" x2="93.87" y2="70.45"/><line x1="90.62" y1="73.45" x2="91.92" y2="74.20"/><line x1="88.42" y1="76.90" x2="89.65" y2="77.76"/><line x1="85.93" y1="80.15" x2="87.08" y2="81.11"/><line x1="80.15" y1="85.93" x2="81.11" y2="87.08"/><line x1="76.90" y1="88.42" x2="77.76" y2="89.65"/><line x1="73.45" y1="90.62" x2="74.20" y2="91.92"/><line x1="69.82" y1="92.51" x2="70.45" y2="93.87"/><line x1="66.04" y1="94.07" x2="66.55" y2="95.48"/><line x1="62.14" y1="95.30" x2="62.53" y2="96.75"/><line x1="58.14" y1="96.19" x2="58.40" y2="97.66"/><line x1="54.09" y1="96.72" x2="54.22" y2="98.22"/><line x1="45.91" y1="96.72" x2="45.78" y2="98.22"/><line x1="41.86" y1="96.19" x2="41.60" y2="97.66"/><line x1="37.86" y1="95.30" x2="37.47" y2="96.75"/><line x1="33.96" y1="94.07" x2="33.45" y2="95.48"/><line x1="30.18" y1="92.51" x2="29.55" y2="93.87"/><line x1="26.55" y1="90.62" x2="25.80" y2="91.92"/><line x1="23.10" y1="88.42" x2="22.24" y2="89.65"/><line x1="19.85" y1="85.93" x2="18.89" y2="87.08"/><line x1="14.07" y1="80.15" x2="12.92" y2="81.11"/><line x1="11.58" y1="76.90" x2="10.35" y2="77.76"/><line x1="9.38" y1="73.45" x2="8.08" y2="74.20"/><line x1="7.49" y1="69.82" x2="6.13" y2="70.45"/><line x1="5.93" y1="66.04" x2="4.52" y2="66.55"/><line x1="4.70" y1="62.14" x2="3.25" y2="62.53"/><line x1="3.81" y1="58.14" x2="2.34" y2="58.40"/><line x1="3.28" y1="54.09" x2="1.78" y2="54.22"/><line x1="3.28" y1="45.91" x2="1.78" y2="45.78"/><line x1="3.81" y1="41.86" x2="2.34" y2="41.60"/><line x1="4.70" y1="37.86" x2="3.25" y2="37.47"/><line x1="5.93" y1="33.96" x2="4.52" y2="33.45"/><line x1="7.49" y1="30.18" x2="6.13" y2="29.55"/><line x1="9.38" y1="26.55" x2="8.08" y2="25.80"/><line x1="11.58" y1="23.10" x2="10.35" y2="22.24"/><line x1="14.07" y1="19.85" x2="12.92" y2="18.89"/><line x1="19.85" y1="14.07" x2="18.89" y2="12.92"/><line x1="23.10" y1="11.58" x2="22.24" y2="10.35"/><line x1="26.55" y1="9.38" x2="25.80" y2="8.08"/><line x1="30.18" y1="7.49" x2="29.55" y2="6.13"/><line x1="33.96" y1="5.93" x2="33.45" y2="4.52"/><line x1="37.86" y1="4.70" x2="37.47" y2="3.25"/><line x1="41.86" y1="3.81" x2="41.60" y2="2.34"/><line x1="45.91" y1="3.28" x2="45.78" y2="1.78"/></g><g class="qa-tk8"><line x1="82.67" y1="17.33" x2="84.65" y2="15.35"/><line x1="96.20" y1="50.00" x2="99.00" y2="50.00"/><line x1="82.67" y1="82.67" x2="84.65" y2="84.65"/><line x1="50.00" y1="96.20" x2="50.00" y2="99.00"/><line x1="17.33" y1="82.67" x2="15.35" y2="84.65"/><line x1="3.80" y1="50.00" x2="1.00" y2="50.00"/><line x1="17.33" y1="17.33" x2="15.35" y2="15.35"/></g><path class="qa-arc" d="M42.33 1.60A49 49 0 0 1 57.67 1.60"/><circle class="qa-r2" cx="50" cy="50" r="19.6"/><circle class="qa-r1" cx="50" cy="50" r="18.2"/><g class="qa-dv"><line x1="50.00" y1="31.80" x2="50.00" y2="30.40"/><line x1="62.87" y1="37.13" x2="63.86" y2="36.14"/><line x1="68.20" y1="50.00" x2="69.60" y2="50.00"/><line x1="62.87" y1="62.87" x2="63.86" y2="63.86"/><line x1="50.00" y1="68.20" x2="50.00" y2="69.60"/><line x1="37.13" y1="62.87" x2="36.14" y2="63.86"/><line x1="31.80" y1="50.00" x2="30.40" y2="50.00"/><line x1="37.13" y1="37.13" x2="36.14" y2="36.14"/></g><path class="qa-mk" d="M50 4.3 48.4 0.8H51.6Z"/></svg>
+                  <div class="qa-center" aria-hidden="true"><img class="qa-big" src="../assets/quick-access/quran-256.webp" srcset="../assets/quick-access/quran-256.webp 256w, ../assets/quick-access/quran-512.webp 512w" sizes="(max-width: 56rem) 6.2rem, 7.6rem" width="512" height="512" alt="" decoding="async" data-kind="raster" /></div>
+                  <div class="qa-ring" data-label="اختصارات الوصول السريع">
+                  <a class="qa-node is-selected" href="#qa-quran" id="qa-tab-quran" style="--a: 0deg" data-kind="raster" data-big="../assets/quick-access/quran-256.webp" data-big-srcset="../assets/quick-access/quran-256.webp 256w, ../assets/quick-access/quran-512.webp 512w">
+                    <img src="../assets/quick-access/quran-128.webp" srcset="../assets/quick-access/quran-128.webp 128w, ../assets/quick-access/quran-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">القرآن</span>
+                  </a>
+                  <a class="qa-node" href="#qa-adhkar" id="qa-tab-adhkar" style="--a: -45deg" data-kind="raster" data-big="../assets/quick-access/adhkar-256.webp" data-big-srcset="../assets/quick-access/adhkar-256.webp 256w, ../assets/quick-access/adhkar-512.webp 512w">
+                    <img src="../assets/quick-access/adhkar-128.webp" srcset="../assets/quick-access/adhkar-128.webp 128w, ../assets/quick-access/adhkar-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">الأذكار</span>
+                  </a>
+                  <a class="qa-node" href="#qa-dua" id="qa-tab-dua" style="--a: -90deg" data-kind="dua" data-big="../assets/quick-access/dua-256.webp" data-big-srcset="../assets/quick-access/dua-256.webp 256w">
+                    <img src="../assets/quick-access/dua-128.webp" srcset="../assets/quick-access/dua-128.webp 128w, ../assets/quick-access/dua-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">الأدعية</span>
+                  </a>
+                  <a class="qa-node" href="#qa-qibla" id="qa-tab-qibla" style="--a: -135deg" data-kind="raster" data-big="../assets/quick-access/qibla-256.webp" data-big-srcset="../assets/quick-access/qibla-256.webp 256w, ../assets/quick-access/qibla-512.webp 512w">
+                    <img src="../assets/quick-access/qibla-128.webp" srcset="../assets/quick-access/qibla-128.webp 128w, ../assets/quick-access/qibla-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">القبلة</span>
+                  </a>
+                  <a class="qa-node" href="#qa-ramadan" id="qa-tab-ramadan" style="--a: -180deg" data-kind="raster" data-big="../assets/quick-access/ramadan-256.webp" data-big-srcset="../assets/quick-access/ramadan-256.webp 256w, ../assets/quick-access/ramadan-512.webp 512w">
+                    <img src="../assets/quick-access/ramadan-128.webp" srcset="../assets/quick-access/ramadan-128.webp 128w, ../assets/quick-access/ramadan-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">رمضان</span><span class="vh"> (يصل في تحديث قادم)</span>
+                  </a>
+                  <a class="qa-node" href="#qa-umrah" id="qa-tab-umrah" style="--a: -225deg" data-kind="raster" data-big="../assets/quick-access/umrah-256.webp" data-big-srcset="../assets/quick-access/umrah-256.webp 256w, ../assets/quick-access/umrah-512.webp 512w">
+                    <img src="../assets/quick-access/umrah-128.webp" srcset="../assets/quick-access/umrah-128.webp 128w, ../assets/quick-access/umrah-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">العمرة</span><span class="vh"> (يصل في تحديث قادم)</span>
+                  </a>
+                  <a class="qa-node" href="#qa-favorites" id="qa-tab-favorites" style="--a: -270deg" data-kind="vector" data-big="../assets/quick-access/favorites.svg" data-big-srcset="">
+                    <img src="../assets/quick-access/favorites.svg" width="48" height="48" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">المفضلة</span>
+                  </a>
+                  <a class="qa-node" href="#qa-saved" id="qa-tab-saved" style="--a: -315deg" data-kind="vector" data-big="../assets/quick-access/saved.svg" data-big-srcset="">
+                    <img src="../assets/quick-access/saved.svg" width="48" height="48" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">المحفوظات</span>
+                  </a>
+                  </div>
+                </div>
+              </div>
+              <div class="qa-tour" hidden>
+                <button class="qa-play" type="button" aria-pressed="false" data-play="تشغيل الجولة" data-pause="إيقاف الجولة"><svg class="qa-i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4a1 1 0 0 0 0-1.8l-10-6.4C8.9 4.3 8 4.8 8 5.6Z"/></svg><svg class="qa-i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6.5" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.2"/></svg><span class="qa-play-label">تشغيل الجولة</span></button>
+              </div>
+            </div>
+            <div class="qa-panels">
+            <article class="qa-panel is-active" id="qa-quran">
+              <h3>القرآن الكريم</h3>
+              <p class="qa-line">اقرأ النص العثماني كاملًا مع ترجمة إنجليزية، داخل التطبيق نفسه.</p>
+              <ul class="qa-facts">
+                <li>العلامات وتقدّم القراءة</li>
+                <li>تلاوة بصوت القارئ الذي تختاره</li>
+                <li>التفسير يُحمَّل عند فتحه</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">تصفّح معرض التطبيق أدناه</a>
+            </article>
+            <article class="qa-panel" id="qa-adhkar">
+              <h3>الأذكار</h3>
+              <p class="qa-line">أذكار الصباح والمساء من حصن المسلم، مع وِردٍ يومي تحافظ عليه.</p>
+              <ul class="qa-facts">
+                <li>وأذكار النوم والاستيقاظ وبعد الصلاة والمنزل والسفر</li>
+                <li>يبقى تقدّمك على جهازك</li>
+                <li>تعمل دون اتصال</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">تصفّح معرض التطبيق أدناه</a>
+            </article>
+            <article class="qa-panel" id="qa-dua">
+              <h3>الأدعية</h3>
+              <p class="qa-line">أدعية مرتّبة حسب الموضوع، مع الترجمة والصوت.</p>
+              <ul class="qa-facts">
+                <li>من القرآن والسنة، وللرزق والشفاء والهمّ والسفر والأسرة والاستغفار</li>
+                <li>تعمل دون اتصال</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">تصفّح معرض التطبيق أدناه</a>
+            </article>
+            <article class="qa-panel" id="qa-qibla">
+              <h3>القبلة</h3>
+              <p class="qa-line">اتجاه الكعبة والمسافة بينك وبينها، يُحسبان على جهازك.</p>
+              <ul class="qa-facts">
+                <li>بوصلة تتبع اتجاه هاتفك</li>
+                <li>موقع مباشر اختياري</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">تصفّح معرض التطبيق أدناه</a>
+            </article>
+            <article class="qa-panel" id="qa-ramadan">
+              <p class="qa-soon">يصل في تحديث قادم، وليس ضمن الإصدار الأول.</p>
+              <h3>مخطط رمضان</h3>
+              <p class="qa-line">كل يوم من رمضان في نظرة: السحور والإفطار من مواقيت صلاتك، وعدّ تنازلي، وخمس عبادات.</p>
+              <ul class="qa-facts">
+                <li>دعاء لكل يوم</li>
+                <li>عدّ تنازلي للعيد من التقويم الهجري، تقديريًا</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">تصفّح معرض التطبيق أدناه</a>
+            </article>
+            <article class="qa-panel" id="qa-umrah">
+              <p class="qa-soon">يصل في تحديث قادم، وليس ضمن الإصدار الأول.</p>
+              <h3>ادخار العمرة</h3>
+              <p class="qa-line">حدّد هدفًا لادخار العمرة، وتابع ما جمعته وما تبقّى وكم يومًا بقي.</p>
+              <ul class="qa-facts">
+                <li>يُحسب من المبالغ التي تُدخلها وحدها</li>
+                <li>لا يحتفظ بأي أموال ولا يتصل بأي بنك</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">تصفّح معرض التطبيق أدناه</a>
+            </article>
+            <article class="qa-panel" id="qa-favorites">
+              <h3>المفضلة</h3>
+              <p class="qa-line">ضع قلبًا على الآيات والأدعية والأذكار التي تحبها، وتجدها مجتمعة.</p>
+              <ul class="qa-facts">
+                <li>اضغط القلب على أي آية أو دعاء أو ذكر</li>
+                <li>منفصلة عمّا تحفظه في المحفوظات</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">تصفّح معرض التطبيق أدناه</a>
+            </article>
+            <article class="qa-panel" id="qa-saved">
+              <h3>المحفوظات</h3>
+              <p class="qa-line">احفظ آيةً أو دعاءً أو ذكرًا لتعود إليه، فتجد كل ما حفظته في صفحة واحدة.</p>
+              <ul class="qa-facts">
+                <li>اضغط علامة الحفظ على أي آية أو دعاء أو ذكر</li>
+                <li>اعرضها حسب الآيات أو الأدعية أو الأذكار</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">تصفّح معرض التطبيق أدناه</a>
+            </article>
+            </div>
+          </div>
+          <p class="qa-around">وحولها في الشاشة الرئيسية: مواقيت الصلاة والتذكيرات تُحسب على هاتفك، وتحدٍّ يومي اختياري.</p>
         </section>
+        <!-- quick-access:end -->
 
       </div>
 
+      <!-- showcase:start -->
       <section class="showcase" aria-labelledby="showcase-title">
         <div class="shell">
           <p class="showcase-eyebrow">داخل التطبيق</p>
           <h2 id="showcase-title">مكان هادئ تعود إليه</h2>
-          <p class="showcase-note">عشرون صورة من زُلْفَى على أندرويد — الصلاة والقرآن والأذكار والقبلة وتحدّي اليوم، بالوضعين الفاتح والداكن.</p>
+          <p class="showcase-note">زُلْفَى على أندرويد — القرآن والقبلة والأذكار وتحدّي اليوم وغيرها، بالوضع الذي تختاره لهذا الموقع.</p>
         </div>
 
         <div class="carousel" data-carousel>
@@ -233,19 +447,24 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="1 / 20: الرئيسية"
+            aria-label="1 / 16: الرئيسية"
             data-cap="الرئيسية"
+            data-screen="home"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/home.webp"
-                srcset="../assets/showcase/home-640.webp 640w, ../assets/showcase/home.webp 941w"
+                src="../assets/showcase/home-ar-light.webp"
+                srcset="../assets/showcase/home-ar-light-640.webp 640w, ../assets/showcase/home-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="لقطة من تطبيق زُلْفَى: الرئيسية"
-                loading="eager"
-                decoding="async" fetchpriority="high"
+                loading="lazy"
+                decoding="async"
+                data-src-light="../assets/showcase/home-ar-light.webp"
+                data-srcset-light="../assets/showcase/home-ar-light-640.webp 640w, ../assets/showcase/home-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/home-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/home-ar-dark-640.webp 640w, ../assets/showcase/home-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -261,19 +480,24 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="2 / 20: أوقات الصلاة"
+            aria-label="2 / 16: أوقات الصلاة"
             data-cap="أوقات الصلاة"
+            data-screen="prayer-times"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/prayer-times.webp"
-                srcset="../assets/showcase/prayer-times-640.webp 640w, ../assets/showcase/prayer-times.webp 941w"
+                src="../assets/showcase/prayer-times-ar-light.webp"
+                srcset="../assets/showcase/prayer-times-ar-light-640.webp 640w, ../assets/showcase/prayer-times-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="لقطة من تطبيق زُلْفَى: أوقات الصلاة"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/prayer-times-ar-light.webp"
+                data-srcset-light="../assets/showcase/prayer-times-ar-light-640.webp 640w, ../assets/showcase/prayer-times-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/prayer-times-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/prayer-times-ar-dark-640.webp 640w, ../assets/showcase/prayer-times-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -289,52 +513,29 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="3 / 20: القبلة"
-            data-cap="القبلة"
+            aria-label="3 / 16: القرآن الكريم"
+            data-cap="القرآن الكريم"
+            data-screen="quran-surahs"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/qibla.webp"
-                srcset="../assets/showcase/qibla-640.webp 640w, ../assets/showcase/qibla.webp 941w"
+                src="../assets/showcase/quran-surahs-ar-light.webp"
+                srcset="../assets/showcase/quran-surahs-ar-light-640.webp 640w, ../assets/showcase/quran-surahs-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="لقطة من تطبيق زُلْفَى: القبلة"
-                loading="eager"
+                width="945"
+                height="2055"
+                alt="لقطة من تطبيق زُلْفَى: القرآن الكريم"
+                loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/quran-surahs-ar-light.webp"
+                data-srcset-light="../assets/showcase/quran-surahs-ar-light-640.webp 640w, ../assets/showcase/quran-surahs-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/quran-surahs-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/quran-surahs-ar-dark-640.webp 640w, ../assets/showcase/quran-surahs-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="2"
-                aria-label="افتح لقطة القبلة بالحجم الكامل"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
-            </div>
-            <p class="shot-cap">القبلة</p>
-          </li>
-          <li
-            class="shot"
-            style="--k: 1.0000"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="4 / 20: القرآن الكريم"
-            data-cap="القرآن الكريم"
-          >
-            <div class="shot-frame">
-              <img
-                src="../assets/showcase/quran.webp"
-                srcset="../assets/showcase/quran-640.webp 640w, ../assets/showcase/quran.webp 941w"
-                sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="لقطة من تطبيق زُلْفَى: القرآن الكريم"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                class="shot-zoom"
-                type="button"
-                data-zoom="3"
                 aria-label="افتح لقطة القرآن الكريم بالحجم الكامل"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
@@ -345,75 +546,123 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="5 / 20: القراءة والاستماع"
+            aria-label="4 / 16: القراءة والاستماع"
             data-cap="القراءة والاستماع"
+            data-screen="quran-reader-continue"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/surah-reader.webp"
-                srcset="../assets/showcase/surah-reader-640.webp 640w, ../assets/showcase/surah-reader.webp 941w"
+                src="../assets/showcase/quran-reader-continue-ar-light.webp"
+                srcset="../assets/showcase/quran-reader-continue-ar-light-640.webp 640w, ../assets/showcase/quran-reader-continue-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="لقطة من تطبيق زُلْفَى: القراءة والاستماع"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/quran-reader-continue-ar-light.webp"
+                data-srcset-light="../assets/showcase/quran-reader-continue-ar-light-640.webp 640w, ../assets/showcase/quran-reader-continue-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/quran-reader-continue-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/quran-reader-continue-ar-dark-640.webp 640w, ../assets/showcase/quran-reader-continue-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
-                data-zoom="4"
+                data-zoom="3"
                 aria-label="افتح لقطة القراءة والاستماع بالحجم الكامل"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
             <p class="shot-cap">القراءة والاستماع</p>
           </li>
           <li
-            class="shot shot--device"
+            class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="6 / 20: القرّاء"
-            data-cap="القرّاء"
+            aria-label="5 / 16: خيارات الآية"
+            data-cap="خيارات الآية"
+            data-screen="quran-verse-actions"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/reciters.webp"
-                srcset="../assets/showcase/reciters-640.webp 640w, ../assets/showcase/reciters.webp 941w"
+                src="../assets/showcase/quran-verse-actions-ar-light.webp"
+                srcset="../assets/showcase/quran-verse-actions-ar-light-640.webp 640w, ../assets/showcase/quran-verse-actions-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="لقطة من تطبيق زُلْفَى: القرّاء"
+                width="945"
+                height="2055"
+                alt="لقطة من تطبيق زُلْفَى: خيارات الآية"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/quran-verse-actions-ar-light.webp"
+                data-srcset-light="../assets/showcase/quran-verse-actions-ar-light-640.webp 640w, ../assets/showcase/quran-verse-actions-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/quran-verse-actions-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/quran-verse-actions-ar-dark-640.webp 640w, ../assets/showcase/quran-verse-actions-ar-dark.webp 945w"
+              />
+              <button
+                class="shot-zoom"
+                type="button"
+                data-zoom="4"
+                aria-label="افتح لقطة خيارات الآية بالحجم الكامل"
+              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
+            </div>
+            <p class="shot-cap">خيارات الآية</p>
+          </li>
+          <li
+            class="shot"
+            style="--k: 1.0034"
+            role="group"
+            aria-roledescription="slide"
+            aria-label="6 / 16: القبلة"
+            data-cap="القبلة"
+            data-screen="qibla"
+          >
+            <div class="shot-frame">
+              <img
+                src="../assets/showcase/qibla-ar-light.webp"
+                srcset="../assets/showcase/qibla-ar-light-640.webp 640w, ../assets/showcase/qibla-ar-light.webp 945w"
+                sizes="(max-width: 457px) 56vw, 16.1rem"
+                width="945"
+                height="2048"
+                alt="لقطة من تطبيق زُلْفَى: القبلة"
+                loading="lazy"
+                decoding="async"
+                data-src-light="../assets/showcase/qibla-ar-light.webp"
+                data-srcset-light="../assets/showcase/qibla-ar-light-640.webp 640w, ../assets/showcase/qibla-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/qibla-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/qibla-ar-dark-640.webp 640w, ../assets/showcase/qibla-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="5"
-                aria-label="افتح لقطة القرّاء بالحجم الكامل"
+                aria-label="افتح لقطة القبلة بالحجم الكامل"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
-            <p class="shot-cap">القرّاء</p>
+            <p class="shot-cap">القبلة</p>
           </li>
           <li
-            class="shot shot--device"
+            class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="7 / 20: الأذكار والأدعية"
+            aria-label="7 / 16: الأذكار والأدعية"
             data-cap="الأذكار والأدعية"
+            data-screen="adhkar-dua"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/adhkar-dua.webp"
-                srcset="../assets/showcase/adhkar-dua-640.webp 640w, ../assets/showcase/adhkar-dua.webp 941w"
+                src="../assets/showcase/adhkar-dua-ar-light.webp"
+                srcset="../assets/showcase/adhkar-dua-ar-light-640.webp 640w, ../assets/showcase/adhkar-dua-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="لقطة من تطبيق زُلْفَى: الأذكار والأدعية"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/adhkar-dua-ar-light.webp"
+                data-srcset-light="../assets/showcase/adhkar-dua-ar-light-640.webp 640w, ../assets/showcase/adhkar-dua-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/adhkar-dua-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/adhkar-dua-ar-dark-640.webp 640w, ../assets/showcase/adhkar-dua-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -429,19 +678,24 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="8 / 20: تحدّي اليوم"
+            aria-label="8 / 16: تحدّي اليوم"
             data-cap="تحدّي اليوم"
+            data-screen="daily-challenge"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/daily-challenge.webp"
-                srcset="../assets/showcase/daily-challenge-640.webp 640w, ../assets/showcase/daily-challenge.webp 941w"
+                src="../assets/showcase/daily-challenge-ar-light.webp"
+                srcset="../assets/showcase/daily-challenge-ar-light-640.webp 640w, ../assets/showcase/daily-challenge-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="لقطة من تطبيق زُلْفَى: تحدّي اليوم"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/daily-challenge-ar-light.webp"
+                data-srcset-light="../assets/showcase/daily-challenge-ar-light-640.webp 640w, ../assets/showcase/daily-challenge-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/daily-challenge-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/daily-challenge-ar-dark-640.webp 640w, ../assets/showcase/daily-challenge-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -453,23 +707,28 @@
             <p class="shot-cap">تحدّي اليوم</p>
           </li>
           <li
-            class="shot shot--device"
+            class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="9 / 20: أسئلة التحدّي"
+            aria-label="9 / 16: أسئلة التحدّي"
             data-cap="أسئلة التحدّي"
+            data-screen="daily-challenge-question"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/challenge-questions.webp"
-                srcset="../assets/showcase/challenge-questions-640.webp 640w, ../assets/showcase/challenge-questions.webp 941w"
+                src="../assets/showcase/daily-challenge-question-ar-light.webp"
+                srcset="../assets/showcase/daily-challenge-question-ar-light-640.webp 640w, ../assets/showcase/daily-challenge-question-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="لقطة من تطبيق زُلْفَى: أسئلة التحدّي"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/daily-challenge-question-ar-light.webp"
+                data-srcset-light="../assets/showcase/daily-challenge-question-ar-light-640.webp 640w, ../assets/showcase/daily-challenge-question-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/daily-challenge-question-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/daily-challenge-question-ar-dark-640.webp 640w, ../assets/showcase/daily-challenge-question-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -485,19 +744,24 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="10 / 20: مخطط رمضان"
+            aria-label="10 / 16: مخطط رمضان"
             data-cap="مخطط رمضان"
+            data-screen="ramadan-planner"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/ramadan-planner.webp"
-                srcset="../assets/showcase/ramadan-planner-640.webp 640w, ../assets/showcase/ramadan-planner.webp 941w"
+                src="../assets/showcase/ramadan-planner-ar-light.webp"
+                srcset="../assets/showcase/ramadan-planner-ar-light-640.webp 640w, ../assets/showcase/ramadan-planner-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="لقطة من تطبيق زُلْفَى: مخطط رمضان"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/ramadan-planner-ar-light.webp"
+                data-srcset-light="../assets/showcase/ramadan-planner-ar-light-640.webp 640w, ../assets/showcase/ramadan-planner-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/ramadan-planner-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/ramadan-planner-ar-dark-640.webp 640w, ../assets/showcase/ramadan-planner-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -513,19 +777,24 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="11 / 20: ادخار العمرة"
+            aria-label="11 / 16: ادخار العمرة"
             data-cap="ادخار العمرة"
+            data-screen="umrah-savings"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/umrah-savings.webp"
-                srcset="../assets/showcase/umrah-savings-640.webp 640w, ../assets/showcase/umrah-savings.webp 941w"
+                src="../assets/showcase/umrah-savings-ar-light.webp"
+                srcset="../assets/showcase/umrah-savings-ar-light-640.webp 640w, ../assets/showcase/umrah-savings-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="لقطة من تطبيق زُلْفَى: ادخار العمرة"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/umrah-savings-ar-light.webp"
+                data-srcset-light="../assets/showcase/umrah-savings-ar-light-640.webp 640w, ../assets/showcase/umrah-savings-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/umrah-savings-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/umrah-savings-ar-dark-640.webp 640w, ../assets/showcase/umrah-savings-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -537,258 +806,172 @@
             <p class="shot-cap">ادخار العمرة</p>
           </li>
           <li
-            class="shot shot--device"
+            class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="12 / 20: التذكيرات"
-            data-cap="التذكيرات"
+            aria-label="12 / 16: هدف الادّخار"
+            data-cap="هدف الادّخار"
+            data-screen="umrah-savings-goal"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/notifications.webp"
-                srcset="../assets/showcase/notifications-640.webp 640w, ../assets/showcase/notifications.webp 941w"
+                src="../assets/showcase/umrah-savings-goal-ar-light.webp"
+                srcset="../assets/showcase/umrah-savings-goal-ar-light-640.webp 640w, ../assets/showcase/umrah-savings-goal-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="لقطة من تطبيق زُلْفَى: التذكيرات"
+                width="945"
+                height="2055"
+                alt="لقطة من تطبيق زُلْفَى: هدف الادّخار"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/umrah-savings-goal-ar-light.webp"
+                data-srcset-light="../assets/showcase/umrah-savings-goal-ar-light-640.webp 640w, ../assets/showcase/umrah-savings-goal-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/umrah-savings-goal-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/umrah-savings-goal-ar-dark-640.webp 640w, ../assets/showcase/umrah-savings-goal-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="11"
-                aria-label="افتح لقطة التذكيرات بالحجم الكامل"
+                aria-label="افتح لقطة هدف الادّخار بالحجم الكامل"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
-            <p class="shot-cap">التذكيرات</p>
+            <p class="shot-cap">هدف الادّخار</p>
           </li>
           <li
-            class="shot shot--device"
-            style="--k: 0.8884"
+            class="shot"
+            style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="13 / 20: إعدادات الصلاة"
-            data-cap="إعدادات الصلاة"
+            aria-label="13 / 16: التنبيهات"
+            data-cap="التنبيهات"
+            data-screen="notifications"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/prayer-settings.webp"
-                srcset="../assets/showcase/prayer-settings-640.webp 640w, ../assets/showcase/prayer-settings.webp 887w"
-                sizes="(max-width: 457px) 50vw, 14.2rem"
-                width="887"
-                height="1774"
-                alt="لقطة من تطبيق زُلْفَى: إعدادات الصلاة"
+                src="../assets/showcase/notifications-ar-light.webp"
+                srcset="../assets/showcase/notifications-ar-light-640.webp 640w, ../assets/showcase/notifications-ar-light.webp 945w"
+                sizes="(max-width: 457px) 56vw, 16.0rem"
+                width="945"
+                height="2055"
+                alt="لقطة من تطبيق زُلْفَى: التنبيهات"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/notifications-ar-light.webp"
+                data-srcset-light="../assets/showcase/notifications-ar-light-640.webp 640w, ../assets/showcase/notifications-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/notifications-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/notifications-ar-dark-640.webp 640w, ../assets/showcase/notifications-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="12"
-                aria-label="افتح لقطة إعدادات الصلاة بالحجم الكامل"
+                aria-label="افتح لقطة التنبيهات بالحجم الكامل"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
-            <p class="shot-cap">إعدادات الصلاة</p>
+            <p class="shot-cap">التنبيهات</p>
           </li>
           <li
             class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="14 / 20: إعدادات التطبيق"
-            data-cap="إعدادات التطبيق"
+            aria-label="14 / 16: مساحتك الشخصية"
+            data-cap="مساحتك الشخصية"
+            data-screen="profile"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/app-settings.webp"
-                srcset="../assets/showcase/app-settings-640.webp 640w, ../assets/showcase/app-settings.webp 941w"
+                src="../assets/showcase/profile-ar-light.webp"
+                srcset="../assets/showcase/profile-ar-light-640.webp 640w, ../assets/showcase/profile-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="لقطة من تطبيق زُلْفَى: إعدادات التطبيق"
+                width="945"
+                height="2055"
+                alt="لقطة من تطبيق زُلْفَى: مساحتك الشخصية"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/profile-ar-light.webp"
+                data-srcset-light="../assets/showcase/profile-ar-light-640.webp 640w, ../assets/showcase/profile-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/profile-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/profile-ar-dark-640.webp 640w, ../assets/showcase/profile-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="13"
-                aria-label="افتح لقطة إعدادات التطبيق بالحجم الكامل"
+                aria-label="افتح لقطة مساحتك الشخصية بالحجم الكامل"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
-            <p class="shot-cap">إعدادات التطبيق</p>
+            <p class="shot-cap">مساحتك الشخصية</p>
           </li>
           <li
             class="shot"
-            style="--k: 1.4220"
+            style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="15 / 20: الوضع الداكن"
-            data-cap="الوضع الداكن"
+            aria-label="15 / 16: القائمة"
+            data-cap="القائمة"
+            data-screen="menu"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/home-dark.webp"
-                srcset="../assets/showcase/home-dark-640.webp 640w, ../assets/showcase/home-dark.webp 1122w"
-                sizes="(max-width: 457px) 80vw, 22.8rem"
-                width="1122"
-                height="1402"
-                alt="لقطة من تطبيق زُلْفَى: الوضع الداكن"
+                src="../assets/showcase/menu-ar-light.webp"
+                srcset="../assets/showcase/menu-ar-light-640.webp 640w, ../assets/showcase/menu-ar-light.webp 945w"
+                sizes="(max-width: 457px) 56vw, 16.0rem"
+                width="945"
+                height="2055"
+                alt="لقطة من تطبيق زُلْفَى: القائمة"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/menu-ar-light.webp"
+                data-srcset-light="../assets/showcase/menu-ar-light-640.webp 640w, ../assets/showcase/menu-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/menu-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/menu-ar-dark-640.webp 640w, ../assets/showcase/menu-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="14"
-                aria-label="افتح لقطة الوضع الداكن بالحجم الكامل"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
-            </div>
-            <p class="shot-cap">الوضع الداكن</p>
-          </li>
-          <li
-            class="shot shot--device"
-            style="--k: 1.0000"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="16 / 20: مساحتك"
-            data-cap="مساحتك"
-          >
-            <div class="shot-frame">
-              <img
-                src="../assets/showcase/profile.webp"
-                srcset="../assets/showcase/profile-640.webp 640w, ../assets/showcase/profile.webp 941w"
-                sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="لقطة من تطبيق زُلْفَى: مساحتك"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                class="shot-zoom"
-                type="button"
-                data-zoom="15"
-                aria-label="افتح لقطة مساحتك بالحجم الكامل"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
-            </div>
-            <p class="shot-cap">مساحتك</p>
-          </li>
-          <li
-            class="shot"
-            style="--k: 1.0000"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="17 / 20: القائمة"
-            data-cap="القائمة"
-          >
-            <div class="shot-frame">
-              <img
-                src="../assets/showcase/menu.webp"
-                srcset="../assets/showcase/menu-640.webp 640w, ../assets/showcase/menu.webp 941w"
-                sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="لقطة من تطبيق زُلْفَى: القائمة"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                class="shot-zoom"
-                type="button"
-                data-zoom="16"
                 aria-label="افتح لقطة القائمة بالحجم الكامل"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
             <p class="shot-cap">القائمة</p>
           </li>
           <li
-            class="shot shot--device"
+            class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="18 / 20: المساعدة والدعم"
+            aria-label="16 / 16: المساعدة والدعم"
             data-cap="المساعدة والدعم"
+            data-screen="help-support"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/help-support.webp"
-                srcset="../assets/showcase/help-support-640.webp 640w, ../assets/showcase/help-support.webp 941w"
+                src="../assets/showcase/help-support-ar-light.webp"
+                srcset="../assets/showcase/help-support-ar-light-640.webp 640w, ../assets/showcase/help-support-ar-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="لقطة من تطبيق زُلْفَى: المساعدة والدعم"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/help-support-ar-light.webp"
+                data-srcset-light="../assets/showcase/help-support-ar-light-640.webp 640w, ../assets/showcase/help-support-ar-light.webp 945w"
+                data-src-dark="../assets/showcase/help-support-ar-dark.webp"
+                data-srcset-dark="../assets/showcase/help-support-ar-dark-640.webp 640w, ../assets/showcase/help-support-ar-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
-                data-zoom="17"
+                data-zoom="15"
                 aria-label="افتح لقطة المساعدة والدعم بالحجم الكامل"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
             <p class="shot-cap">المساعدة والدعم</p>
           </li>
-          <li
-            class="shot"
-            style="--k: 1.0000"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="19 / 20: عن زُلْفَى"
-            data-cap="عن زُلْفَى"
-          >
-            <div class="shot-frame">
-              <img
-                src="../assets/showcase/about.webp"
-                srcset="../assets/showcase/about-640.webp 640w, ../assets/showcase/about.webp 941w"
-                sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="لقطة من تطبيق زُلْفَى: عن زُلْفَى"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                class="shot-zoom"
-                type="button"
-                data-zoom="18"
-                aria-label="افتح لقطة عن زُلْفَى بالحجم الكامل"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
-            </div>
-            <p class="shot-cap">عن زُلْفَى</p>
-          </li>
-          <li
-            class="shot shot--device"
-            style="--k: 0.9989"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="20 / 20: الافتتاحية"
-            data-cap="الافتتاحية"
-          >
-            <div class="shot-frame">
-              <img
-                src="../assets/showcase/intro.webp"
-                srcset="../assets/showcase/intro-640.webp 640w, ../assets/showcase/intro.webp 940w"
-                sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="940"
-                height="1672"
-                alt="لقطة من تطبيق زُلْفَى: الافتتاحية"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                class="shot-zoom"
-                type="button"
-                data-zoom="19"
-                aria-label="افتح لقطة الافتتاحية بالحجم الكامل"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
-            </div>
-            <p class="shot-cap">الافتتاحية</p>
-          </li>
             </ul>
+            <script>(function(){try{if(document.documentElement.getAttribute("data-site-theme")!=="dark")return;var s=document.querySelectorAll("img[data-src-dark]");for(var i=0;i<s.length;i++){s[i].setAttribute("srcset",s[i].getAttribute("data-srcset-dark"));s[i].setAttribute("src",s[i].getAttribute("data-src-dark"))}}catch(e){}})();</script>
           </div>
 
           <button class="car-arrow car-next" type="button" aria-label="اللقطة التالية" aria-controls="shot-scroller">
@@ -796,31 +979,172 @@
           </button>
 
           <p class="car-status" aria-live="polite">
-            <b data-car-index>01</b> / <span data-car-total>20</span> &middot; <span data-car-cap>الرئيسية</span>
+            <b data-car-index>01</b> / <span data-car-total>16</span> &middot; <span data-car-cap>الرئيسية</span>
           </p>
           <p class="car-hint">اسحب أو استخدم الأسهم — ومفاتيح الأسهم تعمل أيضًا.</p>
         </div>
       </section>
+      <!-- showcase:end -->
 
-      <div class="shell">
-        <section class="band" aria-labelledby="privacy-first">
-          <h2 class="section-title" id="privacy-first">الأولوية لجهازك</h2>
-          <p class="section-note">القرآن والأذكار والأدعية ومواقيت الصلاة والقبلة تُحسب وتُحفظ على جهازك. ولا يحتوي زُلْفَى على إعلانات ولا تحليلات ولا تتبّع، ولا يطلب اسمك الحقيقي ولا بريدك ولا رقم هاتفك ولا تاريخ ميلادك.</p>
-          <div class="linkrow">
-            <a class="btn primary" href="privacy/">اقرأ سياسة الخصوصية</a>
-            <a class="btn" href="terms/">شروط الاستخدام</a>
-            <a class="btn" href="delete-data/">حذف البيانات</a>
-            <a class="btn" href="support/">المساعدة والدعم</a>
+        <!-- journal:start -->
+        <section class="journal" aria-labelledby="journal-title">
+          <div class="shell">
+            <div class="jr-head">
+              <p class="jr-eyebrow">المقالات</p>
+              <h2 class="jr-title" id="journal-title">أدلة قصيرة لاستخدام التطبيق</h2>
+              <p class="jr-note">مكتوبة مما يفعله زُلْفَى فعلًا: كيف تضبطه، وكيف تقرأ وتستمع، وما الذي يظل يعمل دون اتصال.</p>
+            </div>
+            <div class="jr-body">
+              <article class="jr-lead">
+                <a class="jr-lead-link" href="../ar/articles/prayer-times/">
+                  <span class="jr-lead-art"><img class="jr-lead-img" src="../assets/showcase/prayer-settings.webp" srcset="../assets/showcase/prayer-settings-640.webp 640w, ../assets/showcase/prayer-settings.webp 941w" sizes="(max-width: 56rem) 88vw, 26rem" width="941" height="1672" alt="شاشة إعدادات الصلاة: طريقة الحساب ومذهب العصر وقاعدة خطوط العرض العالية." loading="lazy" decoding="async" /></span>
+                  <span class="jr-lead-text">
+                    <span class="jr-lead-title">اضبط مواقيت الصلاة لتوافق مسجدك</span> <span class="jr-draft">مسودة</span>
+                    <span class="jr-lead-sum">اختر طريقة الحساب ومذهب العصر، ثم عدّل صلاة بعينها دقيقة أو دقيقتين حتى يوافق التطبيق المسجد الذي تصلي فيه.</span>
+                    <span class="jr-more">اقرأ الدليل</span>
+                  </span>
+                </a>
+              </article>
+              <ul class="jr-list">
+              <li class="jr-item">
+                <a class="jr-item-link" href="../ar/articles/reading-and-listening/">
+                  <span class="jr-item-art"><img class="jr-thumb" src="../assets/showcase/surah-reader.webp" srcset="../assets/showcase/surah-reader-640.webp 640w, ../assets/showcase/surah-reader.webp 941w" sizes="5.5rem" width="941" height="1672" alt="سورة البقرة مفتوحة في الوضع الداكن، مع اختيار القارئ فوق النص العربي." loading="lazy" decoding="async" /></span>
+                  <span class="jr-item-text">
+                    <span class="jr-item-title">قراءة القرآن والاستماع إليه</span> <span class="jr-draft">مسودة</span>
+                    <span class="jr-item-sum">النص العثماني كاملًا مع ترجمة إنجليزية يسافران مع التطبيق. العلامات والمحفوظات وموضع قراءتك تبقى على الجهاز، والتفسير والتلاوة يُحمَّلان عند طلبهما.</span>
+                  </span>
+                </a>
+              </li>
+              <li class="jr-item">
+                <a class="jr-item-link" href="../ar/articles/offline-and-privacy/">
+                  <span class="jr-item-art"><img class="jr-thumb" src="../assets/showcase/adhkar-dua.webp" srcset="../assets/showcase/adhkar-dua-640.webp 640w, ../assets/showcase/adhkar-dua.webp 941w" sizes="5.5rem" width="941" height="1672" alt="الأذكار والأدعية في الوضع الداكن: الورد اليومي والمفضلة والبحث والأدعية حسب الموضوع." loading="lazy" decoding="async" /></span>
+                  <span class="jr-item-text">
+                    <span class="jr-item-title">ما الذي يظل يعمل دون اتصال</span> <span class="jr-draft">مسودة</span>
+                    <span class="jr-item-sum">الأذكار والأدعية والقبلة ومواقيت الصلاة تُحسب وتُحفظ على هاتفك. ولا يصل إلى الإنترنت إلا أجزاء قليلة، ولا يطلب التطبيق حسابًا لشيء من ذلك.</span>
+                  </span>
+                </a>
+              </li>
+              </ul>
+            </div>
+            <p class="jr-all"><a href="../ar/articles/">كل المقالات</a></p>
           </div>
         </section>
+        <!-- journal:end -->
 
-        <section class="band" aria-labelledby="availability">
-          <h2 class="section-title" id="availability">التوفّر</h2>
-          <p class="section-note">زُلْفَى في مرحلة الإعداد النهائي لأول إصدار على أندرويد، ولم يُنشر بعد على Google Play. وستحمل هذه الصفحة رابط المتجر عند إتاحته. والواجهة متاحة بالعربية والإنجليزية والهولندية.</p>
+        <!-- trust:start -->
+        <section class="trust" aria-labelledby="privacy-first">
+          <div class="shell">
+            <div class="tr-head">
+              <p class="tr-eyebrow">الأولوية لجهازك</p>
+              <h2 id="privacy-first">عبادتك تبقى على هاتفك</h2>
+              <p class="tr-lead">يعمل زُلْفَى من جهازك أولًا، وما يعرفه عنك يبقى فيه.</p>
+              <p class="tr-link"><a href="../ar/privacy/">اقرأ سياسة الخصوصية</a></p>
+            </div>
+            <ul class="tr-points">
+              <li class="tr-point">
+                <h3>على الجهاز</h3>
+                <p>القرآن والأذكار يسافران مع التطبيق، ومواقيت الصلاة والقبلة تُحسب على هاتفك لا تُجلب.</p>
+              </li>
+              <li class="tr-point">
+                <h3>محفوظ لا مجموع</h3>
+                <p>المحفوظات والمفضلة وتقدّم القراءة وعدّ أذكارك تبقى على الجهاز. ولا يطلب التطبيق اسمك الحقيقي ولا بريدك ولا رقم هاتفك ولا تاريخ ميلادك.</p>
+              </li>
+              <li class="tr-point">
+                <h3>لا شيء يراقب</h3>
+                <p>بلا إعلانات ولا تحليلات ولا أي كود تتبّع، في التطبيق وفي هذا الموقع.</p>
+              </li>
+              <li class="tr-point">
+                <h3>متى يُستخدم الإنترنت</h3>
+                <p>صوت التلاوة والتفسير وتحدّي اليوم الاختياري تُحمَّل عند فتحها وحدها.</p>
+              </li>
+            </ul>
+          </div>
         </section>
-      </div>
+        <!-- trust:end -->
+
+      <!-- contact:start -->
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="shell">
+          <div class="co-grid">
+            <div class="co-intro">
+              <p class="co-eyebrow">تواصل</p>
+              <h2 id="contact-title">راسِل زُلْفَى</h2>
+              <p class="co-lead">سؤال أو تصحيح أو أمر بدا غريبًا على هاتفك — تصل رسالتك إلى المطوّر مباشرة.</p>
+              <p class="co-mail"><a href="mailto:moner.intelligence@gmail.com">moner.intelligence@gmail.com</a></p>
+            </div>
+            <div class="cf cf-fallback" data-cf-fallback>
+              <p class="cf-fallback-text">النموذج غير متاح الآن، لكن يمكنك مراسلتنا من تطبيق البريد لديك.</p>
+              <p class="cf-actions">
+                <a class="btn primary cf-send" href="mailto:moner.intelligence@gmail.com?subject=%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%20%D8%B2%D9%8F%D9%84%D9%92%D9%81%D9%8E%D9%89">اكتب رسالة بريد</a>
+              </p>
+              <p class="cf-fallback-addr"><a href="mailto:moner.intelligence@gmail.com?subject=%D8%B1%D8%B3%D8%A7%D9%84%D8%A9%20%D9%85%D9%86%20%D9%85%D9%88%D9%82%D8%B9%20%D8%B2%D9%8F%D9%84%D9%92%D9%81%D9%8E%D9%89" dir="ltr">moner.intelligence@gmail.com</a></p>
+            </div>
+            <form class="cf" id="contact-form" method="post" novalidate hidden
+              data-recipient="moner.intelligence@gmail.com"
+              data-subject="رسالة من موقع زُلْفَى"
+              data-lang="ar"
+              data-send="إرسال الرسالة"
+              data-sending="جارٍ الإرسال…"
+              data-write-email="اكتب رسالة بريد"
+              data-unavailable="الإرسال غير متاح في هذه الصفحة الآن، لذلك لم يُرسَل شيء. نصّك ما زال هنا. ويمكنك أيضًا أن"
+              data-unavailable-preview="الإرسال غير متاح في هذه المعاينة، لذلك لم يُرسَل شيء. نصّك ما زال هنا. ويمكنك أيضًا أن"
+              data-received="شكرًا لك — استلمنا رسالتك."
+              data-fail="تعذّر إيصال رسالتك إلينا. نصّك ما زال هنا — حاول مرة أخرى. ويمكنك أيضًا أن"
+              data-rate="أُرسلت عدة رسائل من هذا الاتصال للتو. انتظر بضع دقائق ثم حاول مرة أخرى — نصّك ما زال هنا."
+              data-invalid="تعذّر قبول شيء في النموذج. راجِعه وحاول مرة أخرى."
+              data-err-email="اكتب بريدًا إلكترونيًا ليصلك الرد."
+              data-err-email-format="هذا لا يبدو بريدًا إلكترونيًا."
+              data-err-email-long="عنوان البريد هذا طويل جدًا."
+              data-err-name-long="اجعل الاسم ١٠٠ حرف أو أقل من فضلك."
+              data-err-message="اكتب رسالتك من فضلك."
+              data-err-message-short="اكتب أكثر قليلًا — ١٠ أحرف على الأقل."
+              data-err-message-long="اجعل الرسالة ٥٠٠٠ حرف أو أقل من فضلك."
+              data-count-left="الأحرف المتبقية: {n}"
+              data-count-over="زيادة على الحد: {n}"
+              data-max-name="100"
+              data-max-email="254"
+              data-min-message="10"
+              data-max-message="5000"
+              data-privacy-endpoint="عند إرسال هذا النموذج تُحفَظ رسالتك وعنوان بريدك الإلكتروني واسمك (إن كتبته) لدى خدمة التواصل الخاصة بنا على Cloudflare، لنتمكّن من متابعة استفسارك. تُحذَف الرسائل تلقائيًا بعد ٣٦٥ يومًا، ويمكنك أن تطلب منا حذف رسالتك قبل ذلك."
+              data-privacy-more-title="كيف تُحفَظ رسالتك"
+              data-privacy-more="التخزين: لدى Cloudflare، في قاعدة بيانات موقعها غرب أوروبا. لم يُفرَض شرط يُلزم ببقاء البيانات داخل الاتحاد الأوروبي حصرًا، لذلك لا نَعِد بذلك.
+النسخ الاحتياطية: تحتفظ قاعدة البيانات بسجل قابل للاسترجاع مدة تصل إلى ٧ أيام، فقد تبقى الرسالة المحذوفة في هذا السجل حتى ٧ أيام قبل أن تزول نهائيًا.
+الطلبات: اكتب إلى moner.intelligence@gmail.com لتطلب حذف رسالتك أو نسخة منها.
+هذا يخص نموذج التواصل في الموقع فقط، ولتطبيق زُلْفَى سياسة خصوصية خاصة به."
+              data-disabled="النموذج لا يستقبل الرسائل في الوقت الحالي، لذلك لم يُرسَل شيء. نصّك ما زال هنا. ويمكنك أيضًا أن"
+            >
+              <p class="cf-row">
+                <label for="cf-name">الاسم <span class="cf-hint">اختياري</span></label>
+                <input id="cf-name" name="name" type="text" autocomplete="name" dir="auto"
+                  aria-describedby="cf-name-err" />
+                <span class="cf-err" id="cf-name-err" hidden></span>
+              </p>
+              <p class="cf-row">
+                <label for="cf-email">البريد الإلكتروني <span class="cf-hint">ليصلك الرد</span></label>
+                <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email"
+                  dir="ltr" required aria-describedby="cf-email-err" />
+                <span class="cf-err" id="cf-email-err" hidden></span>
+              </p>
+              <p class="cf-row">
+                <label for="cf-message">الرسالة</label>
+                <textarea id="cf-message" name="message" rows="5" dir="auto" required
+                  aria-describedby="cf-message-err"></textarea>
+                <span class="cf-count" id="cf-message-count" hidden></span>
+                <span class="cf-err" id="cf-message-err" hidden></span>
+              </p>
+              <p class="cf-actions">
+                <button class="btn primary cf-send" type="submit">إرسال الرسالة</button>
+              </p>
+              <p class="cf-state" role="status" aria-live="polite" tabindex="-1" hidden></p>
+              <p class="cf-privacy">الإرسال غير متاح في هذه الصفحة، لذلك لا يُرسَل ولا يُحفَظ شيء مما تكتبه هنا.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- contact:end -->
     </main>
 
+    <!-- lightbox:start -->
     <div class="lb" id="lb" hidden>
       <div class="lb-backdrop" data-lb-close></div>
       <div class="lb-dialog" role="dialog" aria-modal="true" aria-labelledby="lb-title">
@@ -836,9 +1160,9 @@
 
         <div class="lb-stage" data-lb-close>
           <figure class="lb-figure">
-            <img class="lb-img" alt="" width="941" height="1672" decoding="async" />
+            <img class="lb-img" alt="" width="945" height="2055" decoding="async" />
             <figcaption class="lb-cap">
-              <b data-lb-index>01</b> / <span data-lb-total>20</span> &middot; <span data-lb-name></span>
+              <b data-lb-index>01</b> / <span data-lb-total>16</span> &middot; <span data-lb-name></span>
             </figcaption>
           </figure>
         </div>
@@ -848,23 +1172,78 @@
         </button>
       </div>
     </div>
-    <script src="../assets/carousel.js?v=d461b85f" defer></script>
-    <footer class="site-foot">
+    <!-- lightbox:end -->
+    <script src="../assets/quick-access.js?v=70337742" defer></script>
+    <script src="../assets/carousel.js?v=cbf3bc8c" defer></script>
+    <script src="../assets/contact-config.js?v=fd202749" defer></script>
+    <script src="../assets/contact.js?v=9a2027b1" defer></script>
+    <script type="module" src="../assets/hero3d.js?v=df9257a9"></script>
+    <footer class="site-foot is-joined">
       <div class="shell">
-        <nav aria-label="روابط التذييل">
-          <a href="../ar/">الرئيسية</a>
-          <a href="../ar/privacy/">سياسة الخصوصية</a>
-          <a href="../ar/terms/">شروط الاستخدام</a>
-          <a href="../ar/delete-data/">حذف البيانات</a>
-          <a href="../ar/support/">المساعدة والدعم</a>
-        </nav>
-        <p>
-          زُلْفَى من تصميم وتطوير<br />
-          <span class="dev">Moner Intelligence Systems</span>
-        </p>
-        <p>© ٢٠٢٦ MONER INTELLIGENCE SYSTEMS. جميع الحقوق محفوظة.</p>
+        <div class="fo-grid">
+          <div class="fo-brand">
+            <a class="fo-mark" href="../ar/">
+              <img src="../assets/emblem-256.webp" alt="" width="256" height="256" />
+              <span>ZULFAA</span>
+            </a>
+            <p class="fo-tag">مواقيت الصلاة والقرآن والأذكار والقبلة في مكان هادئ واحد، تُحسب على هاتفك.</p>
+            <p class="fo-avail"><span class="fo-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.7v18.6c0 .6.6 1 1.1.7l14.4-8.6a.9.9 0 0 0 0-1.5L5.1 2c-.5-.3-1.1.1-1.1.7Z"/></svg></span>في مرحلة الإعداد النهائي لأول إصدار على أندرويد، ولم يُنشر بعد على Google Play. بالعربية والإنجليزية والهولندية.</p>
+        <ul class="fo-social">
+          <li><a href="https://github.com/moner-dev" rel="me noopener" target="_blank" aria-label="زُلْفَى على GitHub"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg></a></li>
+          <li><span class="fo-social-soon" role="img" aria-label="زُلْفَى على إنستغرام — الرابط غير متاح بعد" title="الرابط غير متاح بعد"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span></li>
+          <li><span class="fo-social-soon" role="img" aria-label="زُلْفَى على إكس — الرابط غير متاح بعد" title="الرابط غير متاح بعد"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 3h3.2l-7 8 8.2 10h-6.4l-5-6.1L4.8 21H1.6l7.5-8.6L1.2 3h6.6l4.5 5.6L17.5 3Zm-1.1 16.1h1.8L7.7 4.8H5.8l10.6 14.3Z"/></svg></span></li>
+        </ul>
+          </div>
+
+          <nav class="fo-links" aria-label="روابط التذييل">
+            <h2>الموقع</h2>
+            <ul>
+              <li><a href="../ar/">الرئيسية</a></li>
+              <li><a href="../ar/articles/">المقالات</a></li>
+              <li><a href="../ar/support/">المساعدة والدعم</a></li>
+            </ul>
+          </nav>
+
+          <nav class="fo-links" aria-label="الوثائق">
+            <h2>الوثائق</h2>
+            <ul>
+              <li><a href="../ar/privacy/">سياسة الخصوصية</a></li>
+              <li><a href="../ar/terms/">شروط الاستخدام</a></li>
+              <li><a href="../ar/delete-data/">حذف البيانات</a></li>
+            </ul>
+          </nav>
+
+          <div class="fo-say">
+            <h2>تواصل</h2>
+            <p><a class="fo-cta" href="#contact">راسِل زُلْفَى</a></p>
+            <p class="fo-mail"><a href="mailto:moner.intelligence@gmail.com">moner.intelligence@gmail.com</a></p>
+            <ul class="fo-langs" aria-label="اللغة">
+            <li><a href="../" lang="en" hreflang="en">English</a></li>
+            <li><a href="../ar/" lang="ar" hreflang="ar" aria-current="true">العربية</a></li>
+            <li><a href="../nl/" lang="nl" hreflang="nl">Nederlands</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="fo-base">
+          <p class="fo-dev">زُلْفَى من تصميم وتطوير <span class="dev">Moner Intelligence Systems</span></p>
+          <p class="fo-copy">© ٢٠٢٦ MONER INTELLIGENCE SYSTEMS. جميع الحقوق محفوظة.</p>
+        </div>
       </div>
     </footer>
-    <script src="../assets/nav.js?v=8940bf7e" defer></script>
+
+    <!-- scrolldock:start -->
+    <div class="dock" data-dock hidden>
+      <button class="dock-btn" type="button" data-dock-up aria-label="العودة إلى أعلى الصفحة" title="العودة إلى أعلى الصفحة">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19V6M6 12l6-6 6 6"/></svg>
+      </button>
+      <button class="dock-btn" type="button" data-dock-down aria-label="الانتقال إلى تذييل الصفحة" title="الانتقال إلى تذييل الصفحة">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v13M6 12l6 6 6-6"/></svg>
+      </button>
+    </div>
+    <!-- scrolldock:end -->
+    <script src="../assets/nav.js?v=bb6bbd3a" defer></script>
+    <script src="../assets/lantern.js?v=cc056950" defer></script>
+    <script src="../assets/scrolldock.js?v=03e59a25" defer></script>
   </body>
 </html>

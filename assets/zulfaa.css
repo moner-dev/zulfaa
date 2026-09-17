@@ -33,7 +33,14 @@
   --teal-soft: #d0ebe8;
   --gold: #e6b84c;
   --gold-soft: #f7e6bd;
-  --gold-ink: #9a6c10;
+  /* gold dark enough to be READ on cream: at #9a6c10 "The short version." and
+     the section eyebrows measured 4.3:1, just under the 4.5 small text needs */
+  --gold-ink: #8a5e0c;
+  /* And gold light enough to be read on the LIGHTER bands - the showcase and
+     contact greens. The brand gold clears 4.5:1 on the deep footer but only
+     reaches 4.0:1 there, so the eyebrows, the slide captions and the contact
+     address get this one step up. The brand gold itself is unchanged. */
+  --gold-band: #f0c868;
   --ink: #33423d;
   --ink-soft: #5c6964;
   --radius: 1.5rem;
@@ -46,11 +53,27 @@
   --band-mid: #164b45;
   --band-deep: #0e332e;
   --band-edge: rgba(230, 184, 76, 0.28);
+  /* the ending: deeper than the contact block above it, same family. Cream on
+     these measures 15.1:1 and 16.7:1, gold 8.5:1 and 9.4:1. */
+  --foot-top: #0b2723;
+  --foot-deep: #071d1a;
+  /* the scrolled navigation bar: the palette's green at reading weight, so
+     near-black type sits on it at 8.5:1. Black on the deep greens is 1.9-2.5:1
+     and unreadable, which is why the bar is light rather than dark. */
+  --bar: #dfe9e2;
   --on-band: rgba(254, 249, 240, 0.78);
-  --on-band-strong: var(--cream);
-  /* 0.62 is the floor: below it the quiet line drops under 4.5:1 against the
-     lightest part of the band, and it is small text. */
-  --on-band-soft: rgba(254, 249, 240, 0.62);
+  /* A LITERAL, not var(--cream). The bands - showcase, contact, footer - are
+     dark in BOTH themes, so the ink on them must not follow the page's
+     background token. While this said var(--cream) the dark theme turned it
+     into the page's near-black and every strong word on a band went dark on
+     dark: the footer's brand, all six footer links, the address, the developer
+     line and the contact form's labels measured 1.04:1 on every page. */
+  --on-band-strong: #fef9f0;
+  /* 0.62 was chosen as the exact floor for 4.5:1, which left the contact form's
+     hints and its privacy line sitting ON the line rather than over it once the
+     band's gradient was measured rather than its flat colour. 0.74 keeps the
+     quiet tone and gives the small text somewhere to stand. */
+  --on-band-soft: rgba(254, 249, 240, 0.74);
 }
 
 *,
@@ -216,22 +239,42 @@ img {
     color 0.2s ease;
 }
 
-.nav-toggle:hover,
-.lang-btn:hover {
-  background: var(--cream-deep);
-  border-color: rgba(42, 138, 128, 0.32);
+/* Gold is the site's interaction colour, and it belongs to HOVER only. The
+   query matters as much as the colour: without it a phone leaves the hovered
+   state painted on the button after a tap, so the menu button sits there
+   looking permanently half-pressed. */
+@media (hover: hover) {
+  .nav-toggle:hover,
+  .lang-btn:hover,
+  .drawer-close:hover {
+    background: #fff;
+    border-color: rgba(138, 94, 12, 0.45);
+    color: var(--gold-ink);
+  }
+}
+
+.nav-toggle:active,
+.lang-btn:active,
+.drawer-close:active {
+  background: var(--gold-soft);
+  border-color: rgba(138, 94, 12, 0.6);
+  color: var(--gold-ink);
 }
 
 .nav-toggle:focus-visible,
-.lang-btn:focus-visible {
+.lang-btn:focus-visible,
+.drawer-close:focus-visible {
   outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
 
+/* Open is a STATE, not an interaction, so it is teal and not gold: "this menu
+   is open" must never look like "your finger is on this button". */
 .nav-toggle[aria-expanded="true"],
 .lang-btn[aria-expanded="true"] {
   background: var(--teal-soft);
-  border-color: rgba(42, 138, 128, 0.32);
+  border-color: rgba(42, 138, 128, 0.45);
+  color: var(--teal-deep);
 }
 
 /* ── the drawer wrapper ──
@@ -288,9 +331,24 @@ img {
    Three bars that fold into a cross. Symmetric, so it needs no mirroring. */
 
 .nav-toggle {
+  position: relative;
   width: 2.25rem;
   padding: 0;
   flex: none;
+}
+
+/* The drawing stays 36px - at 44 the header read as three competing blocks
+   instead of a brand with two quiet controls - but the thing a thumb has to
+   find is 44x44. It reaches 4px past the button on each side, which is well
+   inside the header's own 1.25rem of padding, so it adds no page width. */
+.nav-toggle::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.75rem;
+  height: 2.75rem;
+  transform: translate(-50%, -50%);
 }
 
 .nav-toggle .bars {
@@ -512,8 +570,31 @@ html.js .lang-list a[aria-current="true"] .lang-check {
     display: inline-flex;
   }
 
+  /* ── THE MODAL LAYER ──
+     `.site-head` is `position: sticky` WITH a z-index, and that pair creates a
+     STACKING CONTEXT. The drawer and the scrim are rendered inside the header,
+     so their z-indexes of 60 and 55 only order them against their siblings in
+     there: the whole header subtree then composites as one layer at the
+     header's own 30, and the Top Bar's 40 paints straight over all of it. That
+     is why the close button sat buried under the announcement bar - and why
+     raising the drawer's 60 to any number whatsoever would not have moved it,
+     because that number was never being compared with the Top Bar's.
+
+     So the HEADER is what has to rise, and only while the drawer is open. It
+     carries the drawer and the scrim up with it, which also means the scrim now
+     dims the Top Bar instead of leaving it lit above a darkened page.
+
+     The whole model, in one place:
+        site-head resting  30  <  Top Bar 40  <  scroll dock 45
+        site-head with the drawer open  70  →  scrim 55, drawer 60 inside it
+        lightbox 100, which is never open at the same time. */
+  html.js .site-head:has(.nav-toggle[aria-expanded="true"]) {
+    z-index: 70;
+  }
+
   html.js .drawer {
     --drawer-out: 100%;
+    --drawer-pad: 0.9rem;
     position: fixed;
     inset-block: 0;
     inset-inline-end: 0;
@@ -522,7 +603,9 @@ html.js .lang-list a[aria-current="true"] .lang-check {
     width: min(80vw, 18.5rem);
     flex-direction: column;
     gap: 0.15rem;
-    padding: 0.8rem;
+    /* no padding at the top: the sticky close row below supplies it, together
+       with whatever the notch takes */
+    padding: 0 var(--drawer-pad) calc(var(--drawer-pad) + env(safe-area-inset-bottom, 0px));
     background: var(--cream);
     border-inline-start: 1px solid rgba(42, 138, 128, 0.16);
     box-shadow: -18px 0 44px -24px rgba(26, 90, 82, 0.45);
@@ -574,19 +657,38 @@ html.js .lang-list a[aria-current="true"] .lang-check {
      the panel came from. No "Menu" caption: the panel is plainly a menu, and
      the word was the thing that leaked into the header when the stylesheet was
      a version behind the markup. */
+  /* A row of its own, stuck to the top of the panel: the close button stays
+     reachable however far the links are scrolled, and the gap beneath it keeps
+     it off the first navigation item instead of sharing a line with it. It
+     spans the panel's full width (the negative inline margins undo the
+     drawer's own padding) so a link scrolling underneath never shows through.
+     `background: inherit` takes the drawer's own colour, which the dark theme
+     already swaps - no second place to keep in step. */
   html.js .drawer-top {
+    position: sticky;
+    top: 0;
+    z-index: 1;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding-block-end: 0.35rem;
+    margin-inline: calc(-1 * var(--drawer-pad));
+    padding:
+      calc(var(--drawer-pad) + env(safe-area-inset-top, 0px))
+      var(--drawer-pad)
+      0.55rem;
+    background: inherit;
   }
 
   html.js .drawer-close {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 2rem;
-    height: 2rem;
+    /* 44px outright. There is no crowding to manage inside the drawer, so the
+       target is the button rather than an invisible box around it - the drawer
+       scrolls on its Y axis, and an overhanging hit area would have given it
+       something to scroll on its X axis too. */
+    width: 2.75rem;
+    height: 2.75rem;
     padding: 0;
     border: 1px solid rgba(42, 138, 128, 0.18);
     border-radius: 999px;
@@ -603,15 +705,8 @@ html.js .lang-list a[aria-current="true"] .lang-check {
     height: 0.85rem;
   }
 
-  html.js .drawer-close:hover {
-    background: var(--cream-deep);
-    border-color: rgba(42, 138, 128, 0.32);
-  }
-
-  html.js .drawer-close:focus-visible {
-    outline: 2px solid var(--gold);
-    outline-offset: 2px;
-  }
+  /* hover, active and focus come from the shared header-control rules above,
+     so the close button and the button that opened it behave as one material */
 
   html.js .drawer .site-nav {
     flex-direction: column;
@@ -924,168 +1019,203 @@ html[lang="ar"] .brand-name {
    do its job is worse than an honest label. */
 
 /* ── the phone ──────────────────────────────────────────────────────────
-   One object with weight: a dark bezel, a real inner screen, and light that
-   falls on it from behind. The ambient glow is what sells the depth - it
-   warms in daylight and cools at night, so the phone looks lit by whatever
-   the screen is showing. */
+   A real 3D device (assets/hero3d.js) on a transparent canvas, so the
+   hero's own ground shows through it. Until the live phone is ready - and
+   for good when WebGL or the model is unavailable - two stills captured from
+   the same renderer stand in the same box, so nothing shifts when it takes
+   over.
+
+   The box IS the canvas: 1:2, with room for the whole device, camera bump
+   included, through a full turn. At 22rem the device itself is about 300px
+   wide; on a short viewport the box shrinks so the hero still fits. The
+   glow behind it warms in daylight and cools at night. */
 
 .hero-stage {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.1rem;
+  gap: 0.9rem;
   min-width: 0;
 }
 
-.phone {
-  --ambient-warm: rgba(230, 184, 76, 0.34);
-  --ambient-cool: rgba(26, 90, 82, 0.42);
+.phone3d {
+  --ambient-warm: rgba(230, 184, 76, 0.3);
+  --ambient-cool: rgba(26, 90, 82, 0.38);
   position: relative;
-  width: min(17.5rem, 100%);
-  aspect-ratio: 941 / 1672;
+  width: min(22rem, 100%, max(15rem, calc((100svh - 12rem) / 2)));
+  aspect-ratio: 1 / 2;
 }
 
 /* the light the screen throws onto the page behind it */
-.phone::before {
+.phone3d::before {
   content: "";
   position: absolute;
-  inset: -12% -16% -8%;
+  inset: 6% -6% 8%;
   z-index: 0;
   border-radius: 50%;
   background: radial-gradient(closest-side, var(--ambient-warm), transparent 72%);
-  filter: blur(16px);
+  filter: blur(18px);
   transition: background 0.4s ease 0.2s;
 }
 
-/* The photographed frame sits ON TOP of the screens: its bezel is opaque, so
-   it does the masking - the rounded corners of the aperture are the frame's
-   own, not a border-radius guessed in CSS. */
-.phone-frame {
+/* A soft contact shadow under the device. It stays put while the phone turns
+   and gathers as the phone comes down: --entry runs 0 -> 1 during the
+   entrance (assets/hero3d.js) and is 1 otherwise. */
+.phone3d::after {
+  content: "";
   position: absolute;
-  inset: 0;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: none;
-  filter:
-    drop-shadow(0 18px 26px rgba(14, 51, 46, 0.28))
-    drop-shadow(0 4px 8px rgba(14, 51, 46, 0.2));
+  inset-inline: 24%;
+  bottom: 0.6%;
+  height: 2.6%;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(14, 51, 46, 0.32), transparent);
+  filter: blur(5px);
+  opacity: var(--entry, 1);
+  transform: scaleX(calc(0.55 + 0.45 * var(--entry, 1)));
 }
 
-/* the aperture, measured off the frame: 758x1538 inside 941x1672 */
-.phone-screen {
+/* Loading, with scripting on: the box holds its size and shows only the glow
+   until the live phone is ready - or, if it is slow, the still (data-stage
+   "still", faded in). Without scripting this never applies and the stills
+   simply show. */
+html.js .phone3d[data-stage="loading"] {
+  --entry: 0;
+}
+
+html.js .phone3d[data-stage="loading"] .phone3d-still {
+  visibility: hidden;
+}
+
+.phone3d[data-stage="still"] .phone3d-still {
+  animation: phone3d-still-in 0.35s ease both;
+}
+
+@keyframes phone3d-still-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: var(--still-o, 1);
+  }
+}
+
+.phone3d-still,
+.phone3d-canvas {
   position: absolute;
+  inset: 0;
   z-index: 1;
-  inset-inline-start: 9.777%;
-  top: 3.947%;
-  width: 80.553%;
-  height: 91.986%;
-  overflow: hidden;
-  background: var(--cream);
-}
-
-.phone-screen img {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
 }
 
-/* The two themes are stacked and swapped instantly. There is no crossfade:
-   half-dissolved UI is the thing that looks cheap, and these two screens do
-   not even share a writing direction, so any overlap at all reads as a
-   glitch. The blink below is what hides the swap. */
-.screen-dark {
+/* The two themes swap instantly, on the stills exactly as on the live
+   screen. There is no crossfade: half-dissolved UI looks cheap, and the
+   Arabic screens do not share a writing direction with anything else. */
+.phone3d .phone3d-still {
+  opacity: var(--still-o, 1);
+}
+
+.phone3d .still-dark,
+.phone3d[data-theme="dark"] .still-light {
+  --still-o: 0;
+}
+
+.phone3d[data-theme="dark"] .still-dark {
+  --still-o: 1;
+}
+
+/* The live canvas fades in once over an identical still, then the stills
+   step out of the way. If the live phone fails later, removing `is-live`
+   brings them back at once. */
+.phone3d-canvas {
+  z-index: 2;
   opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.phone[data-theme="dark"] .screen-dark {
+.phone3d.is-live .phone3d-canvas {
   opacity: 1;
 }
 
-/* ── the blink ──────────────────────────────────────────────────────────
-   Two lids close to the centre line, the image changes behind them, they
-   open again. A thin warm line rides the closing edge - the specular catch
-   a real screen gives as it goes dark - and it is the only ornament. */
+/* Direct rotation. The browser keeps vertical scrolling and pinch-zoom on
+   the canvas; only horizontal travel that starts on the device itself turns
+   it (hit-tested in assets/hero3d.js, which also sets these classes). */
+.phone3d-canvas {
+  touch-action: pan-y pinch-zoom;
+}
 
-.lid {
+.phone3d-canvas.is-grabbable {
+  cursor: grab;
+}
+
+.phone3d-canvas.is-grabbing {
+  cursor: grabbing;
+}
+
+/* A one-time hint in the free strip under the device: no layout space of
+   its own, never over the screen, gone after the first drag or 8 s. */
+.drag-hint {
   position: absolute;
-  inset-inline: 0;
-  height: 50.5%; /* the overlap is what stops a seam at the meeting line */
   z-index: 3;
-  pointer-events: none;
-  transform: scaleY(0);
-  background: #060f0d;
-}
-
-.lid-top {
-  top: 0;
-  transform-origin: top center;
-}
-
-.lid-bottom {
-  bottom: 0;
-  transform-origin: bottom center;
-}
-
-.lid::after {
-  content: "";
-  position: absolute;
   inset-inline: 0;
-  height: 1px;
-  opacity: 0;
-  background: linear-gradient(90deg, transparent, rgba(247, 230, 189, 0.75), transparent);
-}
-
-.lid-top::after {
   bottom: 0;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 90, 82, 0.14);
+  background: rgba(254, 249, 240, 0.94);
+  color: var(--ink-soft);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.2;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
 }
 
-.lid-bottom::after {
-  top: 0;
+.drag-hint.is-shown {
+  opacity: 1;
+  transform: none;
 }
 
-.phone.is-blinking .lid {
-  animation: lid-blink 560ms cubic-bezier(0.65, 0, 0.35, 1) both;
+.drag-hint svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex: none;
 }
 
-.phone.is-blinking .lid::after {
-  animation: lid-catch 560ms ease both;
+.phone3d.is-live .phone3d-still {
+  visibility: hidden;
+  transition: visibility 0s linear 0.35s;
 }
 
-@keyframes lid-blink {
-  0% {
-    transform: scaleY(0);
-  }
-  40%,
-  58% {
-    transform: scaleY(1);
-  }
-  100% {
-    transform: scaleY(0);
-  }
-}
-
-@keyframes lid-catch {
-  0%,
-  10% {
-    opacity: 0;
-  }
-  38%,
-  60% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-.phone[data-theme="dark"] {
+.phone3d[data-theme="dark"] {
   --ambient-warm: var(--ambient-cool);
+}
+
+/* the hero's controls: day/night, and pausing the phone's recurring turn */
+.hero-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* the day/night button does nothing without script, so it is not offered */
+html:not(.js) .theme-demo {
+  display: none;
 }
 
 /* ── the day/night control ──────────────────────────────────────────────
@@ -1175,35 +1305,48 @@ html[dir="rtl"] .theme-demo[aria-pressed="true"] .knob::after {
   padding-inline-end: 0.35rem;
 }
 
-/* ── hero night wash ────────────────────────────────────────────────────
-   The page answers the phone. A deep-teal veil fades in behind the hero
-   when the screen goes dark, so the whole composition changes light
-   together instead of the phone changing alone. */
-
-.hero-night {
-  position: absolute;
-  inset-inline: 0;
-  top: 0;
-  height: 100%;
-  z-index: -2;
-  opacity: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    120% 90% at 72% 34%,
-    rgba(14, 51, 46, 0.17),
-    rgba(14, 51, 46, 0.05) 52%,
-    transparent 74%
-  );
-  transition: opacity 0.45s ease 0.2s;
+/* ── pausing the phone's motion ─────────────────────────────────────────
+   The recurring turn can be stopped (WCAG 2.2.2). One quiet round button
+   the height of the day/night control: pause while it plays, play while
+   paused. It exists only when the live phone can move. */
+.motion-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(26, 90, 82, 0.22);
+  background: rgba(254, 249, 240, 0.9);
+  color: var(--teal-deep);
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
 }
 
-.hero-wrap {
-  position: relative;
-  isolation: isolate;
+.motion-toggle svg {
+  width: 0.95rem;
+  height: 0.95rem;
 }
 
-.hero-wrap:has(.phone[data-theme="dark"]) .hero-night {
-  opacity: 1;
+.motion-toggle:hover {
+  border-color: rgba(26, 90, 82, 0.45);
+  background: var(--cream);
+}
+
+.motion-toggle:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.motion-toggle .icon-play,
+.motion-toggle[aria-pressed="true"] .icon-pause {
+  display: none;
+}
+
+.motion-toggle[aria-pressed="true"] .icon-play {
+  display: block;
 }
 
 /* ── hero, narrow ───────────────────────────────────────────────────── */
@@ -1219,22 +1362,23 @@ html[dir="rtl"] .theme-demo[aria-pressed="true"] .knob::after {
   .hero-trust {
     max-width: 46ch;
   }
-  .phone {
-    width: min(15.5rem, 76vw);
+  .phone3d {
+    width: min(18rem, 76vw);
   }
 }
 
 /* ── motion, refused ────────────────────────────────────────────────────
    Everything above still works: the toggle still switches the screen, the
-   ambient light still changes. It simply happens at once. */
+   ambient light still changes. It simply happens at once, and the rotation
+   preview shows four still views instead of a sweep (assets/hero3d.js). */
 
 @media (prefers-reduced-motion: reduce) {
-  .phone.is-blinking .lid,
-  .phone.is-blinking .lid::after {
+  .phone3d[data-stage="still"] .phone3d-still {
     animation: none;
   }
-  .hero-night,
-  .phone::before,
+  .phone3d::before,
+  .phone3d-canvas,
+  .drag-hint,
   .theme-demo .knob,
   .theme-demo .knob::after {
     transition: none;
@@ -1276,56 +1420,422 @@ section.band {
   max-width: 38rem;
 }
 
-.grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+/* ── quick access dial ────────────────────────────────────────────────
+   The eight shortcuts of the app's home screen on one dial (markup:
+   tools/quick_access.py, behaviour: assets/quick-access.js). Every rule is
+   scoped to .qa-*. All geometry is in --u, one hundredth of the dial's
+   diameter, so the same proportions hold from 29rem down to a 320px phone
+   without container queries. The face is static SVG; only the stickers move,
+   and only when a visitor chooses one or starts the tour. */
+
+.qa {
+  padding: clamp(2.75rem, 6vw, 4.25rem) 0 clamp(0.5rem, 2vw, 1.25rem);
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid rgba(42, 138, 128, 0.16);
-  border-radius: var(--radius);
-  padding: 1.4rem 1.35rem;
-  box-shadow: 0 10px 28px -18px rgba(26, 90, 82, 0.45);
+.qa-head {
+  max-width: 40rem;
+  margin: 0 auto clamp(1.75rem, 4.5vw, 3rem);
+  text-align: center;
 }
 
-.card h3 {
-  font-size: 1.05rem;
-  margin-bottom: 0.35rem;
+.qa-title {
+  font-size: clamp(1.6rem, 3.8vw, 2.15rem);
+  text-wrap: balance;
 }
 
-.card p {
-  margin: 0;
-  font-size: 0.92rem;
+.qa-note {
+  margin: 0.5rem auto 0;
+  max-width: 36rem;
   color: var(--ink-soft);
+  font-size: clamp(0.97rem, 2vw, 1.06rem);
+  text-wrap: balance;
 }
 
-.card .glyph {
-  display: inline-flex;
+.qa-body {
+  display: grid;
+  grid-template-columns: minmax(0, 29rem) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
   align-items: center;
-  justify-content: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  margin-bottom: 0.85rem;
-  border-radius: 0.9rem;
-  background: var(--teal-soft);
+}
+
+.qa-dial-col {
+  min-width: 0;
+}
+
+.qa-dial-box {
+  --d: 29rem;
+  --u: calc(var(--d) / 100);
+  width: var(--d);
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+.qa-dial {
+  --rot: 0deg;
+  position: relative;
+  width: var(--d);
+  height: var(--d);
+}
+
+/* the face */
+.qa-face {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.qa-bz { fill: none; stroke: rgba(230, 184, 76, 0.62); stroke-width: 0.3; }
+.qa-bz2 { fill: none; stroke: rgba(230, 184, 76, 0.32); stroke-width: 0.2; }
+.qa-tk line { stroke: rgba(26, 90, 82, 0.2); stroke-width: 0.2; stroke-linecap: round; }
+.qa-tk8 line { stroke: rgba(230, 184, 76, 0.9); stroke-width: 0.42; stroke-linecap: round; }
+.qa-arc { fill: none; stroke: var(--gold); stroke-width: 0.75; stroke-linecap: round; }
+.qa-mk { fill: var(--gold); }
+.qa-r1 { fill: rgba(247, 230, 189, 0.35); stroke: rgba(230, 184, 76, 0.7); stroke-width: 0.28; }
+.qa-r2 { fill: none; stroke: rgba(42, 138, 128, 0.24); stroke-width: 0.22; }
+.qa-dv line { stroke: rgba(42, 138, 128, 0.4); stroke-width: 0.26; stroke-linecap: round; }
+
+/* the centre: the chosen sticker, large, on a lifted disc */
+.qa-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.qa-center::before {
+  content: "";
+  position: absolute;
+  width: calc(var(--u) * 34);
+  height: calc(var(--u) * 34);
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, #fff 0%, #fff 48%, #fdf8ee 100%);
+  box-shadow: 0 calc(var(--u) * 2.5) calc(var(--u) * 7) calc(var(--u) * -3) rgba(26, 90, 82, 0.3);
+}
+
+.qa-big {
+  position: relative;
+  width: calc(var(--u) * 26);
+  height: calc(var(--u) * 26);
+  object-fit: contain;
+  filter: drop-shadow(0 calc(var(--u) * 2) calc(var(--u) * 2.2) rgba(26, 90, 82, 0.22));
+}
+
+/* Du'a exists only up to 256px: never drawn larger than it holds at 2x */
+.qa-big[data-kind="dua"] {
+  width: min(calc(var(--u) * 26), 8rem);
+  height: min(calc(var(--u) * 26), 8rem);
+}
+
+/* the app's own vector drawings for Saved and Favorites carry more margin than
+   the painted stickers; this brings them to the same optical size */
+.qa-big[data-kind="vector"] {
+  width: calc(var(--u) * 23.4);
+  height: calc(var(--u) * 23.4);
+}
+
+/* the ring */
+.qa-ring {
+  position: absolute;
+  inset: 0;
+}
+
+.qa-node {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: calc(var(--u) * 19.4);
+  height: calc(var(--u) * 19.4);
+  margin: calc(var(--u) * -9.7) 0 0 calc(var(--u) * -9.7);
+  /* around the centre by --a + --rot, then straightened back: artwork and
+     label stay upright at every point of the turn */
+  transform: rotate(calc(var(--a) + var(--rot))) translateY(calc(var(--u) * -36))
+    rotate(calc((var(--a) + var(--rot)) * -1));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--u) * 1.6);
+  padding-top: calc(var(--u) * 2);
+  border-radius: calc(var(--u) * 4);
+  color: var(--ink-soft);
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.qa-node::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: calc(var(--u) * 0.8);
+  width: calc(var(--u) * 13.6);
+  height: calc(var(--u) * 13.6);
+  margin-left: calc(var(--u) * -6.8);
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 0 1.5px var(--gold), 0 calc(var(--u) * 1.6) calc(var(--u) * 3.6) calc(var(--u) * -1.6) rgba(26, 90, 82, 0.4);
+  opacity: 0;
+  transform: scale(0.86);
+}
+
+.qa-node img {
+  position: relative;
+  width: calc(var(--u) * 11.2);
+  height: calc(var(--u) * 11.2);
+  object-fit: contain;
+}
+
+.qa-node[data-kind="vector"] img {
+  transform: scale(1.1);
+}
+
+.qa-label {
+  position: relative;
+  font-size: clamp(0.72rem, calc(var(--u) * 2.75), 0.84rem);
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+html[lang="ar"] .qa-label {
+  font-size: clamp(0.76rem, calc(var(--u) * 2.9), 0.88rem);
+  line-height: 1.25;
+}
+
+.qa-node.is-selected {
   color: var(--teal-deep);
 }
 
-.card .glyph svg {
-  width: 1.3rem;
-  height: 1.3rem;
+.qa-node.is-selected .qa-label {
+  font-weight: 700;
 }
 
-.card.gold {
-  border-color: rgba(230, 184, 76, 0.35);
-  background: linear-gradient(to bottom right, #fdf7e8, var(--cream), #f6efdd);
+.qa-node.is-selected::before {
+  opacity: 1;
+  transform: none;
 }
 
-.card.gold .glyph {
-  background: var(--gold-soft);
-  color: var(--gold-ink);
+.qa-node:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .qa-node:hover {
+    color: var(--teal-deep);
+  }
+}
+
+.qa.is-ready .qa-node {
+  transition: transform 650ms cubic-bezier(0.32, 0.72, 0.18, 1), color 150ms ease;
+}
+
+.qa.is-ready .qa-node::before {
+  transition: opacity 200ms ease, transform 200ms ease;
+}
+
+/* the tour control */
+.qa-tour {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(0.75rem, 2vw, 1.1rem);
+}
+
+.qa-tour[hidden] {
+  display: none;
+}
+
+.qa-play {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding-block: 0.5rem;
+  padding-inline: 0.95rem 1.15rem;
+  border: 1px solid rgba(42, 138, 128, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--teal-deep);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.qa-play:hover {
+  background: var(--teal-soft);
+}
+
+.qa-play:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.qa-play svg {
+  width: 0.9rem;
+  height: 0.9rem;
+  flex: none;
+}
+
+.qa-play[aria-pressed="true"] .qa-i-play,
+.qa-play[aria-pressed="false"] .qa-i-pause {
+  display: none;
+}
+
+/* the features */
+.qa-panels {
+  min-width: 0;
+}
+
+.qa-panel h3 {
+  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+}
+
+.qa-soon {
+  margin: 0 0 0.45rem;
+  color: #7f5a0c; /* 5.9:1 on the cream; --gold-ink is only 4.4:1 */
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.qa-line {
+  margin: 0.5rem 0 0;
+  max-width: 30rem;
+  color: var(--ink);
+  font-size: clamp(1.02rem, 2vw, 1.13rem);
+}
+
+.qa-facts {
+  display: grid;
+  gap: 0.45rem;
+  max-width: 30rem;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.qa-facts li {
+  position: relative;
+  padding-inline-start: 1.35rem;
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+.qa-facts li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0.12rem;
+  top: 0.56em;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 0.17rem rgba(230, 184, 76, 0.24);
+}
+
+.qa-more {
+  display: inline-block;
+  margin-top: 1.15rem;
+  color: var(--teal-deep);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-underline-offset: 0.25em;
+}
+
+/* with scripting on, the eight share one grid cell: the cell is as tall as the
+   longest feature, so changing feature never moves anything below it */
+html.js .qa-panels {
+  display: grid;
+}
+
+html.js .qa-panel {
+  grid-area: 1 / 1;
+  visibility: hidden;
+}
+
+html.js .qa-panel.is-active {
+  visibility: visible;
+}
+
+/* with scripting off, the dial stands above every feature, all readable */
+html:not(.js) .qa-body {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+html:not(.js) .qa-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  gap: 2rem 2.5rem;
+  margin-top: 1rem;
+}
+
+html:not(.js) .qa-panel h3 {
+  font-size: 1.3rem;
+}
+
+.qa-around {
+  position: relative;
+  max-width: 38rem;
+  margin: clamp(2.25rem, 5vw, 3.25rem) auto 0;
+  padding-top: 1.4rem;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+.qa-around::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 8rem;
+  height: 1px;
+  margin-left: -4rem;
+  background: linear-gradient(to right, transparent, rgba(230, 184, 76, 0.75), transparent);
+}
+
+@media (max-width: 56rem) {
+  .qa-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .qa-dial-box {
+    --d: min(24rem, calc(100vw - 2.5rem));
+  }
+
+  .qa-panels {
+    width: 100%;
+    max-width: 34rem;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 30rem) {
+  .qa-dial-box {
+    --d: min(22rem, calc(100vw - 2.5rem));
+  }
+}
+
+/* On phones the face keeps only its circles, the gold arc and the marker: the
+   bezel marks and the inner bars would otherwise crowd the labels. */
+@media (max-width: 25rem) {
+  .qa-bz2,
+  .qa-tk,
+  .qa-tk8,
+  .qa-r2,
+  .qa-dv {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .qa.is-ready .qa-node,
+  .qa.is-ready .qa-node::before {
+    transition: none;
+  }
 }
 
 /* ── link row ───────────────────────────────────────────────────────── */
@@ -1385,8 +1895,32 @@ section.band {
 }
 
 .doc-head h1 {
-  font-size: clamp(1.8rem, 6vw, 2.4rem);
+  /* The floor is 1.55rem rather than 1.8rem so that the longest title the site
+     has - the Dutch "Gebruiksvoorwaarden", one unbreakable 19-letter word -
+     fits the text column of a 320px phone on one line. At 1.8rem it was 286px
+     against 280px of column and broke after "Gebruiksvoorwaarde", leaving a
+     single "n" on the next line. Hyphenation is the nicer answer but it needs a
+     dictionary the browser may not have; a title that simply fits needs
+     nothing. */
+  font-size: clamp(1.55rem, 6vw, 2.4rem);
   margin-top: 0.75rem;
+}
+
+/* Dutch compounds do not break on their own: "Gebruiksvoorwaarden" is one
+   286px word, wider than the text column of a 320px phone, and a heading that
+   cannot break takes the whole page sideways with it.
+
+   Hyphenation first, so the break lands where the language allows it
+   ("Gebruiks-voorwaarden") - every page carries a lang attribute, which is what
+   makes that work. `break-word` stays underneath it as the last resort: on its
+   own it split the word mid-syllable and left a single "n" on a line. */
+h1,
+h2,
+.ap-title,
+.brand-name {
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 .doc-head .sub {
@@ -1564,10 +2098,10 @@ section.band {
   border-top: 1px solid var(--band-edge);
   text-align: center;
   font-size: 0.85rem;
-  background-color: var(--band-mid);
+  background-color: var(--foot-top);
   background-image:
-    radial-gradient(38rem 18rem at 50% 0%, rgba(230, 184, 76, 0.12), transparent 70%),
-    linear-gradient(168deg, var(--band-mid) 0%, var(--band-deep) 100%);
+    radial-gradient(38rem 18rem at 50% 0%, rgba(230, 184, 76, 0.1), transparent 70%),
+    linear-gradient(168deg, var(--foot-top) 0%, var(--foot-deep) 100%);
   color: var(--on-band);
 }
 
@@ -1582,31 +2116,6 @@ section.band {
   opacity: 0.5;
 }
 
-.site-foot nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.4rem 1.1rem;
-  margin-bottom: 1.15rem;
-}
-
-.site-foot nav a {
-  text-decoration: none;
-  font-weight: 600;
-  color: var(--on-band-strong);
-  transition: color 0.25s ease;
-}
-
-.site-foot nav a:hover {
-  color: var(--gold);
-}
-
-.site-foot nav a:focus-visible {
-  outline: 2px solid var(--gold);
-  outline-offset: 3px;
-  border-radius: 0.4rem;
-}
-
 .site-foot p {
   color: var(--on-band);
 }
@@ -1618,10 +2127,256 @@ section.band {
   color: var(--on-band-strong);
 }
 
-/* the copyright line is the quietest thing on the page */
-.site-foot p:last-child {
-  margin-bottom: 0;
+/* Four groups of unequal weight: the brand carries the most, the two link
+   columns the least, contact a little more. Never equal quarters - that is
+   what makes a footer look like a sitemap. */
+.fo-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.8fr) minmax(0, 0.8fr) minmax(0, 1.05fr);
+  gap: 2.5rem clamp(1.25rem, 3.2vw, 2.75rem);
+  text-align: start;
+}
+
+.fo-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--on-band-strong);
+  text-decoration: none;
+}
+
+html[lang="ar"] .fo-mark {
+  font-family: "Cairo", ui-sans-serif, system-ui, sans-serif;
+}
+
+.fo-mark img {
+  width: 2.3rem;
+  height: 2.3rem;
+}
+
+.fo-tag {
+  max-width: 26rem;
+  margin: 0.85rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+/* the whole of the old Availability section, in one line */
+.fo-avail {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  max-width: 26rem;
+  margin: 0.9rem 0 0;
+  font-size: 0.82rem;
   color: var(--on-band-soft);
+}
+
+.fo-play {
+  flex: none;
+  margin-top: 0.15rem;
+  color: var(--gold);
+}
+
+.fo-play svg {
+  width: 0.85rem;
+  height: 0.85rem;
+  display: block;
+}
+
+.fo-social {
+  display: flex;
+  gap: 0.6rem;
+  margin: 1.15rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fo-social a {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid rgba(254, 249, 240, 0.25);
+  border-radius: 999px;
+  color: var(--on-band-strong);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.fo-social svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.fo-social a:hover {
+  background: rgba(254, 249, 240, 0.1);
+  border-color: var(--gold);
+}
+
+.fo-links h2,
+.fo-say h2 {
+  margin: 0 0 0.9rem;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* a tracked-out capitalised label is a Latin device; Arabic keeps its own */
+html[lang="ar"] .fo-links h2,
+html[lang="ar"] .fo-say h2 {
+  font-family: "Cairo", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.88rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.fo-links ul,
+.fo-langs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fo-links li {
+  margin-bottom: 0.15rem;
+}
+
+/* a footer link is a thumb target too: the text keeps its size, the hit area
+   does not */
+.fo-links a {
+  display: inline-block;
+  padding-block: 0.45rem;
+}
+
+.fo-langs a {
+  display: inline-block;
+  padding: 0.35rem 0.15rem;
+}
+
+.fo-links a,
+.fo-say a {
+  color: var(--on-band-strong);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: color 0.25s ease;
+}
+
+.fo-links a:hover,
+.fo-say a:hover {
+  color: var(--gold);
+}
+
+.fo-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid rgba(230, 184, 76, 0.55);
+  border-radius: 999px;
+  color: var(--gold) !important;
+}
+
+.fo-cta:hover {
+  background: rgba(230, 184, 76, 0.12);
+}
+
+.fo-say .fo-mail {
+  margin: 0.9rem 0 0;
+  font-size: 0.86rem;
+}
+
+.fo-say .fo-mail a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.fo-langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: 1.1rem;
+}
+
+.fo-langs a {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--on-band);
+}
+
+.fo-langs a[aria-current] {
+  color: var(--gold);
+}
+
+.site-foot a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 0.4rem;
+}
+
+/* the quietest part of the page: two lines, one under the other, the credit
+   first and the copyright below it */
+.fo-base {
+  display: grid;
+  justify-items: center;
+  gap: 0.4rem;
+  margin-top: 2.5rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid rgba(230, 184, 76, 0.22);
+  text-align: center;
+}
+
+.fo-base p {
+  margin: 0;
+}
+
+.fo-dev {
+  color: var(--on-band);
+  font-size: 0.84rem;
+}
+
+.fo-copy {
+  color: var(--on-band-soft);
+  font-size: 0.75rem;
+}
+
+/* a mark we do not have an address for yet: drawn, named, and inert */
+.fo-social-soon {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px dashed rgba(254, 249, 240, 0.3);
+  border-radius: 999px;
+  color: rgba(254, 249, 240, 0.45);
+  cursor: default;
+}
+
+.fo-social-soon svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+/* tablet: two by two rather than four squeezed columns */
+@media (max-width: 62rem) {
+  .fo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem clamp(1.5rem, 4vw, 3rem);
+  }
+}
+
+@media (max-width: 40rem) {
+  .fo-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
 }
 
 @media (max-width: 34rem) {
@@ -1645,7 +2400,8 @@ section.band {
   background-image:
     radial-gradient(44rem 24rem at 50% -4rem, rgba(230, 184, 76, 0.16), transparent 68%),
     linear-gradient(168deg, var(--band-top) 0%, var(--band-mid) 46%, var(--band-deep) 100%);
-  color: var(--cream);
+  /* the ink on a band, which is dark in both themes - never var(--cream) */
+  color: var(--on-band-strong);
 }
 
 /* the khatim lattice again, struck in gold — the same motif as the page ground */
@@ -1667,14 +2423,14 @@ section.band {
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--gold-band);
 }
 
 .showcase h2 {
   margin: 0.6rem 0 0;
   text-align: center;
   font-size: clamp(1.5rem, 4.5vw, 2rem);
-  color: var(--cream);
+  color: var(--on-band-strong);
 }
 
 .showcase-note {
@@ -1688,8 +2444,9 @@ section.band {
 /* ── the carousel ───────────────────────────────────────────────────── */
 
 .carousel {
-  /* the width of a slide in the common 941x1672 proportion; a slide of another
-     shape is --k times as wide, so every slide in the row shares one height */
+  /* the width of a slide in the common 945x2055 proportion (tools/showcase.py
+     BASE_RATIO); a slide of another shape is --k times as wide, so every slide
+     in the row shares one height */
   --shot-w: clamp(11.5rem, 56vw, 16rem);
   position: relative;
   margin-top: 2rem;
@@ -1797,12 +2554,12 @@ section.band {
   font-size: 0.82rem;
   font-weight: 600;
   letter-spacing: 0.02em;
-  color: rgba(254, 249, 240, 0.6);
+  color: rgba(254, 249, 240, 0.85);
   transition: color 0.45s ease;
 }
 
 .carousel.is-enhanced .shot.is-active .shot-cap {
-  color: var(--gold);
+  color: var(--gold-band);
 }
 
 /* Hover lift — pointer devices only, so a tap on a phone never leaves a
@@ -1904,7 +2661,7 @@ section.band {
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(254, 249, 240, 0.5);
+  color: rgba(254, 249, 240, 0.82);
   font-variant-numeric: tabular-nums;
 }
 
@@ -1913,7 +2670,7 @@ section.band {
 }
 
 .car-status b {
-  color: var(--gold);
+  color: var(--gold-band);
   font-weight: 700;
 }
 
@@ -1921,7 +2678,8 @@ section.band {
   margin: 0.5rem 0 0;
   text-align: center;
   font-size: 0.76rem;
-  color: rgba(254, 249, 240, 0.4);
+  /* was 0.4: small text at 2.5:1 on the band, which is a hint nobody can read */
+  color: rgba(254, 249, 240, 0.78);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2109,7 +2867,7 @@ section.band {
   font-size: 0.78rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: rgba(254, 249, 240, 0.62);
+  color: rgba(254, 249, 240, 0.74);
   font-variant-numeric: tabular-nums;
   text-align: center;
 }
@@ -2216,6 +2974,1902 @@ section.band {
   }
 }
 
+/* ── the lower page ───────────────────────────────────────────────────
+   One ending in four movements, each warmer or deeper than the last:
+
+     journal   cream, the page's own ground — editorial reading
+     trust     warm sand (cream-deep), a quiet step down, same family
+     contact   emerald, the material the screenshot band established
+     footer    the same emerald, continued without a seam
+
+   The two light surfaces carry no texture of their own: the body's khatim
+   lattice is enough, and reading wants a calm ground. */
+
+/* ── journal ──────────────────────────────────────────────────────── */
+
+.journal {
+  padding: clamp(3.25rem, 7.5vw, 5.25rem) 0 clamp(3rem, 7vw, 4.75rem);
+  background: var(--cream);
+}
+
+.jr-head {
+  max-width: 40rem;
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.jr-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+html[lang="ar"] .jr-eyebrow {
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.jr-title {
+  margin: 0.55rem 0 0;
+  font-size: clamp(1.6rem, 3.8vw, 2.1rem);
+}
+
+.jr-note {
+  max-width: 36rem;
+  margin: 0.6rem 0 0;
+  color: var(--ink-soft);
+  font-size: clamp(0.97rem, 2vw, 1.05rem);
+}
+
+/* the lead and the two beside it end level: the pair spreads to the lead's
+   height rather than leaving a hole under the second card */
+.jr-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1.5rem, 3.5vw, 2.75rem);
+  align-items: stretch;
+}
+
+.jr-lead-link,
+.jr-item-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* The gallery images are tall Store posters. Any crop of them shows either
+   bezel and blur (from the top) or the phone's black edges as bars (from the
+   middle), so they are never cropped here: each sits whole on a cream mat,
+   the way the article pages show them. */
+/* 4:3 keeps the lead's column close to the height of the two cards beside it;
+   a portrait frame here left a hole under the second card */
+.jr-lead-art {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border-radius: 1.4rem;
+  background: linear-gradient(160deg, #fff, var(--cream-deep));
+  box-shadow: 0 24px 46px -32px rgba(26, 90, 82, 0.5);
+}
+
+.jr-lead-img {
+  width: 100%;
+  height: 100%;
+  padding: 0.9rem;
+  object-fit: contain;
+}
+
+.jr-lead-title,
+.jr-item-title {
+  display: inline;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  color: var(--teal-deep);
+}
+
+html[lang="ar"] .jr-lead-title,
+html[lang="ar"] .jr-item-title,
+html[lang="ar"] .jr-title,
+html[lang="ar"] .ax-title,
+html[lang="ar"] .ap-title {
+  font-family: "Cairo", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+}
+
+.jr-lead-text {
+  display: block;
+  margin-top: 1.1rem;
+}
+
+.jr-lead-title {
+  font-size: clamp(1.25rem, 2.6vw, 1.55rem);
+  line-height: 1.3;
+}
+
+.jr-lead-sum {
+  display: block;
+  margin-top: 0.5rem;
+  max-width: 32rem;
+  color: var(--ink-soft);
+  font-size: 0.97rem;
+  line-height: 1.65;
+}
+
+.jr-more {
+  display: inline-block;
+  margin-top: 0.85rem;
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--teal-deep);
+  text-underline-offset: 0.25em;
+}
+
+.jr-lead-link:hover .jr-more,
+.jr-item-link:hover .jr-item-title {
+  text-decoration: underline;
+}
+
+.jr-list {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.jr-item {
+  display: flex;
+}
+
+.jr-item-link {
+  display: grid;
+  grid-template-columns: 5.75rem minmax(0, 1fr);
+  gap: 1.15rem;
+  align-items: center;
+  width: 100%;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid rgba(42, 138, 128, 0.12);
+  border-radius: 1.35rem;
+  background: #fff;
+  box-shadow: 0 16px 34px -30px rgba(26, 90, 82, 0.55);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.jr-item-link:hover {
+  border-color: rgba(42, 138, 128, 0.28);
+  box-shadow: 0 20px 38px -28px rgba(26, 90, 82, 0.6);
+}
+
+.jr-thumb {
+  width: 5.75rem;
+  height: 5.75rem;
+}
+
+.jr-thumb {
+  width: 5.25rem;
+  height: 5.25rem;
+  padding: 0.3rem;
+  border-radius: 0.9rem;
+  background: linear-gradient(160deg, #fff, var(--cream-deep));
+  object-fit: contain;
+}
+
+.jr-item-text {
+  display: block;
+  min-width: 0;
+}
+
+.jr-item-title {
+  font-size: 1.02rem;
+  line-height: 1.35;
+}
+
+.jr-item-sum {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--ink-soft);
+  font-size: 0.87rem;
+  line-height: 1.55;
+}
+
+/* an honest label, not a badge for decoration */
+.jr-draft {
+  display: inline-block;
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(230, 184, 76, 0.2);
+  color: #7f5a0c;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  vertical-align: 0.15em;
+}
+
+html[lang="ar"] .jr-draft {
+  font-family: "Cairo", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.74rem;
+}
+
+.jr-all {
+  margin: clamp(1.5rem, 3vw, 2rem) 0 0;
+}
+
+.jr-all a {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--teal-deep);
+  text-underline-offset: 0.25em;
+}
+
+@media (max-width: 56rem) {
+  .jr-body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 34rem) {
+  .jr-item-link {
+    grid-template-columns: 4.25rem minmax(0, 1fr);
+    gap: 0.8rem;
+  }
+
+  .jr-thumb {
+    width: 4.25rem;
+    height: 4.25rem;
+  }
+}
+
+/* ── built local first ────────────────────────────────────────────── */
+
+/* a step down in warmth from the journal, not a second helping of cream */
+.trust {
+  padding: clamp(3.25rem, 7vw, 5rem) 0;
+  background: var(--cream-deep);
+  border-top: 1px solid rgba(230, 184, 76, 0.3);
+}
+
+.trust .shell {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.tr-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+html[lang="ar"] .tr-eyebrow {
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.tr-head h2 {
+  margin: 0.55rem 0 0;
+  font-size: clamp(1.6rem, 3.8vw, 2.1rem);
+  text-wrap: balance;
+}
+
+.tr-lead {
+  margin: 0.7rem 0 0;
+  color: var(--ink-soft);
+  font-size: clamp(1rem, 2vw, 1.08rem);
+  line-height: 1.7;
+}
+
+.tr-link {
+  margin: 1.2rem 0 0;
+}
+
+.tr-link a {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--teal-deep);
+  text-underline-offset: 0.25em;
+}
+
+.tr-points {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.4rem 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tr-point {
+  position: relative;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(230, 184, 76, 0.45);
+}
+
+.tr-point h3 {
+  margin: 0;
+  font-size: 1.02rem;
+  color: var(--teal-deep);
+}
+
+.tr-point p {
+  margin: 0.4rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.93rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 56rem) {
+  .trust .shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 34rem) {
+  .tr-points {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.1rem;
+  }
+}
+
+/* ── contact, and the footer it hands over to ─────────────────────── */
+
+.contact {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(3.5rem, 7.5vw, 5rem) 0 clamp(2.75rem, 6vw, 3.75rem);
+  border-top: 1px solid var(--band-edge);
+  background-color: var(--band-top);
+  background-image: linear-gradient(168deg, var(--band-top) 0%, var(--band-mid) 100%);
+  color: var(--on-band-strong);
+}
+
+.contact::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("star-gold.svg");
+  background-repeat: repeat;
+  opacity: 0.45;
+}
+
+/* The footer continues the contact block's material, so the page ends once.
+   `</main>` closes between the two, so no sibling selector can say this: the
+   home page's footer carries the class (tools/lower.py). */
+.site-foot.is-joined {
+  margin-top: 0;
+  padding-top: clamp(2.25rem, 5vw, 3rem);
+  border-top: 0;
+  background-color: var(--foot-top);
+  background-image: linear-gradient(168deg, var(--foot-top) 0%, var(--foot-deep) 100%);
+}
+
+/* one hairline, drawn inside the shell, instead of a change of colour */
+.site-foot.is-joined .fo-grid {
+  padding-top: clamp(2.25rem, 5vw, 3rem);
+  border-top: 1px solid rgba(230, 184, 76, 0.2);
+}
+
+.co-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+
+.co-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-band);
+}
+
+html[lang="ar"] .co-eyebrow {
+  font-size: 0.9rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.contact h2 {
+  margin: 0.55rem 0 0;
+  font-size: clamp(1.6rem, 3.8vw, 2.1rem);
+  color: var(--on-band-strong);
+}
+
+.co-lead {
+  max-width: 28rem;
+  margin: 0.7rem 0 0;
+  color: var(--on-band);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.co-mail {
+  margin: 1.1rem 0 0;
+  font-size: 0.92rem;
+}
+
+.co-mail a {
+  color: var(--gold-band);
+  font-weight: 600;
+  text-underline-offset: 0.2em;
+}
+
+/* the form sits on its own surface: a panel on the band, not loose fields */
+.cf {
+  padding: clamp(1.35rem, 3vw, 2rem);
+  border: 1px solid rgba(254, 249, 240, 0.16);
+  border-radius: 1.6rem;
+  background: rgba(10, 46, 42, 0.32);
+  box-shadow: 0 30px 60px -44px rgba(5, 26, 24, 0.9);
+}
+
+.cf-row {
+  margin: 0 0 1.1rem;
+}
+
+.cf-row label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--on-band-strong);
+}
+
+.cf-hint {
+  font-weight: 500;
+  color: var(--on-band-soft);
+}
+
+.cf-row input,
+.cf-row textarea {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 0.95rem;
+  border: 1px solid rgba(254, 249, 240, 0.28);
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.08);
+  /* what the visitor types, on the contact band: light in both themes */
+  color: var(--on-band-strong);
+  font: inherit;
+  font-size: 0.95rem;
+}
+
+.cf-row textarea {
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.6;
+}
+
+.cf-row input::placeholder,
+.cf-row textarea::placeholder {
+  color: rgba(254, 249, 240, 0.45);
+}
+
+.cf-row input:focus-visible,
+.cf-row textarea:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+  border-color: transparent;
+}
+
+.cf-row input.is-bad,
+.cf-row textarea.is-bad {
+  border-color: #f0b49a;
+}
+
+.cf-err {
+  display: block;
+  margin-top: 0.4rem;
+  color: #ffd2b8;
+  font-size: 0.84rem;
+}
+
+.cf-actions {
+  margin: 1.25rem 0 0;
+}
+
+.cf-send {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #3a2a06;
+  min-height: 2.9rem;
+  cursor: pointer;
+}
+
+.cf-send:hover {
+  background: #f0c765;
+  color: #3a2a06;
+}
+
+.cf-send[disabled] {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.cf-state {
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(254, 249, 240, 0.24);
+  border-radius: 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--on-band-strong);
+}
+
+/* mail mode: the email app was asked to open - a notice, never a success */
+.cf-state.is-mail,
+.cf-state.is-preview {
+  border-color: rgba(230, 184, 76, 0.5);
+  background: rgba(230, 184, 76, 0.12);
+}
+
+.cf-state-line {
+  display: block;
+}
+
+.cf-state-line + .cf-state-line {
+  margin-top: 0.45rem;
+}
+
+.cf-state.is-ok {
+  border-color: rgba(208, 235, 232, 0.6);
+  background: rgba(208, 235, 232, 0.12);
+}
+
+.cf-state.is-fail {
+  border-color: #f0b49a;
+  background: rgba(240, 180, 154, 0.12);
+}
+
+.cf-mailto {
+  color: var(--gold);
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+  /* the address is one unbreakable word; at 320px it must still wrap */
+  overflow-wrap: anywhere;
+}
+
+/* The form ships `hidden` and the fallback ships visible (tools/lower.py);
+   contact.js swaps them once its handler is attached. Stated here too, so no
+   later `display` rule on .cf can bring a script-less form back. */
+.cf[hidden] {
+  display: none;
+}
+
+.cf-fallback-text {
+  margin: 0;
+  color: var(--on-band-strong);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+.cf-fallback .cf-actions {
+  margin-top: 1.1rem;
+}
+
+.cf-fallback-addr {
+  margin: 0.9rem 0 0;
+  font-size: 0.9rem;
+}
+
+.cf-fallback-addr a {
+  color: var(--gold-band);
+  font-weight: 600;
+  text-underline-offset: 0.2em;
+  overflow-wrap: anywhere;
+}
+
+/* shown only near the limit; not a live region (the submit error is) */
+.cf-count {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--on-band-soft);
+  font-size: 0.8rem;
+}
+
+.cf-count.is-over {
+  color: #ffd2b8;
+}
+
+.cf-privacy {
+  margin: 1rem 0 0;
+  max-width: 30rem;
+  color: var(--on-band-soft);
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 56rem) {
+  .co-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+/* ── the journal's own pages ──────────────────────────────────────── */
+
+.ax-list {
+  display: grid;
+  gap: 1rem;
+  max-width: 46rem;
+  margin: 2rem auto 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.ax-link {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid rgba(42, 138, 128, 0.16);
+  border-radius: 1.3rem;
+  background: rgba(255, 255, 255, 0.72);
+  color: inherit;
+  text-decoration: none;
+}
+
+.ax-link:hover {
+  background: #fff;
+}
+
+.ax-thumb {
+  width: 6.5rem;
+  height: 6.5rem;
+  padding: 0.35rem;
+  border-radius: 1rem;
+  background: linear-gradient(160deg, #fff, var(--cream-deep));
+  object-fit: contain;
+}
+
+.ax-title {
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--teal-deep);
+}
+
+.ax-sum {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.ap {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 1.5rem 0 1rem;
+}
+
+.ap-back {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.ap-title {
+  margin: 1rem 0 0;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  line-height: 1.2;
+  color: var(--teal-deep);
+}
+
+.ap-sum {
+  margin: 0.85rem 0 0;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.ap-draft {
+  margin: 1.2rem 0 0;
+  padding: 0.75rem 1rem;
+  border: 1px solid rgba(230, 184, 76, 0.45);
+  border-radius: 0.9rem;
+  background: rgba(247, 230, 189, 0.35);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.ap-fig {
+  margin: 1.75rem 0 0;
+  text-align: center;
+}
+
+.ap-fig img {
+  width: min(22rem, 80%);
+  height: auto;
+  border-radius: 1.4rem;
+}
+
+.ap-body {
+  margin-top: 1.75rem;
+  font-size: 1.02rem;
+  line-height: 1.8;
+}
+
+.ap-body p {
+  margin: 0 0 1.1rem;
+}
+
+.ap-next {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--cream-deep);
+}
+
+.ap-next h2 {
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+.ap-next ul {
+  margin: 0.6rem 0 0;
+  padding-inline-start: 1.1rem;
+}
+
+.ap-next li {
+  margin-bottom: 0.4rem;
+}
+
+@media (max-width: 34rem) {
+  .ax-link {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
+    gap: 0.85rem;
+    padding: 0.8rem;
+  }
+
+  .ax-thumb {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+/* ══ the hanging lantern ═══════════════════════════════════════════════
+   The site's light/dark control, drawn as SVG and lit entirely in CSS
+   (markup: tools/lantern.py, state: assets/lantern.js).
+
+   It hangs inside .hero-wrap, so it belongs to the hero and scrolls away with
+   it rather than following the reader. Its z-index stays under the sticky
+   header's 30, so the bar always passes over it. Everything that moves is a
+   transform or an opacity; nothing here runs when the page is idle except one
+   slow sway, and prefers-reduced-motion stops even that. */
+
+.hero-wrap {
+  position: relative;
+}
+
+/* The box the lantern hangs in. It is the first thing inside <main>'s shell on
+   every page (tools/lantern.py `host`, placed by chrome.py `main_open`), and it
+   has NO HEIGHT: a positioning anchor, not a layout row. That is what makes one
+   set of coordinates work for the home page, a policy and an article at once -
+   the shell is the same width and starts at the same height on all of them -
+   and it is why adding the lantern to a page moves nothing else down. */
+.lantern-host {
+  position: relative;
+  height: 0;
+}
+
+/* The lantern's size and the room it needs, on the root so that the headings
+   which have to keep clear of it can reserve EXACTLY that much. Reserving a
+   flat guess instead is how the Arabic article title came to graze it: 3.25rem
+   is less than the lantern's own 2.9rem plus its 1.25rem inset. */
+:root {
+  --ln-w: clamp(3.9rem, 5.4vw, 5.6rem);
+  --ln-gap: 1.75rem; /* inset + breathing room */
+}
+
+.lantern {
+  --lit: 0; /* 0 unlit, 1 fully lit — every glow layer reads this */
+  position: absolute;
+  top: calc(var(--head-h, 0px) - 1.5rem);
+  inset-inline-start: clamp(-0.75rem, -1vw, 0rem);
+  z-index: 5;
+  width: var(--ln-w);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.lantern:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 6px;
+  border-radius: 1rem;
+}
+
+/* with no script the lantern cannot change anything, so it is not offered */
+html:not(.js) .lantern {
+  display: none;
+}
+
+.ln-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* ── the metal ── */
+.ln-hook {
+  stroke: #4a6d62;
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  fill: none;
+}
+
+/* the uprights that hold the glass: brass, and thin enough to read as metal */
+.ln-rib path {
+  stroke: rgba(230, 184, 76, 0.55);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.ln-cap-sheen {
+  fill: rgba(255, 255, 255, 0.16);
+}
+
+.ln-flame-inner {
+  fill: #fffdf4;
+  /* The wick is alight even on the cream page. With the old floors an unlit
+     lantern was a dark olive canister - no glass, no flame, nothing to say
+     what the object is - and light is the theme a first visitor arrives in. */
+  opacity: calc(0.25 + 0.75 * var(--lit));
+  transition: opacity 0.45s ease;
+}
+
+.ln-hook-ring {
+  fill: none;
+  stroke: url(#ln-brass);
+  stroke-width: 2.2;
+}
+
+.ln-chain ellipse {
+  fill: none;
+  stroke: url(#ln-metal);
+  stroke-width: 2.1;
+}
+
+.ln-cap-top,
+.ln-cap,
+.ln-frame {
+  fill: url(#ln-metal);
+}
+
+.ln-brass {
+  fill: url(#ln-brass);
+}
+
+.ln-brass-fill {
+  fill: url(#ln-brass);
+}
+
+.ln-perf path {
+  fill: #0e211d;
+  opacity: 0.55;
+}
+
+.ln-glass {
+  fill: url(#ln-glass);
+}
+
+.ln-sheen {
+  fill: url(#ln-sheen);
+  /* the highlight slides a little as the body swings */
+  transform-origin: 60px 180px;
+  transition: transform 0.6s ease;
+}
+
+.ln-burner {
+  fill: #6d5420;
+}
+
+/* ── the light ── */
+.ln-core {
+  fill: url(#ln-core);
+  opacity: calc(0.3 + 0.7 * var(--lit));
+  transition: opacity 0.45s ease;
+}
+
+.ln-flame {
+  fill: #ffe6a8;
+  opacity: calc(0.42 + 0.58 * var(--lit));
+  transform-origin: 60px 190px;
+  transition: opacity 0.45s ease;
+}
+
+/* three glows, not one shadow: the bloom on the glass, the halo around the
+   lantern, and the spill that washes the page behind it */
+.ln-bloom,
+.ln-halo,
+.ln-spill {
+  position: absolute;
+  left: 50%;
+  border-radius: 50%;
+  pointer-events: none;
+  translate: -50% 0;
+  transition: opacity 0.5s ease, scale 0.5s ease;
+}
+
+/* The bloom stays INSIDE the glass: an ellipse the size of the body, so the
+   lantern reads as a lit volume rather than a ball of light with a lantern
+   drawn over it. */
+/* Kept INSIDE the frame. The previous size ballooned past the glass and the
+   lantern stopped looking like a container of light. */
+.ln-bloom {
+  top: 35.5%;
+  width: 30%;
+  height: 21%;
+  aspect-ratio: auto;
+  border-radius: 44% 44% 38% 38%;
+  background: radial-gradient(58% 62% at 50% 52%, rgba(255, 246, 224, 0.92), rgba(255, 214, 138, 0.42) 54%, rgba(240, 180, 80, 0) 82%);
+  opacity: calc(0.16 + 0.84 * var(--lit));
+}
+
+/* Warm, and falling off early, so it reads as light in air rather than a disc
+   of paint laid over the page. */
+.ln-halo {
+  top: 28%;
+  /* A variable, because the breakpoints below have to pull the light in. These
+     layers are absolutely positioned children of the button, so whatever hangs
+     past the edge of the page is real horizontal overflow. */
+  width: var(--ln-halo, 190%);
+  aspect-ratio: 1;
+  background: radial-gradient(circle,
+    rgba(255, 226, 160, 0.34) 0%,
+    rgba(246, 198, 104, 0.16) 22%,
+    rgba(230, 184, 76, 0.05) 42%,
+    rgba(230, 184, 76, 0) 62%);
+  opacity: calc(0.05 + 0.95 * var(--lit));
+}
+
+/* the wash on the page behind it: wide, weak, and slightly below the lamp */
+.ln-spill {
+  top: 10%;
+  width: var(--ln-spill, 560%);
+  aspect-ratio: 1;
+  background: radial-gradient(circle, rgba(230, 184, 76, 0.16), rgba(230, 184, 76, 0.05) 42%, rgba(230, 184, 76, 0) 68%);
+  opacity: calc(0.05 * var(--lit));
+}
+
+/* ── the sway: a hanging object in still air ── */
+.ln-swing {
+  transform-origin: 60px 13px; /* the ring, not the middle of the drawing */
+  animation: ln-sway 7.5s ease-in-out infinite alternate;
+}
+
+@keyframes ln-sway {
+  from { transform: rotate(-1.15deg); }
+  60%  { transform: rotate(0.35deg); }
+  to   { transform: rotate(1.25deg); }
+}
+
+/* ── hover: a little more warmth, a little more movement ── */
+@media (hover: hover) {
+  .lantern:hover {
+    --lit: calc(0.18 + 0.82 * var(--on, 0));
+  }
+
+  .lantern:hover .ln-swing {
+    animation-duration: 5.5s;
+  }
+
+  .lantern:hover .ln-sheen {
+    transform: translateX(2px);
+  }
+}
+
+/* ── lit state: dark mode keeps the lantern burning ── */
+html[data-site-theme="dark"] .lantern {
+  --on: 1;
+  --lit: 1;
+}
+
+/* lit, the glass warms rather than disappearing into the glow */
+html[data-site-theme="dark"] .ln-glass {
+  fill: rgba(255, 214, 140, 0.22);
+}
+
+html[data-site-theme="dark"] .ln-frame {
+  filter: brightness(1.12);
+}
+
+/* unlit on cream, the brass is what keeps it from looking like a dull tube */
+html:not([data-site-theme="dark"]) .ln-glass {
+  fill: url(#ln-glass);
+}
+
+/* ── the unlit lantern, on cream ──
+   The light theme is what a first visitor arrives in, and there the lantern
+   was reading as a dark olive capsule on a chain: the glass gradient bottomed
+   out in the body's own metal, the flame was at 15%, and nothing separated the
+   object from the page. Three things fix it, none of them a new drawing: the
+   frame is lifted off the page by a shadow, the ribs and the perforations are
+   darkened so the frame reads as a frame at 5rem, and the glass keeps a little
+   of the light that is inside it. */
+html:not([data-site-theme="dark"]) .ln-svg {
+  filter: drop-shadow(0 7px 11px rgba(14, 51, 46, 0.18));
+}
+
+html:not([data-site-theme="dark"]) .ln-rib path {
+  stroke: rgba(122, 90, 22, 0.66);
+  stroke-width: 1.7;
+}
+
+html:not([data-site-theme="dark"]) .ln-perf path {
+  fill: #12332c;
+  opacity: 0.78;
+}
+
+/* ── striking the light, and putting it out ── */
+.lantern.is-striking .ln-core,
+.lantern.is-striking .ln-flame {
+  animation: ln-strike 0.62s ease-out both;
+}
+
+.lantern.is-striking .ln-bloom {
+  animation: ln-bloom-in 0.72s ease-out both;
+}
+
+.lantern.is-striking .ln-swing {
+  animation: ln-nudge 0.75s ease-out;
+}
+
+.lantern.is-dimming .ln-core,
+.lantern.is-dimming .ln-flame {
+  animation: ln-douse 0.5s ease-in both;
+}
+
+.lantern.is-dimming .ln-swing {
+  animation: ln-nudge 0.6s ease-out;
+}
+
+/* 0 → 65% → 45% → 100%: a match catching, not a strobe */
+@keyframes ln-strike {
+  0%   { opacity: 0.28; }
+  18%  { opacity: 0.65; }
+  32%  { opacity: 0.45; }
+  70%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes ln-bloom-in {
+  0%   { opacity: 0.1; scale: 0.72; }
+  24%  { opacity: 0.7; scale: 1.04; }
+  38%  { opacity: 0.45; scale: 0.96; }
+  100% { opacity: 1; scale: 1; }
+}
+
+/* it ends where the unlit lantern rests, so nothing jumps when the class goes */
+@keyframes ln-douse {
+  0%   { opacity: 1; }
+  30%  { opacity: 0.5; }
+  55%  { opacity: 0.62; }
+  100% { opacity: 0.32; }
+}
+
+/* the touch: it moves as if a hand brushed it, then settles */
+@keyframes ln-nudge {
+  0%   { transform: rotate(0deg); }
+  22%  { transform: rotate(-3.2deg); }
+  52%  { transform: rotate(2deg); }
+  78%  { transform: rotate(-0.9deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* ── smaller screens: the same object, less of it ── */
+@media (max-width: 75rem) {
+  :root {
+    --ln-w: clamp(3.4rem, 4.6vw, 4.4rem);
+  }
+
+  .lantern {
+    /* The hero's gutter has gone, so the lantern is close to the edge of the
+       page. In Arabic that edge is the one the document grows from, so the
+       full-size spill became real overflow - see the note at the next
+       breakpoint. Both glows come in with it. */
+    --ln-halo: 150%;
+    --ln-spill: 240%;
+    inset-inline-start: 0.25rem;
+    /* It hangs from below the header here, not from behind it. In this band the
+       shell's leading edge IS the brand's leading edge, so the -1.5rem that
+       reads well at full width put the chain straight across the emblem. */
+    top: 0;
+  }
+}
+
+/* Below the two-column hero the copy runs full width, so the lantern leaves
+   the text alone: it hangs in the margin beside the heading, not over it.
+   Clipping the drawing (the first attempt) only pushed the body down INTO the
+   copy, which is exactly what it must never do. */
+@media (max-width: 56.25rem) {
+  :root {
+    --ln-w: 2.9rem;
+  }
+
+  .lantern {
+    /* THE GLOW HAS TO FIT ON THE SCREEN IT LIGHTS. These layers are absolutely
+       positioned children of the button; beside the edge of a phone the 560%
+       spill hung ~66px past the page and became real horizontal overflow. In
+       English that is a sideways scroll; in Arabic the document grows from the
+       right, so the page OPENED shifted - heading cut off, wordmark and
+       buttons off-screen. The spill is dropped outright (at 5% alpha on a
+       phone it was never visible) and the halo is pulled inside the edge. */
+    --ln-halo: 130%;
+    --ln-spill: 0%;
+    /* clear of the menu button rather than hanging under it */
+    top: 0;
+    inset-inline-start: auto;
+    inset-inline-end: clamp(0.35rem, 2.5vw, 1.25rem);
+  }
+
+  /* Whatever a page opens with keeps out of the lantern's column, rather than
+     relying on where one language happens to wrap: English cleared it by luck,
+     Arabic ran into it. Three page shapes, one idea - the hero's heading and an
+     article's opening lines are start-aligned and reserve on the end side; the
+     document heads are centred, so they reserve on BOTH sides and stay centred.
+     Everything lower than the lantern is left alone. */
+  .hero-copy h1,
+  .wordmark-ar,
+  .ap-back,
+  .ap-title {
+    padding-inline-end: calc(var(--ln-w) + var(--ln-gap));
+  }
+
+  /* The document heads are NOT in this list. Their emblem is centred and small,
+     and their h1 starts below the lantern's foot, so they never reached it -
+     while reserving on both sides to keep them centred pushed the unbreakable
+     Dutch "Gebruiksvoorwaarden" 38px off a 320px screen. Measured, not assumed. */
+}
+
+@media (max-width: 30rem) {
+  :root {
+    --ln-w: 2.5rem;
+    --ln-gap: 1.1rem;
+  }
+
+  .lantern {
+    --ln-halo: 118%;
+    inset-inline-end: 0.35rem;
+  }
+
+  /* The drawing is narrow; the touch target is not. It grows INWARD only:
+     widening it evenly put 12px of it past the edge of a 320px page, which is
+     overflow for the same reason the glow was. */
+  .lantern::after {
+    content: "";
+    position: absolute;
+    inset-block: 22% 30%;
+    inset-inline: -1.4rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ln-swing,
+  .lantern.is-striking .ln-swing,
+  .lantern.is-dimming .ln-swing {
+    animation: none;
+  }
+  .lantern.is-striking .ln-core,
+  .lantern.is-striking .ln-flame,
+  .lantern.is-striking .ln-bloom,
+  .lantern.is-dimming .ln-core,
+  .lantern.is-dimming .ln-flame {
+    animation: none;
+  }
+  .ln-core,
+  .ln-flame,
+  .ln-bloom,
+  .ln-halo,
+  .ln-spill,
+  .ln-sheen {
+    transition: none;
+  }
+}
+
+/* ══ the 404 ═══════════════════════════════════════════════════════════
+   The sticker is the page. It is a dense piece of artwork - an emerald arch,
+   a lit lantern, a compass over the numerals, gilded leaves on a marble
+   podium - so everything around it is deliberately quiet: no card, no border,
+   no panel. Two columns on a wide screen, the artwork leading; one column on
+   a phone, the artwork still first.
+
+   Markup: tools/notfound.py. Artwork: tools/notfound_art.py. */
+
+.nf {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  /* The composition starts BELOW the lantern's foot, as the home page's own
+     hero copy does - the lantern hangs at the shell's leading edge and the
+     artwork's first column begins there too, so without this its arch and the
+     hanging stars ran up behind the chain (measured: 61x109px at 1440). The
+     height comes from the lantern's own --ln-w and its 140:340 drawing, so it
+     follows the lantern at every breakpoint instead of being a guess that
+     holds at one width. */
+  padding: calc(var(--ln-w) * 2.5 + 1rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+}
+
+/* The artwork sits ON the page, never in a box: it is a transparent PNG with
+   its own soft shadow already painted in, so a background or a border here
+   would draw the very edge the file was cut to avoid. */
+.nf-art {
+  --nf-w: min(38vw, 26rem);
+  position: relative;
+  justify-self: center;
+  width: var(--nf-w);
+  /* The file is NOT cropped, and its lower 13.8% is transparent - the run-off
+     of the podium's painted shadow. Left alone that margin reads as a gap: ~80px
+     of nothing between the artwork and the heading under it on a tablet, and on
+     a desktop it sits the artwork's visible centre above its box's centre, so
+     the text beside it looked low. Pulling the box up by 15% of its own width
+     (the margin is 17%) closes that without trimming a pixel of the artwork. */
+  margin-block-end: calc(var(--nf-w) * -0.15);
+  line-height: 0;
+}
+
+.nf-art img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* The warm air behind it. In the cream theme this is almost nothing - the
+   artwork's own shadow does the work. It earns its keep in the dark, where it
+   lifts the emerald arch and the green numerals off a near-black ground
+   without touching a single pixel of the image itself. */
+.nf-art::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 8%;
+  left: 50%;
+  width: 116%;
+  aspect-ratio: 1;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(230, 184, 76, 0.16) 0%,
+    rgba(230, 184, 76, 0.07) 34%,
+    rgba(230, 184, 76, 0) 66%);
+  pointer-events: none;
+}
+
+.nf-copy {
+  max-width: 30rem;
+}
+
+.nf-title {
+  margin: 0;
+  font-size: clamp(1.9rem, 4.6vw, 3rem);
+  line-height: 1.15;
+}
+
+.nf-body {
+  margin: 0.85rem 0 0;
+  max-width: 26rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.nf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+/* ── the stacked composition ──
+   Not the desktop one scaled down. The artwork leads, then the words, and the
+   sticker is capped so a phone is not one long column of picture: at 74vw it
+   still reads - the numerals and the plate are legible - while leaving the
+   heading and the buttons above the fold on a 390x844 screen. */
+@media (max-width: 56.25rem) {
+  .nf {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+    gap: clamp(1rem, 4vw, 2rem);
+    /* Here the lantern hangs at the OUTER edge and the artwork is centred, so
+       at 390 they already clear each other and the reserve is not needed. */
+    padding-top: 0.5rem;
+  }
+
+  .nf-art {
+    --nf-w: min(74vw, 19rem);
+  }
+
+  .nf-body {
+    margin-inline: auto;
+  }
+
+  .nf-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 30rem) {
+  /* At 320 the column is narrow enough that a centred sticker reaches back
+     under the lantern (measured: 30x89px), and shrinking the artwork far
+     enough to clear it would leave it too small to read. So the composition
+     drops below the lantern's foot here, exactly as it does on a desktop. */
+  .nf {
+    padding-top: calc(var(--ln-w) * 2.55 + 0.75rem);
+  }
+
+  .nf-art {
+    --nf-w: min(78vw, 15.5rem);
+  }
+
+  /* one under the other, each full width: side by side at 320 the two labels
+     wrapped to three lines between them */
+  .nf-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: min(100%, 17rem);
+    /* a fixed-width column inside a block does not centre itself, and a
+       stretched button keeps its label at the start: measured on the 404 and
+       the 403 at 390, the pair sat 32px from one edge and 86px from the
+       other, with the words hugging the left (the right, in Arabic) */
+    margin-inline: auto;
+  }
+
+  .nf-actions .btn {
+    justify-content: center;
+  }
+}
+
+/* A narrow AND short screen: the lantern's clearance and a full-size sticker
+   together pushed "Return home" well below the fold, on the one page whose
+   purpose is that button. The artwork gives up a fifth of its width here - the
+   numerals and the plate still read.
+
+   Measured, and honest about it: this puts the button on the first screen at
+   375x667, but at 320x568 it still sits 24-59px below the fold. The Top Bar,
+   the sticky header and the lantern's own height leave too little room there
+   for any sticker worth showing; the button is one short scroll away. */
+@media (max-width: 30rem) and (max-height: 42rem) {
+  .nf-art {
+    --nf-w: min(60vw, 12rem);
+  }
+
+  .nf {
+    gap: 0.75rem;
+  }
+
+  .nf-body {
+    margin-top: 0.5rem;
+  }
+}
+
+/* ══ the scroll dock ═══════════════════════════════════════════════════
+   Two arrows in the bottom-right corner: back to the top, and down to the
+   start of the footer.
+
+   Deliberately NOT mirrored for Arabic. Everything else on this site flips
+   with the text, but a thumb rests in the same corner of the same phone
+   whichever direction the writing runs, so this is `right`, not
+   `inset-inline-end`.
+
+   Markup: tools/scrolldock.py. State: assets/scrolldock.js. */
+
+.dock {
+  position: fixed;
+  /* above the page and the Top Bar's 40, below the drawer's 55/60 and the
+     lightbox's 100 - it must never float over a modal */
+  z-index: 45;
+  right: calc(1.15rem + env(safe-area-inset-right, 0px));
+  bottom: calc(1.15rem + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.3rem;
+  border: 1px solid rgba(42, 138, 128, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 10px 26px -14px rgba(14, 51, 46, 0.45);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+}
+
+/* `hidden` has to be spelled out: the UA rule that honours the attribute is
+   weaker than the display above, so the dock would ship visible on a page too
+   short to need it. */
+.dock[hidden] {
+  display: none;
+}
+
+/* with no script the arrows cannot scroll anything, so they are not offered */
+html:not(.js) .dock {
+  display: none;
+}
+
+.dock-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem; /* 44px, the whole button - no invisible hit box needed */
+  height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--teal-deep);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.dock-btn svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+@media (hover: hover) {
+  .dock-btn:hover {
+    background: var(--gold-soft);
+    color: var(--gold-ink);
+  }
+}
+
+.dock-btn:active {
+  background: var(--gold-soft);
+  color: var(--gold-ink);
+}
+
+.dock-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: -2px;
+}
+
+/* Unavailable, NOT removed and NOT `disabled`: the button keeps its place, so
+   the pair never shifts under a thumb when the reader reaches either end, and
+   it keeps its focus, so tabbing to "back to top" and pressing it does not
+   drop the keyboard on the floor. assets/scrolldock.js explains the rest. */
+.dock-btn[aria-disabled="true"] {
+  opacity: 0.32;
+  cursor: default;
+}
+
+@media (hover: hover) {
+  .dock-btn[aria-disabled="true"]:hover {
+    background: none;
+    color: var(--teal-deep);
+  }
+}
+
+/* NOT on the 404. That page is a dead end with one job - its two buttons - and
+   its own content does not scroll; only the shared footer under it does, which
+   is the dock's own rule for staying away. On a 320px phone the pair also landed
+   squarely on top of "Return home", the one control that page exists for. */
+body:has(.nf) .dock {
+  display: none;
+}
+
+/* the drawer is modal - nothing floats over its backdrop */
+body:has(.nav-toggle[aria-expanded="true"]) .dock {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ...and it steps aside while the contact form passes under it, so it never
+   covers a field, the send button or the storage disclosure (on a phone the
+   form runs the full width). assets/scrolldock.js decides when. */
+.dock.is-aside {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* The dock floats in the corner, and on a narrow page the footer's closing
+   lines run the full width - so the ending reserves the dock's height instead
+   of being partly covered by it. A wide page needs none of this: the centred
+   line ends nowhere near the corner. */
+@media (max-width: 56.25rem) {
+  .site-foot {
+    padding-bottom: calc(7.5rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (max-width: 30rem) {
+  .dock {
+    right: calc(0.7rem + env(safe-area-inset-right, 0px));
+    bottom: calc(0.7rem + env(safe-area-inset-bottom, 0px));
+    gap: 0.2rem;
+    padding: 0.25rem;
+  }
+}
+
+@media print {
+  .dock {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dock,
+  .dock-btn {
+    transition: none;
+  }
+}
+
+/* ══ dark mode — PROTOTYPE ═════════════════════════════════════════════
+   A first pass, not the final dark design. It works by redefining the
+   palette's own tokens, so every rule that already says var(--cream) or
+   var(--ink) follows without being rewritten; only the places that hard-code
+   white need a line of their own. Warm depth, never pure black: the ground is
+   a green-black, the type is warm cream, and gold stays gold. */
+
+/* THE LADDER. The first pass put every surface within 1.04-1.24:1 of the
+   ground, which is what "flat, lights off" meant: in the LIGHT theme the deep
+   bands stand 7.1:1, 9.4:1 and 15.1:1 away from the cream, and that separation
+   IS the page's architecture. It also drained the colour - the old ground
+   #101b18 has a chroma of 11, so it read as black with a rumour of green.
+
+   So the relationship is inverted rather than copied. The ground is now the
+   darkest thing on the page and every section that was a deep band in the light
+   theme becomes a RAISED emerald above it. Chroma roughly triples (11 -> 21-46)
+   so the night is emerald rather than grey. */
+html[data-site-theme="dark"] {
+  --cream: #0d221e;
+  --cream-deep: #102a25;
+  --ink: #f1ebdf;
+  --ink-soft: #b8c4ba;
+  --teal: #6ecdbd;
+  /* warmed off the old mint #8ad9cb, which read cool and synthetic next to gold */
+  --teal-deep: #7fd4c4;
+  --teal-soft: rgba(127, 212, 196, 0.16);
+  --gold: #e9c063;
+  --gold-soft: rgba(233, 192, 99, 0.18);
+  --gold-ink: #e7c176;
+  --gold-band: #f0c868;
+  --band-top: #1b4940;
+  --band-mid: #164039;
+  --band-deep: #113630;
+  --band-edge: rgba(233, 192, 99, 0.26);
+  /* The footer cannot go DEEPER than an already-dark ground - that was the
+     first pass's mistake, leaving it 1.04:1 away and invisible. It steps DOWN
+     from the contact band while staying clearly above the ground, and takes a
+     gold hairline so the page still visibly ends. */
+  --foot-top: #14372f;
+  --foot-deep: #0f2a24;
+  --bar: #12302a;
+  --surface: #12302a;
+  --surface-raised: #173a33;
+  --border: rgba(241, 235, 223, 0.14);
+  --form-bg: rgba(255, 255, 255, 0.06);
+}
+
+/* ── the ground and its ornament ──
+   The khatim is struck in GOLD here. The light theme's star.svg is stroked in
+   #1a5a52, the light theme's own dark teal: on cream that is a whisper, on a
+   near-black ground it is a dark line on a dark field - invisible by
+   construction, not merely faint. star-gold.svg is the same geometry in the
+   brand gold and already carries the showcase, the contact block and the
+   footer, so this is the site's own ornament, not a new one.
+
+   MIND THE MULTIPLICATION. This pseudo-element's `opacity` scales everything
+   painted on it, and the SVG already bakes in stroke-opacity 0.13:
+       lattice on screen = 0.13 x 0.5 = 6.5%   (the footer's own density)
+       warm wash         = 0.10 x 0.5 = 5%
+   So the wash is written at 0.10 to land at 5, not at 5. Retune the two
+   together or one will drag the other. */
+html[data-site-theme="dark"] body::before {
+  opacity: 0.5;
+  background-image:
+    radial-gradient(60rem 32rem at 50% -10rem, rgba(233, 192, 99, 0.1), transparent 70%),
+    url("star-gold.svg");
+}
+
+/* surfaces that were hard-coded white.
+   .toc and .contact-box only exist on the legal pages, which is why they were
+   missed: they stayed near-white panels while their links took the dark
+   theme's pale teal, and the contents list on /privacy/ measured 1.07:1 -
+   invisible. A panel that hard-codes white belongs in this list. */
+html[data-site-theme="dark"] .jr-item-link,
+html[data-site-theme="dark"] .ax-link,
+html[data-site-theme="dark"] .card,
+html[data-site-theme="dark"] .slab,
+html[data-site-theme="dark"] .toc,
+html[data-site-theme="dark"] .contact-box {
+  background: var(--surface-raised);
+  border-color: var(--border);
+  /* NOT `none`. The light theme separates a card from the page with a shadow;
+     removing it here left the card leaning on a 1.2:1 difference in lightness
+     and nothing else, which is most of why the dark page felt flat. A card at
+     night still sits above the page - the shadow just has to be darker than the
+     thing it falls on. */
+  box-shadow: 0 12px 28px -20px rgba(0, 0, 0, 0.9);
+}
+
+/* the hover was a flat #fff, which flashed a white card in the dark */
+html[data-site-theme="dark"] .ax-link:hover {
+  background: #24352f;
+}
+
+/* two round white buttons that the drawer and Quick Access hard-code */
+html[data-site-theme="dark"] .qa-play,
+html[data-site-theme="dark"] .drawer-close {
+  background: var(--surface-raised);
+  border-color: var(--border);
+  color: var(--ink);
+}
+
+/* dark gold ink on an olive chip reads 1.5:1; the label has to lighten too */
+html[data-site-theme="dark"] .jr-draft {
+  background: rgba(233, 192, 99, 0.18);
+  color: var(--gold);
+}
+
+/* The one gradient the theme could not simply re-colour: it ran from a
+   hard-coded cream to var(--cream), so in the dark it faded from near-white to
+   near-black behind one paragraph of light text - unreadable at the top-left
+   corner and fine at the bottom-right. A numeric contrast pass cannot see this;
+   only looking at it can. */
+html[data-site-theme="dark"] .summary {
+  background: linear-gradient(to bottom right, #1d2c27, var(--surface));
+  border-color: rgba(233, 192, 99, 0.3);
+}
+
+/* Another light panel with no dark rule, like .summary: a 35% cream wash that
+   turned the gold "Draft" chip on top of it into 2.8:1 olive-on-olive. */
+html[data-site-theme="dark"] .ap-draft {
+  background: rgba(233, 192, 99, 0.09);
+  border-color: rgba(233, 192, 99, 0.32);
+}
+
+/* a cream pill with --ink-soft on it: in the dark that was pale on pale */
+html[data-site-theme="dark"] .drag-hint {
+  border-color: var(--border);
+  background: rgba(16, 27, 24, 0.92);
+  color: var(--ink-soft);
+}
+
+html[data-site-theme="dark"] .jr-lead-art,
+html[data-site-theme="dark"] .jr-thumb,
+html[data-site-theme="dark"] .ax-thumb {
+  background: linear-gradient(160deg, #22332d, #16231f);
+}
+
+html[data-site-theme="dark"] .tile,
+html[data-site-theme="dark"] .qa-node::before,
+html[data-site-theme="dark"] .qa-center::before {
+  background: var(--surface-raised);
+}
+
+html[data-site-theme="dark"] .qa-center::before {
+  box-shadow: 0 0 0 1px var(--border);
+}
+
+/* controls */
+html[data-site-theme="dark"] .btn {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--border);
+  color: var(--ink);
+}
+
+html[data-site-theme="dark"] .btn.primary {
+  background: var(--teal-deep);
+  border-color: var(--teal-deep);
+  color: #08201c;
+}
+
+html[data-site-theme="dark"] .btn:hover {
+  background: var(--teal-soft);
+}
+
+/* .nav-toggle was MISSING from this list, and that was the whole bug: the menu
+   button kept the light theme's 70%-white pill and its teal bars, which the
+   dark theme turns into pale mint. On a dark header that read as a washed-out
+   sticker with a barely-there icon, while the language button beside it - same
+   rule, one selector longer - looked correct. */
+html[data-site-theme="dark"] .nav-toggle,
+html[data-site-theme="dark"] .lang-btn,
+html[data-site-theme="dark"] .theme-demo {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: var(--border);
+  color: var(--ink);
+}
+
+@media (hover: hover) {
+  html[data-site-theme="dark"] .nav-toggle:hover,
+  html[data-site-theme="dark"] .lang-btn:hover,
+  html[data-site-theme="dark"] .drawer-close:hover {
+    background: rgba(233, 192, 99, 0.14);
+    border-color: rgba(233, 192, 99, 0.5);
+    color: var(--gold);
+  }
+}
+
+html[data-site-theme="dark"] .nav-toggle:active,
+html[data-site-theme="dark"] .lang-btn:active,
+html[data-site-theme="dark"] .drawer-close:active {
+  background: rgba(233, 192, 99, 0.22);
+  border-color: rgba(233, 192, 99, 0.62);
+  color: var(--gold);
+}
+
+html[data-site-theme="dark"] .nav-toggle[aria-expanded="true"],
+html[data-site-theme="dark"] .lang-btn[aria-expanded="true"] {
+  background: var(--teal-soft);
+  border-color: rgba(127, 212, 196, 0.45);
+  color: var(--teal-deep);
+}
+
+/* The 404 artwork at night. The sticker is NOT filtered, inverted or swapped
+   for a recoloured copy - its marble, its gold and its lit lantern already
+   read on a dark ground. What it loses is the edge of the emerald arch and the
+   green in the numerals, which fall close to the page's own colour, so the
+   warm air behind it is turned up instead. Light behind the picture, never a
+   filter over it. */
+html[data-site-theme="dark"] .nf-art::before {
+  background: radial-gradient(circle,
+    rgba(233, 192, 99, 0.3) 0%,
+    rgba(233, 192, 99, 0.14) 32%,
+    rgba(120, 205, 185, 0.05) 52%,
+    rgba(233, 192, 99, 0) 72%);
+}
+
+/* The 403 at night. Same light-behind-never-a-filter rule as the 404 above;
+   only the air changes. Its sticker is crimson and gold rather than emerald,
+   so the outer ring warms toward its red instead of the 404's sea-green, and
+   the arch reads as lit from within rather than cooled. */
+html[data-site-theme="dark"] .nf-403 .nf-art::before {
+  background: radial-gradient(circle,
+    rgba(233, 192, 99, 0.3) 0%,
+    rgba(233, 192, 99, 0.14) 32%,
+    rgba(214, 92, 84, 0.07) 52%,
+    rgba(233, 192, 99, 0) 72%);
+}
+
+/* the scroll dock, at night: the same raised emerald as a card */
+html[data-site-theme="dark"] .dock {
+  background: var(--surface-raised);
+  border-color: var(--border);
+  box-shadow: 0 12px 28px -16px rgba(0, 0, 0, 0.9);
+}
+
+html[data-site-theme="dark"] .dock-btn {
+  color: var(--ink);
+}
+
+@media (hover: hover) {
+  html[data-site-theme="dark"] .dock-btn:hover {
+    background: rgba(233, 192, 99, 0.16);
+    color: var(--gold);
+  }
+
+  html[data-site-theme="dark"] .dock-btn[aria-disabled="true"]:hover {
+    background: none;
+    color: var(--ink);
+  }
+}
+
+html[data-site-theme="dark"] .dock-btn:active {
+  background: rgba(233, 192, 99, 0.24);
+  color: var(--gold);
+}
+
+html[data-site-theme="dark"] .lang-list,
+html[data-site-theme="dark"] .topbar-lang-list,
+html[data-site-theme="dark"] .drawer {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+/* the scrolled bar, in the dark */
+html[data-site-theme="dark"] .site-head.is-stuck {
+  border-bottom-color: var(--border);
+}
+
+html[data-site-theme="dark"] .site-head.is-stuck .site-nav a,
+html[data-site-theme="dark"] .site-head.is-stuck .brand,
+html[data-site-theme="dark"] .site-head.is-stuck .brand-name,
+html[data-site-theme="dark"] .site-head.is-stuck .nav-toggle,
+html[data-site-theme="dark"] .site-head.is-stuck .lang-btn {
+  color: var(--ink);
+}
+
+html[data-site-theme="dark"] .site-head.is-stuck .site-nav a:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--gold);
+}
+
+html[data-site-theme="dark"] .site-head.is-stuck .site-nav a[aria-current="page"] {
+  background: var(--teal-soft);
+  color: var(--teal-deep);
+}
+
+/* the contact panel and its fields */
+html[data-site-theme="dark"] .cf {
+  background: rgba(0, 0, 0, 0.26);
+  border-color: var(--border);
+}
+
+html[data-site-theme="dark"] .cf-row input,
+html[data-site-theme="dark"] .cf-row textarea {
+  background: var(--form-bg);
+  border-color: var(--border);
+}
+
+/* the phone screenshots keep their own light; a rim stops them floating */
+html[data-site-theme="dark"] .screen {
+  box-shadow: 0 30px 60px -34px #000, inset 0 0 0 1px var(--border);
+}
+
+/* ── the theme change itself: named properties only, never `all` ── */
+body,
+.journal,
+.trust,
+.contact,
+.site-foot,
+.card,
+.jr-item-link,
+.ax-link,
+.slab,
+.btn,
+.lang-btn,
+.cf,
+.cf-row input,
+.cf-row textarea,
+.site-head::before {
+  transition: background-color 0.32s ease, border-color 0.32s ease, color 0.32s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .journal,
+  .trust,
+  .contact,
+  .site-foot,
+  .card,
+  .jr-item-link,
+  .ax-link,
+  .slab,
+  .btn,
+  .lang-btn,
+  .cf,
+  .cf-row input,
+  .cf-row textarea,
+  .site-head::before {
+    transition: none;
+  }
+}
+
+@media print {
+  .lantern {
+    display: none;
+  }
+}
+
 @media print {
   .lb,
   .shot-zoom {
@@ -2283,19 +4937,78 @@ section.band {
   position: sticky;
   top: 0;
   transition:
-    background-color 0.3s ease,
     border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    backdrop-filter 0.3s ease;
+    box-shadow 0.3s ease;
   border-bottom: 1px solid transparent;
 }
 
+/* The glass lives on a layer BEHIND the header's content, never on the header
+   itself. A backdrop-filter (like a transform or filter) makes its element the
+   containing block for every position:fixed descendant - and the side drawer
+   and its scrim are fixed descendants. On the header, the closed drawer parked
+   off-screen became part of the document the moment the header stuck, widening
+   an Arabic phone page by the drawer's 296px and shifting it sideways; opened
+   while scrolled, the drawer and scrim shrank to the header's height. The
+   header's z-index already makes it a stacking context, so -1 stays inside it. */
+.site-head::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -1px; /* under the 1px border too, as a background would be */
+  z-index: -1;
+  pointer-events: none;
+  transition:
+    background-color 0.3s ease,
+    backdrop-filter 0.3s ease;
+}
+
+/* ── the scrolled bar ──
+   A deliberate bar, not a veil. The old state was 82% cream over a blur, so a
+   heading travelling underneath still read through it. This is opaque, in the
+   site's own green at reading weight, with near-black type: ink on --bar
+   measures 8.5:1, while black on the deep greens (#1a5a52, #1c5f56, #164b45)
+   measures 2.36:1, 2.54:1 and 1.91:1 — which is why the bar is light rather
+   than dark. Gold is kept for interaction only. */
 .site-head.is-stuck {
-  background: rgba(254, 249, 240, 0.82);
-  -webkit-backdrop-filter: saturate(1.5) blur(14px);
-  backdrop-filter: saturate(1.5) blur(14px);
-  border-bottom-color: rgba(26, 90, 82, 0.12);
-  box-shadow: 0 6px 22px -14px rgba(14, 51, 46, 0.5);
+  border-bottom-color: rgba(26, 90, 82, 0.2);
+  box-shadow: 0 6px 20px -16px rgba(14, 51, 46, 0.55);
+}
+
+.site-head.is-stuck::before {
+  background: var(--bar);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+.site-head.is-stuck .brand,
+.site-head.is-stuck .brand-name,
+.site-head.is-stuck .nav-toggle {
+  color: var(--ink);
+}
+
+.site-head.is-stuck .site-nav a {
+  color: var(--ink);
+}
+
+/* gold enters on interaction, and only there */
+.site-head.is-stuck .site-nav a:hover {
+  background: rgba(255, 255, 255, 0.62);
+  color: var(--gold-ink);
+}
+
+.site-head.is-stuck .site-nav a[aria-current="page"] {
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--teal-deep);
+}
+
+.site-head.is-stuck .lang-btn {
+  border-color: rgba(26, 90, 82, 0.22);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--ink);
+}
+
+.site-head.is-stuck .lang-btn:hover {
+  background: #fff;
+  color: var(--gold-ink);
 }
 
 .head-sentinel {
@@ -2320,6 +5033,10 @@ section.band {
   /* above .site-head's 30 so the language panel can hang over the navbar,
      below the drawer's backdrop at 55 and the lightbox at 100 */
   z-index: 40;
+  /* the language button's short form is chosen by this row's own width - see
+     .topbar-lang-code. It holds nothing fixed-position, so the containment
+     that comes with a size container traps nothing. */
+  container-type: inline-size;
   background: var(--band-deep);
   border-bottom: 1px solid var(--band-edge);
 }
@@ -2517,12 +5234,15 @@ section.band {
   outline-offset: 2px;
 }
 
-/* the short code stands in where the full name would crowd the row */
+/* The short code stands in where the full name would crowd the row. Measured
+   on the row, not the window: a media query counts a desktop scrollbar, so a
+   390px window with 375px left for the page kept "Nederlands" and pushed the
+   Dutch page up to 11px sideways. On a phone the two widths are the same. */
 .topbar-lang-code {
   display: none;
 }
 
-@media (max-width: 24rem) {
+@container (max-width: 24rem) {
   .topbar-lang-name {
     display: none;
   }

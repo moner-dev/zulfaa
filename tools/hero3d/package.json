@@ -1,0 +1,13 @@
+{
+  "name": "zulfaa-hero3d-build",
+  "private": true,
+  "description": "Builds assets/hero3d.js (the 3D hero phone) from hero3d.src.js. Maintenance tool only; GitHub Pages runs nothing.",
+  "type": "module",
+  "scripts": {
+    "build": "esbuild hero3d.src.js --bundle --format=esm --minify --target=es2020 --legal-comments=eof --outfile=../../assets/hero3d.js"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "three": "0.186.0"
+  }
+}

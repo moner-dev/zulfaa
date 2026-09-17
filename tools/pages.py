@@ -3,7 +3,8 @@
 import os, sys, json, html
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from chrome import (S, LANGS, C, SHOTS, CAPS, ALT, MAIL, DEV, PAGES, SITE,
-                        e, head, header, footer, toc, dochead, clauses, up, write, num)
+                        e, head, header, footer, toc, dochead, clauses, up, write, num,
+                        main_open)
 from dd_strings import DD
 
 NL = chr(10)
@@ -17,7 +18,7 @@ def build_privacy(lang):
     lm = [(MAIL, "mailto:" + MAIL, MAIL)]
     return (head(lang, p, d, "%s — ZULFAA" % n["privacy"], c["intro"][:180])
             + header(lang, p, d)
-            + "    <main>\n      <div class=\"shell\">\n"
+            + main_open(lang, d)
             + dochead(lang, n["privacy"], c["subtitle"], c["updatedLabel"] + ": " + c["updated"], d)
             + '\n        <p class="summary"><strong>%s.</strong> %s</p>\n\n' % (e(s["inShort"]), e(c["summary"]))
             + toc(lang, ids, titles)
@@ -36,7 +37,7 @@ def build_terms(lang):
     lm = [(MAIL, "mailto:" + MAIL, MAIL), (pp, "../privacy/", pp)]
     return (head(lang, p, d, "%s — ZULFAA" % n["terms"], c["intro"][:180])
             + header(lang, p, d)
-            + "    <main>\n      <div class=\"shell\">\n"
+            + main_open(lang, d)
             + dochead(lang, n["terms"], c["subtitle"], c["updatedLabel"] + ": " + c["updated"], d)
             + '\n        <p class="summary"><strong>%s.</strong> %s</p>\n\n' % (e(s["inShort"]), e(c["summary"]))
             + toc(lang, ids, titles)
@@ -54,7 +55,7 @@ def build_support(lang):
     qa = "".join("            <h3>%s</h3>\n            <p>%s</p>\n\n" % (e(x["q"]), e(x["a"])) for x in faq)
     return (head(lang, p, d, s["supTitle"], s["supDesc"])
             + header(lang, p, d)
-            + "    <main>\n      <div class=\"shell\">\n"
+            + main_open(lang, d)
             + dochead(lang, s["supH1"], s["supSub"], "", d)
             + '\n        <div class="doc-body">\n'
             + '          <section id="contact">\n            <h2>%s</h2>\n            <p>%s</p>\n'
@@ -125,7 +126,7 @@ def build_delete(lang):
     tocids = ["who", "in-app", "email", "deleted", "retained", "device", "automatic"]
     return (head(lang, p, d, t["title"], t["desc"])
             + header(lang, p, d)
-            + "    <main>\n      <div class=\"shell\">\n"
+            + main_open(lang, d)
             + dochead(lang, t["h1"], t["sub"], t["updated"], d)
             + '\n        <p class="summary"><strong>%s.</strong> %s</p>\n\n' % (e(s["inShort"]), e(t["summary"]))
             + toc(lang, tocids, t["toc"])

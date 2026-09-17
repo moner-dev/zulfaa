@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- Verbatim port of StickerFavorites (src/home/StickerIcons.tsx) — the app's
+       built-in Favorites tile. No raster sticker exists for Favorites. -->
+  <defs>
+    <linearGradient id="zf-heart" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#f3a49a" />
+      <stop offset="45%" stop-color="#e07a6e" />
+      <stop offset="100%" stop-color="#b8534a" />
+    </linearGradient>
+    <linearGradient id="zf-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4d992" />
+      <stop offset="100%" stop-color="#c2922c" />
+    </linearGradient>
+    <radialGradient id="zf-gloss" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.85" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <ellipse cx="24" cy="43.4" rx="12" ry="2.5" fill="#33423d" opacity="0.14" />
+  <path d="M24 40.2 C24 40.2 7.6 30.6 7.6 19.8 C7.6 14.1 11.9 10 17.2 10 C20.6 10 23 11.8 24 14.2 C25 11.8 27.4 10 30.8 10 C36.1 10 40.4 14.1 40.4 19.8 C40.4 30.6 24 40.2 24 40.2Z" fill="url(#zf-heart)" stroke="url(#zf-gold)" stroke-width="1.3" stroke-linejoin="round" />
+  <ellipse cx="16.6" cy="18.6" rx="4.6" ry="3.4" fill="url(#zf-gloss)" transform="rotate(-32 16.6 18.6)" />
+  <ellipse cx="30.6" cy="16.6" rx="1.9" ry="1.3" fill="#ffffff" opacity="0.4" transform="rotate(-28 30.6 16.6)" />
+  <path d="M41.3 7.9 42.15 10.1 44.35 10.95 42.15 11.8 41.3 14 40.45 11.8 38.25 10.95 40.45 10.1Z" fill="url(#zf-gold)" />
+</svg>

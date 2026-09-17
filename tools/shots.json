@@ -1,162 +1,130 @@
 [
  {
   "file": "home",
-  "w": 941,
-  "h": 1672,
+  "w": 945,
+  "h": 2055,
   "device": false,
   "caption": "Home",
-  "alt": "ZULFAA's home screen on a phone, introduced as a daily companion for worship: the next prayer countdown, today's challenge and quick access to every section."
+  "alt": "ZULFAA's home screen: a greeting with the date, the next prayer and its countdown, today's challenge and quick access to every section."
  },
  {
   "file": "prayer-times",
-  "w": 941,
-  "h": 1672,
+  "w": 945,
+  "h": 2055,
   "device": false,
   "caption": "Prayer times",
-  "alt": "The prayer times screen: the next prayer with its countdown and the five daily prayers, each with its own alert."
+  "alt": "The prayer times screen: the next prayer with its countdown, today's Gregorian and Hijri dates, and the five daily prayers, each with its own alert."
+ },
+ {
+  "file": "quran-surahs",
+  "w": 945,
+  "h": 2055,
+  "device": false,
+  "caption": "The Noble Qur'an",
+  "alt": "The Noble Qur'an: search, the surah you were reading with your progress, and the list of all 114 surahs."
+ },
+ {
+  "file": "quran-reader-continue",
+  "w": 945,
+  "h": 2055,
+  "device": false,
+  "caption": "Reading & listening",
+  "alt": "Surah Aal-i-Imran open for reading, with a card to continue where you stopped and a choice of reciters above the Arabic text."
+ },
+ {
+  "file": "quran-verse-actions",
+  "w": 945,
+  "h": 2055,
+  "device": false,
+  "caption": "Verse options",
+  "alt": "The options for a verse: play from it, repeat it, save it, add it to favourites, read its translation or tafsir, or share it."
  },
  {
   "file": "qibla",
-  "w": 941,
-  "h": 1672,
+  "w": 945,
+  "h": 2048,
   "device": false,
   "caption": "Qibla",
-  "alt": "The qibla compass, pointing to the Ka'bah from the chosen location with the bearing and the remaining difference."
- },
- {
-  "file": "quran",
-  "w": 941,
-  "h": 1672,
-  "device": false,
-  "caption": "The Noble Qur'an",
-  "alt": "The Qur'an index: all 114 surahs, with search and tabs for surahs, juz', favourites and the last reading."
- },
- {
-  "file": "surah-reader",
-  "w": 941,
-  "h": 1672,
-  "device": false,
-  "caption": "Reading & listening",
-  "alt": "Surah Al-Baqarah open in the dark theme, with a choice of reciters above the Arabic text."
- },
- {
-  "file": "reciters",
-  "w": 941,
-  "h": 1672,
-  "device": true,
-  "caption": "Reciters",
-  "alt": "The full list of reciters, with each name in Arabic and English."
+  "alt": "The qibla compass pointing to the Ka'bah from the chosen location, with the qibla bearing, your heading and the difference between them."
  },
  {
   "file": "adhkar-dua",
-  "w": 941,
-  "h": 1672,
-  "device": true,
+  "w": 945,
+  "h": 2055,
+  "device": false,
   "caption": "Adhkar & Du'a",
-  "alt": "Adhkar and Du'a in the dark theme: the daily wird, favourites, search and du'as grouped by theme."
+  "alt": "Adhkar and Du'a: the daily wird, favourites, last read, saved and search, and du'as grouped by theme."
  },
  {
   "file": "daily-challenge",
-  "w": 941,
-  "h": 1672,
+  "w": 945,
+  "h": 2055,
   "device": false,
   "caption": "Daily Challenge",
-  "alt": "The daily challenge: five questions from reliable sources, in-app tokens for correct answers and the Honor Board."
+  "alt": "Today's challenge: five questions from ZULFAA's verified sources, in-app tokens for correct answers and a link to the Honor Board."
  },
  {
-  "file": "challenge-questions",
-  "w": 941,
-  "h": 1672,
-  "device": true,
+  "file": "daily-challenge-question",
+  "w": 945,
+  "h": 2055,
+  "device": false,
   "caption": "Challenge questions",
-  "alt": "A daily challenge question in the dark theme, with four answers to choose from."
+  "alt": "A daily challenge question with four answers to choose from."
  },
  {
   "file": "ramadan-planner",
-  "w": 941,
-  "h": 1672,
+  "w": 945,
+  "h": 2055,
   "device": false,
   "caption": "Ramadan Planner",
-  "alt": "The Ramadan Planner: the days until Ramadan, the estimated start date and an explanation of how the dates are estimated."
+  "alt": "The Ramadan Planner: the days until Ramadan, the estimated start date and how those dates are determined."
  },
  {
   "file": "umrah-savings",
-  "w": 941,
-  "h": 1672,
+  "w": 945,
+  "h": 2055,
   "device": false,
   "caption": "Umrah Savings",
-  "alt": "Umrah Savings: set a personal target, add contributions and see what is saved and what remains."
+  "alt": "Umrah Savings before a goal is set: a button to create a savings goal and a note on how your progress is kept."
+ },
+ {
+  "file": "umrah-savings-goal",
+  "w": 945,
+  "h": 2055,
+  "device": false,
+  "caption": "Savings goal",
+  "alt": "Creating an Umrah savings goal: the target amount, the currency, an optional target date and a savings plan."
  },
  {
   "file": "notifications",
-  "w": 941,
-  "h": 1672,
-  "device": true,
-  "caption": "Reminders",
-  "alt": "The notification settings, with an off, alert or adhan mode and a reminder time for each prayer."
- },
- {
-  "file": "prayer-settings",
-  "w": 887,
-  "h": 1774,
-  "device": true,
-  "caption": "Prayer settings",
-  "alt": "The prayer settings: calculation method, Asr madhhab and the high-latitude rule."
- },
- {
-  "file": "app-settings",
-  "w": 941,
-  "h": 1672,
+  "w": 945,
+  "h": 2055,
   "device": false,
-  "caption": "App settings",
-  "alt": "The app settings: language, light, dark or follow-system theme, notifications and prayer location."
- },
- {
-  "file": "home-dark",
-  "w": 1122,
-  "h": 1402,
-  "device": false,
-  "caption": "Dark theme",
-  "alt": "ZULFAA's home screen in the dark theme and in English, with the next prayer, today's challenge and quick access."
+  "caption": "Notifications",
+  "alt": "The notification settings: for each prayer an off, notify or adhan mode, and a reminder before the prayer."
  },
  {
   "file": "profile",
-  "w": 941,
-  "h": 1672,
-  "device": true,
-  "caption": "Your space",
-  "alt": "The personal space: username, favourites, saved items, Qur'an progress and today's wird."
+  "w": 945,
+  "h": 2055,
+  "device": false,
+  "caption": "Your personal space",
+  "alt": "Your personal space: an optional username, your Qur'an progress with a button to continue reading, saved items and favourites, and today's wird."
  },
  {
   "file": "menu",
-  "w": 941,
-  "h": 1672,
+  "w": 945,
+  "h": 2055,
   "device": false,
-  "caption": "Navigation",
-  "alt": "The side menu, with everything in one place: the daily challenge, saved items, settings, help and the legal pages."
+  "caption": "Menu",
+  "alt": "The side menu, with everything in one place: your personal space, the daily challenge, saved items, favourites, reading history, notifications, prayer location, settings and language."
  },
  {
   "file": "help-support",
-  "w": 941,
-  "h": 1672,
-  "device": true,
-  "caption": "Help & Support",
-  "alt": "Help and Support in the dark theme: frequently asked questions and a way to contact the ZULFAA team."
- },
- {
-  "file": "about",
-  "w": 941,
-  "h": 1672,
+  "w": 945,
+  "h": 2055,
   "device": false,
-  "caption": "About ZULFAA",
-  "alt": "The About ZULFAA screen: what the app brings together and the sources its content comes from."
- },
- {
-  "file": "intro",
-  "w": 940,
-  "h": 1672,
-  "device": true,
-  "caption": "The opening",
-  "alt": "The ZULFAA opening screen: the gold emblem centred on the cream vault."
+  "caption": "Help & Support",
+  "alt": "Help & Support: frequently asked questions, a way to email the ZULFAA team and the support page on the web."
  }
 ]

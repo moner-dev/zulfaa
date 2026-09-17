@@ -12,8 +12,9 @@
     <link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/" />
     <link rel="icon" type="image/png" href="../assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" />
-    <link rel="stylesheet" href="../assets/zulfaa.css?v=977335da" />
+    <link rel="stylesheet" href="../assets/zulfaa.css?v=3e49efdf" />
     <script>document.documentElement.classList.add("js");</script>
+    <script>(function(){try{var t=localStorage.getItem("zulfaa-site-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-site-theme",t)}catch(e){}})();</script>
     <meta name="theme-color" content="#fef9f0" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ZULFAA" />
@@ -99,8 +100,122 @@
 
     <main>
       <div class="shell">
+        <!-- lantern:start -->
+        <div class="lantern-host">
+          <button
+            class="lantern"
+            type="button"
+            aria-pressed="false"
+            aria-label="Overschakelen naar donkere modus"
+            title="Donkere modus"
+            data-to-dark="Overschakelen naar donkere modus"
+            data-to-light="Overschakelen naar lichte modus"
+            data-tip-dark="Donkere modus"
+            data-tip-light="Lichte modus"
+          >
+            <span class="ln-spill" aria-hidden="true"></span>
+            <span class="ln-halo" aria-hidden="true"></span>
+            <span class="ln-bloom" aria-hidden="true"></span>
+            <svg class="ln-svg" viewBox="0 0 140 340" aria-hidden="true" focusable="false">
+              <defs>
+                <linearGradient id="ln-metal" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#0e241f" />
+                  <stop offset="28%" stop-color="#2d564c" />
+                  <stop offset="47%" stop-color="#7f9d91" />
+                  <stop offset="58%" stop-color="#456d61" />
+                  <stop offset="78%" stop-color="#1c3b34" />
+                  <stop offset="100%" stop-color="#0b1d19" />
+                </linearGradient>
+                <linearGradient id="ln-brass" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#6d5119" />
+                  <stop offset="22%" stop-color="#c79a35" />
+                  <stop offset="44%" stop-color="#f6e2a6" />
+                  <stop offset="62%" stop-color="#d7a93c" />
+                  <stop offset="84%" stop-color="#8a681f" />
+                  <stop offset="100%" stop-color="#5c4514" />
+                </linearGradient>
+                <!-- The glass panel is painted OVER the dark metal frame, so a
+                     low alpha here does not show the cream page through it - it
+                     shows the frame, which is why the unlit lantern used to read
+                     as a solid olive canister. It is pale and nearly opaque
+                     instead, and the flame is drawn after it. Dark mode replaces
+                     this fill outright, in the stylesheet. (Do not name a real
+                     asset path in this comment: the build rewrites every one it
+                     finds into a versioned URL, and write_en puts the pristine
+                     text back, so the two would rewrite each other for ever.) -->
+                <linearGradient id="ln-glass" x1="0.1" y1="0" x2="0.9" y2="1">
+                  <stop offset="0%" stop-color="#f7fbf8" stop-opacity="0.92" />
+                  <stop offset="38%" stop-color="#dcebe2" stop-opacity="0.8" />
+                  <stop offset="100%" stop-color="#9fbdae" stop-opacity="0.72" />
+                </linearGradient>
+                <radialGradient id="ln-core" cx="0.5" cy="0.58" r="0.52">
+                  <stop offset="0%" stop-color="#fff8e8" />
+                  <stop offset="30%" stop-color="#ffe0a0" />
+                  <stop offset="64%" stop-color="#eeb44e" stop-opacity="0.45" />
+                  <stop offset="100%" stop-color="#e09a2c" stop-opacity="0" />
+                </radialGradient>
+                <linearGradient id="ln-sheen" x1="0" y1="0" x2="1" y2="0.6">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.40" />
+                  <stop offset="55%" stop-color="#ffffff" stop-opacity="0.08" />
+                  <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+
+              <!-- the ceiling hook: fixed, the sway happens under it -->
+              <path class="ln-hook" d="M70 3v7" />
+              <circle class="ln-hook-ring" cx="70" cy="14" r="4" />
+
+              <g class="ln-swing">
+                <!-- chain: interlocking links, alternating so it reads as chain -->
+                <g class="ln-chain">
+                  <ellipse cx="70" cy="26" rx="3.4" ry="5.4" />
+                  <ellipse cx="70" cy="36" rx="2.2" ry="5.4" />
+                  <ellipse cx="70" cy="46" rx="3.4" ry="5.4" />
+                  <ellipse cx="70" cy="56" rx="2.2" ry="5.4" />
+                  <ellipse cx="70" cy="66" rx="3.4" ry="5.4" />
+                  <ellipse cx="70" cy="76" rx="2.2" ry="5.4" />
+                </g>
+
+                <!-- crown: a small finial, then the shouldered dome -->
+                <path class="ln-brass-fill" d="M70 82c1.6 0 2.6 1 2.6 2.4S71.6 87 70 87s-2.6-1-2.6-2.6S68.4 82 70 82Z" />
+                <path class="ln-cap-top" d="M70 88c10 5 17 12.5 20 21H50c3-8.5 10-16 20-21Z" />
+                <path class="ln-cap-sheen" d="M70 88c-5.5 2.8-10 6.8-13 11.4 3.6-2.6 8-4.4 13-5.2Z" />
+                <rect class="ln-brass" x="46" y="109" width="48" height="7" rx="3" />
+
+                <!-- the body: glass held between two brass rings, four uprights -->
+                <path class="ln-frame" d="M48 116h44l6 84a8 8 0 0 1-8 9H50a8 8 0 0 1-8-9Z" />
+                <path class="ln-glass" d="M52 120h36l5 76a5 5 0 0 1-5 5.5H52a5 5 0 0 1-5-5.5Z" />
+                <g class="ln-rib">
+                  <path d="M49 118 54 202" />
+                  <path d="M91 118 86 202" />
+                  <path d="M63 118v84" />
+                  <path d="M77 118v84" />
+                </g>
+                <path class="ln-sheen" d="M56 123h7l-2.5 72h-7Z" />
+
+                <!-- the flame: small, sitting on its burner, inside a lit volume -->
+                <ellipse class="ln-core" cx="70" cy="168" rx="26" ry="38" />
+                <path class="ln-flame" d="M70 146c4.6 7.2 7 11.4 7 15.4a7 7 0 0 1-14 0c0-4 2.4-8.2 7-15.4Z" />
+                <path class="ln-flame-inner" d="M70 155c2 3.2 3 5.2 3 7a3 3 0 0 1-6 0c0-1.8 1-3.8 3-7Z" />
+                <rect class="ln-burner" x="64" y="176" width="12" height="4.5" rx="1.6" />
+
+                <!-- base: brass ring, a perforated band, splayed foot, drop finial -->
+                <rect class="ln-brass" x="42" y="203" width="56" height="8" rx="3" />
+                <path class="ln-cap" d="M46 211h48l-7 15H53Z" />
+                <g class="ln-perf">
+                  <path d="M58 214.5 61.5 218 58 221.5 54.5 218Z" />
+                  <path d="M70 214.5 73.5 218 70 221.5 66.5 218Z" />
+                  <path d="M82 214.5 85.5 218 82 221.5 78.5 218Z" />
+                </g>
+                <rect class="ln-brass" x="56" y="226" width="28" height="5" rx="2" />
+                <path class="ln-brass-fill" d="M66 231h8l-4 13Z" />
+                <circle class="ln-brass-fill" cx="70" cy="247" r="3.1" />
+              </g>
+            </svg>
+          </button>
+        </div>
+        <!-- lantern:end -->
         <div class="hero-wrap">
-          <div class="hero-night" aria-hidden="true"></div>
           <section class="hero">
             <div class="hero-copy">
               <p class="wordmark-ar" lang="ar">زُلْفَى</p>
@@ -108,52 +223,58 @@
               <p class="tagline">Gebedstijden, de Koran, adhkar en de qibla, berekend op uw eigen telefoon en grotendeels offline.</p>
               <div class="hero-actions">
                 <a class="btn primary" href="mailto:moner.intelligence@gmail.com?subject=ZULFAA">Laat het me weten bij de lancering</a>
-                <a class="btn" href="#more-title">Bekijk de app van binnen</a>
+                <a class="btn" href="#showcase-title">Bekijk de app van binnen</a>
               </div>
               <p class="hero-trust">Geen advertenties. Geen analytics. Geen trackingcode.</p>
             </div>
             <div class="hero-stage">
-              <div class="phone" data-theme="light">
-                <div class="phone-screen">
-                  <img
-                    class="screen-light"
-                    src="../assets/hero/home-light-600.webp"
-                    srcset="../assets/hero/home-light-600.webp 600w, ../assets/hero/home-light-900.webp 900w"
-                    sizes="(max-width: 56.25rem) 74vw, 17rem"
-                    alt="Het startscherm van ZULFAA: de begroeting, het aftellen naar het volgende gebed, de dagelijkse uitdaging en snelle toegang."
-                    width="945"
-                    height="1928"
-                  />
-                  <img
-                    class="screen-dark"
-                    src="../assets/hero/home-dark-600.webp"
-                    srcset="../assets/hero/home-dark-600.webp 600w, ../assets/hero/home-dark-900.webp 900w"
-                    sizes="(max-width: 56.25rem) 74vw, 17rem"
-                    alt=""
-                    aria-hidden="true"
-                    width="945"
-                    height="1928"
-                  />
-                  <span class="lid lid-top" aria-hidden="true"></span>
-                  <span class="lid lid-bottom" aria-hidden="true"></span>
-                </div>
+              <div
+                class="phone3d"
+                role="img"
+                aria-label="Het startscherm van ZULFAA: de begroeting, het aftellen naar het volgende gebed, de dagelijkse uitdaging en snelle toegang."
+                data-theme="light"
+                data-stage="loading"
+                data-model="../assets/hero3d/zulfaa-phone.glb"
+                data-screen-light="../assets/hero3d/screen-nl-light.webp"
+                data-screen-dark="../assets/hero3d/screen-nl-dark.webp"
+              >
                 <img
-                  class="phone-frame"
-                  src="../assets/hero/frame-600.webp"
-                  srcset="../assets/hero/frame-600.webp 600w, ../assets/hero/frame-900.webp 900w"
-                  sizes="(max-width: 56.25rem) 76vw, 17.5rem"
+                  class="phone3d-still still-light"
+                  src="../assets/hero3d/still-nl-light-704.webp"
+                  srcset="../assets/hero3d/still-nl-light-352.webp 352w, ../assets/hero3d/still-nl-light-704.webp 704w, ../assets/hero3d/still-nl-light-1056.webp 1056w"
+                  sizes="(max-width: 56.25rem) min(18rem, 76vw), 22rem"
                   alt=""
-                  aria-hidden="true"
-                  width="941"
-                  height="1672"
+                  width="704"
+                  height="1408"
+                  decoding="async"
+                  fetchpriority="high"
                 />
+                <img
+                  class="phone3d-still still-dark"
+                  src="../assets/hero3d/still-nl-dark-704.webp"
+                  srcset="../assets/hero3d/still-nl-dark-352.webp 352w, ../assets/hero3d/still-nl-dark-704.webp 704w, ../assets/hero3d/still-nl-dark-1056.webp 1056w"
+                  sizes="(max-width: 56.25rem) min(18rem, 76vw), 22rem"
+                  alt=""
+                  width="704"
+                  height="1408"
+                  decoding="async"
+                />
+                <p class="drag-hint" aria-hidden="true" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 8 3 12l4 4M17 8l4 4-4 4M3 12h18"/></svg><span>Sleep om de telefoon te draaien</span></p>
               </div>
-              <button class="theme-demo" type="button" aria-pressed="false">
-                <span class="knob" aria-hidden="true"></span>
-                <span class="vh">Donker thema</span>
-                <span class="label-day" aria-hidden="true">Dag</span>
-                <span class="label-night" aria-hidden="true">Nacht</span>
-              </button>
+              <div class="hero-controls">
+                <button class="theme-demo" type="button" aria-pressed="false">
+                  <span class="knob" aria-hidden="true"></span>
+                  <span class="vh">Donker thema</span>
+                  <span class="label-day" aria-hidden="true">Dag</span>
+                  <span class="label-night" aria-hidden="true">Nacht</span>
+                </button>
+                <button class="motion-toggle" type="button" aria-pressed="false" title="Beweging van de telefoon pauzeren" hidden>
+                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.2"/></svg>
+                  <svg class="icon-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4a1 1 0 0 0 0-1.8l-10-6.4C8.9 4.3 8 4.8 8 5.6Z"/></svg>
+                  <span class="vh">Beweging van de telefoon pauzeren</span>
+                </button>
+              </div>
+              <p class="vh" aria-live="polite" data-hero3d-status data-dark="Donker thema weergegeven" data-light="Licht thema weergegeven"></p>
             </div>
           </section>
         </div>
@@ -162,56 +283,149 @@
 
         <p class="lede">ZULFAA is een islamitische app die nauwkeurige gebedstijden, de Koran, adhkar en doe'a's en de qiblarichting samenbrengt in één rustige, elegante ervaring. De app werkt eerst op uw apparaat, en het meeste werkt offline.</p>
 
-        <section class="band" aria-labelledby="features">
-          <h2 class="section-title" id="features">Wat ZULFAA biedt</h2>
-          <p class="section-note">Alles waar een moslim de dag door naar grijpt, op één rustige plek.</p>
-          <div class="grid">
-            <article class="card">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg></span>
-              <h3>Gebedstijden</h3>
-              <p>Op uw apparaat berekend uit uw locatie, uw berekeningsmethode, madhhab en elke handmatige aanpassing die u maakt.</p>
-            </article>
-
-            <article class="card">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5Z" /><path d="M19 18v3H6.5A2.5 2.5 0 0 1 4 18.5" /></svg></span>
-              <h3>De Nobele Koran</h3>
-              <p>De volledige Uthmani-tekst met een Engelse vertaling, meegeleverd met de app, plus bladwijzers, opgeslagen verzen en uw leesvoortgang.</p>
-            </article>
-
-            <article class="card">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-7.5-10A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 7.5 3c0 5.4-7.5 10-7.5 10Z" /></svg></span>
-              <h3>Adhkar &amp; doe'a's</h3>
-              <p>Ochtend- en avond-adhkar en een doe'a-verzameling met vertaling en audio, allemaal offline beschikbaar.</p>
-            </article>
-
-            <article class="card">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" /><path d="M15.5 8.5 13.6 13.6 8.5 15.5l1.9-5.1Z" /></svg></span>
-              <h3>Qiblarichting</h3>
-              <p>De richting en afstand tot de Ka'bah, op uw apparaat berekend, met optionele live tracking en een kompas.</p>
-            </article>
-
-            <article class="card">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 6-2.5 7-2.5 7h17S18 14 18 8Z" /><path d="M10.5 20a2 2 0 0 0 3 0" /></svg></span>
-              <h3>Herinneringen</h3>
-              <p>Lokale herinneringen voor de vijf gebeden, ochtend- en avond-adhkar, uw Koran-wird en islamitische gelegenheden. Er wordt niets vanaf een server gestuurd.</p>
-            </article>
-
-            <article class="card gold">
-              <span class="glyph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4h8v4a4 4 0 0 1-8 0Z" /><path d="M16 5h3v2a3 3 0 0 1-3 3M8 5H5v2a3 3 0 0 0 3 3" /><path d="M12 12v4M9 20h6" /></svg></span>
-              <h3>Dagelijkse uitdaging</h3>
-              <p>Een optionele dagelijkse kennisvraag, met tokens en een Erelijst. Tokens zijn alleen een score binnen de app — ze hebben geen geldwaarde en kunnen niet worden gekocht of verkocht.</p>
-            </article>
-
+        <!-- quick-access:start -->
+        <section class="qa" aria-labelledby="features" data-qa>
+          <div class="qa-head">
+            <h2 class="qa-title" id="features">Eén tik vanaf het startscherm</h2>
+            <p class="qa-note">Op het startscherm van ZULFAA staan acht snelkoppelingen. Kies er een en zie wat die opent.</p>
           </div>
+          <div class="qa-body">
+            <div class="qa-dial-col">
+              <div class="qa-dial-box">
+                <div class="qa-dial">
+                  <svg class="qa-face" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle class="qa-bz" cx="50" cy="50" r="49"/><circle class="qa-bz2" cx="50" cy="50" r="46.2"/><g class="qa-tk"><line x1="54.09" y1="3.28" x2="54.22" y2="1.78"/><line x1="58.14" y1="3.81" x2="58.40" y2="2.34"/><line x1="62.14" y1="4.70" x2="62.53" y2="3.25"/><line x1="66.04" y1="5.93" x2="66.55" y2="4.52"/><line x1="69.82" y1="7.49" x2="70.45" y2="6.13"/><line x1="73.45" y1="9.38" x2="74.20" y2="8.08"/><line x1="76.90" y1="11.58" x2="77.76" y2="10.35"/><line x1="80.15" y1="14.07" x2="81.11" y2="12.92"/><line x1="85.93" y1="19.85" x2="87.08" y2="18.89"/><line x1="88.42" y1="23.10" x2="89.65" y2="22.24"/><line x1="90.62" y1="26.55" x2="91.92" y2="25.80"/><line x1="92.51" y1="30.18" x2="93.87" y2="29.55"/><line x1="94.07" y1="33.96" x2="95.48" y2="33.45"/><line x1="95.30" y1="37.86" x2="96.75" y2="37.47"/><line x1="96.19" y1="41.86" x2="97.66" y2="41.60"/><line x1="96.72" y1="45.91" x2="98.22" y2="45.78"/><line x1="96.72" y1="54.09" x2="98.22" y2="54.22"/><line x1="96.19" y1="58.14" x2="97.66" y2="58.40"/><line x1="95.30" y1="62.14" x2="96.75" y2="62.53"/><line x1="94.07" y1="66.04" x2="95.48" y2="66.55"/><line x1="92.51" y1="69.82" x2="93.87" y2="70.45"/><line x1="90.62" y1="73.45" x2="91.92" y2="74.20"/><line x1="88.42" y1="76.90" x2="89.65" y2="77.76"/><line x1="85.93" y1="80.15" x2="87.08" y2="81.11"/><line x1="80.15" y1="85.93" x2="81.11" y2="87.08"/><line x1="76.90" y1="88.42" x2="77.76" y2="89.65"/><line x1="73.45" y1="90.62" x2="74.20" y2="91.92"/><line x1="69.82" y1="92.51" x2="70.45" y2="93.87"/><line x1="66.04" y1="94.07" x2="66.55" y2="95.48"/><line x1="62.14" y1="95.30" x2="62.53" y2="96.75"/><line x1="58.14" y1="96.19" x2="58.40" y2="97.66"/><line x1="54.09" y1="96.72" x2="54.22" y2="98.22"/><line x1="45.91" y1="96.72" x2="45.78" y2="98.22"/><line x1="41.86" y1="96.19" x2="41.60" y2="97.66"/><line x1="37.86" y1="95.30" x2="37.47" y2="96.75"/><line x1="33.96" y1="94.07" x2="33.45" y2="95.48"/><line x1="30.18" y1="92.51" x2="29.55" y2="93.87"/><line x1="26.55" y1="90.62" x2="25.80" y2="91.92"/><line x1="23.10" y1="88.42" x2="22.24" y2="89.65"/><line x1="19.85" y1="85.93" x2="18.89" y2="87.08"/><line x1="14.07" y1="80.15" x2="12.92" y2="81.11"/><line x1="11.58" y1="76.90" x2="10.35" y2="77.76"/><line x1="9.38" y1="73.45" x2="8.08" y2="74.20"/><line x1="7.49" y1="69.82" x2="6.13" y2="70.45"/><line x1="5.93" y1="66.04" x2="4.52" y2="66.55"/><line x1="4.70" y1="62.14" x2="3.25" y2="62.53"/><line x1="3.81" y1="58.14" x2="2.34" y2="58.40"/><line x1="3.28" y1="54.09" x2="1.78" y2="54.22"/><line x1="3.28" y1="45.91" x2="1.78" y2="45.78"/><line x1="3.81" y1="41.86" x2="2.34" y2="41.60"/><line x1="4.70" y1="37.86" x2="3.25" y2="37.47"/><line x1="5.93" y1="33.96" x2="4.52" y2="33.45"/><line x1="7.49" y1="30.18" x2="6.13" y2="29.55"/><line x1="9.38" y1="26.55" x2="8.08" y2="25.80"/><line x1="11.58" y1="23.10" x2="10.35" y2="22.24"/><line x1="14.07" y1="19.85" x2="12.92" y2="18.89"/><line x1="19.85" y1="14.07" x2="18.89" y2="12.92"/><line x1="23.10" y1="11.58" x2="22.24" y2="10.35"/><line x1="26.55" y1="9.38" x2="25.80" y2="8.08"/><line x1="30.18" y1="7.49" x2="29.55" y2="6.13"/><line x1="33.96" y1="5.93" x2="33.45" y2="4.52"/><line x1="37.86" y1="4.70" x2="37.47" y2="3.25"/><line x1="41.86" y1="3.81" x2="41.60" y2="2.34"/><line x1="45.91" y1="3.28" x2="45.78" y2="1.78"/></g><g class="qa-tk8"><line x1="82.67" y1="17.33" x2="84.65" y2="15.35"/><line x1="96.20" y1="50.00" x2="99.00" y2="50.00"/><line x1="82.67" y1="82.67" x2="84.65" y2="84.65"/><line x1="50.00" y1="96.20" x2="50.00" y2="99.00"/><line x1="17.33" y1="82.67" x2="15.35" y2="84.65"/><line x1="3.80" y1="50.00" x2="1.00" y2="50.00"/><line x1="17.33" y1="17.33" x2="15.35" y2="15.35"/></g><path class="qa-arc" d="M42.33 1.60A49 49 0 0 1 57.67 1.60"/><circle class="qa-r2" cx="50" cy="50" r="19.6"/><circle class="qa-r1" cx="50" cy="50" r="18.2"/><g class="qa-dv"><line x1="50.00" y1="31.80" x2="50.00" y2="30.40"/><line x1="62.87" y1="37.13" x2="63.86" y2="36.14"/><line x1="68.20" y1="50.00" x2="69.60" y2="50.00"/><line x1="62.87" y1="62.87" x2="63.86" y2="63.86"/><line x1="50.00" y1="68.20" x2="50.00" y2="69.60"/><line x1="37.13" y1="62.87" x2="36.14" y2="63.86"/><line x1="31.80" y1="50.00" x2="30.40" y2="50.00"/><line x1="37.13" y1="37.13" x2="36.14" y2="36.14"/></g><path class="qa-mk" d="M50 4.3 48.4 0.8H51.6Z"/></svg>
+                  <div class="qa-center" aria-hidden="true"><img class="qa-big" src="../assets/quick-access/quran-256.webp" srcset="../assets/quick-access/quran-256.webp 256w, ../assets/quick-access/quran-512.webp 512w" sizes="(max-width: 56rem) 6.2rem, 7.6rem" width="512" height="512" alt="" decoding="async" data-kind="raster" /></div>
+                  <div class="qa-ring" data-label="Snelkoppelingen in Snelle toegang">
+                  <a class="qa-node is-selected" href="#qa-quran" id="qa-tab-quran" style="--a: 0deg" data-kind="raster" data-big="../assets/quick-access/quran-256.webp" data-big-srcset="../assets/quick-access/quran-256.webp 256w, ../assets/quick-access/quran-512.webp 512w">
+                    <img src="../assets/quick-access/quran-128.webp" srcset="../assets/quick-access/quran-128.webp 128w, ../assets/quick-access/quran-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">Koran</span>
+                  </a>
+                  <a class="qa-node" href="#qa-adhkar" id="qa-tab-adhkar" style="--a: 45deg" data-kind="raster" data-big="../assets/quick-access/adhkar-256.webp" data-big-srcset="../assets/quick-access/adhkar-256.webp 256w, ../assets/quick-access/adhkar-512.webp 512w">
+                    <img src="../assets/quick-access/adhkar-128.webp" srcset="../assets/quick-access/adhkar-128.webp 128w, ../assets/quick-access/adhkar-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">Adhkar</span>
+                  </a>
+                  <a class="qa-node" href="#qa-dua" id="qa-tab-dua" style="--a: 90deg" data-kind="dua" data-big="../assets/quick-access/dua-256.webp" data-big-srcset="../assets/quick-access/dua-256.webp 256w">
+                    <img src="../assets/quick-access/dua-128.webp" srcset="../assets/quick-access/dua-128.webp 128w, ../assets/quick-access/dua-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">Doe’a</span>
+                  </a>
+                  <a class="qa-node" href="#qa-qibla" id="qa-tab-qibla" style="--a: 135deg" data-kind="raster" data-big="../assets/quick-access/qibla-256.webp" data-big-srcset="../assets/quick-access/qibla-256.webp 256w, ../assets/quick-access/qibla-512.webp 512w">
+                    <img src="../assets/quick-access/qibla-128.webp" srcset="../assets/quick-access/qibla-128.webp 128w, ../assets/quick-access/qibla-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">Qibla</span>
+                  </a>
+                  <a class="qa-node" href="#qa-ramadan" id="qa-tab-ramadan" style="--a: 180deg" data-kind="raster" data-big="../assets/quick-access/ramadan-256.webp" data-big-srcset="../assets/quick-access/ramadan-256.webp 256w, ../assets/quick-access/ramadan-512.webp 512w">
+                    <img src="../assets/quick-access/ramadan-128.webp" srcset="../assets/quick-access/ramadan-128.webp 128w, ../assets/quick-access/ramadan-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">Ramadan</span><span class="vh"> (komt in een volgende update)</span>
+                  </a>
+                  <a class="qa-node" href="#qa-umrah" id="qa-tab-umrah" style="--a: 225deg" data-kind="raster" data-big="../assets/quick-access/umrah-256.webp" data-big-srcset="../assets/quick-access/umrah-256.webp 256w, ../assets/quick-access/umrah-512.webp 512w">
+                    <img src="../assets/quick-access/umrah-128.webp" srcset="../assets/quick-access/umrah-128.webp 128w, ../assets/quick-access/umrah-256.webp 256w" sizes="3.5rem" width="256" height="256" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">Umrah</span><span class="vh"> (komt in een volgende update)</span>
+                  </a>
+                  <a class="qa-node" href="#qa-favorites" id="qa-tab-favorites" style="--a: 270deg" data-kind="vector" data-big="../assets/quick-access/favorites.svg" data-big-srcset="">
+                    <img src="../assets/quick-access/favorites.svg" width="48" height="48" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">Favorieten</span>
+                  </a>
+                  <a class="qa-node" href="#qa-saved" id="qa-tab-saved" style="--a: 315deg" data-kind="vector" data-big="../assets/quick-access/saved.svg" data-big-srcset="">
+                    <img src="../assets/quick-access/saved.svg" width="48" height="48" alt="" loading="lazy" decoding="async" />
+                    <span class="qa-label">Opgeslagen</span>
+                  </a>
+                  </div>
+                </div>
+              </div>
+              <div class="qa-tour" hidden>
+                <button class="qa-play" type="button" aria-pressed="false" data-play="Rondleiding starten" data-pause="Rondleiding pauzeren"><svg class="qa-i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 5.6v12.8c0 .8.9 1.3 1.6.9l10-6.4a1 1 0 0 0 0-1.8l-10-6.4C8.9 4.3 8 4.8 8 5.6Z"/></svg><svg class="qa-i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6.5" y="5" width="3.6" height="14" rx="1.2"/><rect x="13.9" y="5" width="3.6" height="14" rx="1.2"/></svg><span class="qa-play-label">Rondleiding starten</span></button>
+              </div>
+            </div>
+            <div class="qa-panels">
+            <article class="qa-panel is-active" id="qa-quran">
+              <h3>De Nobele Koran</h3>
+              <p class="qa-line">Lees de volledige Uthmani-tekst met een Engelse vertaling, gewoon in de app.</p>
+              <ul class="qa-facts">
+                <li>Bladwijzers en uw leesvoortgang</li>
+                <li>Recitatie door een reciteur naar keuze</li>
+                <li>Tafsir laadt wanneer u die opent</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">Bekijk de app-galerij hieronder</a>
+            </article>
+            <article class="qa-panel" id="qa-adhkar">
+              <h3>Adhkar</h3>
+              <p class="qa-line">Ochtend- en avond-adhkar uit Hisn al-Muslim, met een dagelijkse wird om bij te houden.</p>
+              <ul class="qa-facts">
+                <li>Ook voor slapen, ontwaken, na het gebed, thuis en op reis</li>
+                <li>Uw voortgang blijft op uw apparaat</li>
+                <li>Werkt offline</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">Bekijk de app-galerij hieronder</a>
+            </article>
+            <article class="qa-panel" id="qa-dua">
+              <h3>Doe’a</h3>
+              <p class="qa-line">Doe’a’s geordend per thema, met vertaling en audio.</p>
+              <ul class="qa-facts">
+                <li>Uit de Koran en de Soenna, en voor levensonderhoud, genezing, zorgen, reizen, gezin en vergeving</li>
+                <li>Werkt offline</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">Bekijk de app-galerij hieronder</a>
+            </article>
+            <article class="qa-panel" id="qa-qibla">
+              <h3>Qibla</h3>
+              <p class="qa-line">De richting van de Ka’bah en uw afstand ertoe, berekend op uw apparaat.</p>
+              <ul class="qa-facts">
+                <li>Een kompas dat de stand van uw telefoon volgt</li>
+                <li>Optioneel met live locatie</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">Bekijk de app-galerij hieronder</a>
+            </article>
+            <article class="qa-panel" id="qa-ramadan">
+              <p class="qa-soon">Komt in een volgende update, niet in de eerste versie.</p>
+              <h3>Ramadanplanner</h3>
+              <p class="qa-line">Elke ramadandag in één oogopslag: suhoor en iftar uit uw gebedstijden, een aftelling en vijf daden van aanbidding.</p>
+              <ul class="qa-facts">
+                <li>Een doe’a voor elke dag</li>
+                <li>Aftellen naar het Suikerfeest volgens de Hijri-kalender, als schatting</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">Bekijk de app-galerij hieronder</a>
+            </article>
+            <article class="qa-panel" id="qa-umrah">
+              <p class="qa-soon">Komt in een volgende update, niet in de eerste versie.</p>
+              <h3>Umrah-sparen</h3>
+              <p class="qa-line">Stel een spaardoel voor de umrah en zie wat u opzij hebt gezet, wat er nog ontbreekt en hoeveel dagen er resten.</p>
+              <ul class="qa-facts">
+                <li>Alleen berekend uit de bedragen die u invoert</li>
+                <li>Beheert geen geld en is aan geen enkele bank gekoppeld</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">Bekijk de app-galerij hieronder</a>
+            </article>
+            <article class="qa-panel" id="qa-favorites">
+              <h3>Favorieten</h3>
+              <p class="qa-line">Markeer de verzen, doe’a’s en adhkar die u dierbaar zijn met een hart, en vind ze bij elkaar.</p>
+              <ul class="qa-facts">
+                <li>Tik op het hart bij een vers, doe’a of dhikr</li>
+                <li>Los van wat u met een bladwijzer opslaat</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">Bekijk de app-galerij hieronder</a>
+            </article>
+            <article class="qa-panel" id="qa-saved">
+              <h3>Opgeslagen</h3>
+              <p class="qa-line">Sla een vers, doe’a of dhikr op om er later naar terug te gaan. Alles wat u opslaat staat op één pagina.</p>
+              <ul class="qa-facts">
+                <li>Tik op de bladwijzer bij een vers, doe’a of dhikr</li>
+                <li>Filter op verzen, doe’a’s of adhkar</li>
+              </ul>
+              <a class="qa-more" href="#showcase-title">Bekijk de app-galerij hieronder</a>
+            </article>
+            </div>
+          </div>
+          <p class="qa-around">Eromheen op het startscherm: gebedstijden en herinneringen, berekend op uw telefoon, en een optionele dagelijkse uitdaging.</p>
         </section>
+        <!-- quick-access:end -->
 
       </div>
 
+      <!-- showcase:start -->
       <section class="showcase" aria-labelledby="showcase-title">
         <div class="shell">
           <p class="showcase-eyebrow">IN DE APP</p>
           <h2 id="showcase-title">Een rustige plek om naar terug te keren</h2>
-          <p class="showcase-note">Twintig beelden uit ZULFAA op Android — gebed, de Koran, adhkar, de qibla en de dagelijkse uitdaging, in een licht en een donker thema.</p>
+          <p class="showcase-note">ZULFAA op Android — de Koran, de qibla, adhkar, de dagelijkse uitdaging en meer, in het thema dat u voor deze site kiest.</p>
         </div>
 
         <div class="carousel" data-carousel>
@@ -233,19 +447,24 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="1 / 20: Start"
+            aria-label="1 / 16: Start"
             data-cap="Start"
+            data-screen="home"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/home.webp"
-                srcset="../assets/showcase/home-640.webp 640w, ../assets/showcase/home.webp 941w"
+                src="../assets/showcase/home-nl-light.webp"
+                srcset="../assets/showcase/home-nl-light-640.webp 640w, ../assets/showcase/home-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="Schermafbeelding uit de ZULFAA-app: Start"
-                loading="eager"
-                decoding="async" fetchpriority="high"
+                loading="lazy"
+                decoding="async"
+                data-src-light="../assets/showcase/home-nl-light.webp"
+                data-srcset-light="../assets/showcase/home-nl-light-640.webp 640w, ../assets/showcase/home-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/home-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/home-nl-dark-640.webp 640w, ../assets/showcase/home-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -261,19 +480,24 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="2 / 20: Gebedstijden"
+            aria-label="2 / 16: Gebedstijden"
             data-cap="Gebedstijden"
+            data-screen="prayer-times"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/prayer-times.webp"
-                srcset="../assets/showcase/prayer-times-640.webp 640w, ../assets/showcase/prayer-times.webp 941w"
+                src="../assets/showcase/prayer-times-nl-light.webp"
+                srcset="../assets/showcase/prayer-times-nl-light-640.webp 640w, ../assets/showcase/prayer-times-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="Schermafbeelding uit de ZULFAA-app: Gebedstijden"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/prayer-times-nl-light.webp"
+                data-srcset-light="../assets/showcase/prayer-times-nl-light-640.webp 640w, ../assets/showcase/prayer-times-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/prayer-times-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/prayer-times-nl-dark-640.webp 640w, ../assets/showcase/prayer-times-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -289,52 +513,29 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="3 / 20: Qibla"
-            data-cap="Qibla"
+            aria-label="3 / 16: De Nobele Koran"
+            data-cap="De Nobele Koran"
+            data-screen="quran-surahs"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/qibla.webp"
-                srcset="../assets/showcase/qibla-640.webp 640w, ../assets/showcase/qibla.webp 941w"
+                src="../assets/showcase/quran-surahs-nl-light.webp"
+                srcset="../assets/showcase/quran-surahs-nl-light-640.webp 640w, ../assets/showcase/quran-surahs-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: Qibla"
-                loading="eager"
+                width="945"
+                height="2055"
+                alt="Schermafbeelding uit de ZULFAA-app: De Nobele Koran"
+                loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/quran-surahs-nl-light.webp"
+                data-srcset-light="../assets/showcase/quran-surahs-nl-light-640.webp 640w, ../assets/showcase/quran-surahs-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/quran-surahs-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/quran-surahs-nl-dark-640.webp 640w, ../assets/showcase/quran-surahs-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="2"
-                aria-label="Open de schermafbeelding Qibla op volledige grootte"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
-            </div>
-            <p class="shot-cap">Qibla</p>
-          </li>
-          <li
-            class="shot"
-            style="--k: 1.0000"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="4 / 20: De Nobele Koran"
-            data-cap="De Nobele Koran"
-          >
-            <div class="shot-frame">
-              <img
-                src="../assets/showcase/quran.webp"
-                srcset="../assets/showcase/quran-640.webp 640w, ../assets/showcase/quran.webp 941w"
-                sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: De Nobele Koran"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                class="shot-zoom"
-                type="button"
-                data-zoom="3"
                 aria-label="Open de schermafbeelding De Nobele Koran op volledige grootte"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
@@ -345,81 +546,129 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="5 / 20: Lezen en luisteren"
+            aria-label="4 / 16: Lezen en luisteren"
             data-cap="Lezen en luisteren"
+            data-screen="quran-reader-continue"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/surah-reader.webp"
-                srcset="../assets/showcase/surah-reader-640.webp 640w, ../assets/showcase/surah-reader.webp 941w"
+                src="../assets/showcase/quran-reader-continue-nl-light.webp"
+                srcset="../assets/showcase/quran-reader-continue-nl-light-640.webp 640w, ../assets/showcase/quran-reader-continue-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="Schermafbeelding uit de ZULFAA-app: Lezen en luisteren"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/quran-reader-continue-nl-light.webp"
+                data-srcset-light="../assets/showcase/quran-reader-continue-nl-light-640.webp 640w, ../assets/showcase/quran-reader-continue-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/quran-reader-continue-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/quran-reader-continue-nl-dark-640.webp 640w, ../assets/showcase/quran-reader-continue-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
-                data-zoom="4"
+                data-zoom="3"
                 aria-label="Open de schermafbeelding Lezen en luisteren op volledige grootte"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
             <p class="shot-cap">Lezen en luisteren</p>
           </li>
           <li
-            class="shot shot--device"
+            class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="6 / 20: Reciteurs"
-            data-cap="Reciteurs"
+            aria-label="5 / 16: Versopties"
+            data-cap="Versopties"
+            data-screen="quran-verse-actions"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/reciters.webp"
-                srcset="../assets/showcase/reciters-640.webp 640w, ../assets/showcase/reciters.webp 941w"
+                src="../assets/showcase/quran-verse-actions-nl-light.webp"
+                srcset="../assets/showcase/quran-verse-actions-nl-light-640.webp 640w, ../assets/showcase/quran-verse-actions-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: Reciteurs"
+                width="945"
+                height="2055"
+                alt="Schermafbeelding uit de ZULFAA-app: Versopties"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/quran-verse-actions-nl-light.webp"
+                data-srcset-light="../assets/showcase/quran-verse-actions-nl-light-640.webp 640w, ../assets/showcase/quran-verse-actions-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/quran-verse-actions-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/quran-verse-actions-nl-dark-640.webp 640w, ../assets/showcase/quran-verse-actions-nl-dark.webp 945w"
+              />
+              <button
+                class="shot-zoom"
+                type="button"
+                data-zoom="4"
+                aria-label="Open de schermafbeelding Versopties op volledige grootte"
+              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
+            </div>
+            <p class="shot-cap">Versopties</p>
+          </li>
+          <li
+            class="shot"
+            style="--k: 1.0034"
+            role="group"
+            aria-roledescription="slide"
+            aria-label="6 / 16: Qibla"
+            data-cap="Qibla"
+            data-screen="qibla"
+          >
+            <div class="shot-frame">
+              <img
+                src="../assets/showcase/qibla-nl-light.webp"
+                srcset="../assets/showcase/qibla-nl-light-640.webp 640w, ../assets/showcase/qibla-nl-light.webp 945w"
+                sizes="(max-width: 457px) 56vw, 16.1rem"
+                width="945"
+                height="2048"
+                alt="Schermafbeelding uit de ZULFAA-app: Qibla"
+                loading="lazy"
+                decoding="async"
+                data-src-light="../assets/showcase/qibla-nl-light.webp"
+                data-srcset-light="../assets/showcase/qibla-nl-light-640.webp 640w, ../assets/showcase/qibla-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/qibla-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/qibla-nl-dark-640.webp 640w, ../assets/showcase/qibla-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="5"
-                aria-label="Open de schermafbeelding Reciteurs op volledige grootte"
+                aria-label="Open de schermafbeelding Qibla op volledige grootte"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
-            <p class="shot-cap">Reciteurs</p>
+            <p class="shot-cap">Qibla</p>
           </li>
           <li
-            class="shot shot--device"
+            class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="7 / 20: Adhkar en doe'a"
-            data-cap="Adhkar en doe'a"
+            aria-label="7 / 16: Adhkar en doe'a"
+            data-cap="Adhkar en doe&#x27;a"
+            data-screen="adhkar-dua"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/adhkar-dua.webp"
-                srcset="../assets/showcase/adhkar-dua-640.webp 640w, ../assets/showcase/adhkar-dua.webp 941w"
+                src="../assets/showcase/adhkar-dua-nl-light.webp"
+                srcset="../assets/showcase/adhkar-dua-nl-light-640.webp 640w, ../assets/showcase/adhkar-dua-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: Adhkar en doe'a"
+                width="945"
+                height="2055"
+                alt="Schermafbeelding uit de ZULFAA-app: Adhkar en doe&#x27;a"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/adhkar-dua-nl-light.webp"
+                data-srcset-light="../assets/showcase/adhkar-dua-nl-light-640.webp 640w, ../assets/showcase/adhkar-dua-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/adhkar-dua-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/adhkar-dua-nl-dark-640.webp 640w, ../assets/showcase/adhkar-dua-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="6"
-                aria-label="Open de schermafbeelding Adhkar en doe'a op volledige grootte"
+                aria-label="Open de schermafbeelding Adhkar en doe&#x27;a op volledige grootte"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
             <p class="shot-cap">Adhkar en doe'a</p>
@@ -429,19 +678,24 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="8 / 20: Dagelijkse uitdaging"
+            aria-label="8 / 16: Dagelijkse uitdaging"
             data-cap="Dagelijkse uitdaging"
+            data-screen="daily-challenge"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/daily-challenge.webp"
-                srcset="../assets/showcase/daily-challenge-640.webp 640w, ../assets/showcase/daily-challenge.webp 941w"
+                src="../assets/showcase/daily-challenge-nl-light.webp"
+                srcset="../assets/showcase/daily-challenge-nl-light-640.webp 640w, ../assets/showcase/daily-challenge-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="Schermafbeelding uit de ZULFAA-app: Dagelijkse uitdaging"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/daily-challenge-nl-light.webp"
+                data-srcset-light="../assets/showcase/daily-challenge-nl-light-640.webp 640w, ../assets/showcase/daily-challenge-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/daily-challenge-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/daily-challenge-nl-dark-640.webp 640w, ../assets/showcase/daily-challenge-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -453,23 +707,28 @@
             <p class="shot-cap">Dagelijkse uitdaging</p>
           </li>
           <li
-            class="shot shot--device"
+            class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="9 / 20: Uitdagingsvragen"
+            aria-label="9 / 16: Uitdagingsvragen"
             data-cap="Uitdagingsvragen"
+            data-screen="daily-challenge-question"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/challenge-questions.webp"
-                srcset="../assets/showcase/challenge-questions-640.webp 640w, ../assets/showcase/challenge-questions.webp 941w"
+                src="../assets/showcase/daily-challenge-question-nl-light.webp"
+                srcset="../assets/showcase/daily-challenge-question-nl-light-640.webp 640w, ../assets/showcase/daily-challenge-question-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="Schermafbeelding uit de ZULFAA-app: Uitdagingsvragen"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/daily-challenge-question-nl-light.webp"
+                data-srcset-light="../assets/showcase/daily-challenge-question-nl-light-640.webp 640w, ../assets/showcase/daily-challenge-question-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/daily-challenge-question-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/daily-challenge-question-nl-dark-640.webp 640w, ../assets/showcase/daily-challenge-question-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -485,19 +744,24 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="10 / 20: Ramadanplanner"
+            aria-label="10 / 16: Ramadanplanner"
             data-cap="Ramadanplanner"
+            data-screen="ramadan-planner"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/ramadan-planner.webp"
-                srcset="../assets/showcase/ramadan-planner-640.webp 640w, ../assets/showcase/ramadan-planner.webp 941w"
+                src="../assets/showcase/ramadan-planner-nl-light.webp"
+                srcset="../assets/showcase/ramadan-planner-nl-light-640.webp 640w, ../assets/showcase/ramadan-planner-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="Schermafbeelding uit de ZULFAA-app: Ramadanplanner"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/ramadan-planner-nl-light.webp"
+                data-srcset-light="../assets/showcase/ramadan-planner-nl-light-640.webp 640w, ../assets/showcase/ramadan-planner-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/ramadan-planner-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/ramadan-planner-nl-dark-640.webp 640w, ../assets/showcase/ramadan-planner-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -513,19 +777,24 @@
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="11 / 20: Umrah-sparen"
+            aria-label="11 / 16: Umrah-sparen"
             data-cap="Umrah-sparen"
+            data-screen="umrah-savings"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/umrah-savings.webp"
-                srcset="../assets/showcase/umrah-savings-640.webp 640w, ../assets/showcase/umrah-savings.webp 941w"
+                src="../assets/showcase/umrah-savings-nl-light.webp"
+                srcset="../assets/showcase/umrah-savings-nl-light-640.webp 640w, ../assets/showcase/umrah-savings-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
+                width="945"
+                height="2055"
                 alt="Schermafbeelding uit de ZULFAA-app: Umrah-sparen"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/umrah-savings-nl-light.webp"
+                data-srcset-light="../assets/showcase/umrah-savings-nl-light-640.webp 640w, ../assets/showcase/umrah-savings-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/umrah-savings-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/umrah-savings-nl-dark-640.webp 640w, ../assets/showcase/umrah-savings-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
@@ -537,258 +806,172 @@
             <p class="shot-cap">Umrah-sparen</p>
           </li>
           <li
-            class="shot shot--device"
+            class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="12 / 20: Herinneringen"
-            data-cap="Herinneringen"
+            aria-label="12 / 16: Spaardoel"
+            data-cap="Spaardoel"
+            data-screen="umrah-savings-goal"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/notifications.webp"
-                srcset="../assets/showcase/notifications-640.webp 640w, ../assets/showcase/notifications.webp 941w"
+                src="../assets/showcase/umrah-savings-goal-nl-light.webp"
+                srcset="../assets/showcase/umrah-savings-goal-nl-light-640.webp 640w, ../assets/showcase/umrah-savings-goal-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: Herinneringen"
+                width="945"
+                height="2055"
+                alt="Schermafbeelding uit de ZULFAA-app: Spaardoel"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/umrah-savings-goal-nl-light.webp"
+                data-srcset-light="../assets/showcase/umrah-savings-goal-nl-light-640.webp 640w, ../assets/showcase/umrah-savings-goal-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/umrah-savings-goal-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/umrah-savings-goal-nl-dark-640.webp 640w, ../assets/showcase/umrah-savings-goal-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="11"
-                aria-label="Open de schermafbeelding Herinneringen op volledige grootte"
+                aria-label="Open de schermafbeelding Spaardoel op volledige grootte"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
-            <p class="shot-cap">Herinneringen</p>
+            <p class="shot-cap">Spaardoel</p>
           </li>
           <li
-            class="shot shot--device"
-            style="--k: 0.8884"
+            class="shot"
+            style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="13 / 20: Gebedsinstellingen"
-            data-cap="Gebedsinstellingen"
+            aria-label="13 / 16: Meldingen"
+            data-cap="Meldingen"
+            data-screen="notifications"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/prayer-settings.webp"
-                srcset="../assets/showcase/prayer-settings-640.webp 640w, ../assets/showcase/prayer-settings.webp 887w"
-                sizes="(max-width: 457px) 50vw, 14.2rem"
-                width="887"
-                height="1774"
-                alt="Schermafbeelding uit de ZULFAA-app: Gebedsinstellingen"
+                src="../assets/showcase/notifications-nl-light.webp"
+                srcset="../assets/showcase/notifications-nl-light-640.webp 640w, ../assets/showcase/notifications-nl-light.webp 945w"
+                sizes="(max-width: 457px) 56vw, 16.0rem"
+                width="945"
+                height="2055"
+                alt="Schermafbeelding uit de ZULFAA-app: Meldingen"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/notifications-nl-light.webp"
+                data-srcset-light="../assets/showcase/notifications-nl-light-640.webp 640w, ../assets/showcase/notifications-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/notifications-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/notifications-nl-dark-640.webp 640w, ../assets/showcase/notifications-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="12"
-                aria-label="Open de schermafbeelding Gebedsinstellingen op volledige grootte"
+                aria-label="Open de schermafbeelding Meldingen op volledige grootte"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
-            <p class="shot-cap">Gebedsinstellingen</p>
+            <p class="shot-cap">Meldingen</p>
           </li>
           <li
             class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="14 / 20: App-instellingen"
-            data-cap="App-instellingen"
+            aria-label="14 / 16: Uw persoonlijke ruimte"
+            data-cap="Uw persoonlijke ruimte"
+            data-screen="profile"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/app-settings.webp"
-                srcset="../assets/showcase/app-settings-640.webp 640w, ../assets/showcase/app-settings.webp 941w"
+                src="../assets/showcase/profile-nl-light.webp"
+                srcset="../assets/showcase/profile-nl-light-640.webp 640w, ../assets/showcase/profile-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: App-instellingen"
+                width="945"
+                height="2055"
+                alt="Schermafbeelding uit de ZULFAA-app: Uw persoonlijke ruimte"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/profile-nl-light.webp"
+                data-srcset-light="../assets/showcase/profile-nl-light-640.webp 640w, ../assets/showcase/profile-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/profile-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/profile-nl-dark-640.webp 640w, ../assets/showcase/profile-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="13"
-                aria-label="Open de schermafbeelding App-instellingen op volledige grootte"
+                aria-label="Open de schermafbeelding Uw persoonlijke ruimte op volledige grootte"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
-            <p class="shot-cap">App-instellingen</p>
+            <p class="shot-cap">Uw persoonlijke ruimte</p>
           </li>
           <li
             class="shot"
-            style="--k: 1.4220"
+            style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="15 / 20: Donker thema"
-            data-cap="Donker thema"
+            aria-label="15 / 16: Menu"
+            data-cap="Menu"
+            data-screen="menu"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/home-dark.webp"
-                srcset="../assets/showcase/home-dark-640.webp 640w, ../assets/showcase/home-dark.webp 1122w"
-                sizes="(max-width: 457px) 80vw, 22.8rem"
-                width="1122"
-                height="1402"
-                alt="Schermafbeelding uit de ZULFAA-app: Donker thema"
+                src="../assets/showcase/menu-nl-light.webp"
+                srcset="../assets/showcase/menu-nl-light-640.webp 640w, ../assets/showcase/menu-nl-light.webp 945w"
+                sizes="(max-width: 457px) 56vw, 16.0rem"
+                width="945"
+                height="2055"
+                alt="Schermafbeelding uit de ZULFAA-app: Menu"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/menu-nl-light.webp"
+                data-srcset-light="../assets/showcase/menu-nl-light-640.webp 640w, ../assets/showcase/menu-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/menu-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/menu-nl-dark-640.webp 640w, ../assets/showcase/menu-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="14"
-                aria-label="Open de schermafbeelding Donker thema op volledige grootte"
+                aria-label="Open de schermafbeelding Menu op volledige grootte"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
-            <p class="shot-cap">Donker thema</p>
+            <p class="shot-cap">Menu</p>
           </li>
           <li
-            class="shot shot--device"
+            class="shot"
             style="--k: 1.0000"
             role="group"
             aria-roledescription="slide"
-            aria-label="16 / 20: Uw ruimte"
-            data-cap="Uw ruimte"
+            aria-label="16 / 16: Hulp en support"
+            data-cap="Hulp en support"
+            data-screen="help-support"
           >
             <div class="shot-frame">
               <img
-                src="../assets/showcase/profile.webp"
-                srcset="../assets/showcase/profile-640.webp 640w, ../assets/showcase/profile.webp 941w"
+                src="../assets/showcase/help-support-nl-light.webp"
+                srcset="../assets/showcase/help-support-nl-light-640.webp 640w, ../assets/showcase/help-support-nl-light.webp 945w"
                 sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: Uw ruimte"
+                width="945"
+                height="2055"
+                alt="Schermafbeelding uit de ZULFAA-app: Hulp en support"
                 loading="lazy"
                 decoding="async"
+                data-src-light="../assets/showcase/help-support-nl-light.webp"
+                data-srcset-light="../assets/showcase/help-support-nl-light-640.webp 640w, ../assets/showcase/help-support-nl-light.webp 945w"
+                data-src-dark="../assets/showcase/help-support-nl-dark.webp"
+                data-srcset-dark="../assets/showcase/help-support-nl-dark-640.webp 640w, ../assets/showcase/help-support-nl-dark.webp 945w"
               />
               <button
                 class="shot-zoom"
                 type="button"
                 data-zoom="15"
-                aria-label="Open de schermafbeelding Uw ruimte op volledige grootte"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
-            </div>
-            <p class="shot-cap">Uw ruimte</p>
-          </li>
-          <li
-            class="shot"
-            style="--k: 1.0000"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="17 / 20: Navigatie"
-            data-cap="Navigatie"
-          >
-            <div class="shot-frame">
-              <img
-                src="../assets/showcase/menu.webp"
-                srcset="../assets/showcase/menu-640.webp 640w, ../assets/showcase/menu.webp 941w"
-                sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: Navigatie"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                class="shot-zoom"
-                type="button"
-                data-zoom="16"
-                aria-label="Open de schermafbeelding Navigatie op volledige grootte"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
-            </div>
-            <p class="shot-cap">Navigatie</p>
-          </li>
-          <li
-            class="shot shot--device"
-            style="--k: 1.0000"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="18 / 20: Hulp en support"
-            data-cap="Hulp en support"
-          >
-            <div class="shot-frame">
-              <img
-                src="../assets/showcase/help-support.webp"
-                srcset="../assets/showcase/help-support-640.webp 640w, ../assets/showcase/help-support.webp 941w"
-                sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: Hulp en support"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                class="shot-zoom"
-                type="button"
-                data-zoom="17"
                 aria-label="Open de schermafbeelding Hulp en support op volledige grootte"
               ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
             </div>
             <p class="shot-cap">Hulp en support</p>
           </li>
-          <li
-            class="shot"
-            style="--k: 1.0000"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="19 / 20: Over ZULFAA"
-            data-cap="Over ZULFAA"
-          >
-            <div class="shot-frame">
-              <img
-                src="../assets/showcase/about.webp"
-                srcset="../assets/showcase/about-640.webp 640w, ../assets/showcase/about.webp 941w"
-                sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="941"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: Over ZULFAA"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                class="shot-zoom"
-                type="button"
-                data-zoom="18"
-                aria-label="Open de schermafbeelding Over ZULFAA op volledige grootte"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
-            </div>
-            <p class="shot-cap">Over ZULFAA</p>
-          </li>
-          <li
-            class="shot shot--device"
-            style="--k: 0.9989"
-            role="group"
-            aria-roledescription="slide"
-            aria-label="20 / 20: De opening"
-            data-cap="De opening"
-          >
-            <div class="shot-frame">
-              <img
-                src="../assets/showcase/intro.webp"
-                srcset="../assets/showcase/intro-640.webp 640w, ../assets/showcase/intro.webp 940w"
-                sizes="(max-width: 457px) 56vw, 16.0rem"
-                width="940"
-                height="1672"
-                alt="Schermafbeelding uit de ZULFAA-app: De opening"
-                loading="lazy"
-                decoding="async"
-              />
-              <button
-                class="shot-zoom"
-                type="button"
-                data-zoom="19"
-                aria-label="Open de schermafbeelding De opening op volledige grootte"
-              ><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M10.5 7.5v6M7.5 10.5h6M15.5 15.5 21 21"/></svg></button>
-            </div>
-            <p class="shot-cap">De opening</p>
-          </li>
             </ul>
+            <script>(function(){try{if(document.documentElement.getAttribute("data-site-theme")!=="dark")return;var s=document.querySelectorAll("img[data-src-dark]");for(var i=0;i<s.length;i++){s[i].setAttribute("srcset",s[i].getAttribute("data-srcset-dark"));s[i].setAttribute("src",s[i].getAttribute("data-src-dark"))}}catch(e){}})();</script>
           </div>
 
           <button class="car-arrow car-next" type="button" aria-label="Volgende schermafbeelding" aria-controls="shot-scroller">
@@ -796,31 +979,172 @@
           </button>
 
           <p class="car-status" aria-live="polite">
-            <b data-car-index>01</b> / <span data-car-total>20</span> &middot; <span data-car-cap>Start</span>
+            <b data-car-index>01</b> / <span data-car-total>16</span> &middot; <span data-car-cap>Start</span>
           </p>
           <p class="car-hint">Veeg, sleep of gebruik de pijlen — de pijltoetsen werken ook.</p>
         </div>
       </section>
+      <!-- showcase:end -->
 
-      <div class="shell">
-        <section class="band" aria-labelledby="privacy-first">
-          <h2 class="section-title" id="privacy-first">Lokaal eerst gebouwd</h2>
-          <p class="section-note">De Koran, adhkar, doe'a's, gebedstijden en de qibla worden op uw eigen apparaat berekend en bewaard. ZULFAA bevat geen advertentie-, analytics- of trackingcode en vraagt nooit om uw echte naam, e-mailadres, telefoonnummer of geboortedatum.</p>
-          <div class="linkrow">
-            <a class="btn primary" href="privacy/">Lees het privacybeleid</a>
-            <a class="btn" href="terms/">Gebruiksvoorwaarden</a>
-            <a class="btn" href="delete-data/">Gegevens verwijderen</a>
-            <a class="btn" href="support/">Hulp &amp; Ondersteuning</a>
+        <!-- journal:start -->
+        <section class="journal" aria-labelledby="journal-title">
+          <div class="shell">
+            <div class="jr-head">
+              <p class="jr-eyebrow">Artikelen</p>
+              <h2 class="jr-title" id="journal-title">Korte gidsen bij de app</h2>
+              <p class="jr-note">Geschreven op basis van wat ZULFAA werkelijk doet: hoe u het instelt, hoe u leest en luistert, en wat blijft werken zonder verbinding.</p>
+            </div>
+            <div class="jr-body">
+              <article class="jr-lead">
+                <a class="jr-lead-link" href="../nl/articles/prayer-times/">
+                  <span class="jr-lead-art"><img class="jr-lead-img" src="../assets/articles/prayer-settings-nl-light.webp" srcset="../assets/articles/prayer-settings-nl-light-640.webp 640w, ../assets/articles/prayer-settings-nl-light.webp 941w" sizes="(max-width: 56rem) 88vw, 26rem" width="941" height="1672" alt="Het scherm met gebedsinstellingen: berekeningsmethode, Asr-madhhab en de regel voor hoge breedtegraden." loading="lazy" decoding="async" data-src-light="../assets/articles/prayer-settings-nl-light.webp" data-srcset-light="../assets/articles/prayer-settings-nl-light-640.webp 640w, ../assets/articles/prayer-settings-nl-light.webp 941w" data-src-dark="../assets/articles/prayer-settings-nl-dark.webp" data-srcset-dark="../assets/articles/prayer-settings-nl-dark-640.webp 640w, ../assets/articles/prayer-settings-nl-dark.webp 941w" /><script>(function(){try{if(document.documentElement.getAttribute("data-site-theme")!=="dark")return;var s=document.querySelectorAll("img[data-src-dark]");for(var i=0;i<s.length;i++){s[i].setAttribute("srcset",s[i].getAttribute("data-srcset-dark"));s[i].setAttribute("src",s[i].getAttribute("data-src-dark"))}}catch(e){}})();</script></span>
+                  <span class="jr-lead-text">
+                    <span class="jr-lead-title">Gebedstijden instellen die kloppen met uw moskee</span> <span class="jr-draft">Concept</span>
+                    <span class="jr-lead-sum">Kies de berekeningsmethode en de Asr-madhhab en pas daarna één gebed met een minuut of twee aan, tot de app overeenkomt met de moskee waar u bidt.</span>
+                    <span class="jr-more">Lees de gids</span>
+                  </span>
+                </a>
+              </article>
+              <ul class="jr-list">
+              <li class="jr-item">
+                <a class="jr-item-link" href="../nl/articles/reading-and-listening/">
+                  <span class="jr-item-art"><img class="jr-thumb" src="../assets/showcase/surah-reader.webp" srcset="../assets/showcase/surah-reader-640.webp 640w, ../assets/showcase/surah-reader.webp 941w" sizes="5.5rem" width="941" height="1672" alt="Soera Al-Baqara geopend in het donkere thema, met een keuze aan reciteurs boven de Arabische tekst." loading="lazy" decoding="async" /></span>
+                  <span class="jr-item-text">
+                    <span class="jr-item-title">De Koran lezen en beluisteren</span> <span class="jr-draft">Concept</span>
+                    <span class="jr-item-sum">De volledige Uthmani-tekst met Engelse vertaling reist mee met de app. Bladwijzers, opgeslagen verzen en uw leespositie blijven op het apparaat; tafsir en recitatie laden wanneer u erom vraagt.</span>
+                  </span>
+                </a>
+              </li>
+              <li class="jr-item">
+                <a class="jr-item-link" href="../nl/articles/offline-and-privacy/">
+                  <span class="jr-item-art"><img class="jr-thumb" src="../assets/showcase/adhkar-dua.webp" srcset="../assets/showcase/adhkar-dua-640.webp 640w, ../assets/showcase/adhkar-dua.webp 941w" sizes="5.5rem" width="941" height="1672" alt="Adhkar en doe&#x27;a in het donkere thema: de dagelijkse wird, favorieten, zoeken en doe&#x27;a&#x27;s per thema." loading="lazy" decoding="async" /></span>
+                  <span class="jr-item-text">
+                    <span class="jr-item-title">Wat blijft werken zonder verbinding</span> <span class="jr-draft">Concept</span>
+                    <span class="jr-item-sum">Adhkar, doe&#x27;a&#x27;s, de qibla en gebedstijden worden op uw telefoon berekend en bewaard. Slechts enkele onderdelen gaan het internet op, en de app vraagt daarvoor geen account.</span>
+                  </span>
+                </a>
+              </li>
+              </ul>
+            </div>
+            <p class="jr-all"><a href="../nl/articles/">Alle artikelen</a></p>
           </div>
         </section>
+        <!-- journal:end -->
 
-        <section class="band" aria-labelledby="availability">
-          <h2 class="section-title" id="availability">Beschikbaarheid</h2>
-          <p class="section-note">ZULFAA wordt voorbereid op de eerste Android-uitgave en staat nog niet op Google Play. Deze pagina krijgt de winkellink zodra de app openbaar beschikbaar is. De interface is beschikbaar in het Arabisch, Engels en Nederlands.</p>
+        <!-- trust:start -->
+        <section class="trust" aria-labelledby="privacy-first">
+          <div class="shell">
+            <div class="tr-head">
+              <p class="tr-eyebrow">Lokaal eerst</p>
+              <h2 id="privacy-first">Uw aanbidding blijft op uw telefoon</h2>
+              <p class="tr-lead">ZULFAA werkt vanaf uw apparaat naar buiten. Wat het van u weet, houdt het daar.</p>
+              <p class="tr-link"><a href="../nl/privacy/">Lees het privacybeleid</a></p>
+            </div>
+            <ul class="tr-points">
+              <li class="tr-point">
+                <h3>Op het apparaat</h3>
+                <p>De Koran en de adhkar reizen mee met de app, en gebedstijden en de qibla worden op uw telefoon berekend in plaats van opgehaald.</p>
+              </li>
+              <li class="tr-point">
+                <h3>Bewaard, niet verzameld</h3>
+                <p>Opgeslagen items, favorieten, leesvoortgang en uw adhkar-telling blijven op het apparaat. De app vraagt niet om uw echte naam, e-mailadres, telefoonnummer of geboortedatum.</p>
+              </li>
+              <li class="tr-point">
+                <h3>Niets dat meekijkt</h3>
+                <p>Geen advertenties, geen analytics, geen trackingcode — in de app en op deze website.</p>
+              </li>
+              <li class="tr-point">
+                <h3>Wanneer internet nodig is</h3>
+                <p>Recitatie-audio, tafsir en de optionele dagelijkse uitdaging laden alleen wanneer u ze opent.</p>
+              </li>
+            </ul>
+          </div>
         </section>
-      </div>
+        <!-- trust:end -->
+
+      <!-- contact:start -->
+      <section class="contact" id="contact" aria-labelledby="contact-title">
+        <div class="shell">
+          <div class="co-grid">
+            <div class="co-intro">
+              <p class="co-eyebrow">Contact</p>
+              <h2 id="contact-title">Schrijf ZULFAA</h2>
+              <p class="co-lead">Een vraag, een correctie, of iets dat zich vreemd gedroeg op uw telefoon — dit komt rechtstreeks bij de ontwikkelaar aan.</p>
+              <p class="co-mail"><a href="mailto:moner.intelligence@gmail.com">moner.intelligence@gmail.com</a></p>
+            </div>
+            <div class="cf cf-fallback" data-cf-fallback>
+              <p class="cf-fallback-text">Het formulier is nu niet beschikbaar, maar u kunt ons schrijven vanuit uw eigen e-mailprogramma.</p>
+              <p class="cf-actions">
+                <a class="btn primary cf-send" href="mailto:moner.intelligence@gmail.com?subject=Bericht%20via%20de%20ZULFAA-website">Schrijf een e-mail</a>
+              </p>
+              <p class="cf-fallback-addr"><a href="mailto:moner.intelligence@gmail.com?subject=Bericht%20via%20de%20ZULFAA-website" dir="ltr">moner.intelligence@gmail.com</a></p>
+            </div>
+            <form class="cf" id="contact-form" method="post" novalidate hidden
+              data-recipient="moner.intelligence@gmail.com"
+              data-subject="Bericht via de ZULFAA-website"
+              data-lang="nl"
+              data-send="Bericht versturen"
+              data-sending="Versturen…"
+              data-write-email="Schrijf een e-mail"
+              data-unavailable="Versturen is op deze pagina nu niet beschikbaar; er is dus niets verzonden. Uw tekst staat er nog. U kunt ook"
+              data-unavailable-preview="Versturen is niet beschikbaar in deze preview; er is dus niets verzonden. Uw tekst staat er nog. U kunt ook"
+              data-received="Dank u — uw bericht is ontvangen."
+              data-fail="Uw bericht kon ons niet bereiken. Uw tekst staat er nog — probeer het opnieuw. U kunt ook"
+              data-rate="Er zijn zojuist meerdere berichten vanaf deze verbinding verstuurd. Wacht een paar minuten en probeer het opnieuw — uw tekst staat er nog."
+              data-invalid="Iets in het formulier kon niet worden geaccepteerd. Controleer het en probeer het opnieuw."
+              data-err-email="Vul een e-mailadres in zodat een antwoord u kan bereiken."
+              data-err-email-format="Dat lijkt geen e-mailadres."
+              data-err-email-long="Dat e-mailadres is te lang."
+              data-err-name-long="Houd de naam op 100 tekens of minder."
+              data-err-message="Schrijf een bericht."
+              data-err-message-short="Schrijf iets meer — minstens 10 tekens."
+              data-err-message-long="Houd het bericht op 5.000 tekens of minder."
+              data-count-left="Nog {n} tekens"
+              data-count-over="{n} tekens te veel"
+              data-max-name="100"
+              data-max-email="254"
+              data-min-message="10"
+              data-max-message="5000"
+              data-privacy-endpoint="Als u dit formulier verstuurt, worden uw naam (als u die invult), uw e-mailadres en uw bericht opgeslagen in onze contactdienst bij Cloudflare, zodat we uw vraag kunnen afhandelen. Berichten worden na 365 dagen automatisch verwijderd; u kunt ons vragen uw bericht eerder te verwijderen."
+              data-privacy-more-title="Hoe uw bericht wordt opgeslagen"
+              data-privacy-more="Opslag: bij Cloudflare, in een database in West-Europa. Er is geen verplichting ingesteld dat de gegevens uitsluitend in de EU blijven, dus dat beloven we niet.
+Back-ups: de database bewaart een herstelbare geschiedenis van maximaal 7 dagen; een verwijderd bericht kan daarin nog tot 7 dagen staan voordat het definitief weg is.
+Verzoeken: schrijf naar moner.intelligence@gmail.com om uw bericht te laten verwijderen of om een kopie ervan te vragen.
+Dit geldt alleen voor het contactformulier van de website. De ZULFAA-app heeft een eigen privacybeleid."
+              data-disabled="Het formulier neemt op dit moment geen berichten aan; er is dus niets verzonden. Uw tekst staat er nog. U kunt ook"
+            >
+              <p class="cf-row">
+                <label for="cf-name">Naam <span class="cf-hint">Optioneel</span></label>
+                <input id="cf-name" name="name" type="text" autocomplete="name" dir="auto"
+                  aria-describedby="cf-name-err" />
+                <span class="cf-err" id="cf-name-err" hidden></span>
+              </p>
+              <p class="cf-row">
+                <label for="cf-email">E-mail <span class="cf-hint">Zodat een antwoord u kan bereiken</span></label>
+                <input id="cf-email" name="email" type="email" inputmode="email" autocomplete="email"
+                  dir="ltr" required aria-describedby="cf-email-err" />
+                <span class="cf-err" id="cf-email-err" hidden></span>
+              </p>
+              <p class="cf-row">
+                <label for="cf-message">Bericht</label>
+                <textarea id="cf-message" name="message" rows="5" dir="auto" required
+                  aria-describedby="cf-message-err"></textarea>
+                <span class="cf-count" id="cf-message-count" hidden></span>
+                <span class="cf-err" id="cf-message-err" hidden></span>
+              </p>
+              <p class="cf-actions">
+                <button class="btn primary cf-send" type="submit">Bericht versturen</button>
+              </p>
+              <p class="cf-state" role="status" aria-live="polite" tabindex="-1" hidden></p>
+              <p class="cf-privacy">Versturen is op deze pagina niet beschikbaar; niets van wat u hier typt wordt verzonden of opgeslagen.</p>
+            </form>
+          </div>
+        </div>
+      </section>
+      <!-- contact:end -->
     </main>
 
+    <!-- lightbox:start -->
     <div class="lb" id="lb" hidden>
       <div class="lb-backdrop" data-lb-close></div>
       <div class="lb-dialog" role="dialog" aria-modal="true" aria-labelledby="lb-title">
@@ -836,9 +1160,9 @@
 
         <div class="lb-stage" data-lb-close>
           <figure class="lb-figure">
-            <img class="lb-img" alt="" width="941" height="1672" decoding="async" />
+            <img class="lb-img" alt="" width="945" height="2055" decoding="async" />
             <figcaption class="lb-cap">
-              <b data-lb-index>01</b> / <span data-lb-total>20</span> &middot; <span data-lb-name></span>
+              <b data-lb-index>01</b> / <span data-lb-total>16</span> &middot; <span data-lb-name></span>
             </figcaption>
           </figure>
         </div>
@@ -848,23 +1172,78 @@
         </button>
       </div>
     </div>
-    <script src="../assets/carousel.js?v=d461b85f" defer></script>
-    <footer class="site-foot">
+    <!-- lightbox:end -->
+    <script src="../assets/quick-access.js?v=70337742" defer></script>
+    <script src="../assets/carousel.js?v=cbf3bc8c" defer></script>
+    <script src="../assets/contact-config.js?v=fd202749" defer></script>
+    <script src="../assets/contact.js?v=9a2027b1" defer></script>
+    <script type="module" src="../assets/hero3d.js?v=df9257a9"></script>
+    <footer class="site-foot is-joined">
       <div class="shell">
-        <nav aria-label="Voettekst">
-          <a href="../nl/">Start</a>
-          <a href="../nl/privacy/">Privacybeleid</a>
-          <a href="../nl/terms/">Gebruiksvoorwaarden</a>
-          <a href="../nl/delete-data/">Gegevens verwijderen</a>
-          <a href="../nl/support/">Hulp &amp; Ondersteuning</a>
-        </nav>
-        <p>
-          ZULFAA is ontworpen en ontwikkeld door<br />
-          <span class="dev">Moner Intelligence Systems</span>
-        </p>
-        <p>© 2026 MONER INTELLIGENCE SYSTEMS. Alle rechten voorbehouden.</p>
+        <div class="fo-grid">
+          <div class="fo-brand">
+            <a class="fo-mark" href="../nl/">
+              <img src="../assets/emblem-256.webp" alt="" width="256" height="256" />
+              <span>ZULFAA</span>
+            </a>
+            <p class="fo-tag">Gebedstijden, de Koran, adhkar en de qibla op één rustige plek, berekend op uw eigen telefoon.</p>
+            <p class="fo-avail"><span class="fo-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.7v18.6c0 .6.6 1 1.1.7l14.4-8.6a.9.9 0 0 0 0-1.5L5.1 2c-.5-.3-1.1.1-1.1.7Z"/></svg></span>In voorbereiding op de eerste Android-uitgave; nog niet op Google Play. In het Arabisch, Engels en Nederlands.</p>
+        <ul class="fo-social">
+          <li><a href="https://github.com/moner-dev" rel="me noopener" target="_blank" aria-label="ZULFAA op GitHub"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27s-1.36.09-2 .27c-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"/></svg></a></li>
+          <li><span class="fo-social-soon" role="img" aria-label="ZULFAA op Instagram — link nog niet beschikbaar" title="link nog niet beschikbaar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></span></li>
+          <li><span class="fo-social-soon" role="img" aria-label="ZULFAA op X — link nog niet beschikbaar" title="link nog niet beschikbaar"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.5 3h3.2l-7 8 8.2 10h-6.4l-5-6.1L4.8 21H1.6l7.5-8.6L1.2 3h6.6l4.5 5.6L17.5 3Zm-1.1 16.1h1.8L7.7 4.8H5.8l10.6 14.3Z"/></svg></span></li>
+        </ul>
+          </div>
+
+          <nav class="fo-links" aria-label="Voettekst">
+            <h2>De site</h2>
+            <ul>
+              <li><a href="../nl/">Start</a></li>
+              <li><a href="../nl/articles/">Artikelen</a></li>
+              <li><a href="../nl/support/">Hulp &amp; Ondersteuning</a></li>
+            </ul>
+          </nav>
+
+          <nav class="fo-links" aria-label="Juridisch">
+            <h2>Juridisch</h2>
+            <ul>
+              <li><a href="../nl/privacy/">Privacybeleid</a></li>
+              <li><a href="../nl/terms/">Gebruiksvoorwaarden</a></li>
+              <li><a href="../nl/delete-data/">Gegevens verwijderen</a></li>
+            </ul>
+          </nav>
+
+          <div class="fo-say">
+            <h2>Contact</h2>
+            <p><a class="fo-cta" href="#contact">Schrijf ZULFAA</a></p>
+            <p class="fo-mail"><a href="mailto:moner.intelligence@gmail.com">moner.intelligence@gmail.com</a></p>
+            <ul class="fo-langs" aria-label="Taal">
+            <li><a href="../" lang="en" hreflang="en">English</a></li>
+            <li><a href="../ar/" lang="ar" hreflang="ar">العربية</a></li>
+            <li><a href="../nl/" lang="nl" hreflang="nl" aria-current="true">Nederlands</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="fo-base">
+          <p class="fo-dev">ZULFAA is ontworpen en ontwikkeld door <span class="dev">Moner Intelligence Systems</span></p>
+          <p class="fo-copy">© 2026 MONER INTELLIGENCE SYSTEMS. Alle rechten voorbehouden.</p>
+        </div>
       </div>
     </footer>
-    <script src="../assets/nav.js?v=8940bf7e" defer></script>
+
+    <!-- scrolldock:start -->
+    <div class="dock" data-dock hidden>
+      <button class="dock-btn" type="button" data-dock-up aria-label="Terug naar boven" title="Terug naar boven">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 19V6M6 12l6-6 6 6"/></svg>
+      </button>
+      <button class="dock-btn" type="button" data-dock-down aria-label="Naar de voettekst" title="Naar de voettekst">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5v13M6 12l6 6 6-6"/></svg>
+      </button>
+    </div>
+    <!-- scrolldock:end -->
+    <script src="../assets/nav.js?v=bb6bbd3a" defer></script>
+    <script src="../assets/lantern.js?v=cc056950" defer></script>
+    <script src="../assets/scrolldock.js?v=03e59a25" defer></script>
   </body>
 </html>

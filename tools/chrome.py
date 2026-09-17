@@ -13,6 +13,8 @@ SCR = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, SCR)
 from ui_strings import S, LANGS, DEIXIS          # noqa: E402
 from dd_strings import DD                        # noqa: E402
+from lantern import host as lantern_host         # noqa: E402
+from scrolldock import render as scroll_dock     # noqa: E402
 
 SITE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # ── which content, and where it is written ───────────────────────────────────
@@ -32,18 +34,19 @@ ORIGIN = "https://zulfaa.nl/"
 MAIL = "moner.intelligence@gmail.com"
 DEV = "MONER INTELLIGENCE SYSTEMS"
 
+# Arabic and Dutch captions, one per shots.json entry and in the same order
+# (English is `caption` in shots.json). tools/showcase.py refuses a mismatch.
 CAPS = {
- "ar": ["الرئيسية","أوقات الصلاة","القبلة","القرآن الكريم","القراءة والاستماع","القرّاء","الأذكار والأدعية",
-        "تحدّي اليوم","أسئلة التحدّي","مخطط رمضان","ادخار العمرة","التذكيرات","إعدادات الصلاة",
-        "إعدادات التطبيق","الوضع الداكن","مساحتك","القائمة","المساعدة والدعم","عن زُلْفَى","الافتتاحية"],
- "nl": ["Start","Gebedstijden","Qibla","De Nobele Koran","Lezen en luisteren","Reciteurs","Adhkar en doe'a",
-        "Dagelijkse uitdaging","Uitdagingsvragen","Ramadanplanner","Umrah-sparen","Herinneringen",
-        "Gebedsinstellingen","App-instellingen","Donker thema","Uw ruimte","Navigatie","Hulp en support",
-        "Over ZULFAA","De opening"],
+ "ar": ["الرئيسية","أوقات الصلاة","القرآن الكريم","القراءة والاستماع","خيارات الآية","القبلة","الأذكار والأدعية",
+        "تحدّي اليوم","أسئلة التحدّي","مخطط رمضان","ادخار العمرة","هدف الادّخار","التنبيهات","مساحتك الشخصية","القائمة",
+        "المساعدة والدعم"],
+ "nl": ["Start","Gebedstijden","De Nobele Koran","Lezen en luisteren","Versopties","Qibla","Adhkar en doe'a",
+        "Dagelijkse uitdaging","Uitdagingsvragen","Ramadanplanner","Umrah-sparen","Spaardoel","Meldingen","Uw persoonlijke ruimte","Menu",
+        "Hulp en support"],
 }
 ALT = {"ar": "لقطة من تطبيق زُلْفَى: %s", "nl": "Schermafbeelding uit de ZULFAA-app: %s"}
 
-PAGES = ["", "privacy/", "terms/", "delete-data/", "support/"]
+PAGES = ["", "articles/", "privacy/", "terms/", "delete-data/", "support/"]
 
 
 def e(t):
@@ -89,6 +92,7 @@ def head(lang, page, depth, title, desc):
     <link rel="apple-touch-icon" href="{a}assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="{a}{asset("assets/zulfaa.css")}" />
 {JS_CLASS}
+{THEME_BOOT}
     <meta name="theme-color" content="#fef9f0" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ZULFAA" />
@@ -110,6 +114,26 @@ def head(lang, page, depth, title, desc):
 # the header renders as plain wrapped links - see assets/zulfaa.css.
 JS_CLASS = '    <script>document.documentElement.classList.add("js");</script>'
 
+# The saved site theme, applied before the stylesheet paints anything, so a
+# visitor who chose dark never sees the cream page flash first. It is the same
+# line on every page, which is why dark survives following a link. The lantern
+# that sets it lives on the home page (tools/lantern.py).
+THEME_BOOT = ('    <script>(function(){try{var t=localStorage.getItem("zulfaa-site-theme");'
+              'if(t==="dark"||t==="light")document.documentElement.setAttribute("data-site-theme",t)}'
+              'catch(e){}})();</script>')
+
+
+def themed_img_boot(indent):
+    """For images with both themes' files (data-src-light/-dark, data-srcset-*):
+    placed inline right after them, it switches them to the dark set while the
+    page is still parsing when dark is already the theme, so a lazy image never
+    fetches the light file first. Idempotent - it may run several times on a
+    page. assets/lantern.js keeps them in step when the theme changes later."""
+    return (indent + '<script>(function(){try{if(document.documentElement.getAttribute("data-site-theme")!=="dark")return;'
+            'var s=document.querySelectorAll("img[data-src-dark]");'
+            'for(var i=0;i<s.length;i++){s[i].setAttribute("srcset",s[i].getAttribute("data-srcset-dark"));'
+            's[i].setAttribute("src",s[i].getAttribute("data-src-dark"))}}catch(e){}})();</script>\n')
+
 
 def asset(rel):
     """`assets/x.css` -> `assets/x.css?v=<content hash>`.
@@ -130,7 +154,8 @@ def asset(rel):
         return "%s?v=%s" % (rel, hashlib.sha1(fh.read()).hexdigest()[:8])
 
 
-ASSET_RE = re.compile(r"assets/(?:zulfaa\.css|nav\.js|carousel\.js)(?:\?v=[0-9a-f]+)?")
+ASSET_RE = re.compile(r"assets/(?:zulfaa\.css|nav\.js|carousel\.js|hero3d\.js|quick-access\.js"
+                      r"|contact-config\.js|contact\.js|lantern\.js|scrolldock\.js)(?:\?v=[0-9a-f]+)?")
 
 
 def reversion(text):
@@ -139,6 +164,12 @@ def reversion(text):
 
 
 NAV_JS = '    <script src="%s' + asset("assets/nav.js") + '" defer></script>'
+# Beside nav.js because it belongs to the same furniture: the lantern is on
+# every page, so the script that gives it its state has to be too. Without it
+# the lantern still draws and the saved theme still applies - it simply cannot
+# be changed, which on a secondary page means no way out of dark mode.
+LANTERN_JS = '    <script src="%s' + asset("assets/lantern.js") + '" defer></script>'
+DOCK_JS = '    <script src="%s' + asset("assets/scrolldock.js") + '" defer></script>'
 
 GLOBE = ('<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
          'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'
@@ -188,10 +219,15 @@ def langswitch(lang, page, depth):
 
 
 def nav_items(lang):
+    """The pages, with the labels that language's pages already use.
+
+    English takes `navSupport` ("Support") rather than the app's own "Help &
+    Support": the hand-written English headers say Support, and a generated
+    footer that disagreed with the header above it would read as a mistake."""
     s = S[lang]
     n = C[lang]["nav"]
     return [("", s["home"]), ("privacy/", n["privacy"]), ("terms/", n["terms"]),
-            ("delete-data/", s["deleteNav"]), ("support/", n["support"])]
+            ("delete-data/", s["deleteNav"]), ("support/", s.get("navSupport", n["support"]))]
 
 
 # The only external address ZULFAA actually has. The About screen in the app
@@ -339,23 +375,18 @@ def header(lang, page, depth):
 
 
 def footer(lang, page, depth):
-    a = up(depth)
-    s = S[lang]
-    items = nav_items(lang)
-    links = "\n".join('          <a href="%s">%s</a>' % (a + LANGS[lang]["base"] + h, e(l)) for h, l in items)
-    return f"""    <footer class="site-foot">
-      <div class="shell">
-        <nav aria-label="{e(s['footerLabel'])}">
-{links}
-        </nav>
-        <p>
-          {e(s['devBy'])}<br />
-          <span class="dev">Moner Intelligence Systems</span>
-        </p>
-        <p>{e(s['rights'])}</p>
-      </div>
-    </footer>
-{NAV_JS % a}
+    """The closing composition - brand, pages, availability, social, copyright.
+
+    Its markup lives in lower.py beside the contact block it continues, and is
+    imported here so every builder keeps calling chrome.footer(). The import is
+    inside the function because lower.py reads this module at its own import
+    time."""
+    from lower import render_footer
+    # The dock is fixed to the viewport, so it sits after the footer rather than
+    # inside it - it belongs to the page, not to the ending.
+    return render_footer(lang, page, depth) + "\n" + scroll_dock(lang) + f"""{NAV_JS % up(depth)}
+{LANTERN_JS % up(depth)}
+{DOCK_JS % up(depth)}
   </body>
 </html>
 """
@@ -372,6 +403,18 @@ def toc(lang, ids, titles):
           </ol>
         </nav>
 """
+
+
+def main_open(lang, depth=0):
+    """How every page opens: <main>, the shell, and the lantern hung at the top
+    of it.
+
+    The lantern is the site's light/dark control and there is exactly one of it
+    per page. Having a single opener is what keeps that true and what keeps it
+    in the same place everywhere: no generator positions the lantern, they only
+    say "a page starts here". A page that opens its own <main> by hand would
+    silently have no way to change the theme."""
+    return '    <main>\n      <div class="shell">\n' + lantern_host(lang, up(depth))
 
 
 def dochead(lang, h1, sub, updated, depth):

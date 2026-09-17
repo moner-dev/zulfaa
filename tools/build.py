@@ -6,6 +6,8 @@ from chrome import (SITE, LANGS, S, C, write, e, up, PREVIEW, OUT_ROOT, ORIGIN,
                     header_html, JS_CLASS, NAV_JS, reversion)
 from pages import build_privacy, build_terms, build_support, build_delete
 from home import build_home
+from articles import ARTICLES, build_index as build_articles_index, build_article
+from notfound import build as build_notfound
 
 BUILDERS = {"": build_home, "privacy/": build_privacy, "terms/": build_terms,
             "delete-data/": build_delete, "support/": build_support}
@@ -15,6 +17,30 @@ for lang in ("ar", "nl"):
     for page, fn in BUILDERS.items():
         path = os.path.join(LANGS[lang]["base"], page, "index.html").replace("\\", "/")
         written.append(write(path, fn(lang)))
+
+# ── the journal ─────────────────────────────────────────────────────────────
+# The articles are new pages with no hand-written English original, so all
+# three languages are generated from tools/articles.py - English included.
+for lang in ("en", "ar", "nl"):
+    base = LANGS[lang]["base"]
+    written.append(write(os.path.join(base, "articles", "index.html").replace("\\", "/"),
+                         build_articles_index(lang)))
+    for art in ARTICLES:
+        written.append(write(os.path.join(base, "articles", art["slug"], "index.html").replace("\\", "/"),
+                             build_article(lang, art["slug"])))
+
+# ── the 404 ─────────────────────────────────────────────────────────────────
+# One file, at the root, because that is the only one GitHub Pages will serve
+# for an unknown URL - it does not look inside /ar/ or /nl/. All three messages
+# ship inside it. tools/notfound.py explains the <base> and the language boot.
+written.append(write("404.html", build_notfound()))
+
+# ── the 403 ─────────────────────────────────────────────────────────────────
+# Three real pages (/403/, /ar/403/, /nl/403/), not one root file: a 403 is
+# reached by an address, so each language gets its own chrome. It borrows the
+# 404's composition. tools/forbidden.py explains what Pages can and cannot do.
+from forbidden import apply as apply_forbidden
+written += apply_forbidden()
 
 EN_PAGES = {"index.html": ("", 0), "privacy/index.html": ("privacy/", 1),
             "terms/index.html": ("terms/", 1), "delete-data/index.html": ("delete-data/", 1),
@@ -92,6 +118,14 @@ for f, (page, depth) in EN_PAGES.items():
     if t != orig:
         open(full, "w", encoding="utf-8", newline="").write(t)
         written.append(f + "  (header, nav.js, hreflang only)")
+
+# ── maintenance ─────────────────────────────────────────────────────────────
+# Last, because it edits pages the steps above have just written: the three
+# /maintenance/ pages from tools/maintenance.json, then the gate line in the
+# <head> of each covered page - added while `enabled` is true, removed when it
+# is not. tools/maintenance.py explains what a static host can and cannot do.
+from maintenance import apply as apply_maintenance
+written += apply_maintenance()
 
 print("wrote %d files -> %s" % (len(written), OUT_ROOT))
 for w in written:

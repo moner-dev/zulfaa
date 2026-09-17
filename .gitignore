@@ -1,6 +1,9 @@
 __pycache__/
 *.pyc
 
+# the hero3d bundler's own dependencies; the built assets/hero3d.js is committed
+tools/hero3d/node_modules/
+
 # ── the owner's next-release legal preview ──────────────────────────────────
 # `ZULFAA_LEGAL_PREVIEW=1 python tools/extract_from_app.py && ZULFAA_LEGAL_PREVIEW=1 python tools/build.py`
 # renders the PREPARED legal clauses — the ones the public build deliberately

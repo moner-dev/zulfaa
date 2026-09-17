@@ -1,0 +1,395 @@
+/* ZULFAA - the maintenance page.
+
+   Loaded ONLY by /maintenance/ (and /ar/, /nl/), after zulfaa.css. The Top
+   Bar, the header, the lantern, the buttons and the footer are the site's own
+   and are NOT restyled here - this page is a sibling of the 404 and uses the
+   404's composition rules: the sticker is the page, no card or panel around
+   it, two columns on a wide screen, the artwork leading.
+
+   What this file adds is only what the 404 does not have: the status eyebrow,
+   the countdown, and the withheld-link state for the gated window.
+
+   Markup: tools/maintenance.py. Countdown: assets/maintenance.js. */
+
+/* ── the composition: the 404's, measure for measure ── */
+.mt {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 5vw, 4rem);
+  /* below the lantern's foot, from the lantern's own --ln-w - as .nf */
+  padding: calc(var(--ln-w) * 2.5 + 1rem) 0 clamp(2.5rem, 6vw, 4.5rem);
+}
+
+.mt-art {
+  --mt-w: min(38vw, 26rem);
+  position: relative;
+  justify-self: center;
+  width: var(--mt-w);
+  /* Measured on the file, not guessed: below the podium's shadow the 503
+     master is empty alpha for 22% of its width (the 404's is 18%, which that
+     page pulls up by 15%). The same proportion here, so the stacked layout has
+     no dead band under the podium and on a desktop the artwork's visible
+     centre, not its box's, sits level with the words. */
+  margin-block-end: calc(var(--mt-w) * -0.19);
+  line-height: 0;
+}
+
+.mt-art img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* the warm air behind it - the 404's own, at the 404's strength */
+.mt-art::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 8%;
+  left: 50%;
+  width: 116%;
+  aspect-ratio: 1;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(230, 184, 76, 0.16) 0%,
+    rgba(230, 184, 76, 0.07) 34%,
+    rgba(230, 184, 76, 0) 66%);
+  pointer-events: none;
+}
+
+.mt-copy {
+  max-width: 30rem;
+}
+
+/* the site's eyebrow (.jr-eyebrow, .co-eyebrow), with one still status light */
+.mt-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--gold-ink);
+}
+
+.mt-eyebrow::before {
+  content: "";
+  flex: none;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 0.25rem var(--gold-soft);
+}
+
+/* .nf-title and .nf-body, exactly */
+.mt-title {
+  margin: 0;
+  font-size: clamp(1.9rem, 4.6vw, 3rem);
+  line-height: 1.15;
+}
+
+.mt-body {
+  margin: 0.85rem 0 0;
+  max-width: 26rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+.mt-status {
+  margin: 0.9rem 0 0;
+  padding-inline-start: 0.85rem;
+  border-inline-start: 2px solid var(--gold);
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+/* ── the countdown ──
+   One quiet surface in the site's own radius, divided into four by hairlines -
+   the material of .summary and the footer's rules, not four dashboard tiles. */
+.mt-count {
+  margin-top: clamp(1.4rem, 3vw, 1.85rem);
+}
+
+.mt-intro,
+.mt-done {
+  margin: 0 0 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.mt-done {
+  color: var(--teal-deep);
+}
+
+.mt-cells {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  max-width: 24rem;
+  margin: 0;
+  padding: 0.35rem 0;
+  list-style: none;
+  border: 1px solid rgba(42, 138, 128, 0.18);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.mt-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.55rem 0.2rem 0.5rem;
+}
+
+.mt-cell + .mt-cell {
+  border-inline-start: 1px solid rgba(42, 138, 128, 0.14);
+}
+
+.mt-num {
+  display: block;
+  min-width: 2ch;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.55rem, 2.5vw, 1.9rem);
+  font-weight: 600;
+  line-height: 1.15;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  color: var(--teal-deep);
+}
+
+.mt-unit {
+  margin-top: 0.2rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.mt-when {
+  margin: 0.75rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.mt-when time {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* no script: no cells to fill, so the absolute time stands alone. A clock
+   that cannot be right is treated the same way. */
+html:not(.js) .mt-intro,
+html:not(.js) .mt-cells,
+.mt-count.is-unknown .mt-intro,
+.mt-count.is-unknown .mt-cells {
+  display: none;
+}
+
+/* at zero: the line that says so takes the intro's place, the cells rest, and
+   the expected time - now in the past - is no longer news */
+.mt-count.is-done .mt-intro,
+.mt-count.is-done .mt-when {
+  display: none;
+}
+
+.mt-count.is-done .mt-cells {
+  opacity: 0.55;
+}
+
+/* .nf-actions */
+.mt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: clamp(1.25rem, 3vw, 1.75rem);
+}
+
+/* .btn sets its own display, which would otherwise beat the attribute */
+.mt-actions [hidden] {
+  display: none;
+}
+
+/* ── withheld links, while the gate is open ──
+   assets/maintenance.js takes the href away from links the gate would bounce
+   back here. They stay where they are, so the header and footer keep their
+   shape, and read as unavailable: dimmed, no pointer, no hover. The brand keeps
+   its full colour - a faded logo reads as a broken page, not a closed door. */
+a[data-mt-off] {
+  cursor: default;
+}
+
+a[data-mt-off]:not(.brand):not(.fo-mark) {
+  opacity: 0.45;
+}
+
+.site-nav a[data-mt-off]:hover,
+.fo-links a[data-mt-off]:hover,
+.fo-say a[data-mt-off]:hover {
+  color: inherit;
+  background: none;
+}
+
+/* the dock stays away, as on the 404: a dead end with one job */
+body:has(.mt) .dock {
+  display: none;
+}
+
+/* ── Arabic ──
+   Capitals and tracking belong to Latin type; Arabic letters that are spaced
+   apart stop joining. The numerals are Arabic-Indic, so they take Cairo. */
+html[lang="ar"] .mt-eyebrow,
+html[lang="ar"] .mt-unit {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+html[lang="ar"] .mt-eyebrow {
+  font-size: 0.9rem;
+}
+
+html[lang="ar"] .mt-unit {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+html[lang="ar"] .mt-num {
+  font-family: "Cairo", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  line-height: 1.2;
+  /* a number is written left to right in Arabic too; isolating it keeps
+     "٠١" from being reordered to "١٠" around the zero's own box */
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* The Arabic-Indic zero is a small square in Cairo, so a cell reading "٠٠"
+   looked empty beside "١٨". It stays the same character. It is turned on its
+   point - the rhombus of the calligraphic zero - and drawn at the weight of
+   the digits beside it, with a digit's worth of room. A transform, so the line
+   box, and with it the cell's height, does not move. */
+.mt-zero {
+  display: inline-block;
+  margin-inline: 0.08em;
+  transform: rotate(45deg) scale(2.15);
+  transform-origin: 50% 50%;
+}
+
+/* ── the stacked composition: the 404's breakpoints ── */
+@media (max-width: 56.25rem) {
+  .mt {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    text-align: center;
+    gap: clamp(1rem, 4vw, 2rem);
+    padding-top: 0.5rem;
+  }
+
+  /* smaller than the 404's 19rem: this page has a countdown to keep in view */
+  .mt-art {
+    --mt-w: min(64vw, 17rem);
+  }
+
+  .mt-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mt-body {
+    margin-inline: auto;
+  }
+
+  .mt-cells {
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  .mt-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 30rem) {
+  /* the 404's rule: at phone width the centred sticker reaches under the
+     lantern, so the composition drops below its foot */
+  .mt {
+    padding-top: calc(var(--ln-w) * 2.55 + 0.75rem);
+  }
+
+  .mt-art {
+    --mt-w: min(64vw, 14rem);
+  }
+
+  .mt-title {
+    font-size: 1.85rem;
+  }
+
+  .mt-body {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .mt-cell {
+    padding: 0.45rem 0.1rem 0.4rem;
+  }
+
+  .mt-num {
+    font-size: 1.4rem;
+  }
+
+  .mt-unit {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+  }
+
+  html[lang="ar"] .mt-unit {
+    font-size: 0.74rem;
+  }
+
+  .mt-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: min(100%, 17rem);
+  }
+
+  .mt-actions .btn {
+    justify-content: center;
+  }
+}
+
+/* ══ at night ══════════════════════════════════════════════════════════
+   The sticker is not filtered or swapped; the warm air behind it is turned up,
+   as on the 404. The countdown takes the dark theme's own surface ladder. */
+html[data-site-theme="dark"] .mt-art::before {
+  background: radial-gradient(circle,
+    rgba(233, 192, 99, 0.3) 0%,
+    rgba(233, 192, 99, 0.14) 32%,
+    rgba(120, 205, 185, 0.05) 52%,
+    rgba(233, 192, 99, 0) 72%);
+}
+
+html[data-site-theme="dark"] .mt-cells {
+  border-color: var(--border);
+  background: var(--surface);
+}
+
+html[data-site-theme="dark"] .mt-cell + .mt-cell {
+  border-inline-start-color: var(--border);
+}
+
+html[data-site-theme="dark"] .mt-num {
+  color: var(--ink);
+}
+

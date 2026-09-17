@@ -96,11 +96,98 @@ ui_strings.py         chrome, marketing copy, the deixis rules
 dd_strings.py         the data-deletion page, ar + nl
 chrome.py             head, header (menu button + language menu), footer, clause renderer
 responsive_check.mjs  headless-Chrome check: overflow, menu/dropdown, screenshots (--nojs, --states)
-home.py               the landing page, carousel and lightbox
+home.py               the landing page (the carousel and preview come from showcase.py)
+showcase.py           the homepage screenshot carousel + preview, all three languages
+showcase_art.py       masters (../assets/masters/screenshots) -> assets/showcase/<screen>-<lang>-<theme>[-640].webp
+article_art.py        an article's `screen` inside the empty phone (../assets/masters/device) -> assets/articles/, per language and theme
 pages.py              privacy, terms, support, delete-data
 build.py              writes everything; run this one
-shots.json            the screenshot manifest (file names, sizes)
+shots.json            the carousel's screens, in order (English caption + alt; ar/nl captions in chrome.CAPS)
+maintenance.json      THE maintenance window: enabled, startsAt, endsAt (UTC), routes, status
+maintenance.py        /maintenance/ in en, ar, nl + the gate line; build.py runs it last
+maintenance_art.py    the 503 sticker -> assets/maintenance-{562,842,1122}.webp
+notfound.py           404.html: the English page + Arabic/Dutch pages in <template>s, chosen by URL
+forbidden.py          /403/ in en, ar, nl
+error_pages_check.mjs headless-Chrome check of what visitors get on 404, 403 and maintenance
 ```
+
+## The homepage carousel
+
+The screenshots are the app's own, per language AND theme. The organised
+originals and their manifest (screen, language, theme, SHA-256) live outside
+this repository, which is the deployment:
+
+    ../assets/masters/screenshots/{AR,En,NL}/{Dark,Light}/<screen>-<lang>-<theme>.png|jpg
+    ../assets/masters/screenshots/screenshot-manifest.csv
+
+To change what the carousel shows:
+
+1. edit `shots.json` (order, English caption and alt) and `chrome.CAPS` (Arabic
+   and Dutch captions, same order) - a screen belongs there only when all six
+   of its masters exist;
+2. `python tools/showcase_art.py` - writes the six variants' web files; it
+   stops and names any missing master rather than substituting one;
+3. the normal build (`build.py`, `quick_access.py --write-en`, `write_en.py`,
+   `build.py`); `write_en.py` gives the English page the same markup.
+
+A page shows only its own language. The theme is the site's (`data-site-theme`,
+set by the theme boot and the lantern): the markup carries the light files and
+both themes' URLs, an inline line under the slides picks dark before a lazy
+slide can load, and `assets/carousel.js` follows the lantern and hands the
+preview the current theme's full-size file. `tools/showcase.py` has the details.
+
+The older `assets/showcase/*.webp` files (941x1672 Store images) are no longer
+in the carousel; three are still used by the journal articles. None were deleted.
+
+## Maintenance
+
+Edit `maintenance.json`, then run `python tools/build.py` (or just
+`python tools/maintenance.py`). Times are UTC with a `Z`; the page shows them in
+the visitor's own time zone.
+
+* `enabled: false` (default) — `/maintenance/` exists for review; no page points
+  at it and no page changes.
+* `enabled: true` — the pages in `routes` get a one-line head script that, between
+  `startsAt` and `endsAt` by the visitor's clock, replaces them with the
+  maintenance page in their language (`?from=` keeps where they were going).
+  After `endsAt` it does nothing, so an overrun needs a new `endsAt` pushed.
+  Set it back to `false` and rebuild to remove the lines.
+* `privacy/`, `terms/` and `delete-data/` can never be listed — the loader refuses.
+
+**This is not an HTTP 503.** zulfaa.nl points straight at GitHub Pages, which only
+answers 200 or 404; the maintenance page is served as 200 with `noindex`, and
+visitors without JavaScript see the ordinary pages. A real 503 needs a CDN or
+proxy in front of Pages — a hosting change, not made here.
+
+`?from=` is accepted only for a route that exists in all three languages
+(`data-routes`, written by the build); Try again goes to that route in the
+page's own language, and the language links carry it into theirs. Anything
+else falls back to that language's home.
+
+## Error pages: what is designed and what is actually served
+
+| | Page | Served with that status? |
+|---|---|---|
+| 404 | `404.html`, one file | **yes** — GitHub Pages answers every unknown URL with it and status 404, at the address asked for |
+| 403 | `/403/`, `/ar/403/`, `/nl/403/` | no — ordinary pages (200). Pages never answers 403; nothing routes a visitor here yet |
+| 503 | `/maintenance/` + the gate above | no — 200 with `noindex`; a real 503 needs a CDN or proxy |
+
+**The 404's language comes from the URL, not a redirect.** `/ar/…` gets the whole
+page in Arabic, right to left; `/nl/…` in Dutch; anything else in English. The
+file carries the English page and, in inert `<template>`s, the Arabic and Dutch
+pages built by the same `header()`/`main_open()`/`footer()` calls; a head script
+picks the language and an inline script swaps the page in before `nav.js` runs,
+so there is only ever one header, drawer, lantern, footer and dock.
+`tools/notfound.py` has the details. **Without JavaScript every unknown URL gets
+the English page**, and the title is English to anything that runs no script.
+
+The 404 sticker says PAGE NOT FOUND in English inside the supplied artwork
+(`assets/masters/404.png`); it is kept as supplied until a text-free master exists.
+
+Locally, the DEV LAB front door serves `404.html` with status 404 for a missing
+page (never for a missing asset) the way Pages does. Check all of it with
+
+    node tools/error_pages_check.mjs [--gate-root <a copy built with maintenance on>]
 
 ## If you add a language
 

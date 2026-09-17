@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <!-- Verbatim port of StickerSaved (src/home/StickerIcons.tsx) — the app's
+       built-in Saved tile. No raster sticker exists for Saved. -->
+  <defs>
+    <linearGradient id="zs-cover" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#3ba297" />
+      <stop offset="55%" stop-color="#2a8a80" />
+      <stop offset="100%" stop-color="#1a5a52" />
+    </linearGradient>
+    <linearGradient id="zs-spine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#15514a" />
+      <stop offset="100%" stop-color="#22736a" />
+    </linearGradient>
+    <linearGradient id="zs-pages" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#fffdf7" />
+      <stop offset="100%" stop-color="#eaddc4" />
+    </linearGradient>
+    <linearGradient id="zs-gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4d992" />
+      <stop offset="55%" stop-color="#e6b84c" />
+      <stop offset="100%" stop-color="#bd8c26" />
+    </linearGradient>
+    <linearGradient id="zs-ribbon" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e6b84c" />
+      <stop offset="100%" stop-color="#c2922c" />
+    </linearGradient>
+  </defs>
+  <ellipse cx="24" cy="43.4" rx="12.5" ry="2.5" fill="#33423d" opacity="0.14" />
+  <path d="M13 10.4 H35.4 A2.4 2.4 0 0 1 37.8 12.8 V37.4 A2.4 2.4 0 0 1 35.4 39.8 H13Z" fill="url(#zs-pages)" />
+  <g stroke="#cdbb9a" stroke-width="0.55" opacity="0.75">
+    <path d="M34.6 15.2 V35.4" />
+    <path d="M36.4 16.4 V34.2" />
+  </g>
+  <path d="M12.2 9 H33.6 A3 3 0 0 1 36.6 12 V36.6 A3 3 0 0 1 33.6 39.6 H12.2Z" fill="url(#zs-cover)" />
+  <path d="M10.4 9 H14.6 V39.6 H10.4 A1.6 1.6 0 0 1 8.8 38 V10.6 A1.6 1.6 0 0 1 10.4 9Z" fill="url(#zs-spine)" />
+  <rect x="17.6" y="13.4" width="15.6" height="21.8" rx="2" fill="none" stroke="url(#zs-gold)" stroke-width="0.95" opacity="0.9" />
+  <g transform="translate(25.4 24.3)" fill="url(#zs-gold)">
+    <path d="M0 -6 1.35 -1.9 5.4 -3.4 3.1 0 5.4 3.4 1.35 1.9 0 6 -1.35 1.9 -5.4 3.4 -3.1 0 -5.4 -3.4 -1.35 -1.9Z" />
+  </g>
+  <path d="M15.6 9 H21 L15.6 39.6 H12.2Z" fill="#ffffff" opacity="0.1" />
+  <path d="M28.4 9 H32.6 V21.6 L30.5 19.4 28.4 21.6Z" fill="url(#zs-ribbon)" />
+  <path d="M28.4 9 H30 V20.9 L28.4 21.6Z" fill="#ffffff" opacity="0.22" />
+</svg>
