@@ -121,99 +121,27 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zulfaa.nl/articles/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/"/>
-    <priority>0.7</priority>
+    <loc>https://zulfaa.nl/updates/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/updates/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/updates/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/updates/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/updates/"/>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zulfaa.nl/ar/articles/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/"/>
-    <priority>0.7</priority>
+    <loc>https://zulfaa.nl/ar/updates/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/updates/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/updates/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/updates/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/updates/"/>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://zulfaa.nl/nl/articles/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/"/>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://zulfaa.nl/articles/prayer-times/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/prayer-times/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/prayer-times/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/prayer-times/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/prayer-times/"/>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://zulfaa.nl/ar/articles/prayer-times/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/prayer-times/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/prayer-times/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/prayer-times/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/prayer-times/"/>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://zulfaa.nl/nl/articles/prayer-times/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/prayer-times/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/prayer-times/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/prayer-times/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/prayer-times/"/>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://zulfaa.nl/articles/reading-and-listening/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/reading-and-listening/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/reading-and-listening/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/reading-and-listening/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/reading-and-listening/"/>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://zulfaa.nl/ar/articles/reading-and-listening/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/reading-and-listening/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/reading-and-listening/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/reading-and-listening/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/reading-and-listening/"/>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://zulfaa.nl/nl/articles/reading-and-listening/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/reading-and-listening/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/reading-and-listening/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/reading-and-listening/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/reading-and-listening/"/>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://zulfaa.nl/articles/offline-and-privacy/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/offline-and-privacy/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/offline-and-privacy/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/offline-and-privacy/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/offline-and-privacy/"/>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://zulfaa.nl/ar/articles/offline-and-privacy/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/offline-and-privacy/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/offline-and-privacy/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/offline-and-privacy/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/offline-and-privacy/"/>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://zulfaa.nl/nl/articles/offline-and-privacy/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/articles/offline-and-privacy/"/>
-    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/articles/offline-and-privacy/"/>
-    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/articles/offline-and-privacy/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/articles/offline-and-privacy/"/>
-    <priority>0.6</priority>
+    <loc>https://zulfaa.nl/nl/updates/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://zulfaa.nl/updates/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://zulfaa.nl/ar/updates/"/>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://zulfaa.nl/nl/updates/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zulfaa.nl/updates/"/>
+    <priority>0.8</priority>
   </url>
 </urlset>

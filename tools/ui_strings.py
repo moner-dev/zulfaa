@@ -69,6 +69,11 @@ S["en"] = {
     "zoomLabel": "Open the %s screenshot full size",
     "lbTitle": "Screenshot preview",
     "lbClose": "Close preview",
+    # The English PRIMARY nav is four links, not five: the English pages put
+    # Data deletion in the footer only. chrome.header() reads this list and
+    # keeps a generated English page (articles, updates) in step with them.
+    # Arabic and Dutch have no such list and keep all five.
+    "headerNav": ["", "privacy/", "terms/", "support/"],
 }
 
 # ─────────────────────────── ARABIC ───────────────────────────

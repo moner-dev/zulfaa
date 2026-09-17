@@ -2390,7 +2390,8 @@ html[lang="ar"] .fo-say h2 {
    screenshots are themselves cream-heavy, and on cream they would dissolve
    into the page. Full-bleed, so it reads as its own room. */
 
-.showcase {
+.showcase,
+.spring {
   position: relative;
   isolation: isolate;
   margin-top: 3.5rem;
@@ -2405,7 +2406,8 @@ html[lang="ar"] .fo-say h2 {
 }
 
 /* the khatim lattice again, struck in gold — the same motif as the page ground */
-.showcase::before {
+.showcase::before,
+.spring::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -2971,6 +2973,1031 @@ html[lang="ar"] .fo-say h2 {
   }
   .lb-btn {
     transition: none;
+  }
+}
+
+/* ── the Updates Oasis ──────────────────────────────────────────────────
+   /updates/ - what has changed in ZULFAA, and what has not shipped yet.
+
+   AN EDITORIAL PAGE, NOT A CHANGELOG. Two columns on a desktop: a quiet
+   release navigator on the reading-start side, one release told as a story on
+   the other. Scale contrast does the hierarchy - a large headline, a small
+   tracked eyebrow, a lead paragraph, hairlines instead of boxes - and gold is
+   spent on almost nothing: the journey thread, the current node, the number
+   of a key change. A release a person can have is a solid node; one that does
+   not exist yet is a hollow one. That is the whole vocabulary.
+
+   Every offset is a logical property, so Arabic mirrors itself: the navigator
+   sits on the right, the thread runs down the right edge, flipped sections
+   flip the other way. No rule in this block names left or right.
+
+   WITHOUT SCRIPT the stylesheet decides which release is shown from the URL
+   fragment (:target, and :has() for a link into a section of a release).
+   With script, assets/updates.js sets .is-selected and the same rules step
+   aside. Both the navigator and every "View all … changes" are <details>. */
+
+/* ── the page frame ───────────────────────────────────────────────────── */
+
+.oasis-shell {
+  width: 100%;
+  max-width: 92rem;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* this page runs wider than the reading column the rest of the site uses,
+   so its header runs with it - the brand should sit on the same edge as the
+   navigator, not a hand's width inboard of it */
+html:has(.oasis) .site-head .shell {
+  max-width: 92rem;
+}
+
+.oasis-head {
+  padding: 2rem 0 1.5rem;
+  max-width: 44rem;
+}
+
+.oasis-eyebrow {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+.oasis-head h1 {
+  margin: 0.35rem 0 0;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+
+.oasis-lede {
+  margin: 1rem 0 0;
+  max-width: 34rem;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+
+.oasis-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  padding-top: 0.5rem;
+}
+
+@media (min-width: 68.8rem) {
+  .oasis-grid {
+    grid-template-columns: 14rem minmax(0, 1fr);
+    gap: clamp(3rem, 6vw, 6rem);
+    padding-top: 1.5rem;
+  }
+}
+
+/* ── the release navigator ────────────────────────────────────────────── */
+
+.release-nav {
+  --node: 0.7rem;
+}
+
+.release-nav > summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 1.1rem;
+  border: 1px solid rgba(42, 138, 128, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 0.95rem;
+  color: var(--teal-deep);
+}
+
+.release-nav > summary::-webkit-details-marker {
+  display: none;
+}
+
+.release-nav > summary:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+.rn-current b {
+  font-weight: 700;
+}
+
+.release-nav .chev {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: none;
+  transition: transform 0.18s ease;
+}
+
+.release-nav[open] > summary .chev {
+  transform: rotate(180deg);
+}
+
+.release-nav > nav {
+  margin-top: 0.6rem;
+  padding: 1rem 1.25rem 0.75rem;
+  border: 1px solid rgba(42, 138, 128, 0.18);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.rn-title {
+  margin: 0 0 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.rn-list {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-inline-start: 1.6rem;
+}
+
+/* the journey thread */
+.rn-list::before {
+  content: "";
+  position: absolute;
+  inset-block: 0.9rem 0.9rem;
+  inset-inline-start: calc(var(--node) / 2 - 0.5px);
+  width: 1px;
+  background: rgba(230, 184, 76, 0.6);
+}
+
+.rn-item {
+  position: relative;
+}
+
+.rn-item a {
+  display: block;
+  padding: 0.55rem 0;
+  text-decoration: none;
+  color: var(--ink-soft);
+}
+
+.rn-node {
+  position: absolute;
+  top: 0.95rem;
+  inset-inline-start: calc(-1.6rem);
+  width: var(--node);
+  height: var(--node);
+  border-radius: 999px;
+  background: var(--cream);
+  box-shadow: inset 0 0 0 1.5px rgba(42, 138, 128, 0.7);
+}
+
+.rn-item.is-released .rn-node {
+  background: var(--teal-deep);
+  box-shadow: none;
+}
+
+.rn-item a[aria-current] .rn-node {
+  box-shadow: 0 0 0 3px var(--cream), 0 0 0 4.5px var(--gold);
+}
+
+.rn-item.is-released a[aria-current] .rn-node {
+  box-shadow: 0 0 0 3px var(--cream), 0 0 0 4.5px var(--gold);
+}
+
+.rn-label {
+  display: block;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+
+.rn-item a[aria-current] .rn-label {
+  color: var(--teal-deep);
+}
+
+.rn-version {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+}
+
+.rn-status {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.rn-item.is-upcoming .rn-status {
+  color: var(--gold-ink);
+}
+
+.rn-item a:hover .rn-label {
+  color: var(--teal);
+}
+
+.rn-item a:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 68.8rem) {
+  .release-nav {
+    position: sticky;
+    top: 1.5rem;
+  }
+
+  .release-nav > summary {
+    display: none; /* the sidebar has no lid: it is always open */
+  }
+
+  .release-nav > nav {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  .rn-item a {
+    padding: 0.7rem 0;
+  }
+}
+
+/* ── which release is shown ───────────────────────────────────────────── */
+
+.stage {
+  min-width: 0;
+}
+
+/* without script: the fragment decides, else the newest */
+.stage:not(.js-select) .release {
+  display: none;
+}
+
+.stage:not(.js-select) .release:first-child {
+  display: block;
+}
+
+.stage:not(.js-select):has(.release:target, .release :target) .release {
+  display: none;
+}
+
+.stage:not(.js-select):has(.release:target, .release :target) .release:target,
+.stage:not(.js-select):has(.release:target, .release :target) .release:has(:target) {
+  display: block;
+}
+
+/* with script: the class decides */
+.stage.js-select .release:not(.is-selected),
+.release[hidden] {
+  display: none;
+}
+
+/* ── the release hero ─────────────────────────────────────────────────── */
+
+.release {
+  scroll-margin-top: 1rem;
+}
+
+.rel-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+  padding: 0.5rem 0 2.5rem;
+}
+
+@media (min-width: 56rem) {
+  .rel-hero {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    padding: 1rem 0 3.5rem;
+  }
+}
+
+.rel-eyebrow {
+  margin: 0;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+}
+
+.rel-status.is-upcoming {
+  color: var(--gold-ink);
+}
+
+.rel-status.is-released {
+  color: var(--teal);
+}
+
+.rel-hero h2 {
+  margin: 0.8rem 0 0;
+  font-size: clamp(2rem, 3.8vw, 3.2rem);
+  line-height: 1.08;
+  letter-spacing: -0.012em;
+  max-width: 18ch;
+}
+
+.rel-lead {
+  margin: 1.25rem 0 0;
+  max-width: 36rem;
+  font-size: 1.12rem;
+  line-height: 1.65;
+  color: var(--ink);
+}
+
+.rel-meta {
+  margin: 1.1rem 0 0;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.rel-hero-side {
+  min-width: 0;
+}
+
+/* what is inside - the hero's side when there is no picture yet */
+.hero-inside {
+  border-inline-start: 1px solid rgba(230, 184, 76, 0.55);
+  padding-inline-start: 1.5rem;
+  max-width: 24rem;
+}
+
+.hero-inside-title {
+  margin: 0 0 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+.hero-inside-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-inside-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.6rem 0;
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--teal-deep);
+  border-top: 1px solid rgba(42, 138, 128, 0.12);
+}
+
+.hero-inside-list li:first-child {
+  border-top: 0;
+}
+
+.ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  background: var(--teal-soft);
+  color: var(--teal-deep);
+}
+
+.ico svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+
+.hero-inside-list .ico {
+  margin-top: 0.05rem;
+}
+
+/* a phone, when there is one */
+.device {
+  margin: 0;
+  justify-self: end;
+  max-width: 15.5rem;
+}
+
+.device img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 1.6rem;
+  border: 1px solid rgba(42, 138, 128, 0.18);
+  background: var(--cream);
+  box-shadow: 0 30px 60px -40px rgba(14, 51, 46, 0.55);
+}
+
+.device figcaption {
+  margin-top: 0.75rem;
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+}
+
+.hero-device {
+  margin-inline-start: auto;
+}
+
+/* ── the section nav ──────────────────────────────────────────────────
+   Sticky, and made of the site's deep band so it is unmistakably ZULFAA's
+   as it follows the reader: the khatim struck once in gold at its start,
+   cream labels, and a gold underline - not colour alone - for the section
+   in view. It scrolls sideways on a phone; the mark stays put. */
+
+.sec-nav {
+  position: sticky;
+  top: 0.75rem;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.55rem 1.1rem 0.55rem 1rem;
+  margin: 0.25rem 0 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid var(--band-edge);
+  background-color: var(--band-mid);
+  background-image: linear-gradient(120deg, var(--band-top) 0%, var(--band-mid) 55%, var(--band-deep) 100%);
+  box-shadow: 0 18px 40px -30px rgba(14, 51, 46, 0.75);
+  color: var(--cream);
+}
+
+/* the bar floats a little below the top edge; this covers the strip above
+   it, so scrolling text does not show through the gap */
+.sec-nav::before {
+  content: "";
+  position: absolute;
+  inset-inline: -1px;
+  bottom: 100%;
+  height: 0.8rem;
+  background: var(--cream);
+}
+
+.sec-mark {
+  flex: none;
+  width: 1.45rem;
+  height: 1.45rem;
+  color: var(--gold);
+  padding-inline-end: 0.9rem;
+  margin-inline-end: 0.1rem;
+  border-inline-end: 1px solid rgba(254, 249, 240, 0.16);
+  box-sizing: content-box;
+}
+
+.sec-links {
+  display: flex;
+  gap: 1.6rem;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 0.3rem 0.15rem;
+}
+
+.sec-links::-webkit-scrollbar {
+  display: none;
+}
+
+.sec-nav a {
+  flex: none;
+  padding: 0.15rem 0 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--on-band);
+  border-bottom: 2px solid transparent;
+}
+
+.sec-nav a:hover {
+  color: var(--on-band-strong);
+  border-bottom-color: rgba(230, 184, 76, 0.55);
+}
+
+.sec-nav a[aria-current] {
+  color: var(--on-band-strong);
+  font-weight: 700;
+  border-bottom-color: var(--gold);
+}
+
+.sec-nav a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── a feature story ──────────────────────────────────────────────────── */
+
+.story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.75rem;
+  padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+  border-top: 1px solid rgba(42, 138, 128, 0.14);
+  scroll-margin-top: 4.75rem;
+}
+
+.rel-body > .story:first-child,
+.rel-body > .story-split:first-child {
+  border-top: 0;
+}
+
+@media (min-width: 56rem) {
+  .story {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(2.5rem, 5vw, 5.5rem);
+    align-items: start;
+  }
+
+  .story.flip .story-text {
+    order: 2;
+  }
+
+  .story.flip .story-side {
+    order: 1;
+  }
+}
+
+.story-area {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+}
+
+.story h3 {
+  margin: 1rem 0 0;
+  font-size: clamp(1.6rem, 2.4vw, 2.25rem);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  max-width: 20ch;
+}
+
+.story-lead {
+  margin: 1rem 0 0;
+  max-width: 32rem;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--ink-soft);
+}
+
+/* the changes that matter most - large, numbered, and nothing around them */
+.keys {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: keys;
+}
+
+.keys li {
+  counter-increment: keys;
+  display: grid;
+  grid-template-columns: 2.4rem minmax(0, 1fr);
+  column-gap: 0.5rem;
+  padding: 1.05rem 0;
+  border-top: 1px solid rgba(42, 138, 128, 0.14);
+}
+
+.keys li:first-child {
+  border-top: 0;
+  padding-top: 0.2rem;
+}
+
+.keys li::before {
+  content: counter(keys, decimal-leading-zero);
+  grid-row: 1 / span 2;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--gold-ink);
+  padding-top: 0.2rem;
+}
+
+html[lang="ar"] .keys li::before {
+  content: counter(keys, arabic-indic);
+}
+
+.keys b {
+  display: block;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.08rem;
+  line-height: 1.3;
+  color: var(--teal-deep);
+}
+
+.keys span {
+  display: block;
+  margin-top: 0.3rem;
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+}
+
+.story-device {
+  justify-self: start;
+}
+
+.story.flip .story-device {
+  justify-self: end;
+}
+
+/* ── view all … changes ───────────────────────────────────────────────── */
+
+.story-all {
+  grid-column: 1 / -1;
+  order: 3; /* after both columns, whichever way the section is flipped */
+  margin-top: 0.5rem;
+}
+
+.story-all > summary {
+  list-style: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--teal-deep);
+  border-bottom: 1px solid rgba(26, 90, 82, 0.35);
+  padding-bottom: 0.15rem;
+}
+
+.story-all > summary::-webkit-details-marker {
+  display: none;
+}
+
+.story-all > summary:hover {
+  color: var(--teal);
+}
+
+.story-all > summary:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+.story-all .chev {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.18s ease;
+}
+
+.story-all[open] > summary .chev {
+  transform: rotate(180deg);
+}
+
+.sa-close,
+.story-all[open] .sa-open {
+  display: none;
+}
+
+.story-all[open] .sa-close {
+  display: inline;
+}
+
+.full-list {
+  list-style: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  max-width: 52rem;
+}
+
+.full-list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.25rem 1.5rem;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(42, 138, 128, 0.14);
+}
+
+@media (min-width: 40rem) {
+  .full-list li {
+    grid-template-columns: 8rem minmax(0, 1fr);
+  }
+}
+
+.fl-kind {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-top: 0.35rem;
+}
+
+.k-new .fl-kind {
+  color: var(--gold-ink);
+}
+
+.fl-body b {
+  display: block;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.02rem;
+  line-height: 1.3;
+  color: var(--teal-deep);
+}
+
+.fl-body p {
+  margin: 0.3rem 0 0;
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+  max-width: 40rem;
+}
+
+.fl-link {
+  margin-top: 0.4rem !important;
+  font-size: 0.88rem !important;
+}
+
+/* ── two small areas, side by side ────────────────────────────────────── */
+
+.story-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2.5rem clamp(2.5rem, 5vw, 5.5rem);
+  padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+  border-top: 1px solid rgba(42, 138, 128, 0.14);
+}
+
+@media (min-width: 56rem) {
+  .story-split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.story.small {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 0;
+  border-top: 0;
+  scroll-margin-top: 5.75rem;
+}
+
+.story-split .story.small + .story.small {
+  padding-inline-start: clamp(0rem, 4vw, 2.5rem);
+  border-inline-start: 1px solid rgba(42, 138, 128, 0.14);
+}
+
+@media (max-width: 55.99rem) {
+  .story-split .story.small + .story.small {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(42, 138, 128, 0.14);
+  }
+}
+
+.story.small h3 {
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
+}
+
+.story.small .keys li:first-child {
+  padding-top: 1.05rem;
+  border-top: 1px solid rgba(42, 138, 128, 0.14);
+}
+
+.story.small .keys b {
+  font-size: 1rem;
+}
+
+.rel-body > .story.small:not(.story-split .story.small) {
+  padding: clamp(2.5rem, 5vw, 4.5rem) 0;
+  border-top: 1px solid rgba(42, 138, 128, 0.14);
+}
+
+/* ── launch, told briefly ─────────────────────────────────────────────── */
+
+.compact {
+  padding: 1rem 0 2rem;
+  border-top: 1px solid rgba(42, 138, 128, 0.14);
+}
+
+.compact > h3 {
+  margin: 1.75rem 0 1.5rem;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
+
+.compact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.75rem clamp(2.5rem, 5vw, 5rem);
+}
+
+.compact > h3 {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 56rem) {
+  .compact {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+.held {
+  list-style: none;
+  margin: 0.6rem 0 0;
+  padding: 0;
+}
+
+.held li {
+  padding: 0.7rem 0;
+  border-top: 1px solid rgba(42, 138, 128, 0.12);
+}
+
+.held b {
+  display: block;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--teal-deep);
+}
+
+.held span {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+}
+
+/* ── worth knowing ────────────────────────────────────────────────────── */
+
+.worth,
+.pending {
+  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  border-top: 1px solid rgba(42, 138, 128, 0.14);
+  scroll-margin-top: 4.75rem;
+}
+
+.worth h3,
+.pending h3 {
+  margin: 0 0 1.5rem;
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+}
+
+.worth-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 2rem clamp(2rem, 4vw, 3.5rem);
+}
+
+.note {
+  border-inline-start: 2px solid var(--gold);
+  padding-inline-start: 1.1rem;
+}
+
+.note-kind {
+  margin: 0 0 0.3rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-ink);
+}
+
+.note h4,
+.pending-item h4 {
+  margin: 0 0 0.35rem;
+  font-family: "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  color: var(--teal-deep);
+}
+
+.note p,
+.pending-item p {
+  margin: 0;
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+}
+
+.note-link {
+  margin-top: 0.45rem !important;
+  font-size: 0.88rem !important;
+}
+
+/* ── still being written ──────────────────────────────────────────────── */
+
+.pending-note {
+  margin: -1rem 0 1.25rem;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+.pending-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+  padding: 1.5rem 1.75rem;
+  border: 1.5px dashed rgba(42, 138, 128, 0.35);
+  border-radius: 1.4rem;
+}
+
+.pending-item h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* ── how versions work ────────────────────────────────────────────────── */
+
+.how-versions {
+  max-width: 40rem;
+  padding: clamp(3rem, 6vw, 5rem) 0 2rem;
+}
+
+.how-versions h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.3rem;
+}
+
+.how-versions p {
+  margin: 0.5rem 0 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+}
+
+/* ── Arabic ───────────────────────────────────────────────────────────── */
+
+html[lang="ar"] .oasis-eyebrow,
+html[lang="ar"] .rel-eyebrow,
+html[lang="ar"] .story-area,
+html[lang="ar"] .rn-title,
+html[lang="ar"] .rn-status,
+html[lang="ar"] .fl-kind,
+html[lang="ar"] .note-kind,
+html[lang="ar"] .hero-inside-title {
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+html[lang="ar"] .oasis-head h1,
+html[lang="ar"] .rel-hero h2,
+html[lang="ar"] .story h3 {
+  letter-spacing: normal;
+  line-height: 1.3;
+}
+
+html[lang="ar"] .rn-label,
+html[lang="ar"] .keys b,
+html[lang="ar"] .fl-body b,
+html[lang="ar"] .held b,
+html[lang="ar"] .note h4,
+html[lang="ar"] .pending-item h4,
+html[lang="ar"] .keys li::before,
+html[lang="ar"] h4 {
+  font-family: "Cairo", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* ── motion, print ────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .release-nav .chev,
+  .story-all .chev {
+    transition: none;
+  }
+}
+
+@media print {
+  .release-nav,
+  .sec-nav {
+    display: none;
+  }
+
+  /* a printed record shows every release and every list */
+  .stage .release,
+  .stage.js-select .release:not(.is-selected),
+  .release[hidden] {
+    display: block !important;
+  }
+
+  .story-all > .full-list {
+    display: block !important;
+    content-visibility: visible !important;
+  }
+
+  .story-all::details-content {
+    content-visibility: visible !important;
   }
 }
 

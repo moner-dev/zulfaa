@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="referrer" content="no-referrer" />
+    <title>ZULFAA — private preview</title>
+    <meta name="theme-color" content="#0e332e" />
+    <style>
+      :root {
+        --cream: #fef9f0;
+        --band-deep: #0e332e;
+        --band-mid: #164b45;
+        --gold: #e6b84c;
+        --on-band: rgba(254, 249, 240, 0.78);
+        --on-band-soft: rgba(254, 249, 240, 0.62);
+      }
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        display: grid;
+        place-items: center;
+        padding: 1.5rem;
+        background: radial-gradient(120% 90% at 50% 0%, var(--band-mid), var(--band-deep));
+        color: var(--cream);
+        font: 400 1rem/1.6 "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      .card {
+        width: 100%;
+        max-width: 26rem;
+        text-align: center;
+      }
+      .mark {
+        width: 4.5rem;
+        height: 4.5rem;
+        margin: 0 auto 1.25rem;
+        display: block;
+      }
+      h1 {
+        margin: 0 0 0.35rem;
+        font-size: 1.35rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+      p.note {
+        margin: 0 0 1.75rem;
+        color: var(--on-band-soft);
+        font-size: 0.9rem;
+      }
+      form { display: flex; flex-direction: column; gap: 0.75rem; }
+      input[type="password"] {
+        width: 100%;
+        padding: 0.85rem 1rem;
+        border-radius: 0.85rem;
+        border: 1px solid rgba(254, 249, 240, 0.22);
+        background: rgba(254, 249, 240, 0.06);
+        color: var(--cream);
+        font: inherit;
+        text-align: center;
+        letter-spacing: 0.08em;
+      }
+      input[type="password"]:focus {
+        outline: 2px solid var(--gold);
+        outline-offset: 2px;
+        border-color: transparent;
+      }
+      button {
+        padding: 0.85rem 1rem;
+        border: 0;
+        border-radius: 0.85rem;
+        background: var(--gold);
+        color: #3a2a06;
+        font: 600 1rem/1 inherit;
+        font-family: inherit;
+        cursor: pointer;
+      }
+      button:disabled { opacity: 0.6; cursor: default; }
+      .langs {
+        margin-top: 1.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 1.25rem;
+        font-size: 0.85rem;
+      }
+      .langs a { color: var(--on-band); text-decoration: none; border-bottom: 1px solid rgba(230, 184, 76, 0.45); padding-bottom: 2px; }
+      .langs a[aria-current="true"] { color: var(--gold); }
+      .msg { min-height: 1.4rem; margin: 0.9rem 0 0; font-size: 0.85rem; color: var(--gold); }
+      @media (prefers-reduced-motion: no-preference) {
+        .card { animation: rise 320ms ease-out both; }
+        @keyframes rise { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="card">
+      <img class="mark" src="/assets/emblem-256.webp" alt="" width="72" height="72" />
+      <h1>Private preview</h1>
+      <p class="note">This page is not part of the public website. Enter the passphrase to read it.</p>
+      <form id="gate" autocomplete="off">
+        <input id="pass" type="password" placeholder="passphrase" aria-label="passphrase" autocomplete="current-password" required />
+        <button type="submit" id="go">Open</button>
+      </form>
+      <p class="msg" id="msg" role="status" aria-live="polite"></p>
+      <nav class="langs">
+        <a href="?lang=en" data-lang="en">English</a>
+        <a href="?lang=ar" data-lang="ar">العربية</a>
+        <a href="?lang=nl" data-lang="nl">Nederlands</a>
+      </nav>
+    </main>
+
+    <script>
+      /* Decrypts <lang>.enc in the browser and replaces the document with it.
+         AES-256-GCM under a PBKDF2-SHA256 key; nothing readable is stored in
+         the repository, and the passphrase never leaves this page. It is kept
+         in sessionStorage only so switching language does not ask again, and
+         the tab closing clears it. */
+      const KEY = 'zulfaa.uprev.pass'
+      const LANGS = ['en', 'ar', 'nl']
+      const params = new URLSearchParams(location.search)
+      const lang = LANGS.includes(params.get('lang')) ? params.get('lang') : 'en'
+
+      const form = document.getElementById('gate')
+      const input = document.getElementById('pass')
+      const button = document.getElementById('go')
+      const msg = document.getElementById('msg')
+      for (const a of document.querySelectorAll('.langs a')) {
+        if (a.dataset.lang === lang) a.setAttribute('aria-current', 'true')
+      }
+
+      async function unlock(passphrase, quiet) {
+        button.disabled = true
+        msg.textContent = 'Opening…'
+        try {
+          const response = await fetch(lang + '.enc', { cache: 'no-store' })
+          if (!response.ok) throw new Error('missing')
+          const payload = await response.json()
+          const bytes = (b64) => Uint8Array.from(atob(b64), (c) => c.charCodeAt(0))
+          const material = await crypto.subtle.importKey('raw', new TextEncoder().encode(passphrase), 'PBKDF2', false, ['deriveKey'])
+          const key = await crypto.subtle.deriveKey(
+            { name: 'PBKDF2', salt: bytes(payload.salt), iterations: payload.iterations, hash: 'SHA-256' },
+            material,
+            { name: 'AES-GCM', length: 256 },
+            false,
+            ['decrypt'],
+          )
+          const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: bytes(payload.iv) }, key, bytes(payload.ct))
+          sessionStorage.setItem(KEY, passphrase)
+          const html = new TextDecoder().decode(plain)
+          document.open()
+          document.write(html)
+          document.close()
+        } catch (error) {
+          sessionStorage.removeItem(KEY)
+          button.disabled = false
+          msg.textContent = quiet ? '' : 'That passphrase does not open this page.'
+          input.value = ''
+          input.focus()
+        }
+      }
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault()
+        if (input.value) unlock(input.value, false)
+      })
+
+      const remembered = sessionStorage.getItem(KEY)
+      if (remembered) unlock(remembered, true)
+      else input.focus()
+    </script>
+  </body>
+</html>

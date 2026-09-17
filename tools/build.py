@@ -8,6 +8,7 @@ from pages import build_privacy, build_terms, build_support, build_delete
 from home import build_home
 from articles import ARTICLES, build_index as build_articles_index, build_article
 from notfound import build as build_notfound
+from updates import build_updates
 
 BUILDERS = {"": build_home, "privacy/": build_privacy, "terms/": build_terms,
             "delete-data/": build_delete, "support/": build_support}
@@ -41,6 +42,18 @@ written.append(write("404.html", build_notfound()))
 # 404's composition. tools/forbidden.py explains what Pages can and cannot do.
 from forbidden import apply as apply_forbidden
 written += apply_forbidden()
+
+# ── the Updates Oasis: generated in ALL THREE languages ─────────────────────
+# Every other English page at the root is a hand-written, Play-facing original
+# and build.py only re-renders its header. /updates/ is the exception, and
+# deliberately so: its every word comes from tools/releases/*.json, so an
+# English copy kept by hand would be a fourth transcription of the same data
+# and the first thing to fall out of step with the other two languages. Adding
+# a future release stays "one file plus one index line, in three languages at
+# once" only if no language is maintained by hand.
+for lang in ("en", "ar", "nl"):
+    path = os.path.join(LANGS[lang]["base"], "updates/", "index.html").replace("\\", "/")
+    written.append(write(path, build_updates(lang)))
 
 EN_PAGES = {"index.html": ("", 0), "privacy/index.html": ("privacy/", 1),
             "terms/index.html": ("terms/", 1), "delete-data/index.html": ("delete-data/", 1),

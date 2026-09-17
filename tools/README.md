@@ -1,6 +1,6 @@
 # Site generator — the `ar/` and `nl/` subtrees
 
-The site is fifteen pages: five in each of English, Arabic and Dutch. Hand-kept,
+The site is eighteen pages: six in each of English, Arabic and Dutch. Hand-kept,
 fifteen copies of a privacy policy drift. These scripts keep them from drifting.
 
 **The generated HTML is committed.** GitHub Pages serves plain static files and
@@ -12,6 +12,7 @@ never runs any of this — the tools are a maintenance aid, not a build step.
 | --- | --- | --- |
 | `/`, `/privacy/`, `/terms/`, `/delete-data/`, `/support/` | hand-written | **No** — these are the approved, Play-facing English originals |
 | `/ar/…`, `/nl/…` | `content.json` + `ui_strings.py` + `dd_strings.py` | Yes |
+| `/updates/`, `/ar/updates/`, `/nl/updates/` | `releases/*.json` + `updates_strings.py` | **Yes, all three** — see below |
 
 The English pages are touched by `build.py` for three things only, each
 idempotent: re-rendering their `<header>` (menu button, primary links, language
@@ -58,12 +59,72 @@ when a feature ships.
 | **Owner preview** | `ZULFAA_LEGAL_PREVIEW=1 …` | `content.preview.json`, then `.preview/` | **no — both gitignored** |
 
 The extractor prints what it omitted on every public run. The full owner
-procedure is `Docs/LEGAL_RELEASE_WORKFLOW.md` in the app repository.
+procedure is `Docs/operations/LEGAL_RELEASE_WORKFLOW.md` in the app repository.
 
 > **The English pages are never touched in preview mode.** They are the
 > approved, Play-facing originals; rewriting them while showing you a preview is
 > exactly the accident this mechanism exists to prevent. Preview English in the
 > app instead: `npm run dev`, then `/?legal=preview`.
+
+## The Updates Oasis — `/updates/`
+
+The one page generated in all three languages. Every word of release content is
+in `releases/<id>.json`; every word of the page's own furniture is in
+`updates_strings.py`; `updates.py` only renders. The content model it
+implements is `Docs/releases/UPDATES_OASIS_CONTENT_MODEL.md` in the app repository, and
+its evidence gate is `Docs/releases/APP_UPDATE_HISTORY.md` there: **nothing goes
+into a release file that is not proven in that history.**
+
+**Adding a release:** write `releases/<id>.json`, put its id at the top of
+`releases/index.json`, run `build.py`. Nothing else. If a release ever needs the
+markup or the stylesheet changed, the model has failed and should be fixed.
+
+**The gate** (`releases.render_state`):
+
+| `distributed` | `status` | On the page |
+|---|---|---|
+| `true` | `released` | an available release: filled pill, a date, the archive |
+| `false` | `upcoming` | "not released yet": outline pill, **no date**, never in the hero band |
+| `false` | `internal` (or anything else) | **nothing** — kept as record, rendered nowhere |
+
+`status: released` with `distributed: false`, or `upcoming` with `true`, is a
+validation error, as is an upcoming entry with a publish date. So an internal QA
+phase cannot become a public release entry by omission: it has to be marked,
+deliberately, one of the two.
+
+**Validation** runs on every build and stops it on any failure: unique permanent
+id, all three languages everywhere prose appears, 3–5 headline changes that
+exist, alt text in three languages on every image, a date whose precision
+matches (`YYYY-MM-DD` = day, `YYYY-MM` = month, `null` = unknown), non-empty
+evidence, and every area one of the nine. `python tools/releases.py` runs it on
+its own and lists what the page will show.
+
+**Content still to come** goes in an upcoming release's `pending` list — the
+Qur'an audit is the first — and renders as a dashed "Still being written"
+block, so the gap is visible instead of the list looking finished. When the
+content arrives it becomes ordinary `changes` entries in the same file and the
+pending item is deleted. The page needs no change for that.
+
+**A deep link** is `/updates/#r-<id>`; a section is `#r-<id>-<area>` and a
+single change `#c-<id>-<change id>`. Ids are permanent. Every release is in
+the page; the URL fragment decides which one is SHOWN - the stylesheet reads
+`:target` (and `:has()` for a link into a section) with scripting off, and
+`assets/updates.js` sets `.is-selected` with it on. The newest release shows
+when there is no fragment.
+
+**The writing rule.** Say what changed, why the user will notice it, then
+stop. A change's `body` is one short paragraph - one to three sentences,
+roughly 25-55 words in English - with no internal mechanics, no audit
+reasoning and no edge cases a normal reader does not need. The title carries
+the headline; the body does not repeat it. Behaviour that matters (what is
+never switched on for you, what stays an estimate) is kept; justification is
+cut. All three languages are written to the same length.
+
+**Curated stories.** A release may carry `stories: [{area, title, lead}]` -
+the headline and lead an area's section opens with. An area without one opens
+with its most important change instead, so a story is never required. The
+two or three changes a section shows are the release's `headline` entries for
+that area first, then the newest kind; the rest sit behind "View all".
 
 ## Running it
 
@@ -109,6 +170,10 @@ maintenance_art.py    the 503 sticker -> assets/maintenance-{562,842,1122}.webp
 notfound.py           404.html: the English page + Arabic/Dutch pages in <template>s, chosen by URL
 forbidden.py          /403/ in en, ar, nl
 error_pages_check.mjs headless-Chrome check of what visitors get on 404, 403 and maintenance
+releases/             the Updates Oasis source: index.json + one file per release
+releases.py           loads and validates it; the release gate lives here
+updates.py            the /updates/ page, all three languages
+updates_strings.py    that page's headings, labels, area names and icons
 ```
 
 ## The homepage carousel

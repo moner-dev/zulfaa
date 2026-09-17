@@ -46,7 +46,7 @@ CAPS = {
 }
 ALT = {"ar": "لقطة من تطبيق زُلْفَى: %s", "nl": "Schermafbeelding uit de ZULFAA-app: %s"}
 
-PAGES = ["", "articles/", "privacy/", "terms/", "delete-data/", "support/"]
+PAGES = ["", "articles/", "privacy/", "terms/", "delete-data/", "support/", "updates/"]
 
 
 def e(t):
@@ -155,7 +155,7 @@ def asset(rel):
 
 
 ASSET_RE = re.compile(r"assets/(?:zulfaa\.css|nav\.js|carousel\.js|hero3d\.js|quick-access\.js"
-                      r"|contact-config\.js|contact\.js|lantern\.js|scrolldock\.js)(?:\?v=[0-9a-f]+)?")
+                      r"|contact-config\.js|contact\.js|lantern\.js|scrolldock\.js|updates\.js)(?:\?v=[0-9a-f]+)?")
 
 
 def reversion(text):
@@ -370,7 +370,15 @@ def header_html(lang, page, depth, links):
 
 def header(lang, page, depth):
     a = up(depth)
-    links = [(a + LANGS[lang]["base"] + href, label, href == page) for href, label in nav_items(lang)]
+    items = nav_items(lang)
+    # The English primary nav carries four of the five links - the English
+    # pages put Data deletion in their footer only - so a generated English
+    # page filters to the same four rather than inventing a fifth. Arabic and
+    # Dutch declare no such list and keep all five, as their pages already do.
+    only = S[lang].get("headerNav")
+    if only is not None:
+        items = [(h, label) for h, label in items if h in only]
+    links = [(a + LANGS[lang]["base"] + href, label, href == page) for href, label in items]
     return header_html(lang, page, depth, links)
 
 
