@@ -15,3 +15,6 @@ tools/hero3d/node_modules/
 # committed would be a live page.
 .preview/
 tools/content.preview.json
+
+# the Admin's image rollback copies must never be committed (they would be served)
+*.admin-backup

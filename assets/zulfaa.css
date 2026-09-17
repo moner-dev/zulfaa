@@ -4001,6 +4001,54 @@ html[lang="ar"] h4 {
   }
 }
 
+/* ── the Updates Oasis inside the redesign ─────────────────────────────
+   The redesign's header is sticky as well (4.6rem tall), and the lantern
+   hangs at the reading start of every page's first shell. So the Oasis's own
+   sticky parts start BELOW the header instead of sliding under it, anchor
+   jumps land below it too, and the page heading keeps out of the lantern's
+   column where the lantern hangs at the start (above 56.25rem). In dark, the
+   navigator's lids take the theme's surface instead of white glass. */
+
+.oasis {
+  --oasis-head: 4.6rem;
+}
+
+.sec-nav {
+  top: calc(var(--oasis-head) + 0.75rem);
+}
+
+.release {
+  scroll-margin-top: calc(var(--oasis-head) + 1rem);
+}
+
+.story,
+.worth,
+.pending {
+  scroll-margin-top: calc(var(--oasis-head) + 4.75rem);
+}
+
+.story.small {
+  scroll-margin-top: calc(var(--oasis-head) + 5.75rem);
+}
+
+@media (min-width: 68.8rem) {
+  .release-nav {
+    top: calc(var(--oasis-head) + 1.5rem);
+  }
+}
+
+@media (min-width: 56.26rem) {
+  .oasis-head {
+    padding-inline-start: calc(var(--ln-w) + var(--ln-gap));
+  }
+}
+
+html[data-site-theme="dark"] .release-nav > summary,
+html[data-site-theme="dark"] .release-nav > nav {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
 /* ── the lower page ───────────────────────────────────────────────────
    One ending in four movements, each warmer or deeper than the last:
 
