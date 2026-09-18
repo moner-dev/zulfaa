@@ -7,9 +7,13 @@ block belongs to the home page only, and the other pages link to it.
 WHAT IS CLAIMED, AND ON WHAT EVIDENCE
   local first ....... the Qur'an, adhkar, du'as, prayer times and the qibla are
                       calculated or stored on the device; no advertising, no
-                      analytics, no tracking code; no real name, email, phone
-                      number or date of birth is asked for. This is the app's
-                      own Privacy Policy, which this site mirrors from the app.
+                      analytics, no tracking code IN THE APP; no real name,
+                      email, phone number or date of birth is asked for. This
+                      is the app's own Privacy Policy, which this site mirrors.
+  this website ...... no ads, no cross-site tracking; limited internal analytics
+                      (owner's wording of 18 September 2026, the same sentence in
+                      the trust point and under "About this website" on the
+                      privacy page's footer). Nothing technical is said in public.
   needs internet .... recitation audio, tafsir on demand, the daily challenge.
   availability ...... "in final preparation for the first Android release, not
                       yet on Google Play" - the former Availability section,
@@ -28,7 +32,7 @@ import html, os, sys
 from urllib.parse import quote
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from chrome import S, C, LANGS, MAIL, DEV, GITHUB, e, up, lang_links, nav_items  # noqa: E402
+from chrome import S, C, LANGS, MAIL, DEV, GITHUB, e, up, lang_links, nav_items, asset  # noqa: E402
 
 # Verified external addresses only. Empty string = the link is not rendered.
 INSTAGRAM = ""
@@ -47,7 +51,7 @@ T = {
         "points": [
             ("On the device", "The Qur'an and the adhkar travel with the app, and prayer times and the qibla are calculated on your phone rather than fetched."),
             ("Kept, not collected", "Saved items, favourites, reading progress and your adhkar count stay on the device. The app asks for no real name, email address, phone number or date of birth."),
-            ("Nothing watching", "No advertising, no analytics, no tracking code — in the app and on this website."),
+            ("Ads and analytics", "No ads or cross-site tracking. We use limited internal analytics to protect the website and improve the service."),
             ("When the internet is used", "Recitation audio, tafsir and the optional daily challenge load only when you open them."),
         ],
         "trustLink": "Read the Privacy Policy",
@@ -97,6 +101,8 @@ T = {
         "countLeft": "{n} characters left",
         "countOver": "{n} characters over the limit",
         "footTag": "Prayer times, the Qur'an, adhkar and the qibla in one calm place, calculated on your own phone.",
+        "siteNoteTitle": "About this website",
+        "siteNote": "No ads or cross-site tracking. We use limited internal analytics to protect the website and improve the service.",
         "footLinks": "Pages",
         "footMain": "The site",
         "footLegal": "Legal",
@@ -115,7 +121,7 @@ T = {
         "points": [
             ("على الجهاز", "القرآن والأذكار يسافران مع التطبيق، ومواقيت الصلاة والقبلة تُحسب على هاتفك لا تُجلب."),
             ("محفوظ لا مجموع", "المحفوظات والمفضلة وتقدّم القراءة وعدّ أذكارك تبقى على الجهاز. ولا يطلب التطبيق اسمك الحقيقي ولا بريدك ولا رقم هاتفك ولا تاريخ ميلادك."),
-            ("لا شيء يراقب", "بلا إعلانات ولا تحليلات ولا أي كود تتبّع، في التطبيق وفي هذا الموقع."),
+            ("الإعلانات والتحليلات", "لا إعلانات ولا تتبّع عبر المواقع. نستخدم تحليلات داخلية محدودة لحماية الموقع وتحسين الخدمة."),
             ("متى يُستخدم الإنترنت", "صوت التلاوة والتفسير وتحدّي اليوم الاختياري تُحمَّل عند فتحها وحدها."),
         ],
         "trustLink": "اقرأ سياسة الخصوصية",
@@ -151,6 +157,8 @@ T = {
         "countLeft": "الأحرف المتبقية: {n}",
         "countOver": "زيادة على الحد: {n}",
         "footTag": "مواقيت الصلاة والقرآن والأذكار والقبلة في مكان هادئ واحد، تُحسب على هاتفك.",
+        "siteNoteTitle": "عن هذا الموقع",
+        "siteNote": "لا إعلانات ولا تتبّع عبر المواقع. نستخدم تحليلات داخلية محدودة لحماية الموقع وتحسين الخدمة.",
         "footLinks": "الصفحات",
         "footMain": "الموقع",
         "footLegal": "الوثائق",
@@ -169,7 +177,7 @@ T = {
         "points": [
             ("Op het apparaat", "De Koran en de adhkar reizen mee met de app, en gebedstijden en de qibla worden op uw telefoon berekend in plaats van opgehaald."),
             ("Bewaard, niet verzameld", "Opgeslagen items, favorieten, leesvoortgang en uw adhkar-telling blijven op het apparaat. De app vraagt niet om uw echte naam, e-mailadres, telefoonnummer of geboortedatum."),
-            ("Niets dat meekijkt", "Geen advertenties, geen analytics, geen trackingcode — in de app en op deze website."),
+            ("Advertenties en analyses", "Geen advertenties of tracking tussen websites. We gebruiken beperkte interne analyses om de website te beveiligen en de service te verbeteren."),
             ("Wanneer internet nodig is", "Recitatie-audio, tafsir en de optionele dagelijkse uitdaging laden alleen wanneer u ze opent."),
         ],
         "trustLink": "Lees het privacybeleid",
@@ -205,6 +213,8 @@ T = {
         "countLeft": "Nog {n} tekens",
         "countOver": "{n} tekens te veel",
         "footTag": "Gebedstijden, de Koran, adhkar en de qibla op één rustige plek, berekend op uw eigen telefoon.",
+        "siteNoteTitle": "Over deze website",
+        "siteNote": "Geen advertenties of tracking tussen websites. We gebruiken beperkte interne analyses om de website te beveiligen en de service te verbeteren.",
         "footLinks": "Pagina's",
         "footMain": "De site",
         "footLegal": "Juridisch",
@@ -436,6 +446,21 @@ def render_footer(lang, page, depth):
     # continues its material instead of starting a new one. A sibling selector
     # cannot say this - </main> closes between the two - so the page says it.
     joined = " is-joined" if page in CONTACT_PLACES else ""
+    # The Privacy Policy is the APP's policy, mirrored from the app. What this
+    # WEBSITE does is said here, in the footer of that page only, so the mirrored
+    # legal text above stays exactly the app's.
+    site_note = (f"""
+        <div class="fo-say" id="about-this-website" style="margin-block-start:2rem">
+          <h2>{esc(t['siteNoteTitle'])}</h2>
+          <p>{esc(t['siteNote'])}</p>
+        </div>
+""" if page == "privacy/" else "")
+    # Every page ends with this footer, the English originals included (write_en.py
+    # replaces this region), so the two analytics files reach all of them from
+    # here. Configuration first: analytics.js reads it, and returns at once while
+    # it says `enabled: false`.
+    analytics = "\n".join('      <script src="%s%s" defer></script>' % (a, asset("assets/" + js))
+                          for js in ("analytics-config.js", "analytics.js"))
     return f"""    <footer class="site-foot{joined}">
       <div class="shell">
         <div class="fo-grid">
@@ -472,11 +497,12 @@ def render_footer(lang, page, depth):
             </ul>
           </div>
         </div>
-
+{site_note}
         <div class="fo-base">
           <p class="fo-dev">{e(s['devBy'])} <span class="dev">Moner Intelligence Systems</span></p>
           <p class="fo-copy">{e(s['rights'])}</p>
         </div>
       </div>
+{analytics}
     </footer>
 """

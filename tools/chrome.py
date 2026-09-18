@@ -155,7 +155,8 @@ def asset(rel):
 
 
 ASSET_RE = re.compile(r"assets/(?:zulfaa\.css|nav\.js|carousel\.js|hero3d\.js|quick-access\.js"
-                      r"|contact-config\.js|contact\.js|lantern\.js|scrolldock\.js|updates\.js)(?:\?v=[0-9a-f]+)?")
+                      r"|contact-config\.js|contact\.js|lantern\.js|scrolldock\.js|updates\.js"
+                      r"|analytics-config\.js|analytics\.js)(?:\?v=[0-9a-f]+)?")
 
 
 def reversion(text):
