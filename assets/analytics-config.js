@@ -12,7 +12,7 @@
    Nothing else is configurable from here. What is measured is fixed by
    assets/analytics.js: no cookie, no device storage, no form contents. */
 window.ZULFAA_ANALYTICS = {
-  enabled: false,
+  enabled: true,
   endpoint: ({
     "zulfaa.nl": "https://zulfaa-analytics.moner-intelligence.workers.dev/v1/collect",
   })[location.hostname] || "",
