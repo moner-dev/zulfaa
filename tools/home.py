@@ -12,6 +12,7 @@ from lower import render_trust, render_contact
 # shared with the English original (tools/write_en.py). THUMB_W and BASE_RATIO
 # live there too.
 from showcase import render_showcase, render_lightbox, THUMB_W, BASE_RATIO  # noqa: E402,F401
+from salah import render_salah  # noqa: E402
 
 
 # ── the hero phone ────────────────────────────────────────────────────────
@@ -125,6 +126,7 @@ def build_home(lang):
       </div>
 
 {render_showcase(lang, a)}
+{render_salah(lang, a)}
 {render_journal(lang, a)}
 
 {render_trust(lang, a)}

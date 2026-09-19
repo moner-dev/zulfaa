@@ -1,0 +1,198 @@
+/* ZULFAA homepage - the Salah section.
+   A deep band (the same material as the showcase and the footer) holding one cinematic stage. Two layers on the stage:
+   .salah-scene (poster + WebGL canvas) and .salah-ui (plain HTML). The interface is small on purpose: the scene is the
+   hero, the glass only carries what matters now. One component family, six restrained tints via [data-phase]. */
+
+.salah {
+  --salah-ink: #fef9f0;
+  --salah-ink-soft: rgba(254, 249, 240, 0.78);
+  --salah-tint: #fff4dc;   /* about 20 % of the glass; the other 80 % is the same neutral smoke in every state */
+  --salah-accent: #f4d58a;
+  --salah-smoke: 0.5;      /* how dark the neutral glass is: darker by day so cream text holds over a bright scene */
+  background: linear-gradient(180deg, var(--band-deep) 0%, var(--foot-top) 38%, var(--foot-deep) 100%);
+  color: var(--salah-ink);
+  padding-block: clamp(3.5rem, 7vw, 6rem) clamp(3rem, 6vw, 5rem);
+}
+.salah[data-phase="fajr"]    { --salah-tint: #b9b6ff; --salah-accent: #cfd0ff; --salah-smoke: 0.34; }
+.salah[data-phase="sunrise"] { --salah-tint: #ffd39a; --salah-accent: #ffe0b0; --salah-smoke: 0.46; }
+.salah[data-phase="dhuhr"]   { --salah-tint: #fff4dc; --salah-accent: #f6e2a8; --salah-smoke: 0.54; }
+.salah[data-phase="asr"]     { --salah-tint: #ffc677; --salah-accent: #ffd793; --salah-smoke: 0.52; }
+.salah[data-phase="maghrib"] { --salah-tint: #ff9a4a; --salah-accent: #ffc07a; --salah-smoke: 0.4; }
+.salah[data-phase="isha"]    { --salah-tint: #7d8cff; --salah-accent: #b9c4ff; --salah-smoke: 0.3; }
+
+.salah-head { text-align: center; margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem); }
+.salah-eyebrow { margin: 0 0 0.6rem; color: var(--gold-band); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+html[lang="ar"] .salah-eyebrow { letter-spacing: 0; font-size: 0.95rem; }
+.salah h2 { margin: 0; color: var(--on-band-strong); font-size: clamp(1.85rem, 1.2rem + 2.4vw, 2.9rem); line-height: 1.12; }
+.salah-note { margin: 0.9rem auto 0; max-width: 40rem; color: var(--on-band-soft); font-size: 1.02rem; line-height: 1.6; }
+
+/* ---- the stage: one projection, three framings (the script sets data-framing from the stage's own width) ---- */
+.salah-stage { position: relative; width: min(100% - 2rem, 100rem); margin-inline: auto; }
+/* wide desktop: a framed cinematic canvas, never edge to edge - a constant share of the viewport, centred, with a ceiling.
+   Two numbers to tune. The frame only changes size; the scene keeps its 1916:821 projection, so nothing stretches. */
+@media (min-width: 80rem) {
+  .salah { --salah-stage-share: 92vw; --salah-stage-max: 110rem; }
+  .salah-stage { width: min(100% - 2rem, var(--salah-stage-share), var(--salah-stage-max)); }
+}
+.salah-scene { position: relative; overflow: hidden; border-radius: clamp(1rem, 2vw, 1.75rem); aspect-ratio: 4 / 5; background: #07141a; box-shadow: 0 0 0 1px var(--band-edge), 0 30px 70px -30px rgba(0, 0, 0, 0.8); }
+@media (min-width: 40rem) { .salah-scene { aspect-ratio: 4 / 3; } }
+@media (min-width: 64rem) { .salah-scene { aspect-ratio: 1916 / 821; } }
+.salah-stage[data-framing="mobile"] .salah-scene { aspect-ratio: 4 / 5; }
+.salah-stage[data-framing="tablet"] .salah-scene { aspect-ratio: 4 / 3; }
+.salah-stage[data-framing="desktop"] .salah-scene { aspect-ratio: 1916 / 821; }
+.salah-poster, .salah-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.salah-poster { object-fit: cover; object-position: 30% 60%; }
+.salah-canvas { opacity: 0; transition: opacity 0.9s ease; }
+.salah.is-live .salah-canvas { opacity: 1; }
+.salah-noscript { margin: 1rem auto 0; max-width: 40rem; text-align: center; color: var(--on-band-soft); }
+
+/* ---- glass: one material ---- */
+.salah-glass {
+  color: var(--salah-ink);
+  background:
+    linear-gradient(155deg, color-mix(in srgb, var(--salah-tint) 26%, transparent) 0%, color-mix(in srgb, var(--salah-tint) 7%, transparent) 46%, transparent 72%),
+    rgba(8, 17, 22, var(--salah-smoke));
+  -webkit-backdrop-filter: blur(18px) saturate(1.35);
+  backdrop-filter: blur(18px) saturate(1.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 1.5rem;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.22), inset 0 0 0 1px color-mix(in srgb, var(--salah-tint) 12%, transparent), 0 22px 44px -22px rgba(0, 0, 0, 0.7);
+  transition: background-color 1.2s ease, box-shadow 1.2s ease;
+}
+@supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))) {
+  .salah-glass { background: linear-gradient(155deg, color-mix(in srgb, var(--salah-tint) 18%, transparent), transparent 70%), rgba(8, 17, 22, 0.82); }
+}
+
+/* ---- the prayer focus ---- */
+.salah-ui { position: relative; z-index: 1; }
+.salah-focus { position: relative; margin: -5.25rem auto 0; width: min(100% - 1.5rem, 30rem); padding: 1.1rem 1.25rem 1rem; display: grid; grid-template-columns: 1fr auto; column-gap: 1rem; align-items: end; }
+.salah-badge { grid-column: 1 / -1; margin: 0 0 0.35rem; display: inline-flex; align-items: center; gap: 0.5rem; color: var(--salah-accent); font-size: 0.74rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+html[lang="ar"] .salah-badge { letter-spacing: 0; font-size: 0.9rem; }
+.salah-icons { display: inline-grid; width: 1.35rem; height: 1.35rem; }
+.salah-ico { grid-area: 1 / 1; width: 100%; height: 100%; opacity: 0; transition: opacity 0.8s ease; }
+.salah[data-phase="fajr"] .salah-ico-fajr, .salah[data-phase="sunrise"] .salah-ico-sunrise, .salah[data-phase="dhuhr"] .salah-ico-dhuhr,
+.salah[data-phase="asr"] .salah-ico-asr, .salah[data-phase="maghrib"] .salah-ico-maghrib, .salah[data-phase="isha"] .salah-ico-isha { opacity: 1; }
+.salah[data-status="now"] .salah-badge::after { content: ""; width: 0.5rem; height: 0.5rem; border-radius: 50%; background: var(--salah-accent); box-shadow: 0 0 0 0 color-mix(in srgb, var(--salah-accent) 70%, transparent); animation: salah-pulse 2.4s ease-out infinite; }
+@keyframes salah-pulse { to { box-shadow: 0 0 0 0.6rem transparent; } }
+.salah-name, .salah-time { font-family: "Fredoka", "Cairo", ui-sans-serif, system-ui, sans-serif; margin: 0; line-height: 1; text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35); }
+.salah-name { font-size: clamp(1.7rem, 1.35rem + 1.4vw, 2.3rem); font-weight: 600; }
+.salah-time { grid-row: 2 / span 2; grid-column: 2; font-size: clamp(2.5rem, 1.9rem + 2.6vw, 3.5rem); font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.01em; direction: ltr; }
+.salah-countdown { margin: 0.4rem 0 0; color: var(--salah-ink-soft); font-size: 0.98rem; font-variant-numeric: tabular-nums; }
+
+/* ---- the day line: six evenly spaced points; the marker travels between them with the clock ---- */
+.salah-line { grid-column: 1 / -1; position: relative; list-style: none; margin: 1.15rem 0 0; padding: 0 0 1.35rem; display: grid; grid-template-columns: repeat(6, 1fr); }
+.salah-line::before { content: ""; position: absolute; inset-inline: 8.333%; top: 0.3rem; height: 2px; border-radius: 2px; background: linear-gradient(to right, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.34), rgba(255, 255, 255, 0.16)); }
+.salah-point { position: relative; display: grid; justify-items: center; }
+.salah-dot { width: 0.62rem; height: 0.62rem; border-radius: 50%; background: rgba(8, 17, 22, 0.85); border: 1.5px solid rgba(255, 255, 255, 0.6); transition: background-color 0.6s ease, border-color 0.6s ease, transform 0.6s ease; }
+.salah-point.is-milestone .salah-dot { width: 0.5rem; height: 0.5rem; margin-top: 0.06rem; border-radius: 0.12rem; transform: rotate(45deg); border-color: rgba(255, 255, 255, 0.45); } /* sunrise: a milestone, not a prayer */
+.salah-point.is-past .salah-dot { background: rgba(255, 255, 255, 0.72); border-color: rgba(255, 255, 255, 0.85); }
+.salah-point.is-focus .salah-dot { background: var(--salah-accent); border-color: var(--salah-accent); transform: scale(1.25); }
+.salah-point.is-milestone.is-past .salah-dot { transform: rotate(45deg); }
+.salah-point-name { position: absolute; top: 1.05rem; white-space: nowrap; font-size: 0.72rem; font-weight: 600; color: var(--salah-ink-soft); opacity: 0; transition: opacity 0.5s ease; }
+.salah-point:first-child .salah-point-name, .salah-point:nth-child(6) .salah-point-name, .salah-point.is-focus .salah-point-name { opacity: 1; }
+.salah-point.is-focus .salah-point-name { color: var(--salah-accent); }
+/* the focus label wins: an end label steps aside when its neighbour is the focus */
+.salah-line:has(.salah-point:nth-child(2).is-focus) .salah-point:first-child .salah-point-name,
+.salah-line:has(.salah-point:nth-child(5).is-focus) .salah-point:nth-child(6) .salah-point-name { opacity: 0; }
+.salah-marker { position: absolute; top: 0.3rem; inset-inline-start: calc(8.333% + var(--at, 0) * 83.334%); width: 0; height: 0; transition: inset-inline-start 1s linear; }
+.salah-marker::before { content: ""; position: absolute; inset-inline-start: -0.5rem; top: -0.45rem; width: 1rem; height: 1rem; border-radius: 50%; background: radial-gradient(circle, #fff 0 22%, color-mix(in srgb, var(--salah-accent) 85%, transparent) 26% 46%, transparent 72%); filter: drop-shadow(0 0 6px color-mix(in srgb, var(--salah-accent) 80%, transparent)); }
+.salah-marker.is-night::before { opacity: 0.55; }
+
+/* ---- chips, panels ---- */
+/* one row, always: a long label (Dutch, a long city name) shortens with an ellipsis instead of pushing the glass taller */
+.salah-actions { grid-column: 1 / -1; display: flex; flex-wrap: nowrap; gap: 0.4rem; margin-top: 0.35rem; min-width: 0; }
+.salah-chip { display: inline-flex; align-items: center; gap: 0.3rem; min-height: 2.1rem; padding: 0.25rem 0.62rem; min-width: 0; max-width: 100%; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.22); background: rgba(255, 255, 255, 0.08); color: var(--salah-ink); font: inherit; font-size: 0.8rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease; }
+/* the city gives way first (names can be long); the times label is a fixed short phrase and is never cut */
+.salah-chip[data-salah-open="times"] { flex: none; }
+.salah-chip svg { width: 0.95rem; height: 0.95rem; flex: none; opacity: 0.85; }
+.salah-chip > span:not(.vh) { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.salah-chip:hover { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.4); }
+.salah-chip[aria-expanded="true"] { background: color-mix(in srgb, var(--salah-accent) 26%, rgba(255, 255, 255, 0.08)); border-color: color-mix(in srgb, var(--salah-accent) 60%, transparent); }
+.salah-chip:focus-visible, .salah-x:focus-visible, .salah-city:focus-visible, .salah-link:focus-visible { outline: 2px solid var(--gold-band); outline-offset: 2px; }
+
+.salah-panel { margin: 0.75rem auto 0; width: min(100% - 1.5rem, 30rem); padding: 1rem 1.15rem 1.1rem; }
+.salah-panel-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.6rem; }
+.salah-panel h3 { margin: 0; font-size: 1.05rem; color: var(--salah-ink); }
+.salah-x { display: grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; border: 1px solid rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.06); color: inherit; cursor: pointer; }
+.salah-x svg { width: 1rem; height: 1rem; }
+.salah-rows { list-style: none; margin: 0; padding: 0; }
+.salah-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.5rem 0.15rem; border-top: 1px solid rgba(255, 255, 255, 0.12); font-size: 1rem; }
+.salah-row:first-child { border-top: 0; }
+.salah-row-time { font-variant-numeric: tabular-nums; font-weight: 600; direction: ltr; }
+.salah-row.is-milestone { color: var(--salah-ink-soft); font-size: 0.92rem; font-style: italic; }
+.salah-row.is-focus { color: var(--salah-accent); font-weight: 700; }
+.salah-fine { margin: 0.7rem 0 0; color: var(--salah-ink-soft); font-size: 0.8rem; line-height: 1.5; }
+.salah-search { display: flex; align-items: center; gap: 0.5rem; padding: 0 0.75rem; border-radius: 0.9rem; border: 1px solid rgba(255, 255, 255, 0.22); background: rgba(0, 0, 0, 0.22); transition: border-color 0.18s ease, box-shadow 0.18s ease; }
+/* focus belongs to the ROUNDED FIELD, not to a box around the bare input: the border turns warm white and an inset ring of the
+   same colour doubles its weight (1px border + 1px ring = 2px, no layout shift), with a whisper of separation from the glass.
+   The input's own outline is removed only because this replaces it - for mouse and keyboard alike. */
+.salah-search:focus-within { border-color: rgba(255, 250, 240, 0.94); box-shadow: inset 0 0 0 1px rgba(255, 250, 240, 0.94), 0 0 0 3px rgba(255, 250, 240, 0.09); }
+.salah-search input:focus, .salah-search input:focus-visible { outline: none; }
+.salah-search svg { width: 1rem; height: 1rem; flex: none; opacity: 0.8; }
+.salah-search input { flex: 1; min-width: 0; min-height: 2.6rem; border: 0; background: none; color: inherit; font: inherit; font-size: 1rem; }
+.salah-search input::placeholder { color: rgba(254, 249, 240, 0.6); }
+/* the browser's own "clear" control of type=search (Chrome, Edge, Safari), kept for what it does and redrawn for how it looks:
+   the native blue glyph is switched off and a small warm-white cross is painted through a mask, so its colour can follow
+   hover and press. It stays on the inline-end side by itself, so Arabic needs nothing extra. Browsers without this control
+   (Firefox) simply show none, as before. */
+.salah-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none; appearance: none; flex: none; width: 1rem; height: 1rem; margin: 0; margin-inline-start: 0.4rem; cursor: pointer;
+  background-color: rgba(254, 249, 240, 0.6);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.25 4.25l7.5 7.5M11.75 4.25l-7.5 7.5' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.25 4.25l7.5 7.5M11.75 4.25l-7.5 7.5' fill='none' stroke='%23000' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: background-color 0.15s ease;
+}
+.salah-search input::-webkit-search-cancel-button:hover { background-color: rgba(254, 249, 240, 0.88); }
+.salah-search input::-webkit-search-cancel-button:active { background-color: #fef9f0; }
+.salah-cities { list-style: none; margin: 0.6rem 0 0; padding: 0; max-height: 13.5rem; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.salah-city { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; width: 100%; padding: 0.55rem 0.5rem; border: 0; border-radius: 0.6rem; background: none; color: inherit; font: inherit; text-align: start; cursor: pointer; }
+.salah-city:hover, .salah-city[aria-current="true"] { background: rgba(255, 255, 255, 0.1); }
+.salah-city[aria-current="true"] { color: var(--salah-accent); font-weight: 700; }
+.salah-city-country { color: var(--salah-ink-soft); font-size: 0.82rem; }
+.salah-link { margin-top: 0.5rem; padding: 0.35rem 0; border: 0; background: none; color: var(--salah-accent); font: inherit; font-size: 0.88rem; font-weight: 600; text-decoration: underline; text-underline-offset: 0.2em; cursor: pointer; }
+
+/* The site's floating scroll dock (assets/zulfaa.css, bottom-right, fixed) steps aside while a Salah panel is open - the
+   same manners it already has for the drawer and the contact form - so it can never sit on the panel's close button or
+   its last rows on a small phone. It returns the moment the panel closes. Only while the stage is on screen (today's times
+   rest open on tablet and desktop, and the dock serves the whole page), and only below 80rem: from there up the framed
+   stage ends well short of the dock's corner, so the two never meet. */
+@media (max-width: 79.99rem) {
+  body:has(.salah.has-panel.is-onscreen) .dock { opacity: 0; visibility: hidden; pointer-events: none; }
+}
+
+/* ---- tablet: the same lower glass, wider, the day line beside the time ---- */
+@media (min-width: 40rem) {
+  .salah-focus { width: min(100% - 3rem, 38rem); margin-top: -6.5rem; padding: 1.3rem 1.6rem 1.15rem; }
+  .salah-panel { width: min(100% - 3rem, 38rem); }
+}
+
+/* ---- desktop: composed INTO the picture, low on the left over the dark near bank - clear of the mosque, the
+        sunset peak, the sun's and the moon's paths and the long reflections ---- */
+@media (min-width: 64rem) {
+  .salah-ui { position: absolute; inset: 0; pointer-events: none; }
+  .salah-ui > * { pointer-events: auto; }
+  .salah-focus { position: absolute; inset-inline-start: clamp(1rem, 2.4%, 2.75rem); bottom: clamp(1rem, 5.5%, 2.75rem); margin: 0; width: clamp(19rem, 21.5%, 21rem); padding: 1.15rem 1.3rem 1rem; }
+  .salah-name { font-size: clamp(1.7rem, 1.1rem + 0.9vw, 2.15rem); }
+  .salah-time { font-size: clamp(2.4rem, 1.5rem + 1.5vw, 3.2rem); }
+  /* The side panel has two resting places, both physical (the picture is mirrored for nobody, so right-to-left pages use
+     the same two): the right EDGE, and an INNER anchor whose right side stops at 71.5 % of the stage - clear of the low
+     afternoon sun (78 % across at Asr), the sunset behind the right-hand peak (82-86 %) and the glitter path beneath it.
+     The script picks one from the shared day model ([data-panel-anchor]); the panel glides between them, once, slowly. */
+  .salah { --salah-panel-right: clamp(1rem, 2.4%, 2.75rem); }
+  .salah[data-panel-anchor="inner"] { --salah-panel-right: 28.5%; }
+  .salah-panel { position: absolute; right: var(--salah-panel-right); bottom: clamp(1rem, 5.5%, 2.75rem); margin: 0; width: clamp(17.5rem, 22%, 21rem); max-height: 88%; overflow: auto; transition: right 1.1s cubic-bezier(0.33, 0, 0.2, 1), background-color 1.2s ease, box-shadow 1.2s ease; }
+  /* the picture is mirrored for nobody: in right-to-left pages the focus stays on the dark bank at the LEFT */
+  html[dir="rtl"] .salah-focus { inset-inline-start: auto; left: clamp(1rem, 2.4%, 2.75rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .salah-canvas, .salah-glass, .salah-panel, .salah-ico, .salah-dot, .salah-point-name, .salah-search { transition: none; }
+  .salah-marker { transition: none; }
+  .salah[data-status="now"] .salah-badge::after { animation: none; }
+}
+@media (forced-colors: active) {
+  .salah-glass { border: 1px solid CanvasText; background: Canvas; color: CanvasText; backdrop-filter: none; }
+  .salah-dot, .salah-marker::before { forced-color-adjust: none; }
+  .salah-search input::-webkit-search-cancel-button { forced-color-adjust: none; background-color: CanvasText; }
+  .salah-search:focus-within { outline: 2px solid Highlight; outline-offset: 2px; } /* shadows are dropped in this mode */
+}

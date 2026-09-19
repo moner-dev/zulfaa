@@ -27,6 +27,7 @@ from lower import render_trust, render_contact, render_footer, CONTACT_PLACES  #
 from lantern import host as lantern_host  # noqa: E402
 from scrolldock import render as render_dock  # noqa: E402
 from showcase import render_showcase, render_lightbox  # noqa: E402
+from salah import render_salah  # noqa: E402
 
 PAGES = {"index.html": ("", 0), "privacy/index.html": ("privacy/", 1),
          "terms/index.html": ("terms/", 1), "delete-data/index.html": ("delete-data/", 1),
@@ -134,8 +135,26 @@ def fix_showcase(t):
     return t
 
 
+SALAH_MARKED = re.compile(r"[ ]*<!-- salah:start -->.*?<!-- salah:end -->\n", re.S)
+SHOWCASE_END = "<!-- showcase:end -->\n"
+
+
+def fix_salah(t):
+    """The Salah section, from tools/salah.py, right after the showcase. Remove-then-write-one, so running twice is
+    a no-op; with salah.ENABLED False the block is simply removed."""
+    t = SALAH_MARKED.sub("", t)
+    block = render_salah("en", "")
+    if not block:
+        return t
+    i = t.find(SHOWCASE_END)
+    assert i != -1, "index.html: no showcase to place the Salah section after"
+    j = i + len(SHOWCASE_END)
+    return t[:j] + block + t[j:]
+
+
 def fix_home(t):
     t = fix_showcase(t)
+    t = fix_salah(t)
     block = lower_block()
     if LOWER_MARKED.search(t):
         t = LOWER_MARKED.sub(lambda m: block, t, count=1)

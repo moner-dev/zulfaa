@@ -985,6 +985,82 @@
       </section>
       <!-- showcase:end -->
 
+        <!-- salah:start -->
+        <link rel="stylesheet" href="../assets/salah-d8fa6f77b6/salah.css" />
+        <section class="salah" id="prayer-times" aria-labelledby="salah-title" data-salah data-phase="dhuhr" data-status="next" data-lang="ar" data-assets="../assets/salah-d8fa6f77b6/">
+          <div class="shell salah-head">
+            <p class="salah-eyebrow">مواقيت الصلاة</p>
+            <h2 id="salah-title">يومك، حيث أنت</h2>
+            <p class="salah-note">مشهد حيّ ليومك من الفجر إلى العشاء. تُحسب المواقيت داخل متصفحك لموقع تقريبي، ولا يغادر هذه الصفحة أي شيء عنك.</p>
+          </div>
+
+          <div class="salah-stage">
+            <!-- layer 1: the scene. One canvas; the poster is the placeholder and the fallback. -->
+            <div class="salah-scene">
+              <img class="salah-poster" src="../assets/salah-d8fa6f77b6/poster/dhuhr.webp" width="1280" height="548" alt="مسجد على ضفة بحيرة تحت الجبال، كما يبدو في هذا الوقت من اليوم." loading="lazy" decoding="async" data-salah-poster />
+              <canvas class="salah-canvas" aria-hidden="true" data-salah-canvas></canvas>
+            </div>
+
+            <!-- layer 2: the interface. Plain HTML over the scene; never drawn into it. -->
+            <div class="salah-ui" data-salah-ui hidden>
+              <div class="salah-focus salah-glass" role="group" aria-labelledby="salah-name">
+                <p class="salah-badge"><span class="salah-icons"><svg class="salah-ico salah-ico-fajr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15.5 4.2a5 5 0 1 0 4.3 7.3 4.2 4.2 0 0 1-4.3-7.3Z"/><path d="M3 18.5h18"/><path d="M7 21.5h10"/></svg><svg class="salah-ico salah-ico-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6.5 17a5.5 5.5 0 0 1 11 0"/><path d="M3 17h2M19 17h2M12 6.5V9M5.6 10.6l1.5 1.5M18.4 10.6l-1.5 1.5"/><path d="M8 20.5h8"/></svg><svg class="salah-ico salah-ico-dhuhr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6"/></svg><svg class="salah-ico salah-ico-asr" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="14.5" cy="9.5" r="3.6"/><path d="M14.5 2.8v1.7M21.2 9.5h-1.7M19.2 4.8 18 6M9.8 4.8 11 6M7.8 9.5h1.7"/><path d="M3 18.5h18"/><path d="M9 18.5 4.5 21.5"/></svg><svg class="salah-ico salah-ico-maghrib" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6.5 16a5.5 5.5 0 0 1 11 0"/><path d="M3 16h18"/><path d="M12 5.5V8M5.6 9.6l1.5 1.5M18.4 9.6l-1.5 1.5"/><path d="M6 19.5h12M9 22.5h6"/></svg><svg class="salah-ico salah-ico-isha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.8 3.6a7.4 7.4 0 1 0 5.6 12.6A6.4 6.4 0 0 1 14.8 3.6Z"/><path d="m18.6 5.2.5 1.4 1.4.5-1.4.5-.5 1.4-.5-1.4-1.4-.5 1.4-.5Z"/></svg></span><span data-salah-text="status">الصلاة القادمة</span></p>
+                <p class="salah-name" id="salah-name" data-salah-text="name">الظهر</p>
+                <p class="salah-time"><time data-salah-text="time">--:--</time></p>
+                <p class="salah-countdown" data-salah-text="countdown">&nbsp;</p>
+                <ol class="salah-line" aria-label="اليوم، من الفجر إلى العشاء" data-salah-line>
+                  <li class="salah-point" data-point="fajr"><span class="salah-dot" aria-hidden="true"></span><span class="salah-point-name">الفجر</span></li>
+                  <li class="salah-point is-milestone" data-point="sunrise"><span class="salah-dot" aria-hidden="true"></span><span class="salah-point-name">الشروق</span></li>
+                  <li class="salah-point" data-point="dhuhr"><span class="salah-dot" aria-hidden="true"></span><span class="salah-point-name">الظهر</span></li>
+                  <li class="salah-point" data-point="asr"><span class="salah-dot" aria-hidden="true"></span><span class="salah-point-name">العصر</span></li>
+                  <li class="salah-point" data-point="maghrib"><span class="salah-dot" aria-hidden="true"></span><span class="salah-point-name">المغرب</span></li>
+                  <li class="salah-point" data-point="isha"><span class="salah-dot" aria-hidden="true"></span><span class="salah-point-name">العشاء</span></li>
+                  <li class="salah-marker" aria-hidden="true" data-salah-marker></li>
+                </ol>
+                <div class="salah-actions">
+                  <button class="salah-chip" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="salah-places" data-salah-open="places"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21s6.5-5.4 6.5-10.5a6.5 6.5 0 1 0-13 0C5.5 15.6 12 21 12 21Z"/><circle cx="12" cy="10.5" r="2.3"/></svg><span data-salah-text="place">&nbsp;</span><span class="vh"> - تغيير الموقع</span></button>
+                  <button class="salah-chip" type="button" aria-expanded="false" aria-controls="salah-times" data-salah-open="times"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 7h11M8 12h11M8 17h11"/><path d="M4.5 7h.01M4.5 12h.01M4.5 17h.01"/></svg><span data-salah-text="timesToggle">مواقيت اليوم</span></button>
+                </div>
+              </div>
+
+              <div class="salah-panel salah-glass" id="salah-times" data-salah-panel="times" hidden>
+                <div class="salah-panel-head">
+                  <h3 data-salah-text="timesTitle">مواقيت اليوم</h3>
+                  <button class="salah-x" type="button" aria-label="إغلاق" data-salah-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+                </div>
+                <ol class="salah-rows">
+                  <li class="salah-row" data-row="fajr"><span class="salah-row-name">الفجر</span><time class="salah-row-time" data-salah-time="fajr">--:--</time></li>
+                  <li class="salah-row is-milestone" data-row="sunrise"><span class="salah-row-name">الشروق</span><time class="salah-row-time" data-salah-time="sunrise">--:--</time></li>
+                  <li class="salah-row" data-row="dhuhr"><span class="salah-row-name">الظهر</span><time class="salah-row-time" data-salah-time="dhuhr">--:--</time></li>
+                  <li class="salah-row" data-row="asr"><span class="salah-row-name">العصر</span><time class="salah-row-time" data-salah-time="asr">--:--</time></li>
+                  <li class="salah-row" data-row="maghrib"><span class="salah-row-name">المغرب</span><time class="salah-row-time" data-salah-time="maghrib">--:--</time></li>
+                  <li class="salah-row" data-row="isha"><span class="salah-row-name">العشاء</span><time class="salah-row-time" data-salah-time="isha">--:--</time></li>
+                </ol>
+                <p class="salah-fine">الشروق نهاية وقت الفجر، وليس صلاة.</p>
+                <p class="salah-fine" data-salah-text="methodNote">طريقة رابطة العالم الإسلامي، والعصر على القول المشهور. المواقيت تقريبية، وقد يختلف مسجدك المحلي بدقائق.</p>
+              </div>
+
+              <div class="salah-panel salah-glass" id="salah-places" role="dialog" aria-labelledby="salah-places-title" data-salah-panel="places" hidden>
+                <div class="salah-panel-head">
+                  <h3 id="salah-places-title">اختر مدينة</h3>
+                  <button class="salah-x" type="button" aria-label="إغلاق" data-salah-close><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+                </div>
+                <label class="salah-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.4-4.4"/></svg><span class="vh">ابحث عن مدينة</span>
+                  <input type="search" placeholder="ابحث عن مدينة" autocomplete="off" spellcheck="false" data-salah-search /></label>
+                <ul class="salah-cities" data-salah-cities></ul>
+                <p class="salah-fine" data-salah-text="placeSource">&nbsp;</p>
+                <button class="salah-link" type="button" data-salah-timezone>استخدم منطقتي الزمنية بدلًا من ذلك</button>
+              </div>
+
+              <p class="vh" aria-live="polite" data-salah-text="announce"></p>
+            </div>
+            <noscript><p class="salah-noscript">تحتاج مواقيت الصلاة إلى JavaScript. تُظهر الصورة المسجد وقت الظهيرة.</p></noscript>
+          </div>
+          <script type="application/json" data-salah-words>{"sceneAlt": "مسجد على ضفة بحيرة تحت الجبال، كما يبدو في هذا الوقت من اليوم.", "next": "الصلاة القادمة", "now": "الآن", "tomorrow": "غدًا", "in_hm": "بعد {h} س {m} د", "in_m": "بعد {m} د", "in_soon": "بعد أقل من دقيقة", "since_m": "بدأت قبل {m} د", "since_now": "بدأت الآن", "names": {"fajr": "الفجر", "sunrise": "الشروق", "dhuhr": "الظهر", "asr": "العصر", "maghrib": "المغرب", "isha": "العشاء"}, "dayLine": "اليوم، من الفجر إلى العشاء", "todaysTimes": "مواقيت اليوم", "hideTimes": "إخفاء مواقيت اليوم", "timesTitle": "اليوم في {place}", "sunriseNote": "الشروق نهاية وقت الفجر، وليس صلاة.", "methodNote": "طريقة رابطة العالم الإسلامي، والعصر على القول المشهور. المواقيت تقريبية، وقد يختلف مسجدك المحلي بدقائق.", "adjustedNote": "عند هذا العرض يقصر الليل اليوم عن زوايا الشفق المعتادة، فيُحسب الفجر والعشاء بقاعدة الزاوية.", "changePlace": "تغيير الموقع", "placeApprox": "موقع تقريبي بحسب منطقتك الزمنية", "placeChosen": "المدينة التي اخترتها", "chooseCity": "اختر مدينة", "searchCity": "ابحث عن مدينة", "useTimeZone": "استخدم منطقتي الزمنية بدلًا من ذلك", "close": "إغلاق", "noCity": "لا توجد مدينة مطابقة.", "announce": "{status}: {name} عند {time}، {countdown}."}</script>
+        </section>
+        <script type="module" src="../assets/salah-d8fa6f77b6/salah-section.js"></script>
+        <!-- salah:end -->
+
         <!-- journal:start -->
         <!-- journal:end -->
 
