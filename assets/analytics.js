@@ -8,35 +8,51 @@
    gives an endpoint for this host. With either missing it returns before
    registering a single listener.
 
-   WHAT IT SENDS, in batches (never one request per movement):
-     page_view   path, title, referrer ORIGIN only, UTM values, screen class,
-                 page language
-     heartbeat   every 90 s while the tab is visible ("still here")
-     scroll      the quarter milestones 25 / 50 / 75 / 100 - one event each,
-                 computed on a throttled scroll listener, never a trail
-     leave       on pagehide: seconds the page was visible, deepest milestone
-     outbound    a click on a link to another site: its host only
-     interaction a NAMED action from a closed list (contact form submitted,
-                 store link, theme or language switch, menu, carousel,
-                 quick access, updates) with at most one short label
-     error       window error / unhandled rejection: class + clipped message
-     failed_request  a same-site resource that failed to load: its path
-     perf        ttfb, fcp, lcp, cls (x1000), dcl, load - once, rounded
+   WHAT IT SENDS, in batches (normally two requests per page):
+     page_view      once per page opening: path, title, referrer ORIGIN only,
+                    UTM values, screen class, page language, and a random id
+                    for this page opening (made here, kept in memory only)
+     page_summary   for that page opening: the seconds the page was visible
+                    and in use SINCE THE PREVIOUS SUMMARY, and the deepest
+                    scroll so far as ONE number. Sent when the page is hidden
+                    or closed, and - only while the page is visible AND being
+                    used - at most every five minutes
+     perf           once per page load: ttfb, fcp, lcp (as known), load. The
+                    collector keeps a sample of these, as daily aggregates
+     interaction    a NAMED action from a closed list: contact message
+                    received / failed (read from the form's own state class),
+                    store link, file download, language change
+     outbound       a click on a link to another site: its host only
+     error          window error / unhandled rejection: class + clipped message
+     failed_request a same-site resource that failed to load: its path
+
+   WHAT IT NO LONGER SENDS: an event per scroll milestone, an event per
+   performance mark, a heartbeat, a second "leave" for the same departure,
+   theme changes, menu / carousel / quick-access clicks, form submissions.
 
    WHAT IT DOES NOT DO:
      no cookie, no localStorage, no sessionStorage, no identifier of any kind
+     on the device; the page id above dies with the page
      no canvas / audio / WebGL / font / hardware fingerprinting
      no geolocation API, no precise location, ever
-     no pointer trails, no keystrokes, no form contents, no message text
-     no query strings (a path is cut at "?"), no full referrer URLs
+     no pointer trails, no keystrokes, no form contents, no message text, no
+     element text, no CSS selectors, no clipboard
+     no query strings (a path is cut at "?"), no full URLs of other sites
      no third-party requests: it talks to the ZULFAA collector only
+
+   ACTIVITY is one boolean: "something happened since the last check"
+   (a scroll, a click, a key, a touch - never which one, where or what).
+   A page left open and untouched stops counting as engaged after five
+   minutes and sends nothing at all until it is used again.
 
    FLUSHING: 8 s after the first queued event, then every 30 s while events
    wait, immediately at 10 queued events, before a client-side navigation,
    and on pagehide / visibility hidden with sendBeacon. Batches carry an id,
-   so a retried batch is stored once. If the collector answers "disabled",
-   "protected" or "dnt" the script stops for this page; "reduced" stops the
-   detail events (scroll, perf, heartbeat) for this page. */
+   so a retried batch is stored once; summaries carry a sequence number, so a
+   repeated summary changes nothing. If the collector answers "disabled",
+   "protected", "stopped", "dnt" or "excluded" the script stops for this
+   page; "reduced" / "sampled" stop the optional detail (performance and the
+   periodic summaries) for this page. */
 ;(function () {
   'use strict'
 
@@ -55,25 +71,47 @@
   if (/^\/(con|admin|api|__devlab|__analytics|p|preview)(\/|$)/.test(location.pathname)) return
 
   var endpoint = cfg.endpoint
-  var HEARTBEAT_MS = 90000
+  /* the test harness may shorten the liveness interval; production never sets it */
+  var LIVENESS_MS = typeof cfg.livenessMs === 'number' && /^http:\/\/127\.0\.0\.1[:/]/.test(endpoint) ? cfg.livenessMs : 300000
   var FLUSH_FIRST_MS = 8000
   var FLUSH_EVERY_MS = 30000
   var FLUSH_AT = 10
   var MAX_QUEUE = 20
+  var MAX_SUMMARIES = 100
 
   var queue = []
   var stopped = false
   var detail = true
   var flushTimer = null
-  var pageStart = Date.now()
-  var visibleSince = document.visibilityState === 'visible' ? Date.now() : null
-  var engaged = 0
-  var maxDepth = 0
-  var sentMilestones = {}
-  var perfSent = {}
   /* a page with many broken images or a looping error is reported, not narrated */
   var errorBudget = { error: 5, failed_request: 3 }
 
+  /* the page opening: everything below is reset by a client-side route change */
+  var pv = ''
+  var pagePath = ''
+  var engaged = 0 //          ms the page has been visible and in use
+  var reported = 0 //         ms already sent in earlier summaries
+  var visibleSince = null
+  var paused = false //       visible, but untouched for a whole liveness interval
+  var activeSinceCheck = false
+  var seq = 0
+  var maxDepth = 0
+  var leaveSent = false //    one summary per hidden / departure period
+  var perfSent = false
+
+  function randomId() {
+    try {
+      var bytes = new Uint8Array(8)
+      crypto.getRandomValues(bytes)
+      var s = ''
+      for (var i = 0; i < bytes.length; i++) s += (bytes[i] + 256).toString(16).slice(1)
+      return s
+    } catch (e) {
+      var t = ''
+      while (t.length < 16) t += Math.floor(Math.random() * 16).toString(16)
+      return t
+    }
+  }
   function uuid() {
     try {
       if (crypto && crypto.randomUUID) return crypto.randomUUID()
@@ -81,9 +119,6 @@
     var s = ''
     for (var i = 0; i < 36; i++) s += i === 8 || i === 13 || i === 18 || i === 23 ? '-' : i === 14 ? '4' : i === 19 ? '89ab'[Math.floor(Math.random() * 4)] : Math.floor(Math.random() * 16).toString(16)
     return s
-  }
-  function path() {
-    return location.pathname
   }
   function referrer() {
     try {
@@ -113,12 +148,12 @@
 
   function push(type, extra) {
     if (stopped) return
-    if (!detail && (type === 'scroll' || type === 'perf' || type === 'heartbeat')) return
+    if (!detail && type === 'perf') return
     if (type in errorBudget) {
       if (errorBudget[type] <= 0) return
       errorBudget[type] -= 1
     }
-    var event = { type: type, path: path(), dt: Date.now() }
+    var event = { type: type, path: pagePath || location.pathname, pv: pv, dt: Date.now() }
     if (extra) for (var key in extra) if (Object.prototype.hasOwnProperty.call(extra, key)) event[key] = extra[key]
     queue.push(event)
     if (queue.length > MAX_QUEUE) queue.splice(0, queue.length - MAX_QUEUE)
@@ -127,8 +162,11 @@
   }
 
   function handleAnswer(header) {
-    if (header === 'disabled' || header === 'protected' || header === 'dnt' || header === 'excluded') stopped = true
-    else if (header === 'reduced' || header === 'sampled') detail = false
+    if (header === 'disabled' || header === 'protected' || header === 'stopped' || header === 'dnt' || header === 'excluded') {
+      stopped = true
+      queue.length = 0
+      if (flushTimer) { clearTimeout(flushTimer); flushTimer = null }
+    } else if (header === 'reduced' || header === 'sampled') detail = false
   }
 
   function flush(unloading) {
@@ -153,15 +191,88 @@
     } catch (e) { /* analytics must never break the site */ }
   }
 
-  /* ── the page view ─────────────────────────────────────────────────────── */
-  push('page_view', { title: (document.title || '').slice(0, 200), referrer: referrer(), screen: screenClass, lang: (document.documentElement.lang || '').slice(0, 8), campaign: campaign() })
+  /* ── the page opening ──────────────────────────────────────────────────── */
+  function openPage(fromRoute) {
+    pv = randomId()
+    pagePath = location.pathname
+    engaged = 0
+    reported = 0
+    seq = 0
+    maxDepth = 0
+    leaveSent = false
+    paused = false
+    activeSinceCheck = false
+    visibleSince = document.visibilityState === 'visible' ? Date.now() : null
+    push('page_view', { title: (document.title || '').slice(0, 200), referrer: fromRoute ? 'internal' : referrer(), screen: screenClass, lang: (document.documentElement.lang || '').slice(0, 8), campaign: campaign() })
+  }
 
-  /* ── heartbeat while visible ───────────────────────────────────────────── */
+  /* ── engaged time: visible AND in use ──────────────────────────────────── */
+  function settle() {
+    if (visibleSince !== null) { engaged += Date.now() - visibleSince; visibleSince = null }
+  }
+  function resume() {
+    if (visibleSince === null && document.visibilityState === 'visible') visibleSince = Date.now()
+    paused = false
+  }
+  /* THE ONE PLACE a summary is made. `engaged` is a DELTA: what has not been reported yet. */
+  function summary(kind) {
+    var wasCounting = visibleSince !== null
+    settle()
+    if (kind === 'beat' && wasCounting) visibleSince = Date.now()
+    var delta = Math.max(0, Math.round((engaged - reported) / 1000))
+    if (kind === 'beat' && delta <= 0) return
+    if (seq >= MAX_SUMMARIES) return
+    reported += delta * 1000
+    seq += 1
+    push('page_summary', { seq: seq, engaged: delta, depth: maxDepth, end: kind === 'end', beat: kind === 'beat' })
+  }
+  /* hidden, closed or navigated away: ONE summary per departure, whichever event comes first */
+  function leave(kind) {
+    if (leaveSent) { flush(true); return }
+    leaveSent = true
+    summary(kind)
+    flush(true)
+  }
+  function back() {
+    leaveSent = false
+    resume()
+  }
+
+  function activity() {
+    activeSinceCheck = true
+    if (paused) resume()
+  }
+  ;['scroll', 'click', 'keydown', 'touchstart', 'pointerdown'].forEach(function (name) {
+    window.addEventListener(name, activity, { passive: true, capture: true })
+  })
+
+  /* liveness: only a visible page that was used since the last check says anything */
   var beat = setInterval(function () {
-    if (document.visibilityState === 'visible') push('heartbeat')
-  }, HEARTBEAT_MS)
+    if (stopped || document.visibilityState !== 'visible') return
+    if (!activeSinceCheck) {
+      /* untouched for a whole interval: stop counting it as engaged and stay silent */
+      settle()
+      paused = true
+      return
+    }
+    activeSinceCheck = false
+    if (detail) summary('beat')
+  }, LIVENESS_MS)
 
-  /* ── scroll milestones, throttled, one event per milestone ─────────────── */
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') leave('hide')
+    else back()
+  })
+  window.addEventListener('pagehide', function () {
+    clearInterval(beat)
+    leave('end')
+  })
+  /* restored from the back/forward cache: the same page opening continues */
+  window.addEventListener('pageshow', function (e) {
+    if (e && e.persisted) back()
+  })
+
+  /* ── deepest scroll: one number, measured on a throttled listener ──────── */
   var ticking = false
   function measureScroll() {
     ticking = false
@@ -169,78 +280,60 @@
     var total = Math.max(1, (doc.scrollHeight || 0) - (window.innerHeight || 0))
     var pct = Math.min(100, Math.round(((window.scrollY || doc.scrollTop || 0) / total) * 100))
     if (pct > maxDepth) maxDepth = pct
-    ;[25, 50, 75, 100].forEach(function (m) {
-      if (pct >= m && !sentMilestones[m]) {
-        sentMilestones[m] = true
-        push('scroll', { value: m })
-      }
-    })
   }
   window.addEventListener('scroll', function () {
     if (!ticking) { ticking = true; requestAnimationFrame(measureScroll) }
   }, { passive: true })
 
-  /* ── visibility and leaving ────────────────────────────────────────────── */
-  function settleVisible() {
-    if (visibleSince !== null) { engaged += Date.now() - visibleSince; visibleSince = null }
-  }
-  document.addEventListener('visibilitychange', function () {
-    if (document.visibilityState === 'hidden') {
-      settleVisible()
-      push('leave', { value: Math.round(engaged / 1000), depth: maxDepth })
-      flush(true)
-    } else if (visibleSince === null) visibleSince = Date.now()
-  })
-  window.addEventListener('pagehide', function () {
-    clearInterval(beat)
-    if (document.visibilityState !== 'hidden') {
-      settleVisible()
-      push('leave', { value: Math.round(engaged / 1000), depth: maxDepth })
-    }
-    flush(true)
-  })
+  openPage(false)
 
-  /* ── outbound links and named interactions ─────────────────────────────── */
+  /* ── the closed list of named actions ──────────────────────────────────── */
+  var ACTIONS = { contact_sent: 1, contact_failed: 1, store_click: 1, download_click: 1, lang_switch: 1 }
+  function action(name, label) {
+    if (!ACTIONS[name]) return
+    push('interaction', label ? { name: name, label: String(label).slice(0, 24) } : { name: name })
+  }
+
   document.addEventListener('click', function (e) {
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null
     if (!a) return
     var href = a.getAttribute('href') || ''
     if (/^mailto:|^tel:/i.test(href)) return // never the address
+    var url = null
     try {
-      var url = new URL(a.href, location.href)
-      if (/^https?:$/.test(url.protocol) && url.host !== location.host) {
-        if (/play\.google\.com|apps\.apple\.com/.test(url.host)) push('interaction', { name: 'store_click' })
-        else push('outbound', { name: url.protocol + '//' + url.host })
-      }
-    } catch (err) { /* not a URL */ }
+      url = new URL(a.href, location.href)
+    } catch (err) { return /* not a URL */ }
+    if (/^https?:$/.test(url.protocol) && url.host !== location.host) {
+      if (/play\.google\.com|apps\.apple\.com/.test(url.host)) action('store_click')
+      else push('outbound', { name: url.protocol + '//' + url.host })
+      return
+    }
     /* the language menu's links carry hreflang AND lang (tools/chrome.py langswitch); <link rel=alternate> is not an anchor */
-    if (a.hasAttribute('hreflang') && a.hasAttribute('lang')) push('interaction', { name: 'lang_switch', label: String(a.getAttribute('hreflang') || '').slice(0, 8) })
-    if (/\.(apk|pdf|zip)$/i.test(url && url.pathname || '')) push('interaction', { name: 'download_click' })
+    if (a.hasAttribute('hreflang') && a.hasAttribute('lang')) action('lang_switch', String(a.getAttribute('hreflang') || '').slice(0, 8))
+    if (/\.(apk|pdf|zip)$/i.test(url.pathname || '')) action('download_click')
   }, true)
 
-  document.addEventListener('submit', function (e) {
-    var form = e.target
-    if (form && form.id === 'contact-form') push('interaction', { name: 'contact_submit' })
-  }, true)
+  /* the contact form announces its own outcome with a state class (assets/contact.js: "cf-state is-ok" /
+     "is-fail"). Only that class name is read - never a field, never the message, never the state text. */
+  try {
+    var state = document.querySelector('#contact-form .cf-state')
+    if (state && window.MutationObserver) {
+      var lastState = ''
+      new MutationObserver(function () {
+        var now = /\bis-ok\b/.test(state.className) ? 'ok' : /\bis-fail\b/.test(state.className) ? 'fail' : ''
+        if (now === lastState) return
+        lastState = now
+        if (now === 'ok') action('contact_sent')
+        else if (now === 'fail') action('contact_failed')
+      }).observe(state, { attributes: true, attributeFilter: ['class'] })
+    }
+  } catch (e) { /* no observer: no contact action */ }
 
-  /* the site announces its own outcomes with CustomEvents; only the name is read */
+  /* the site may announce an allowlisted action itself; only the name and one short label are read */
   document.addEventListener('zulfaa:analytics', function (e) {
     var d = e && e.detail
-    if (d && typeof d.name === 'string') push('interaction', { name: d.name, label: typeof d.label === 'string' ? d.label.slice(0, 24) : undefined })
+    if (d && typeof d.name === 'string') action(d.name, typeof d.label === 'string' && /^[\w-]{1,24}$/.test(d.label) ? d.label : '')
   })
-
-  /* theme switch: the <html data-site-theme> attribute changes */
-  try {
-    var themeObserver = new MutationObserver(function (records) {
-      for (var i = 0; i < records.length; i++) {
-        if (records[i].attributeName === 'data-site-theme') {
-          push('interaction', { name: 'theme_switch', label: document.documentElement.getAttribute('data-site-theme') || 'system' })
-          return
-        }
-      }
-    })
-    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-site-theme'] })
-  } catch (e) { /* no observer: no theme event */ }
 
   /* ── errors and failed resources (class + clipped message, never a stack) ── */
   window.addEventListener('error', function (e) {
@@ -259,56 +352,42 @@
     push('error', { name: (r && r.name) || 'UnhandledRejection', message: String((r && r.message) || r || '').slice(0, 160) })
   })
 
-  /* ── performance marks, once each, rounded ─────────────────────────────── */
-  function perf(name, value) {
-    if (perfSent[name] || !(value >= 0)) return
-    perfSent[name] = true
-    push('perf', { name: name, value: Math.round(value) })
-  }
+  /* ── performance: ONE event per page load, shortly after load ──────────── */
   try {
-    var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0]
-    var onLoad = function () {
-      setTimeout(function () {
-        var n = nav || (performance.getEntriesByType && performance.getEntriesByType('navigation')[0])
-        if (n) {
-          perf('ttfb', n.responseStart)
-          perf('dcl', n.domContentLoadedEventEnd)
-          perf('load', n.loadEventEnd)
-        }
-        var paints = performance.getEntriesByType ? performance.getEntriesByType('paint') : []
-        for (var i = 0; i < paints.length; i++) if (paints[i].name === 'first-contentful-paint') perf('fcp', paints[i].startTime)
-      }, 0)
-    }
-    if (document.readyState === 'complete') onLoad()
-    else window.addEventListener('load', onLoad)
+    var lcp = 0
     if (window.PerformanceObserver) {
-      var lcp = 0
-      new PerformanceObserver(function (list) {
-        var entries = list.getEntries()
-        if (entries.length) lcp = entries[entries.length - 1].startTime
-      }).observe({ type: 'largest-contentful-paint', buffered: true })
-      var cls = 0
-      new PerformanceObserver(function (list) {
-        list.getEntries().forEach(function (entry) { if (!entry.hadRecentInput) cls += entry.value })
-      }).observe({ type: 'layout-shift', buffered: true })
-      document.addEventListener('visibilitychange', function () {
-        if (document.visibilityState === 'hidden') {
-          if (lcp) perf('lcp', lcp)
-          perf('cls', cls * 1000)
-        }
-      })
+      try {
+        new PerformanceObserver(function (list) {
+          var entries = list.getEntries()
+          if (entries.length) lcp = entries[entries.length - 1].startTime
+        }).observe({ type: 'largest-contentful-paint', buffered: true })
+      } catch (err) { /* this browser has no LCP entries */ }
     }
-  } catch (e) { /* no performance API: no perf events */ }
+    var reportPerf = function () {
+      if (perfSent) return
+      perfSent = true
+      var m = {}
+      var n = performance.getEntriesByType && performance.getEntriesByType('navigation')[0]
+      if (n) {
+        if (n.responseStart >= 0) m.ttfb = Math.round(n.responseStart)
+        if (n.loadEventEnd > 0) m.load = Math.round(n.loadEventEnd)
+      }
+      var paints = performance.getEntriesByType ? performance.getEntriesByType('paint') : []
+      for (var i = 0; i < paints.length; i++) if (paints[i].name === 'first-contentful-paint') m.fcp = Math.round(paints[i].startTime)
+      if (lcp > 0) m.lcp = Math.round(lcp)
+      for (var key in m) { push('perf', { m: m }); break }
+    }
+    var afterLoad = function () { setTimeout(reportPerf, 2000) }
+    if (document.readyState === 'complete') afterLoad()
+    else window.addEventListener('load', afterLoad)
+  } catch (e) { /* no performance API: no perf event */ }
 
   /* ── client-side route changes (guarded so the first render never counts twice) ── */
-  var lastPath = location.pathname
   function routeChanged() {
-    if (location.pathname === lastPath) return
+    if (location.pathname === pagePath) return
+    summary('end')
     flush(false)
-    lastPath = location.pathname
-    sentMilestones = {}
-    maxDepth = 0
-    push('page_view', { title: (document.title || '').slice(0, 200), referrer: 'internal', screen: screenClass, lang: (document.documentElement.lang || '').slice(0, 8), campaign: campaign() })
+    openPage(true)
   }
   window.addEventListener('popstate', routeChanged)
   var pushState = history.pushState
