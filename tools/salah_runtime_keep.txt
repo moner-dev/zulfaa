@@ -1,0 +1,2 @@
+# runtime folders to keep for one release: a page cached during the ten minutes after a deploy still names the previous one
+salah-d8fa6f77b6
