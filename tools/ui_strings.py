@@ -77,6 +77,12 @@ S["en"] = {
     "pnUpdates": "Updates",
     "pnSupport": "Support",
     "pnContact": "Contact",
+    # The text alternative for the one shared preview image, assets/og.png.
+    # This is the English wording the hand-written homepage already carries
+    # (audit H-07), kept here so the generated English page - /updates/ - can
+    # describe the same image with the same approved words. One image, one
+    # description per language; see chrome.head().
+    "ogImageAlt": "The ZULFAA emblem: a gold-framed teal medallion with the name ZULFAA.",
 }
 
 # ─────────────────────────── ARABIC ───────────────────────────

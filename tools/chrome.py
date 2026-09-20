@@ -74,9 +74,16 @@ def up(depth):
 
 # ── shared chrome ──────────────────────────────────────────────────────────
 def head(lang, page, depth, title, desc, og_image_alt=None):
-    """og_image_alt: the homepages describe the shared preview image in their own language and name the card type, as the
-    hand-written English homepage does (audit H-07). Other pages pass nothing and keep their head as it was."""
+    """og_image_alt: the text alternative for the one shared preview image, assets/og.png.
+
+    Every page shares that image, so every page describes it with the same approved wording in its
+    own language - S[lang]["ogImageAlt"] (audit H-07, extended to the whole site by SEO-01B). A
+    caller may pass its own text; passing nothing takes the language's. The alt is also what turns
+    a shared link into a large-image card on X, so twitter:card is emitted with it.
+    """
     a = up(depth)
+    if og_image_alt is None:
+        og_image_alt = S[lang]["ogImageAlt"]
     social = ("" if og_image_alt is None else
               '    <meta property="og:image:alt" content="%s" />\n' % html.escape(og_image_alt))
     card = "" if og_image_alt is None else '    <meta name="twitter:card" content="summary_large_image" />\n'
