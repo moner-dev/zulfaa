@@ -88,8 +88,8 @@ def build_home(lang):
     p, d = "", 1
     s, prod, n = S[lang], C[lang]["product"], C[lang]["nav"]
     a = up(d)
-    return (head(lang, p, d, s["homeTitle"], s["homeDesc"]) + header(lang, p, d)
-            + main_open(lang, d) + f"""        <div class="hero-wrap">
+    return (head(lang, p, d, s["homeTitle"], s["homeDesc"], og_image_alt=s["ogImageAlt"]) + header(lang, p, d, skip_to="content")
+            + main_open(lang, d) + f"""        <div class="hero-wrap" id="content" tabindex="-1">
           <section class="hero">
             <div class="hero-copy">
               <p class="wordmark-ar" lang="ar">زُلْفَى</p>

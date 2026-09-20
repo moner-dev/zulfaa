@@ -198,7 +198,7 @@ def render_lightbox(lang):
 
         <div class="lb-stage" data-lb-close>
           <figure class="lb-figure">
-            <img class="lb-img" alt="" width="{SHOTS[0]['w']}" height="{SHOTS[0]['h']}" decoding="async" />
+            <img class="lb-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="" width="{SHOTS[0]['w']}" height="{SHOTS[0]['h']}" decoding="async" />
             <figcaption class="lb-cap">
               <b data-lb-index>01</b> / <span data-lb-total>{n:02d}</span> &middot; <span data-lb-name></span>
             </figcaption>

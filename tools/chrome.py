@@ -73,8 +73,13 @@ def up(depth):
 
 
 # ── shared chrome ──────────────────────────────────────────────────────────
-def head(lang, page, depth, title, desc):
+def head(lang, page, depth, title, desc, og_image_alt=None):
+    """og_image_alt: the homepages describe the shared preview image in their own language and name the card type, as the
+    hand-written English homepage does (audit H-07). Other pages pass nothing and keep their head as it was."""
     a = up(depth)
+    social = ("" if og_image_alt is None else
+              '    <meta property="og:image:alt" content="%s" />\n' % html.escape(og_image_alt))
+    card = "" if og_image_alt is None else '    <meta name="twitter:card" content="summary_large_image" />\n'
     alts = "\n".join(
         '    <link rel="alternate" hreflang="%s" href="%s%s%s" />' % (l, ORIGIN, LANGS[l]["base"], page)
         for l in ("en", "ar", "nl"))
@@ -102,8 +107,8 @@ def head(lang, page, depth, title, desc):
     <meta property="og:image" content="{ORIGIN}assets/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:locale" content="{ {'en':'en','ar':'ar','nl':'nl'}[lang] }" />
-  </head>
+{social}    <meta property="og:locale" content="{ {'en':'en','ar':'ar','nl':'nl'}[lang] }" />
+{card}  </head>
   <body>
 """
 
@@ -311,7 +316,7 @@ def topbar(lang, page, depth):
 """
 
 
-def header_html(lang, page, depth, links):
+def header_html(lang, page, depth, links, skip_to=None):
     """The header for any language. `links` is a list of (href, label, current)
     with hrefs already resolved - always chrome.primary_nav() (nav_items() is
     the footer's list).
@@ -339,8 +344,11 @@ def header_html(lang, page, depth, links):
     home = (a + LANGS[lang]["base"]) or "./"
     rows = "\n".join('            <a href="%s"%s>%s</a>'
                      % (h, ' aria-current="page"' if cur else "", e(label)) for h, label, cur in links)
+    # audit H-09: the homepage header is long (top bar, brand, nav, language, theme); a keyboard visitor can step over it.
+    # Asked for by the homepages only (skip_to="content", the hero wrapper): the 404 page borrows the home header and has no such target.
+    skip = '    <a class="skip-link" href="#%s">%s</a>\n' % (skip_to, e(s["skipToContent"])) if skip_to else ""
     return f"""    <!-- site-chrome:start -->
-{topbar(lang, page, depth)}    <div class="head-sentinel" aria-hidden="true"></div>
+{skip}{topbar(lang, page, depth)}    <div class="head-sentinel" aria-hidden="true"></div>
     <header class="site-head">
       <div class="shell">
         <a class="brand" href="{home}">
@@ -393,8 +401,8 @@ def primary_nav(lang, page, depth):
     return links
 
 
-def header(lang, page, depth):
-    return header_html(lang, page, depth, primary_nav(lang, page, depth))
+def header(lang, page, depth, skip_to=None):
+    return header_html(lang, page, depth, primary_nav(lang, page, depth), skip_to=skip_to)
 
 
 def footer(lang, page, depth):

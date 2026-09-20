@@ -72,6 +72,7 @@ S["en"] = {
     # The primary navigation, the same four destinations on every page and in
     # the drawer (chrome.primary_nav). Privacy, Terms and Data deletion live in
     # the footer's Legal group.
+    "skipToContent": "Skip to content",
     "pnStart": "Start",
     "pnUpdates": "Updates",
     "pnSupport": "Support",
@@ -82,6 +83,7 @@ S["en"] = {
 S["ar"] = {
     "skip": "تخطّي إلى المحتوى",
     "navLabel": "التنقل الرئيسي",
+    "skipToContent": "انتقل إلى المحتوى",
     "pnStart": "الرئيسية",
     "pnUpdates": "التحديثات",
     "pnSupport": "الدعم",
@@ -117,6 +119,7 @@ S["ar"] = {
     # home
     "homeTitle": "زُلْفَى — مواقيت الصلاة والقرآن والأذكار والقبلة",
     "homeDesc": "زُلْفَى تطبيق إسلامي يجمع مواقيت الصلاة الدقيقة والقرآن الكريم والأذكار والأدعية واتجاه القبلة في تجربة هادئة وأنيقة، بلا إعلانات ولا تحليلات ولا تتبّع.",
+    "ogImageAlt": "شعار زُلْفَى: ميدالية فيروزية بإطار ذهبي تحمل اسم زُلْفَى.",
     "pill": "قريبًا على أندرويد",
     "lede": "زُلْفَى تطبيق إسلامي يجمع مواقيت الصلاة الدقيقة والقرآن الكريم والأذكار والأدعية واتجاه القبلة في تجربة هادئة وأنيقة. يعمل على جهازك أوّلًا، ومعظمه يعمل دون اتصال.",
     # the second section (the Quick Access dial) lives in tools/quick_access.py
@@ -152,6 +155,7 @@ S["ar"] = {
 S["nl"] = {
     "skip": "Naar de inhoud",
     "navLabel": "Hoofdnavigatie",
+    "skipToContent": "Naar de inhoud",
     "pnStart": "Start",
     "pnUpdates": "Updates",
     "pnSupport": "Ondersteuning",
@@ -185,7 +189,8 @@ S["nl"] = {
     "contents": "Inhoud",
     "inShort": "In het kort",
     "homeTitle": "ZULFAA — Gebedstijden, Koran, adhkar en qibla",
-    "homeDesc": "ZULFAA is een islamitische app die nauwkeurige gebedstijden, de Koran, adhkar en doe'a's en de qiblarichting samenbrengt in één rustige, elegante ervaring. Lokaal eerst, zonder advertenties, analytics of tracking.",
+    "homeDesc": "ZULFAA is een islamitische app met nauwkeurige gebedstijden, de Koran, adhkar, doe'a's en de qibla. Lokaal eerst, zonder advertenties, analytics of tracking.",
+    "ogImageAlt": "Het ZULFAA-embleem: een turquoise medaillon in een gouden rand met de naam ZULFAA.",
     "pill": "Binnenkort op Android",
     "lede": "ZULFAA is een islamitische app die nauwkeurige gebedstijden, de Koran, adhkar en doe'a's en de qiblarichting samenbrengt in één rustige, elegante ervaring. De app werkt eerst op uw apparaat, en het meeste werkt offline.",
     # the second section (the Quick Access dial) lives in tools/quick_access.py

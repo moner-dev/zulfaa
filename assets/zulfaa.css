@@ -211,6 +211,33 @@ img {
 }
 
 /* visually hidden, still read out - the "Language:" prefix on the menu button */
+/* Skip to content (audit H-09): the first stop of the Tab key on the homepages, out of sight until it has focus. */
+.skip-link {
+  position: absolute;
+  inset-inline-start: 0.75rem;
+  top: 0.5rem;
+  z-index: 60; /* over the top bar (40) and the header, under the lightbox (100) */
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  background: var(--band-deep);
+  color: var(--on-band-strong);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-250%);
+}
+
+.skip-link:focus {
+  transform: none;
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+/* its target takes focus so that the next Tab continues from the content; a wrapper shows no ring of its own */
+#content:focus {
+  outline: none;
+}
+
 .vh {
   position: absolute;
   width: 1px;
@@ -1438,6 +1465,9 @@ section.band {
 
 .qa {
   padding: clamp(2.75rem, 6vw, 4.25rem) 0 clamp(0.5rem, 2vw, 1.25rem);
+  /* the section measures ITSELF (see the @container block after the 56rem media rule): it holds nothing
+     fixed-position, so the containment that comes with a size container traps nothing */
+  container-type: inline-size;
 }
 
 .qa-head {
@@ -1447,6 +1477,9 @@ section.band {
 }
 
 .qa-title {
+  /* /#features landed with this heading under the sticky header (audit H-06): the offset the site already uses for
+     #contact and #prayer-times (4.6rem = the header), plus the air a bare heading needs above it */
+  scroll-margin-top: calc(4.6rem + 1.25rem);
   font-size: clamp(1.6rem, 3.8vw, 2.15rem);
   text-wrap: balance;
 }
@@ -1694,6 +1727,9 @@ html[lang="ar"] .qa-label {
 /* the features */
 .qa-panels {
   min-width: 0;
+  /* a long word (Dutch compounds, at a doubled text size) may break rather than widen the page (V-02); at the
+     normal text size every word fits its line and nothing changes */
+  overflow-wrap: anywhere;
 }
 
 .qa-panel h3 {
@@ -1824,6 +1860,27 @@ html:not(.js) .qa-panel h3 {
 @media (max-width: 30rem) {
   .qa-dial-box {
     --d: min(22rem, calc(100vw - 2.5rem));
+  }
+}
+
+/* Enlarged text (V-02). A media query counts pixels, so with a doubled root font size a 1024px window kept the
+   two-column layout while the dial's 29rem column took everything and the text spilled 189-330px past the page.
+   The same one-column layout, asked for in the section's OWN width in rem. 50rem is below what the section
+   measures when the 56rem media rule above takes over, so at the normal text size this never applies first. */
+@container (max-width: 50rem) {
+  .qa-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+
+  .qa-dial-box {
+    --d: min(24rem, 100cqi);
+  }
+
+  .qa-panels {
+    width: 100%;
+    max-width: 34rem;
+    margin-inline: auto;
   }
 }
 
@@ -2101,6 +2158,9 @@ h2,
 .site-foot {
   position: relative;
   isolation: isolate;
+  /* the footer measures ITSELF for the enlarged-text rules after the 40rem media rule below; it holds nothing
+     fixed-position (the scroll dock lives after it), so the containment of a size container traps nothing */
+  container-type: inline-size;
   margin-top: 3rem;
   padding: 2.75rem 0 3rem;
   border-top: 1px solid var(--band-edge);
@@ -2198,6 +2258,7 @@ html[lang="ar"] .fo-mark {
 
 .fo-social {
   display: flex;
+  flex-wrap: wrap; /* three 2.75rem circles do not fit a 320px phone at a doubled text size (V-02): they take a second row */
   gap: 0.6rem;
   margin: 1.15rem 0 0;
   padding: 0;
@@ -2384,6 +2445,29 @@ html[lang="ar"] .fo-say h2 {
   .fo-grid {
     grid-template-columns: minmax(0, 1fr);
     gap: 2rem;
+  }
+}
+
+/* Enlarged text (V-02). At a doubled root font size the e-mail address is 437px wide and ran 88px past a 1440px page,
+   because the four-column grid is chosen by PIXELS. The same two steps, asked for in the footer's own width in rem -
+   the footer is as wide as the page, so at the normal text size these are exactly the two media rules above and
+   nothing changes. In one column, and only there, an address or a long word ("Gebruiksvoorwaarden") may break:
+   at the normal text size a phone's column is wider than both, so nothing breaks there either. */
+@container (max-width: 62rem) {
+  .fo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.25rem clamp(1.5rem, 4vw, 3rem);
+  }
+}
+
+@container (max-width: 40rem) {
+  .fo-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+  }
+  .fo-say .fo-mail a,
+  .fo-links a {
+    overflow-wrap: anywhere;
   }
 }
 
@@ -4505,6 +4589,7 @@ html[lang="ar"] .co-eyebrow {
   color: var(--gold-band);
   font-weight: 600;
   text-underline-offset: 0.2em;
+  overflow-wrap: anywhere; /* as the footer's address (V-02) */
 }
 
 /* the form sits on its own surface: a panel on the band, not loose fields */
@@ -6239,6 +6324,37 @@ body,
   }
   .topbar-note {
     display: none;
+  }
+}
+
+/* Enlarged text (V-02): the same narrow row, asked for in the bar's OWN width in rem (.topbar is a size container).
+   46rem equals the media rule above at the normal text size, so nothing changes there; with a doubled root font
+   size a tablet or a laptop gets the two-ended row instead of three columns that no longer fit. */
+@container (max-width: 46rem) {
+  .topbar-inner {
+    grid-template-columns: auto auto;
+    gap: 0.75rem;
+    padding: 0 1rem;
+  }
+  .topbar-note {
+    display: none;
+  }
+}
+
+/* ...and on a phone with enlarged text the two ends do not fit side by side at all (the status alone is 384px at a
+   doubled root font size): they wrap onto two rows and the status may break. 19rem is 304px at the normal text
+   size - below the narrowest supported phone - so this is reached only through larger text. */
+@container (max-width: 19rem) {
+  .topbar-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem 0.75rem;
+    padding-block: 0.35rem;
+  }
+  .topbar-status {
+    white-space: normal;
   }
 }
 

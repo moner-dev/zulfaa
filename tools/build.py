@@ -98,7 +98,7 @@ def english_header(t, page, depth):
     # like every generated page; the links they used to hold are not read.
     m = HEADER_RE.search(t)
     assert m, "no <header class=\"site-head\"> in the English page"
-    return t[:m.start()] + header_html("en", page, depth, primary_nav("en", page, depth)) + t[m.end():]
+    return t[:m.start()] + header_html("en", page, depth, primary_nav("en", page, depth), skip_to="content" if page == "" else None) + t[m.end():]
 
 
 for f, (page, depth) in EN_PAGES.items():
