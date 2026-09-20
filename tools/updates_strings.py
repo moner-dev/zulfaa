@@ -28,7 +28,8 @@ U["en"] = {
     "availableNow": "Available now",
     "onTheWayTitle": "On the way",
     "notReleasedYet": "Not released yet",
-    "notReleasedNote": "This update has not been built or distributed. Nothing below is on "
+    "notReleasedNote": "This update has been submitted to Google Play and is waiting for "
+                       "review. It has not been distributed, so nothing below is on "
                        "anyone's phone yet.",
     "proposed": "proposed",
     "dateUnknown": "No date set",
@@ -108,7 +109,7 @@ U["ar"] = {
     "availableNow": "متاح الآن",
     "onTheWayTitle": "في الطريق",
     "notReleasedYet": "لم يصدر بعد",
-    "notReleasedNote": "هذا التحديث لم يُبنَ ولم يُوزَّع. وما دونه ليس على هاتف أحد بعد.",
+    "notReleasedNote": "قُدِّم هذا التحديث إلى Google Play وهو ينتظر المراجعة. ولم يُوزَّع بعد، فما دونه ليس على هاتف أحد.",
     "proposed": "مقترح",
     "dateUnknown": "لا تاريخ محدَّد",
     "datePending": "تاريخ النشر الدقيق قيد التأكّد",
@@ -186,8 +187,9 @@ U["nl"] = {
     "availableNow": "Nu beschikbaar",
     "onTheWayTitle": "Onderweg",
     "notReleasedYet": "Nog niet uitgebracht",
-    "notReleasedNote": "Deze update is niet gebouwd en niet verspreid. Niets hieronder staat "
-                       "al op iemands telefoon.",
+    "notReleasedNote": "Deze update is ingediend bij Google Play en wacht op beoordeling. "
+                       "Hij is niet verspreid, dus niets hieronder staat al op iemands "
+                       "telefoon.",
     "proposed": "voorgesteld",
     "dateUnknown": "Geen datum vastgesteld",
     "datePending": "exacte publicatiedatum nog te bevestigen",
