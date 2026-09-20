@@ -102,7 +102,19 @@ The poster of the current phase always lies under the canvas; the canvas only co
 
 `engine/` and `scene/` are byte-for-byte copies of a frozen runtime checkpoint. Never edit them here.
 
-- CURRENT (candidate, awaiting owner review): `Salah Section/SALAH_WEB_RUNTIME_CANDIDATE_2026-09-19_birds-v3` - birds from
+- CURRENT (released 20 Sep 2026 with the conditional prewarming below): `Salah Section/SALAH_WEB_RUNTIME_CANDIDATE_2026-09-19_shader-async-v1`
+  - roadmap V-01. Only `engine/renderer.js` differs from birds-v3, and only in how the two programs are prepared; 13
+  deterministic captures are byte-identical. With `KHR_parallel_shader_compile` (Chrome, Edge) the programs are started at the
+  beginning of `load()` and asked about only when the browser reports them complete: a cold visit no longer freezes the page
+  (Salah longest task 2235 -> 81 ms, worst input delay 2193 -> 35 ms). Firefox has no such extension and is unchanged.
+  TRADE-OFF: Chrome caches a program only when its link is waited for, so with this engine every Chromium visit waits ~1.5 s
+  with the poster before the scene comes alive (birds-v3: a ~2.2 s freeze once, alive on arrival afterwards). The engine's
+  `prepare()`, called early by the controller (see "Rendering lifecycle": PREWARM), removes that wait for a visitor who takes
+  about 1.8 s or more to arrive. Record: the checkpoint's `CANDIDATE.md`;
+  evidence: `Salah Section/V01_2026-09-19_shader-async/`. The controller (`salah-section.js`) is unchanged: it already awaits
+  `load()` behind a build token and checks `isContextLost()`, which is all the new path needs. To go back to production's engine:
+  `python tools/salah_sync.py "../Salah Section/SALAH_WEB_RUNTIME_CANDIDATE_2026-09-19_birds-v3"`, then rebuild.
+- PREVIOUS (released 19 Sep 2026): `Salah Section/SALAH_WEB_RUNTIME_CANDIDATE_2026-09-19_birds-v3` - birds from
   BOTH sides, a lower band, sooner. Half of the flights enter at the right edge of the framing; from late Asr to sunset
   the right-hand sky is the sun's and those flights give way to left-hand twins. The schedule panel and the city picker
   are frosted glass above the canvas (`blur(18px)`): a bird behind them is erased completely (checked with full-size test
@@ -172,7 +184,24 @@ layouts keep the panel below the picture, so nothing moves there.
 
 ## Rendering lifecycle
 
-Engine and assets load only when the stage comes within 700 px of the viewport. Visible: every display frame while
+The engine starts in two steps (roadmap V-01, option D, released 20 Sep 2026):
+
+1. PREWARM - the stage comes within **1800 px** of the viewport, or the address names `#prayer-times` (on load or by a
+   `hashchange`): the engine modules are imported, the WebGL context is created and the two shader programs are started
+   (engine `prepare()`); they compile in the background. Nothing else - no scene asset, no texture, no drawing, no loop
+   work. Asked for once per renderer; going in and out of the distance starts nothing again. A visitor who stays in the
+   first screen or so never starts any of it. Why: a browser that compiles without blocking (Chrome, Edge) keeps no
+   compiled program for the next visit, so EVERY visit compiles for ~1.6 s; 1800 px is what an unhurried, unbroken scroll
+   (~1100 px/s, measured on this page) covers in that time. Without `KHR_parallel_shader_compile` (Firefox) the step
+   creates the context and compiles nothing: the blocking compile stays in step 2, where it always was.
+2. LOAD - within **700 px**, as before: scene assets, textures, the wait for the programs (none left after an unhurried
+   approach), the first frame. The early renderer is handed over and used once (`prepared` in `salah-section.js`).
+
+Context loss: a loss drops the early renderer; if the scene was never wanted yet, a restoration only starts the programs
+again (it counts against the same limit of six rebuilds in ten minutes). Measurements and limits:
+`Salah Section/V01_2026-09-19_conditional-prewarm/RESULT.md`.
+
+Visible: every display frame while
 something moves, 30 fps when idle (the water). Off-screen or hidden tab: no rendering at all. Reduced motion: no reveal,
 a still lake, one redraw every 20 s. The countdown runs on a 1 s timer, independent of WebGL. A governor lowers the
 canvas resolution (never the layout) when a device cannot hold the frame rate. Scroll reveal: a 1.8 s catch-up from
@@ -183,6 +212,8 @@ canvas resolution (never the layout) when a device cannot hold the frame rate. S
 `?salah-dev` (panel) or `?salah-dev=quiet` (URL-driven, no panel), with `&t=HH:MM`, `&city=<id>`, `&method=ISNA`, `&asr=2`.
 DEV places are ephemeral (`previewCity()` in `places.js`): neither `&city=` nor the panel's city select stores anything or
 clears a city the visitor really chose. Only the user-facing picker writes to localStorage.
+Benchmarks only, local hosts only (dead under any other hostname, checked by `salah_prewarm_check` case P):
+`?salah-prewarm=off` (no early start = the Async V1 behaviour) and `?salah-prewarm=eager` (programs at once).
 
 ## Checks
 
@@ -191,6 +222,13 @@ clears a city the visitor really chose. Only the user-facing picker writes to lo
     node tools/salah_check.mjs OUT SHOT...   review screenshots + the model for each
     python tools/salah_contrast.py SHOT...   measured text contrast of the glass
     node tools/salah_perf.mjs [label]        median GPU time of the scene at 1920 (Maghrib, Dhuhr) and on a phone-sized canvas
+    node tools/salah_compile_check.mjs OUT   49 browser checks of the non-blocking shader preparation (V-01): path in use, order of the questions, a cold compile,
+                                             pending state (poster, working interface), scroll away / tab switch during it, reduced motion, context loss
+                                             before / during / at the end of it and repeatedly, no extension, a broken shader on both paths, the 20 s limit, prepare()
+    node tools/salah_prewarm_check.mjs OUT   browser checks of the conditional prewarming (V-01 option D): nothing at the top, programs only inside 1800 px,
+                                             idempotent, hand-over without a second compile, the first frame is the moment of ARRIVAL, #prayer-times and
+                                             hashchange, reduced motion, context loss around the early start, background tab, no extension, no WebGL2,
+                                             phone viewport, the DEV switches dead under the production hostname
     node tools/salah_release_check.mjs OUT --rehearse | --live    the published page as a visitor gets it (see above)
     python tools/salah_runtime.py --check    the versioned runtime folder exists and equals the source
 

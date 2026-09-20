@@ -21,9 +21,10 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SITE = os.path.dirname(HERE)
-# the engine the site runs: CANDIDATE birds v3 (distant birds from both sides, lower band, on top of Water v3). Pass another checkpoint's path to go back:
-#   ..._birds-v2 (left-hand entries only) | ..._CANDIDATE_2026-09-19_birds-v1 (first birds) | ..._CANDIDATE_2026-09-19_water-v3 (no birds) | SALAH_WEB_RUNTIME_APPROVED_2026-09-19 (approved, Water v2)
-DEFAULT = os.path.join(os.path.dirname(SITE), "Salah Section", "SALAH_WEB_RUNTIME_CANDIDATE_2026-09-19_birds-v3")
+# the engine the site runs: shader-async-v1 (birds v3 + Water v3, pixel-identical; the two programs are prepared without blocking the page -
+# roadmap V-01, released 20 Sep 2026 together with the controller's conditional prewarming). Pass another checkpoint's path to go back:
+#   ..._CANDIDATE_2026-09-19_birds-v3 (the previous release) | ..._birds-v2 (left-hand entries only) | ..._CANDIDATE_2026-09-19_birds-v1 (first birds) | ..._CANDIDATE_2026-09-19_water-v3 (no birds) | SALAH_WEB_RUNTIME_APPROVED_2026-09-19 (approved, Water v2)
+DEFAULT = os.path.join(os.path.dirname(SITE), "Salah Section", "SALAH_WEB_RUNTIME_CANDIDATE_2026-09-19_shader-async-v1")
 ENGINE = ("timeline.js", "renderer.js", "shaders.js", "water.js", "birds.js")
 
 args = [a for a in sys.argv[1:] if not a.startswith("--")]
