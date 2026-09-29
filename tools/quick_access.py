@@ -37,7 +37,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 # clockwise from the gold marker (counter-clockwise in Arabic), neighbours that
 # belong together: Qur'an beside Saved and Adhkar, Umrah beside Ramadan
 ORDER = ("quran", "adhkar", "dua", "qibla", "ramadan", "umrah", "favorites", "saved")
-UPCOMING = ("umrah", "ramadan")
+# Shortcuts marked "coming in a future update". Umrah and Ramadan shipped in
+# 1.2.0 (on Google Play since 30 September 2026), so none is upcoming now.
+UPCOMING = ()
 VECTOR = ("saved", "favorites")
 RASTER_SIZES = {"dua": (128, 256)}  # the largest Du'a file that exists
 DEFAULT_SIZES = (128, 256, 512)

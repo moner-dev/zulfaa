@@ -2,7 +2,7 @@
 """The localised landing page, carousel and lightbox included."""
 import os, sys, html
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from chrome import (S, LANGS, C, SHOTS, CAPS, ALT, MAIL, DEV, e, head, header, footer, up, asset,
+from chrome import (S, LANGS, C, SHOTS, CAPS, ALT, MAIL, DEV, PLAY, e, head, header, footer, up, asset,
                         main_open)
 from quick_access import render as quick_access
 from articles import render_journal
@@ -96,7 +96,7 @@ def build_home(lang):
               <h1>{e(s['heroTitle'])}</h1>
               <p class="tagline">{e(s['heroLead'])}</p>
               <div class="hero-actions">
-                <a class="btn primary" href="mailto:{MAIL}?subject=ZULFAA">{e(s['ctaNotify'])}</a>
+                <a class="btn primary" href="{PLAY}" rel="noopener" target="_blank">{e(s['playGet'])}</a>
                 <a class="btn" href="#showcase-title">{e(s['ctaInside'])}</a>
               </div>
               <p class="hero-trust">{e(s['heroTrust'])}</p>
