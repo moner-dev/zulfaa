@@ -248,7 +248,7 @@ def hero(rel, state, lang):
             date += " · " + u["datePending"]
         meta = "%s <span aria-hidden=\"true\">&middot;</span> %s" % (e(date), e(u["testersOnly"])
                                                                     if rel.get("track") != "production"
-                                                                    else e(date))
+                                                                    else e(u["availableNow"]))
     m = media_for(rel)
     if m:
         side = figure(m, lang, "hero-device")

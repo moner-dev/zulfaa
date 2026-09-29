@@ -3,12 +3,12 @@
   "updateNumber": 1,
   "versionName": "1.2.0",
   "versionProvisional": false,
-  "versionCode": null,
-  "track": null,
-  "distributed": false,
-  "status": "upcoming",
-  "publishedOn": null,
-  "datePrecision": "unknown",
+  "versionCode": 3,
+  "track": "production",
+  "distributed": true,
+  "status": "released",
+  "publishedOn": "2026-09-30",
+  "datePrecision": "day",
   "datePending": false,
   "evidence": [
     "Docs/releases/APP_UPDATE_HISTORY.md 4b (the 1.2.0 cycle)",
@@ -17,7 +17,7 @@
     "Begins after restore/pre-updates-oasis-quran-audit-20260911 (db214bb); see Docs/releases/RELEASE_POLICY.md",
     "Batch 1: efdc724, 6f353a4; verified on 2046 / 1.1.0-qa46 (2404f20)",
     "Batch 2: f429368 (text integrity, internal), be538c1; verified on 2050 / 1.1.0-qa50 (36dd27b)",
-    "Submitted to Google Play PRODUCTION and awaiting Google's review. Play Console, 21 Sep 2026 (owner's reading): Production shows ZULFAA 1.2.0, \"Changes in review\", \"Start full rollout\" offered, managed publishing off. NOT distributed: no one can receive it yet, so the entry stays upcoming and carries no date. The prepared artifact was versionCode 3, tag release-candidate/v1.2.0-vc3, 16 Sep 2026 (Docs/releases/release-state.json, prepared[0]) - prepared evidence, NOT proof of the versionCode Play accepted.",
+    "Released to Google Play PRODUCTION on 30 Sep 2026 as versionCode 3 (owner's Play Console reading, 30 Sep 2026). Public listing https://play.google.com/store/apps/details?id=com.zulfaa.app read 30 Sep 2026: 'Zulfaa', MONER INTELLIGENCE SYSTEMS, version 1.2.0, a paid app. Artifact: tag release-candidate/v1.2.0-vc3, prepared 16 Sep 2026 (Docs/releases/release-state.json). Earlier: submitted and 'Changes in review' on 21 Sep 2026 (owner's reading).",
     "Batch 3: player dock on every tab (Q-B7a), completion at the true end (Q-AU3/AU2), player core + 24 behaviour tests (Q-TT6), short pages under the dock (Q-B12), the tafsir close label (Q-A9); verified on 2054 / 1.2.0-qa54"
   ],
   "title": {
@@ -1006,34 +1006,5 @@
       }
     }
   ],
-  "pending": [
-    {
-      "id": "quran-review-remaining",
-      "area": "quran",
-      "title": {
-        "en": "This release is with Google for review",
-        "ar": "هذا الإصدار قيد المراجعة لدى Google",
-        "nl": "Deze uitgave ligt bij Google ter beoordeling"
-      },
-      "body": {
-        "en": "Version 1.2 has been submitted to Google Play and is waiting for Google's review, so it is not on anyone's device yet. The Qur'an review also found more than the batches above fixed; what remains is design and product decisions rather than defects, and will be added here only when it is finished and verified.",
-        "ar": "قُدِّم الإصدار 1.2 إلى Google Play وهو ينتظر مراجعة Google، فليس على جهاز أحد بعد. كما وجدت مراجعة القرآن أكثر ممّا أصلحته الدفعات أعلاه؛ وما تبقّى قرارات تصميم ومنتج لا عيوب، ولن يُضاف هنا إلا حين يكتمل ويُتحقَّق منه.",
-        "nl": "Versie 1.2 is ingediend bij Google Play en wacht op de beoordeling van Google, dus staat de app nog op niemands toestel. De Koran-doorlichting vond bovendien meer dan de reeksen hierboven hebben opgelost; wat overblijft zijn ontwerp- en productbeslissingen, geen gebreken, en wordt hier pas toegevoegd zodra het klaar en geverifieerd is."
-      }
-    },
-    {
-      "id": "privacy-update",
-      "area": "legal",
-      "title": {
-        "en": "The Privacy Policy is revised with this release",
-        "ar": "سياسة الخصوصية تُراجَع مع هذا الإصدار",
-        "nl": "Het privacybeleid wordt met deze uitgave herzien"
-      },
-      "body": {
-        "en": "Umrah Savings and the Ramadan Planner record things the current policy does not describe, so the policy in the app, the text on this website and the Play data declaration are all updated at the same time as the release — not before it.",
-        "ar": "ادّخار العمرة ومخطِّط رمضان يسجّلان أمورًا لا تصفها السياسة الحالية، فالسياسة داخل التطبيق والنص على هذا الموقع وإقرار البيانات في Google Play تُحدَّث كلّها مع الإصدار نفسه — لا قبله.",
-        "nl": "De Umrah-spaarpot en de Ramadan-planner leggen dingen vast die het huidige beleid niet beschrijft, dus het beleid in de app, de tekst op deze website en de gegevensverklaring in Play worden alle tegelijk met de uitgave bijgewerkt — niet ervoor."
-      }
-    }
-  ]
+  "pending": []
 }

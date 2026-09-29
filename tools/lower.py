@@ -15,9 +15,10 @@ WHAT IS CLAIMED, AND ON WHAT EVIDENCE
                       the trust point and under "About this website" on the
                       privacy page's footer). Nothing technical is said in public.
   needs internet .... recitation audio, tafsir on demand, the daily challenge.
-  availability ...... "in final preparation for the first Android release, not
-                      yet on Google Play" - the former Availability section,
-                      kept as one compact footer line rather than dropped.
+  availability ...... "version 1.2 is available for Android" plus the Google
+                      Play link (since 30 September 2026) - the former
+                      Availability section, kept as one compact footer line.
+                      The app is paid: never say "free" about it.
   the website ....... stated separately: the contact form sends an email
                       address so a reply can reach the visitor. The app's
                       promise is about the APP; the site must not borrow it.
@@ -32,7 +33,7 @@ import html, os, sys
 from urllib.parse import quote
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from chrome import S, C, LANGS, MAIL, DEV, GITHUB, e, up, lang_links, nav_items, asset  # noqa: E402
+from chrome import S, C, LANGS, MAIL, DEV, GITHUB, PLAY, e, up, lang_links, nav_items, asset  # noqa: E402
 
 # Verified external addresses only. Empty string = the link is not rendered.
 INSTAGRAM = ""
@@ -108,7 +109,7 @@ T = {
         "footLegal": "Legal",
         "footContact": "Contact",
         "soon": "link not available yet",
-        "availability": "Version 1.2 is under review for its public release; not yet on Google Play. In Arabic, English and Dutch.",
+        "availability": "Version 1.2 is available for Android, in Arabic, English and Dutch.",
         "github": "ZULFAA on GitHub",
         "instagram": "ZULFAA on Instagram",
         "x": "ZULFAA on X",
@@ -164,7 +165,7 @@ T = {
         "footLegal": "الوثائق",
         "footContact": "تواصل",
         "soon": "الرابط غير متاح بعد",
-        "availability": "الإصدار 1.2 قيد المراجعة لإطلاقه العلني، ولم يُنشر بعد على Google Play. بالعربية والإنجليزية والهولندية.",
+        "availability": "الإصدار 1.2 متاح لأجهزة أندرويد، بالعربية والإنجليزية والهولندية.",
         "github": "زُلْفَى على GitHub",
         "instagram": "زُلْفَى على إنستغرام",
         "x": "زُلْفَى على إكس",
@@ -220,7 +221,7 @@ T = {
         "footLegal": "Juridisch",
         "footContact": "Contact",
         "soon": "link nog niet beschikbaar",
-        "availability": "Versie 1.2 wordt beoordeeld voor de publieke release; nog niet op Google Play. In het Arabisch, Engels en Nederlands.",
+        "availability": "Versie 1.2 is beschikbaar voor Android, in het Arabisch, Engels en Nederlands.",
         "github": "ZULFAA op GitHub",
         "instagram": "ZULFAA op Instagram",
         "x": "ZULFAA op X",
@@ -471,6 +472,7 @@ def render_footer(lang, page, depth):
             </a>
             <p class="fo-tag">{esc(t['footTag'])}</p>
             <p class="fo-avail"><span class="fo-play">{ICON['play']}</span>{esc(t['availability'])}</p>
+            <p class="fo-store"><a class="fo-store-btn" href="{PLAY}" rel="noopener" target="_blank">{ICON['play']}<span>{e(s['playGet'])}</span></a></p>
 {socials(lang)}
           </div>
 

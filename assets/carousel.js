@@ -32,6 +32,11 @@
 
   var active = -1;
   var ticking = false;
+  /* The slide a step is gliding towards, or -1 at rest. `active` only moves
+     once the glide passes the midpoint, so stepping from it would make a quick
+     second click re-aim at the same slide and be lost. */
+  var target = -1;
+  var settle = 0;
 
   function pad(n) {
     return (n < 10 ? "0" : "") + n;
@@ -76,13 +81,25 @@
     var sr = slides[i].getBoundingClientRect();
     var delta = sr.left + sr.width / 2 - (vr.left + vr.width / 2);
     if (!delta) {
+      target = -1;
       setActive(i);
       return;
     }
-    view.scrollBy({ left: delta, behavior: reduce.matches ? "auto" : "smooth" });
+    target = i;
+    // an absolute offset, so a step issued mid-glide lands where it aims
+    view.scrollTo({ left: view.scrollLeft + delta, behavior: reduce.matches ? "auto" : "smooth" });
+  }
+
+  function from() {
+    return target > -1 ? target : active;
   }
 
   function onScroll() {
+    // the glide is over once scrolling has been quiet for a moment
+    window.clearTimeout(settle);
+    settle = window.setTimeout(function () {
+      target = -1;
+    }, 180);
     if (ticking) return;
     ticking = true;
     window.requestAnimationFrame(function () {
@@ -96,12 +113,12 @@
 
   if (prevBtn) {
     prevBtn.addEventListener("click", function () {
-      go(active - 1);
+      go(from() - 1);
     });
   }
   if (nextBtn) {
     nextBtn.addEventListener("click", function () {
-      go(active + 1);
+      go(from() + 1);
     });
   }
 
@@ -117,8 +134,8 @@
      nudging the scroll by a scrollbar's worth. */
   view.addEventListener("keydown", function (e) {
     var handled = true;
-    if (e.key === "ArrowLeft") go(active - 1);
-    else if (e.key === "ArrowRight") go(active + 1);
+    if (e.key === "ArrowLeft") go(from() - 1);
+    else if (e.key === "ArrowRight") go(from() + 1);
     else if (e.key === "Home") go(0);
     else if (e.key === "End") go(slides.length - 1);
     else handled = false;

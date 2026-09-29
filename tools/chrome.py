@@ -247,6 +247,10 @@ def nav_items(lang):
 # links to the same place, so the site and the app agree.
 GITHUB = "https://github.com/moner-dev"
 
+# The public Google Play listing, live since 30 September 2026 (version 1.2.0,
+# versionCode 3). ZULFAA is a paid app: link to it, never call it free.
+PLAY = "https://play.google.com/store/apps/details?id=com.zulfaa.app"
+
 PLAY_SVG = ('<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">'
             '<path d="M4 2.7v18.6c0 .6.6 1 1.1.7l14.4-8.6a.9.9 0 0 0 0-1.5L5.1 2'
             'c-.5-.3-1.1.1-1.1.7Z"/></svg>')
@@ -316,7 +320,7 @@ def topbar(lang, page, depth):
         </div>
         <p class="topbar-note">{e(s['topNote'])}</p>
         <p class="topbar-play">
-          <span class="topbar-status">{PLAY_SVG}{e(s['playSoon'])}</span>
+          <a class="topbar-status" href="{PLAY}" rel="noopener" target="_blank">{PLAY_SVG}{e(s['playAvail'])}</a>
         </p>
       </div>
     </div>

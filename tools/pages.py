@@ -2,7 +2,7 @@
 """Page builders for the ar / nl subtrees. Chrome comes from build_i18n."""
 import os, sys, json, html
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from chrome import (S, LANGS, C, SHOTS, CAPS, ALT, MAIL, DEV, PAGES, SITE,
+from chrome import (S, LANGS, C, SHOTS, CAPS, ALT, MAIL, DEV, PAGES, SITE, PLAY,
                         e, head, header, footer, toc, dochead, clauses, up, write, num,
                         main_open, asset)
 from dd_strings import DD
@@ -52,8 +52,12 @@ def build_support(lang):
     p, d = "support/", 2
     s, sup, n = S[lang], C[lang]["support"], C[lang]["nav"]
     faq = list(sup["faq"]) + [{"q": s["supDelQ"], "a": s["supDelA"]},
-                              {"q": s["supPlayQ"], "a": s["supPlayA"]}]
-    qa = "".join("            <h3>%s</h3>\n            <p>%s</p>\n\n" % (e(x["q"]), e(x["a"])) for x in faq)
+                              {"q": s["supPlayQ"], "a": s["supPlayA"], "link": (PLAY, s["playGet"])}]
+    qa = "".join("            <h3>%s</h3>\n            <p>%s%s</p>\n\n"
+                 % (e(x["q"]), e(x["a"]),
+                    ' <a href="%s" rel="noopener" target="_blank">%s</a>' % (x["link"][0], e(x["link"][1]))
+                    if x.get("link") else "")
+                 for x in faq)
     return (head(lang, p, d, s["supTitle"], s["supDesc"])
             + header(lang, p, d)
             + main_open(lang, d)
