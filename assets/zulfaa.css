@@ -6045,8 +6045,7 @@ html[data-site-theme="dark"] .site-head.is-stuck {
 html[data-site-theme="dark"] .site-head.is-stuck .site-nav a,
 html[data-site-theme="dark"] .site-head.is-stuck .brand,
 html[data-site-theme="dark"] .site-head.is-stuck .brand-name,
-html[data-site-theme="dark"] .site-head.is-stuck .nav-toggle,
-html[data-site-theme="dark"] .site-head.is-stuck .lang-btn {
+html[data-site-theme="dark"] .site-head.is-stuck .nav-toggle {
   color: var(--ink);
 }
 
@@ -6251,17 +6250,6 @@ body,
 .site-head.is-stuck .site-nav a[aria-current="page"] {
   background: rgba(255, 255, 255, 0.78);
   color: var(--teal-deep);
-}
-
-.site-head.is-stuck .lang-btn {
-  border-color: rgba(26, 90, 82, 0.22);
-  background: rgba(255, 255, 255, 0.72);
-  color: var(--ink);
-}
-
-.site-head.is-stuck .lang-btn:hover {
-  background: #fff;
-  color: var(--gold-ink);
 }
 
 .head-sentinel {
