@@ -21,7 +21,7 @@ run reports that nothing changed.
 import os, re, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from chrome import SITE, asset, THEME_BOOT  # noqa: E402
+from chrome import SITE, asset, THEME_BOOT, font_preload  # noqa: E402
 from articles import render_journal  # noqa: E402
 from lower import render_trust, render_contact, render_footer, CONTACT_PLACES  # noqa: E402
 from lantern import host as lantern_host  # noqa: E402
@@ -44,6 +44,8 @@ DOCK_MARKED = re.compile(r"[ ]*<!-- scrolldock:start -->.*?<!-- scrolldock:end -
 DOCK_JS = re.compile(r'    <script src="[^"]*assets/scrolldock\.js[^"]*" defer></script>\n')
 FOOTER_END = "    </footer>\n"
 BOOT_RE = re.compile(r'    <script>\(function\(\)\{try\{var t=localStorage\.getItem\("zulfaa-site-theme"\).*?</script>\n', re.S)
+FONT_PRELOAD_RE = re.compile(r'    <link rel="preload" href="[^"]*assets/fonts/[^"]*" as="font"[^>]*>\n')
+CSS_LINK_RE = re.compile(r'    <link rel="stylesheet" href="[^"]*assets/zulfaa\.css[^"]*" />\n')
 JS_CLASS_LINE = '    <script>document.documentElement.classList.add("js");</script>\n'
 LOWER_MARKED = re.compile(r"        <!-- journal:start -->.*?<!-- contact:end -->\n", re.S)
 LOWER_LEGACY = re.compile(r'      <div class="shell">\n'
@@ -120,6 +122,15 @@ def fix_boot(t):
     i = t.find(JS_CLASS_LINE)
     assert i != -1, "no js-class script to place the theme boot after"
     return t[:i + len(JS_CLASS_LINE)] + THEME_BOOT + "\n" + t[i + len(JS_CLASS_LINE):]
+
+
+def fix_fonts(t, a):
+    """The header's font preloads (chrome.font_preload), right after the stylesheet as on every
+    generated page. Remove-then-write, so running twice is a no-op."""
+    t = FONT_PRELOAD_RE.sub("", t)
+    m = CSS_LINK_RE.search(t)
+    assert m, "no stylesheet link to place the font preloads after"
+    return t[:m.end()] + font_preload("en", a) + t[m.end():]
 
 
 def fix_showcase(t):
@@ -216,6 +227,7 @@ def main():
         page, depth = spec
         t = orig = open(full, encoding="utf-8").read()
         t = fix_boot(t)  # every English page carries the theme boot line
+        t = fix_fonts(t, "../" * depth)  # ... and preloads the header's fonts
         t = fix_lantern(t, rel)  # ... and every one carries the lantern
         t = fix_lantern_script(t, "../" * depth, rel)
         if rel == "index.html":

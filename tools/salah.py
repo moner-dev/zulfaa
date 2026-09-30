@@ -64,6 +64,8 @@ def render_salah(lang, a=""):
     # everything the section loads comes from ONE content-addressed folder (tools/salah_runtime.py): the folder name is
     # the version, so the stylesheet, the entry module, every module it imports and every scene asset change together
     rt = salah_runtime.build()
+    # the entry module is `async` for the same reason as hero3d.js (tools/home.py): it only reads its own section,
+    # which precedes the tag, and must not hold the header and footer scripts behind its import chain
     return f'''        <!-- salah:start -->
         <link rel="stylesheet" href="{a}{rt}salah.css" />
         <section class="salah" id="prayer-times" aria-labelledby="salah-title" data-salah data-phase="dhuhr" data-status="next" data-lang="{lang}" data-assets="{a}{rt}">
@@ -127,6 +129,6 @@ def render_salah(lang, a=""):
           </div>
           <script type="application/json" data-salah-words>{words}</script>
         </section>
-        <script type="module" src="{a}{rt}salah-section.js"></script>
+        <script type="module" src="{a}{rt}salah-section.js" async></script>
         <!-- salah:end -->
 '''

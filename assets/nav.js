@@ -274,17 +274,21 @@
 /* ZULFAA — the hero's day/night control, WITHOUT the live phone.
  *
  * assets/hero3d.js owns this button whenever it runs: it claims the phone by
- * setting data-controller="hero3d" before this file executes (module and
- * deferred scripts run in document order, and the module comes first), and
- * then turns the phone to change theme. This block is only the fallback for
- * a browser that did not run the module at all - no module support, the file
- * failed to load - where the stills are all there is: it shows them and
- * switches between them directly.
+ * setting data-controller="hero3d" as soon as it runs, and then turns the
+ * phone to change theme. This block is only the fallback for a browser that
+ * did not run the module at all - no module support, the file failed to load -
+ * where the stills are all there is: it shows them and switches between them
+ * directly.
+ *
+ * It decides at the load event, not when this file runs. hero3d.js is an
+ * async module (so the header never waits for it) and may still be arriving
+ * now; the load event waits until it has run or failed. This file is deferred,
+ * so it always runs before that event.
  *
  * Either way the visitor's choice is kept for the session under the same key,
  * so switching language (a plain link to another page) keeps the phone in the
  * theme they picked. Absent on every page but the home page. */
-(function () {
+window.addEventListener("load", function () {
   var btn = document.querySelector(".theme-demo");
   var phone = document.querySelector(".hero .phone3d");
   if (!btn || !phone) return;
@@ -313,4 +317,4 @@
   btn.addEventListener("click", function () {
     set(btn.getAttribute("aria-pressed") !== "true", true);
   });
-})();
+});

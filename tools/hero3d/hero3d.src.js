@@ -100,7 +100,7 @@ function decodeImage(url) {
 }
 
 function main(el) {
-  // Claim the phone before assets/nav.js runs, so exactly one script owns the toggle.
+  // Claim the phone at once, so exactly one script owns the toggle (assets/nav.js checks at the load event).
   el.setAttribute("data-controller", "hero3d");
 
   const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

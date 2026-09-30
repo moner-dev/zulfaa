@@ -103,7 +103,7 @@ def head(lang, page, depth, title, desc, og_image_alt=None):
     <link rel="icon" type="image/png" href="{a}assets/favicon-64.png" />
     <link rel="apple-touch-icon" href="{a}assets/apple-touch-icon.png" />
     <link rel="stylesheet" href="{a}{asset("assets/zulfaa.css")}" />
-{JS_CLASS}
+{font_preload(lang, a)}{JS_CLASS}
 {THEME_BOOT}
     <meta name="theme-color" content="#fef9f0" />
     <meta property="og:type" content="website" />
@@ -133,6 +133,24 @@ JS_CLASS = '    <script>document.documentElement.classList.add("js");</script>'
 THEME_BOOT = ('    <script>(function(){try{var t=localStorage.getItem("zulfaa-site-theme");'
               'if(t==="dark"||t==="light")document.documentElement.setAttribute("data-site-theme",t)}'
               'catch(e){}})();</script>')
+
+# The header's typefaces, requested together with the stylesheet instead of
+# after it. Left to the stylesheet, a font is only asked for once the whole
+# sheet has arrived and been matched against the page, so on a phone the
+# header painted in the fallback face and re-set itself up to two seconds
+# later (measured 30 Sep 2026). Only what the header and the first screen
+# render in that language: Cairo is the Arabic pages' text face; on the
+# English and Dutch pages it draws a few words and still loads on its own.
+PRELOAD_FONTS = {"en": ("plus-jakarta-sans-latin", "fredoka-latin"),
+                 "nl": ("plus-jakarta-sans-latin", "fredoka-latin"),
+                 "ar": ("cairo-arabic", "plus-jakarta-sans-latin", "fredoka-latin")}
+
+
+def font_preload(lang, a):
+    """The <link rel=preload> lines for `lang`, each ending in a newline. `crossorigin` is required:
+    fonts are always fetched in CORS mode, and a preload without it is fetched twice."""
+    return "".join('    <link rel="preload" href="%sassets/fonts/%s.woff2" as="font" type="font/woff2" crossorigin />\n'
+                   % (a, f) for f in PRELOAD_FONTS[lang])
 
 
 def themed_img_boot(indent):

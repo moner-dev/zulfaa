@@ -88,6 +88,10 @@ def build_home(lang):
     p, d = "", 1
     s, prod, n = S[lang], C[lang]["product"], C[lang]["nav"]
     a = up(d)
+    # hero3d.js is `async`: a module otherwise joins the ordered queue of deferred scripts, and every
+    # script after it - nav.js, lantern.js and scrolldock.js, the header and footer - waited for its
+    # 160 KB download and its long first run (6.1 s instead of 1.4 s on a slow phone, 30 Sep 2026).
+    # It needs nothing below the hero; nav.js decides its fallback at the load event (see there).
     return (head(lang, p, d, s["homeTitle"], s["homeDesc"], og_image_alt=s["ogImageAlt"]) + header(lang, p, d, skip_to="content")
             + main_open(lang, d) + f"""        <div class="hero-wrap" id="content" tabindex="-1">
           <section class="hero">
@@ -138,5 +142,5 @@ def build_home(lang):
     <script src="{a}{asset("assets/carousel.js")}" defer></script>
     <script src="{a}{asset("assets/contact-config.js")}" defer></script>
     <script src="{a}{asset("assets/contact.js")}" defer></script>
-    <script type="module" src="{a}{asset("assets/hero3d.js")}"></script>
+    <script type="module" src="{a}{asset("assets/hero3d.js")}" async></script>
 """ + footer(lang, p, d))
