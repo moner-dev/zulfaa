@@ -1,0 +1,320 @@
+{
+  "id": "1-3-0",
+  "updateNumber": 2,
+  "versionName": "1.3.0",
+  "versionProvisional": false,
+  "versionCode": null,
+  "track": null,
+  "distributed": false,
+  "status": "upcoming",
+  "publishedOn": null,
+  "datePrecision": "unknown",
+  "datePending": true,
+  "evidence": [
+    "Docs/releases/APP_UPDATE_HISTORY.md 4c (the 1.3.0 cycle)",
+    "Docs/releases/V1_3_0_USER_FACING_NOTES_DRAFT.md Part A (consolidated 2 October 2026)",
+    "Docs/releases/RELEASE_STATE.md (scope frozen 2 October 2026)",
+    "src/quran/translations/en/provenance.json and src/quran/translations/nl/provenance.json (QuranEnc editions, verified current 2 October 2026)"
+  ],
+  "title": {
+    "en": "A new Qur'an reader, now in your language",
+    "ar": "قارئ جديد للقرآن الكريم، وبلغتك",
+    "nl": "Een nieuwe Koranlezer, nu in uw taal"
+  },
+  "summary": {
+    "en": "The Qur'an section is rebuilt around two ways of reading: verse by verse, or as one continuous page. The meaning comes in your language, including Dutch, Full Reading gets twenty-four matching styles, and the reciter list grows from 12 to 29 voices.",
+    "ar": "أُعيد بناء قسم القرآن حول طريقتين للقراءة: آيةً آية، أو صفحةً متصلة. ويأتي المعنى بلغتك، بما فيها الهولندية، وتأتي القراءة الكاملة بأربعة وعشرين طرازًا متناسقًا، وتتسع قائمة القرّاء من 12 إلى 29 صوتًا.",
+    "nl": "Het Koran-gedeelte is opnieuw opgebouwd rond twee manieren van lezen: vers voor vers, of als één doorlopende pagina. De betekenis verschijnt in uw taal, ook in het Nederlands, Volledig lezen krijgt vierentwintig bijpassende stijlen en de lijst met recitatoren groeit van 12 naar 29 stemmen."
+  },
+  "headline": ["quran-two-views", "quran-meaning-in-your-language", "quran-dutch-translation", "quran-full-reading-styles", "quran-more-reciters"],
+  "media": [],
+  "stories": [
+    {
+      "area": "quran",
+      "title": {
+        "en": "Reading the Qur'an, two ways",
+        "ar": "قراءة القرآن بطريقتين",
+        "nl": "De Koran lezen, op twee manieren"
+      },
+      "lead": {
+        "en": "Interactive Reading shows each verse on its own row, with its meaning beneath it. Full Reading is a calm page of continuous text in an ornamental frame. Switch at any time; you stay on the verse you were reading.",
+        "ar": "تعرض القراءة التفاعلية كل آية في سطرها الخاص ومعناها تحتها، وتقدّم القراءة الكاملة صفحةً هادئة من النص المتصل داخل إطار مزخرف. بدّل بينهما متى شئت، وتبقى عند الآية التي كنت تقرؤها.",
+        "nl": "Interactief lezen toont elk vers op een eigen regel, met de betekenis eronder. Volledig lezen is een rustige pagina met doorlopende tekst in een sierlijk kader. Wissel wanneer u wilt; u blijft bij het vers dat u aan het lezen was."
+      }
+    }
+  ],
+  "changes": [
+    {
+      "id": "quran-two-views",
+      "area": "quran",
+      "kind": "new",
+      "title": {
+        "en": "Two ways to read every surah",
+        "ar": "طريقتان لقراءة كل سورة",
+        "nl": "Twee manieren om elke soera te lezen"
+      },
+      "body": {
+        "en": "Interactive Reading, verse by verse, and Full Reading, one continuous page in which the app's bottom bar steps aside. The bar at the top stays in reach, and switching keeps your place.",
+        "ar": "القراءة التفاعلية آيةً آية، والقراءة الكاملة صفحةً متصلة يتنحّى فيها الشريط السفلي للتطبيق. ويبقى الشريط العلوي في متناولك، ولا يغيّر التبديل موضع قراءتك.",
+        "nl": "Interactief lezen, vers voor vers, en Volledig lezen, één doorlopende pagina waarbij de onderste balk van de app plaatsmaakt. De balk bovenaan blijft binnen bereik, en wisselen houdt uw plek vast."
+      }
+    },
+    {
+      "id": "quran-meaning-in-your-language",
+      "area": "quran",
+      "kind": "new",
+      "title": {
+        "en": "The meaning in your language",
+        "ar": "المعنى بلغتك",
+        "nl": "De betekenis in uw taal"
+      },
+      "body": {
+        "en": "In Interactive Reading each verse shows the original Arabic with the translation of its meaning beneath: Dutch in Dutch, English in Arabic and English. Turn the translation off in Reading settings and the app remembers. In English and Dutch, Full Reading is the translation as one continuous page.",
+        "ar": "في القراءة التفاعلية تظهر كل آية بنصها العربي وتحتها ترجمة معناها: بالهولندية في الواجهة الهولندية، وبالإنجليزية في الواجهتين العربية والإنجليزية. ويمكنك إخفاء الترجمة من إعدادات القراءة ويتذكّر التطبيق اختيارك. وفي الإنجليزية والهولندية تكون القراءة الكاملة هي الترجمة صفحةً متصلة.",
+        "nl": "Bij Interactief lezen toont elk vers de oorspronkelijke Arabische tekst met de vertaling van de betekenis eronder: Nederlands in het Nederlands, Engels in het Arabisch en Engels. Zet de vertaling uit in de leesinstellingen en de app onthoudt het. In het Engels en Nederlands is Volledig lezen de vertaling als één doorlopende pagina."
+      }
+    },
+    {
+      "id": "quran-dutch-translation",
+      "area": "quran",
+      "kind": "new",
+      "title": {
+        "en": "A Dutch translation of the meanings",
+        "ar": "ترجمة هولندية لمعاني القرآن",
+        "nl": "Een Nederlandse vertaling van de betekenissen"
+      },
+      "body": {
+        "en": "The translation issued by the Dutch Islamic Center under the supervision of the Rowwad Translation Center, version 2.0.10 from QuranEnc.com, shown exactly as published and available offline. Its notes, shared verses and the Verse of the Day are in Dutch too.",
+        "ar": "الترجمة الصادرة عن المركز الإسلامي الهولندي بإشراف مركز رواد الترجمة، الإصدار 2.0.10 من موقع QuranEnc.com، معروضةً كما نُشرت ومتاحةً دون اتصال. وتأتي حواشيها والآيات المشارَكة وآية اليوم بالهولندية أيضًا.",
+        "nl": "De vertaling uitgegeven door het Dutch Islamic Center onder supervisie van het Rowwad Translation Center, versie 2.0.10 van QuranEnc.com, precies zoals gepubliceerd en ook offline beschikbaar. De noten, gedeelde verzen en het Vers van de dag zijn ook in het Nederlands."
+      }
+    },
+    {
+      "id": "quran-full-reading-styles",
+      "area": "quran",
+      "kind": "new",
+      "title": {
+        "en": "Twenty-four styles for Full Reading",
+        "ar": "أربعة وعشرون طرازًا للقراءة الكاملة",
+        "nl": "Vierentwintig stijlen voor Volledig lezen"
+      },
+      "body": {
+        "en": "Each style dresses the surah frame and every verse medallion together, from Emerald to Musk. Tap the surah heading or open Reading settings to choose; your choice stays in every surah, language and theme.",
+        "ar": "يكسو كل طراز إطار السورة وفواصل الآيات معًا، من الزمرد إلى المسك. اضغط على عنوان السورة أو افتح إعدادات القراءة للاختيار، ويبقى اختيارك في كل سورة ولغة ومظهر.",
+        "nl": "Elke stijl past het soerakader en alle verstekens samen aan, van Smaragd tot Muskus. Tik op de soeratitel of open de leesinstellingen om te kiezen; uw keuze blijft in elke soera, taal en weergave."
+      }
+    },
+    {
+      "id": "quran-more-reciters",
+      "area": "quran",
+      "kind": "new",
+      "title": {
+        "en": "29 reciters, and a search to find them",
+        "ar": "29 قارئًا، وبحث للعثور عليهم",
+        "nl": "29 recitatoren, en een zoekveld om ze te vinden"
+      },
+      "body": {
+        "en": "Seventeen voices join the list. Type a name in Arabic or Latin letters to find a reciter; the one you had chosen stays selected.",
+        "ar": "تنضم سبعة عشر صوتًا إلى القائمة. اكتب الاسم بالحروف العربية أو اللاتينية للعثور على القارئ، ويبقى القارئ الذي اخترته من قبل محددًا.",
+        "nl": "Zeventien stemmen komen erbij. Typ een naam in Arabische of Latijnse letters om een recitator te vinden; de stem die u had gekozen blijft geselecteerd."
+      }
+    },
+    {
+      "id": "quran-reading-settings",
+      "area": "quran",
+      "kind": "new",
+      "title": {
+        "en": "Reading settings on their own page",
+        "ar": "إعدادات القراءة في صفحة مستقلة",
+        "nl": "Leesinstellingen op een eigen pagina"
+      },
+      "body": {
+        "en": "The view, text size, translation, following the recitation, the ornament style and your reciter in one place, with Back stepping out one level at a time. A short tip shows once that a tap on a verse opens its actions.",
+        "ar": "طريقة العرض وحجم النص والترجمة ومتابعة التلاوة وطراز الزخرفة والقارئ في مكان واحد، ويرجع زر الرجوع مستوىً واحدًا في كل مرة. وتظهر مرة واحدة تلميحة قصيرة بأن الضغط على الآية يفتح خياراتها.",
+        "nl": "Weergave, tekstgrootte, vertaling, meelopen met de recitatie, de ornamentstijl en uw recitator op één plek, waarbij Terug telkens één niveau teruggaat. Een korte tip laat één keer zien dat een tik op een vers de acties opent."
+      }
+    },
+    {
+      "id": "quran-player-knows-where-you-are",
+      "area": "quran",
+      "kind": "improved",
+      "title": {
+        "en": "Listening, closer to where you read",
+        "ar": "الاستماع أقرب إلى موضع قراءتك",
+        "nl": "Luisteren, dichter bij waar u leest"
+      },
+      "body": {
+        "en": "A Listen-with row under the surah card shows the reciter; nothing plays until you press Play. On the player, tap the reciter's name to change it, or the verse number to go straight back to the verse being recited.",
+        "ar": "يعرض سطر «الاستماع بصوت» أسفل بطاقة السورة اسم القارئ، ولا يبدأ شيء قبل أن تضغط تشغيل. وفي المشغّل اضغط على اسم القارئ لتغييره، أو على رقم الآية للعودة مباشرةً إلى الآية التي تُتلى.",
+        "nl": "Een regel ‘Luisteren met’ onder de soerakaart toont de recitator; er speelt niets totdat u op Afspelen drukt. Tik in de speler op de naam van de recitator om te wisselen, of op het versnummer om direct terug te gaan naar het vers dat wordt gereciteerd."
+      }
+    },
+    {
+      "id": "quran-english-names",
+      "area": "quran",
+      "kind": "improved",
+      "title": {
+        "en": "English surah names and search by meaning",
+        "ar": "أسماء السور بالإنجليزية والبحث بالمعنى",
+        "nl": "Engelse soeranamen en zoeken op betekenis"
+      },
+      "body": {
+        "en": "In English, surahs carry their familiar names and meanings, such as Al-Baqarah — The Cow, and typing a meaning like cow or light finds the surah. Your place, bookmarks and history stay the same in every language.",
+        "ar": "في الواجهة الإنجليزية تظهر السور بأسمائها المألوفة ومعانيها، مثل Al-Baqarah — The Cow، وتجد السورةَ بكتابة معنى مثل cow أو light. ويبقى موضع قراءتك وعلاماتك وسجلك كما هي في كل لغة.",
+        "nl": "In het Engels dragen de soera's hun bekende namen en betekenissen, zoals Al-Baqarah — The Cow, en een betekenis als cow of light typen vindt de soera. Uw plek, bladwijzers en geschiedenis blijven in elke taal hetzelfde."
+      }
+    },
+    {
+      "id": "app-theme-on-every-tab",
+      "area": "app",
+      "kind": "improved",
+      "title": {
+        "en": "Light or dark from every main screen",
+        "ar": "الفاتح أو الداكن من كل شاشة رئيسية",
+        "nl": "Licht of donker vanaf elk hoofdscherm"
+      },
+      "body": {
+        "en": "The theme button now sits on Prayer, Qur'an, Qibla and Profile as well as Home.",
+        "ar": "أصبح زر المظهر موجودًا في الصلاة والقرآن والقبلة والملف الشخصي، إلى جانب الرئيسية.",
+        "nl": "De weergaveknop staat nu ook op Gebed, Koran, Qibla en Profiel, naast Start."
+      }
+    },
+    {
+      "id": "quran-continue-exactly",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Continue where you were, exactly",
+        "ar": "تابع من حيث توقفت تمامًا",
+        "nl": "Precies verder waar u was"
+      },
+      "body": {
+        "en": "Continue reading, saved verses, history and the Verse of the Day open at their verse, also on slower phones.",
+        "ar": "تفتح «متابعة القراءة» والآيات المحفوظة والسجل وآية اليوم عند آيتها، حتى على الهواتف الأبطأ.",
+        "nl": "Verder lezen, opgeslagen verzen, geschiedenis en het Vers van de dag openen bij hun vers, ook op tragere telefoons."
+      }
+    },
+    {
+      "id": "quran-juz-start",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Each Juz opens where it begins",
+        "ar": "يفتح كل جزء من بدايته",
+        "nl": "Elke juz opent waar hij begint"
+      },
+      "body": {
+        "en": "Tapping a Juz opens its first verse, such as Al-Baqarah 2:142 for Juz 2, and the starts of Juz 19 and 23 were corrected.",
+        "ar": "يفتح الضغط على الجزء عند أول آية فيه، مثل البقرة 2:142 للجزء الثاني، وصُحّحت بداية الجزأين 19 و23.",
+        "nl": "Een tik op een juz opent het eerste vers ervan, zoals Al-Baqarah 2:142 voor juz 2, en het begin van juz 19 en 23 is gecorrigeerd."
+      }
+    },
+    {
+      "id": "quran-progress-hundred",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "100 % means finished",
+        "ar": "100% تعني أنك أتممت السورة",
+        "nl": "100 % betekent uitgelezen"
+      },
+      "body": {
+        "en": "The verse before the last no longer shows 100 %, and Profile shows the percent sign of your language.",
+        "ar": "لم تعد الآية قبل الأخيرة تُظهر 100%، ويعرض الملف الشخصي علامة النسبة المئوية بلغتك.",
+        "nl": "Het voorlaatste vers toont geen 100 % meer, en Profiel gebruikt het procentteken van uw taal."
+      }
+    },
+    {
+      "id": "quran-surah-names-join",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Clearer Arabic surah names",
+        "ar": "أسماء السور العربية أوضح",
+        "nl": "Duidelijkere Arabische soeranamen"
+      },
+      "body": {
+        "en": "In 41 surahs a vowel mark made the letters of the name come apart; the names now join properly wherever they appear.",
+        "ar": "كانت علامة تشكيل في أسماء 41 سورة تجعل حروف الاسم تتفرّق، وأصبحت الأسماء الآن متصلة كما ينبغي أينما ظهرت.",
+        "nl": "In 41 soera's liet een klinkerteken de letters van de naam uit elkaar vallen; de namen sluiten nu overal goed op elkaar aan."
+      }
+    },
+    {
+      "id": "quran-translation-retry",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "A way out if a translation does not load",
+        "ar": "حلّ عند تعذّر تحميل الترجمة",
+        "nl": "Een uitweg als een vertaling niet laadt"
+      },
+      "body": {
+        "en": "The reader says so and offers Try again, instead of loading for ever.",
+        "ar": "يُخبرك القارئ بذلك ويعرض «إعادة المحاولة» بدلًا من التحميل بلا نهاية.",
+        "nl": "De lezer meldt het en biedt Opnieuw proberen aan, in plaats van eindeloos te laden."
+      }
+    },
+    {
+      "id": "quran-tafsir-surah-name",
+      "area": "quran",
+      "kind": "fixed",
+      "title": {
+        "en": "Tafsir names the surah in your language",
+        "ar": "التفسير يسمّي السورة بلغة الواجهة",
+        "nl": "De tafsir noemt de soera in uw taal"
+      },
+      "body": {
+        "en": "In English and Dutch the Tafsir panel now names the surah the way the rest of the app does.",
+        "ar": "في الواجهتين الإنجليزية والهولندية تسمّي لوحة التفسير السورةَ الآن كما يسمّيها بقية التطبيق.",
+        "nl": "In het Engels en Nederlands noemt het tafsirpaneel de soera nu zoals de rest van de app dat doet."
+      }
+    },
+    {
+      "id": "prayer-dates-for-travellers",
+      "area": "prayer",
+      "kind": "fixed",
+      "title": {
+        "en": "Prayer dates for travellers",
+        "ar": "تواريخ الصلاة للمسافرين",
+        "nl": "Gebedsdata voor reizigers"
+      },
+      "body": {
+        "en": "When your prayer location is in another time zone, the dates on the Prayer screen follow that place, like the times.",
+        "ar": "حين يكون موقع الصلاة في منطقة زمنية أخرى، تتبع التواريخ في شاشة الصلاة ذلك المكان، كما تتبعه المواقيت.",
+        "nl": "Als uw gebedslocatie in een andere tijdzone ligt, volgen de data op het Gebed-scherm die plaats, net als de tijden."
+      }
+    }
+  ],
+  "worthKnowing": [
+    {
+      "id": "translations-as-published",
+      "kind": "behaviour",
+      "title": {
+        "en": "Translations exactly as published",
+        "ar": "الترجمات كما نُشرت تمامًا",
+        "nl": "Vertalingen precies zoals gepubliceerd"
+      },
+      "body": {
+        "en": "The English and Dutch translations of the meanings are bundled exactly as QuranEnc.com publishes them, and work without a connection. A translation of the meanings is not the Qur'an itself; the Arabic text is shown with it. About › Sources names each edition, its version and a link.",
+        "ar": "تُضمَّن ترجمتا المعاني الإنجليزية والهولندية كما ينشرهما موقع QuranEnc.com تمامًا، وتعملان دون اتصال. وترجمة المعاني ليست هي القرآن نفسه، ولذلك يظهر النص العربي معها. وتذكر صفحة «حول» ← «المصادر» كل إصدار ورقمه ورابطه.",
+        "nl": "De Engelse en Nederlandse vertaling van de betekenissen zitten in de app precies zoals QuranEnc.com ze publiceert, en werken zonder verbinding. Een vertaling van de betekenissen is niet de Koran zelf; de Arabische tekst staat erbij. Over › Bronnen noemt elke editie, de versie en een link."
+      }
+    }
+  ],
+  "pending": [
+    {
+      "id": "latin-pronunciation-aid",
+      "area": "quran",
+      "title": {
+        "en": "A Latin-letter pronunciation aid",
+        "ar": "مُعين على النطق بالحروف اللاتينية",
+        "nl": "Een uitspraakhulp in Latijnse letters"
+      },
+      "body": {
+        "en": "A line under each Arabic verse showing how it is read, for readers who do not read Arabic script. It is generated by ZULFAA from the Arabic text and awaits a check by a qualified reviewer of Qur'an recitation before it is part of a release.",
+        "ar": "سطر تحت كل آية يبيّن كيف تُقرأ، لمن لا يقرأ الحرف العربي. يولّده زلفى من النص العربي، وينتظر مراجعةً من مختص مؤهَّل في التلاوة قبل أن يصبح جزءًا من إصدار.",
+        "nl": "Een regel onder elk Arabisch vers die laat zien hoe het gelezen wordt, voor wie het Arabische schrift niet leest. Hij wordt door ZULFAA uit de Arabische tekst gegenereerd en wacht op controle door een gekwalificeerde kenner van de Koranrecitatie voordat hij deel uitmaakt van een release."
+      }
+    }
+  ]
+}

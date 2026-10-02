@@ -241,7 +241,10 @@ def hero(rel, state, lang):
         e(rel_label(rel, lang)), e(version_text(rel, lang)))
     if state == "upcoming":
         meta = "%s <span aria-hidden=\"true\">&middot;</span> %s" % (
-            e(u["dateUnknown"]), e(u["notReleasedNote"]))
+            e(u["dateUnknown"]),
+            # "submitted" only when the entry says so: an update still being
+            # prepared must not claim to be waiting for Google Play's review
+            e(u["notReleasedNote"] if rel.get("submitted") is True else u["notSubmittedNote"]))
     else:
         date = fmt_date(rel, lang)
         if rel.get("datePending"):
