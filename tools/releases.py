@@ -198,6 +198,12 @@ def validate(rel, seen_ids):
             raise ReleaseError("%s: area %r is not one of the nine" % (pw, p.get("area")))
         _langs(p.get("title"), "title", pw)
         _langs(p.get("body"), "body", pw)
+    if rel.get("reviewStatus") is not None:
+        if state != "upcoming":
+            raise ReleaseError("%s: reviewStatus belongs to an upcoming release only" % w)
+        _langs(rel.get("reviewStatus"), "reviewStatus", w)
+    if rel.get("submitted") is not None and not isinstance(rel.get("submitted"), bool):
+        raise ReleaseError("%s: submitted must be true or false" % w)
     if rel.get("pending") and state != "upcoming":
         raise ReleaseError("%s: only an upcoming release can have pending items - a shipped "
                            "release is a record, not a plan" % w)

@@ -124,7 +124,8 @@ def status_short(rel, state, lang):
 def status_long(rel, state, lang):
     u = U[lang]
     if state == "upcoming":
-        return u["notReleasedYet"]
+        # an entry may say where it stands, e.g. "Under review on Google Play"
+        return (rel.get("reviewStatus") or {}).get(lang) or u["notReleasedYet"]
     return u["track"].get(rel.get("track"), u["availableNow"])
 
 

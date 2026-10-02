@@ -7,6 +7,12 @@
   "track": null,
   "distributed": false,
   "status": "upcoming",
+  "submitted": true,
+  "reviewStatus": {
+    "en": "Under review on Google Play",
+    "ar": "قيد المراجعة في Google Play",
+    "nl": "Wordt beoordeeld door Google Play"
+  },
   "publishedOn": null,
   "datePrecision": "unknown",
   "datePending": true,
